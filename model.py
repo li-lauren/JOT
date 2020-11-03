@@ -131,9 +131,9 @@ class Doc_Follower(db.Model):
     created_at = db.Column(db.DateTime)
 
     def __repr__(self):
-        return (f'<Doc_Follower doc_follower_id={self.doc_follower_id} 
-                 user_id={self.user_id} 
-                 doc_id={self.doc_id}>')
+        return (f'<Doc_Follower doc_follower_id={self.doc_follower_id} '
+                 f'user_id={self.user_id} '
+                 f'doc_id={self.doc_id}>')
 
 
 class Note(db.Model):
@@ -184,20 +184,24 @@ class Like(db.Model):
 class Relationship_Type(db.Model):
     """A type of user relationship"""
 
+    __tablename__ = "relationship_types"
+
     relationship_type_id = db.Column(db.Integer, 
                                      autoincrement=True, 
                                      primary_key=True)
     relationship_type = db.Column(db.String)
 
     def __repr__(self):
-        return (f'<Relationship Type 
-                   relationship_type_id={self.relationship_type_id} 
-                   relationship_type={self.relationship_type}>')
+        return (f'<Relationship Type ' 
+                   f'relationship_type_id={self.relationship_type_id} ' 
+                   f'relationship_type={self.relationship_type}>')
 
 
 
 class User_Relationship(db.Model):
     """A user relationship (friends, etc.)"""
+
+    __tablename__ = "user_relationships"
 
     user_relationship_id = db.Column(db.Integer, 
                                      autoincrement=True, 
@@ -212,10 +216,10 @@ class User_Relationship(db.Model):
     created_at = db.Column(db.DateTime)
 
     def __repr__(self):
-        return (f'<User Relationship
-                   user_relationship_id={self.user_relationship_id} 
-                   user_1_id={self.user_1_id} 
-                   user_2_id={self.user_2_id}>')
+        return (f'<User Relationship '
+                   f'user_relationship_id={self.user_relationship_id} ' 
+                   f'user_1_id={self.user_1_id} '
+                   f'user_2_id={self.user_2_id}>')
 
 
 
