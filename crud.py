@@ -11,6 +11,9 @@ if __name__ == '__main__':
     from server import app
     connect_to_db(app)
 
+
+### USER CRUD OPS ###
+
 def create_user(fname, lname, email, pw):
     """Create and return a new user."""
 
@@ -46,7 +49,7 @@ def get_user_by_email(email):
 
 
 ### DOC CRUD OPS ###
-def create_doc(url, title, doc_date=None, body, owner):
+def create_doc(url, title, doc_date, body, owner):
     """Create a document."""
     
     tz = pytz.timezone('America/Los_Angeles')
@@ -136,12 +139,29 @@ def create_doc_tag(doc_id, tag_id):
 
 
 def get_docs_owned_by_user_id(user_id):
-    """Return all docs belonging to user_id"""
+    """Return all docs belonging to user_id."""
 
     return Doc.query.filter(Doc.owner == user_id).all()
 
 
-### ADD DOC_FOLLOWER AT SOME POINT ###
+def create_doc_follower(user_id, doc_id):
+    """Create a document-follower relationship."""
+
+    tz = pytz.timezone('America/Los_Angeles')
+    created_at = datetime.now(tz)
+
+    doc_follower = Doc_Follower(
+        user_id = user_id,
+        doc_id = doc_id, 
+        created_at = created_at
+    )
+
+    db.session.add(doc_follower)
+    db.session.commit()
+
+    return doc_follower
+
+
 
 ### NOTE CRUD OPERATIONS ###
 
@@ -178,6 +198,8 @@ def get_notes_by_doc_id(doc_id):
 ### LIKE CRUD OPERATIONS ###
 def get_num_likes_by_note_id(note_id):
     """Get number of likes for a document"""
+
+    return Like.query.filter(Like.note_id == note_id).count()
 
 
 
