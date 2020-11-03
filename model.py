@@ -19,6 +19,7 @@ class User(db.Model):
     img = db.Column(db.String)
 
     notes = db.relationship("Note")
+    likes = db.relationship("Like")
 
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}>'
@@ -137,6 +138,26 @@ class Note(db.Model):
 
     doc = db.relationship("Doc")
     user = db.relationship("User")
+
+    likes = db.relationship("Like")
+
+
+class Like(db.Model):
+    """A like."""
+
+    __tablename__ = "likes"
+
+    like_id = db.Column(db.Integer, 
+                        autoincrement=True, 
+                        primary_key=True)
+
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    note_id = db.Column(db.Integer, db.ForeignKey('notes.note_id'))
+
+    user = db.relationship("User")
+    note = db.relationship("Note")
+
+
 
 
 
