@@ -36,7 +36,9 @@ def get_user_by_id(user_id):
 
 def get_user_by_email(email):
     """Return a user by email."""
-
+    print('HERE')
+    user = User.query.filter(User.email == email).first()
+    print(f'FNAME: {user.fname}')
     return User.query.filter(User.email == email).first()
 
 

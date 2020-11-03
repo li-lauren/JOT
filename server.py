@@ -1,6 +1,7 @@
 from flask import (Flask, render_template, request, flash, session,
                    redirect)
 from flask_socketio import SocketIO, send, join_room
+from model import connect_to_db
 import crud
 
 import os
@@ -21,10 +22,12 @@ def login():
     email = request.form.get('email')
     pw = request.form.get('password')
 
+    print(email)
+
     user = crud.get_user_by_email(email)
 
     if user:
-        if user.password == pw:
+        if user.pw == pw:
             session['user'] = user.user_id
             flash('Logged in!')
             print(session)
@@ -55,4 +58,5 @@ def register_user():
 
 
 if __name__ == '__main__':
+    connect_to_db(app)
     io.run(app, debug=True, host='0.0.0.0')
