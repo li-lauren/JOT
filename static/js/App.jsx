@@ -18,10 +18,12 @@ const Login = () => {
 
     return(
         <div>
+            <h5>Login</h5>
             <label>Email</label>
             <input type="text" name="email" value={userInput.email} onChange={handleChange} />
             <label>Password</label>
             <input type="text" name="pw" value={userInput.pw} onChange={handleChange} />
+            <br/>
             <button type="submit">Login</button>
         </div>   
     )
@@ -50,7 +52,7 @@ const SignUp = () => {
 
     return(
         <div>
-            <br/>
+            <h5>Sign Up</h5>
             <label>First Name</label>
             <input type="text" name="fname" value={userInput.fname} onChange={handleChange} />
             <label>Last Name</label>
