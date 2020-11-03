@@ -14,17 +14,27 @@ const Login = () => {
         setUserInput({[name]: value});
     }
 
-    // add onSubmit
+    // const login = () => {
+    //     const reqOptions = {
+    //         method: 'POST',
+    //         body: JSON.stringify({userInput})
+    //     }
+    //     fetch("/login", { method: 'POST' }, reqOptions)
+    //     .then(res => res.json())
+    //     .then()
+    // }
 
     return(
         <div>
             <h5>Login</h5>
-            <label>Email</label>
-            <input type="text" name="email" value={userInput.email} onChange={handleChange} />
-            <label>Password</label>
-            <input type="text" name="pw" value={userInput.pw} onChange={handleChange} />
-            <br/>
-            <button type="submit">Login</button>
+            <form action="/login" method="POST">
+                <label>Email</label>
+                <input type="text" name="email" value={userInput.email} onChange={handleChange} />
+                <label>Password</label>
+                <input type="text" name="pw" value={userInput.pw} onChange={handleChange} />
+                <br/>
+                <button type="submit">Login</button>
+            </form>    
         </div>   
     )
 }
@@ -53,18 +63,20 @@ const SignUp = () => {
     return(
         <div>
             <h5>Sign Up</h5>
-            <label>First Name</label>
-            <input type="text" name="fname" value={userInput.fname} onChange={handleChange} />
-            <label>Last Name</label>
-            <input type="text" name="lname" value={userInput.lname} onChange={handleChange} />
-            
-            <br/>
-            <label>Email</label>
-            <input type="text" name="email" value={userInput.email} onChange={handleChange} />
-            <label>Password</label>
-            <input type="text" name="pw" value={userInput.pw} onChange={handleChange} />
-            <br/>
-            <button type="submit">Join Jot</button>
+            <form action="/users" method='POST'>
+                <label>First Name</label>
+                <input type="text" name="fname" value={userInput.fname} onChange={handleChange} />
+                <label>Last Name</label>
+                <input type="text" name="lname" value={userInput.lname} onChange={handleChange} />
+                
+                <br/>
+                <label>Email</label>
+                <input type="text" name="email" value={userInput.email} onChange={handleChange} />
+                <label>Password</label>
+                <input type="text" name="pw" value={userInput.pw} onChange={handleChange} />
+                <br/>
+                <button type="submit">Join Jot</button>
+            </form>   
         </div>   
     )
 }
