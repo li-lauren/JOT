@@ -1,5 +1,8 @@
 """CRUD operations."""
 
+from datetime import datetime
+import pytz
+
 from model import (db, connect_to_db, User, Doc, Author, Doc_Author, Img_Url,
                     Tag, Doc_Tag, Doc_Follower, Note, Like, Relationship_Type,
                     User_Relationship)
@@ -40,11 +43,28 @@ def get_user_by_email(email):
     """Return a user by email."""
 
     return User.query.filter(User.email == email).first()
+    
 
 ### DOC CRUD OPS ###
-def create_doc(url, title, doc_date, body, owner):
-    #get created_at
-    return
+def create_doc(url, title, doc_date=None, body, owner):
+    """Create a document."""
+    
+    tz = pytz.timezone('America/Los_Angeles')
+    created_at = datetime.now(tz)
+
+    doc = Doc(
+        url = url,
+        title = title,
+        doc_date = doc_date,
+        body = body,
+        owner = owner,
+        created_at = created_at
+    )
+
+    db.session.add(doc)
+    db.session.commit()
+
+    return doc
 
 
 def create_author(fname='', lname=''):
@@ -124,6 +144,12 @@ def get_docs_owned_by_user_id(user_id):
 ### ADD DOC_FOLLOWER AT SOME POINT ###
 
 ### NOTE CRUD OPERATIONS ###
+
+def create_note(user_id, doc_id, body, x_pos=0, y_pos=0):
+    # add created_at
+    # figure out x and y pos
+
+
 
 
 
