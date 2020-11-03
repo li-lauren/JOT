@@ -1,3 +1,5 @@
+import CreateArticle from './Article'
+
 const Login = () => {
     const [userInput, setUserInput] = React.useReducer(
         (state, newState) => ({...state, ...newState}), 
@@ -81,38 +83,7 @@ const SignUp = () => {
     )
 }
 
-const CreateArticle = () => {
-    const [userInput, setUserInput] = React.useReducer(
-        (state, newState) => ({...state, ...newState}), 
-        {
-            url: '', 
-            tag: '',
-        }
-    );
 
-    const handleChange = e => {
-        const name = e.target.name;
-        const value = e.target.value;
-
-        setUserInput({[name]: value});
-    }
-
-    // add onSubmit
-
-    return(
-        <div>
-            <h5>Add an Article</h5>
-            <form action="/articles" method='POST'>
-                <label>URL</label>
-                <input type="text" name="url" value={userInput.url} onChange={handleChange} />
-                <label>Tag</label>
-
-               
-                <button type="submit">Add</button>
-            </form>   
-        </div>   
-    )
-}
 
 const ArticleLibrary = () => {
     return (

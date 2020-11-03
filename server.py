@@ -29,8 +29,11 @@ def login():
     if user:
         if user.pw == pw:
             session['user'] = user.user_id
-            flash('Logged in!')
+            session['fname'] = user.fname
+            session['lname'] = user.lname
+            #flash('Logged in!')
             print(session)
+    
         else:
             flash('Incorrect password')
     else:

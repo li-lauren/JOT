@@ -36,9 +36,13 @@ def get_user_by_id(user_id):
 
 def get_user_by_email(email):
     """Return a user by email."""
-    print('HERE')
-    user = User.query.filter(User.email == email).first()
-    print(f'FNAME: {user.fname}')
+    # print('HERE')
+    # user = User.query.filter(User.email == email).first()
+    # print(f'FNAME: {user.fname}')
     return User.query.filter(User.email == email).first()
 
+def get_docs_by_user_id(user_id):
+    """Return all docs belonging to user_id"""
+
+    return
 
