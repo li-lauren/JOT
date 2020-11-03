@@ -28,7 +28,7 @@ def login():
 
     if user:
         if user.pw == pw:
-            session['user'] = user.user_id
+            session['user_id'] = user.user_id
             session['fname'] = user.fname
             session['lname'] = user.lname
             #flash('Logged in!')
