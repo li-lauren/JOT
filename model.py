@@ -158,7 +158,30 @@ class Like(db.Model):
     note = db.relationship("Note")
 
 
+class Relationship_Type(db.Model):
+    """A type of user relationship"""
 
+    relationship_type_id = db.Column(db.Integer, 
+                                     autoincrement=True, 
+                                     primary_key=True)
+    relationship_type = db.Column(db.String)
+
+
+
+class User_Relationship(db.Model):
+    """A user relationship (friends, etc.)"""
+
+    user_relationship_id = db.Column(db.Integer, 
+                                     autoincrement=True, 
+                                     primary_key=True)
+
+    user_1_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    user_2_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+
+    relationship_type = db.Column(db.Integer, 
+                                 db.ForeignKey('relationship_types.relationship_type_id'))
+
+    created_at = db.Column(db.DateTime)
 
 
     
