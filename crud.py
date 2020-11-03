@@ -43,7 +43,7 @@ def get_user_by_email(email):
     """Return a user by email."""
 
     return User.query.filter(User.email == email).first()
-    
+
 
 ### DOC CRUD OPS ###
 def create_doc(url, title, doc_date=None, body, owner):
@@ -146,8 +146,39 @@ def get_docs_owned_by_user_id(user_id):
 ### NOTE CRUD OPERATIONS ###
 
 def create_note(user_id, doc_id, body, x_pos=0, y_pos=0):
-    # add created_at
+    """Create a note."""
     # figure out x and y pos
+
+    tz = pytz.timezone('America/Los_Angeles')
+    created_at = datetime.now(tz)
+
+    note = Note(
+        user_id = user_id,
+        doc_id = doc_id, 
+        created_at = created_at, 
+        body = body,
+        x_pos = x_pos,
+        y_pos = y_pos
+    )
+
+    db.session.add(note)
+    db.session.commit()
+
+    return note
+
+
+def get_notes_by_doc_id(doc_id):
+    """Get all notes belonging to a document."""
+
+    # Doc.query.get(doc_id).notes (Which is more efficient?)
+
+    return Note.query.filter(Note.doc_id == doc_id).all()
+
+
+### LIKE CRUD OPERATIONS ###
+def get_num_likes_by_note_id(note_id):
+    """Get number of likes for a document"""
+
 
 
 
