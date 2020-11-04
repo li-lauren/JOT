@@ -70,6 +70,11 @@ def register_user():
 @app.route('/docs/<doc_id>')
 def show_doc(doc_id):
     """Show a JOT-formatted document"""
+    #TO DO: Maybe there is a cleaner way to do this
+    
+    doc = crud.get_doc_by_doc_id(doc_id)
+
+    return jsonify(doc)
 
 
 

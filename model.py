@@ -43,6 +43,10 @@ class Doc(db.Model):
     publish_date: datetime
     owner: int #user?
     created_at: datetime
+    authors: Author
+    img_urls: Img_Url
+    tags: Tag
+    followers: User
 
     __tablename__ = "docs"
 
@@ -77,8 +81,11 @@ class Doc(db.Model):
         return f'<Doc doc_id={self.doc_id} title={self.title}>'
 
 
+@dataclass
 class Author(db.Model):
     """An author"""
+    author_id: int
+    name: str
 
     __tablename__ = "authors"
 
@@ -89,8 +96,12 @@ class Author(db.Model):
         return f'<Author author_id={self.author_id} name={self.name}>'
    
 
+@dataclass
 class Doc_Author(db.Model):
     """A document's author"""
+    doc_author_id: int
+    doc_id: int
+    author_id: int
 
     __tablename__ = "doc_authors"
 
@@ -99,8 +110,12 @@ class Doc_Author(db.Model):
     author_id = db.Column(db.Integer, db.ForeignKey('authors.author_id'))
 
 
+@dataclass
 class Img_Url(db.Model):
     """A document's image url."""
+    img_url_id: int
+    doc_id: int
+    url: str
 
     __tablename__ = "img_urls"
 
@@ -112,8 +127,11 @@ class Img_Url(db.Model):
         return f'<Img_URL image_url_id={self.image_url_id} doc_id={self.doc_id}>'
 
 
+@dataclass
 class Tag(db.Model):
     """A tag"""
+    tag_id: int
+    tag: str
 
     __tablename__ = "tags"
 
@@ -124,8 +142,12 @@ class Tag(db.Model):
         return f'<Tag tag_id={self.tag_id} tag={self.tag}>'
    
 
+@dataclass
 class Doc_Tag(db.Model):
     """A document's tag"""
+    doc_tag_id: int
+    doc_id: int
+    tag_id: int
 
     __tablename__ = "doc_tags"
 
@@ -134,9 +156,14 @@ class Doc_Tag(db.Model):
     tag_id = db.Column(db.Integer, db.ForeignKey('tags.tag_id'))
 
 
+@dataclass
 class Doc_Follower(db.Model):
     """A document's follower."""
-
+    doc_follower_id: int
+    user_id: int
+    doc_id: int
+    created_at: datetime
+    
     __tablename__ = "doc_followers"
 
     doc_follower_id = db.Column(db.Integer, 
