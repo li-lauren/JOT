@@ -14,20 +14,29 @@ const Login = () => {
         setUserInput({[name]: value});
     }
 
-    // const login = () => {
-    //     const reqOptions = {
-    //         method: 'POST',
-    //         body: JSON.stringify({userInput})
-    //     }
-    //     fetch("/login", { method: 'POST' }, reqOptions)
-    //     .then(res => res.json())
-    //     .then(data => console.log(data))
-    // }
+    const login = (e) => {
+        e.preventDefault()
+        console.log('LOGIN')
+        console.log(`UserInput: ${userInput}`)
+
+        const reqOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+              },
+            body: JSON.stringify({
+                'email': userInput.email, 
+                'pw': userInput.pw })
+        }
+        fetch("/login", reqOptions)
+        .then(res => res.json())
+        .then(data => console.log(`Success: ${data}`))
+    }
 
     return(
         <div>
             <h5>Login</h5>
-            <form action="/login" method="POST">
+            <form onSubmit={login} >
                 <label>Email</label>
                 <input type="text" name="email" value={userInput.email} onChange={handleChange} />
                 <label>Password</label>

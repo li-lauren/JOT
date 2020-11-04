@@ -1,5 +1,5 @@
 from flask import (Flask, render_template, request, flash, session,
-                   redirect)
+                   redirect, jsonify)
 from flask_socketio import SocketIO, send, join_room
 import newspaper
 
@@ -21,13 +21,12 @@ def index():
 
 @app.route('/login', methods=['POST'])
 def login():
-    email = request.form.get('email')
-    pw = request.form.get('password')
 
-    print(email)
+    email = request.json.get('email')
+    pw = request.json.get('pw')
 
     user = crud.get_user_by_email(email)
-
+   
     if user:
         if user.pw == pw:
             session['user_id'] = user.user_id
@@ -37,7 +36,8 @@ def login():
             print(session)
 
             doc_list = crud.get_docs_owned_by_user_id(user.user_id)
-            return doc_list
+            print(doc_list)
+            return jsonify(doc_list)
     
         else:
             flash('Incorrect password')
