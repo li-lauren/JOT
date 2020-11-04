@@ -6,6 +6,8 @@ const Login = () => {
             pw: ''
         }
     );
+    const [errorMsg, setErrorMsg] = React.useState('')
+    const [docList, setDocList] = React.useState([])
 
     const handleChange = e => {
         const name = e.target.name;
@@ -30,7 +32,16 @@ const Login = () => {
         }
         fetch("/login", reqOptions)
         .then(res => res.json())
-        .then(data => console.log(`Success: ${data}`))
+        .then(data => {
+            if (typeof(data) === 'string') {
+                setErrorMsg(data)
+            } else {
+                setDocList(data)
+                for (const doc of data) {
+                    console.log(`Success: ${doc.title}`)
+                }  
+            }   
+        })
     }
 
     return(

@@ -1,10 +1,18 @@
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
+from dataclasses import dataclass
 
 db = SQLAlchemy()
 
+@dataclass
 class User(db.Model):
     """A user."""
+    user_id: int
+    fname: str
+    lname: str
+    email: str
+    pw: str
+    img: str
 
     __tablename__ = "users"
 
@@ -24,8 +32,17 @@ class User(db.Model):
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}>'
 
+
+
+@dataclass
 class Doc(db.Model):
     """A document/article."""
+    doc_id: int
+    url: str
+    title: str
+    publish_date: datetime
+    owner: int #user?
+    created_at: datetime
 
     __tablename__ = "docs"
 

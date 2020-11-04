@@ -3,6 +3,7 @@ certifi==2020.6.20
 chardet==3.0.4
 Click==7.0
 cssselect==1.1.0
+dataclasses==0.7
 dnspython==1.16.0
 eventlet==0.29.1
 feedfinder2==0.0.4

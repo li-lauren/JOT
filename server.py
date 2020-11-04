@@ -40,9 +40,11 @@ def login():
             return jsonify(doc_list)
     
         else:
-            flash('Incorrect password')
+            #flash('Incorrect password')
+            return "Incorrect password"
     else:
-        flash('No user associated with that email')
+        # flash('No user associated with that email')
+        return "No user associated with that email"
 
     return redirect('/')
 
