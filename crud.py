@@ -143,6 +143,12 @@ def get_docs_owned_by_user_id(user_id):
     return Doc.query.filter(Doc.owner == user_id).all()
 
 
+def get_doc_by_doc_id(doc_id):
+    """Return document given a doc id."""
+    
+    return Doc.query.get(doc_id)
+
+
 def create_doc_follower(user_id, doc_id):
     """Create a document-follower relationship."""
 

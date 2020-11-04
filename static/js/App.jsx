@@ -1,3 +1,23 @@
+const DocList = ({docs}) => {
+    return (
+        <div>
+            <h5>Doc Library</h5>
+            <ul>
+                {docs.map(doc => {
+                    return (
+                        <li key={doc.doc_id}>
+                            <a href={`/login/${doc.doc_id}`}>
+                                {doc.title}
+                            </a>
+                        </li>    
+                    )               
+                })}
+            </ul>
+        </div>
+    )
+}
+
+
 const Login = () => {
     const [userInput, setUserInput] = React.useReducer(
         (state, newState) => ({...state, ...newState}), 
@@ -138,18 +158,14 @@ const CreateArticle = () => {
 }
 
 
-const ArticleLibrary = () => {
-    return (
-        <div></div>
-    )
-}
+
 
 const App = () => {
 
     return(
         <div>
-            <Login />
             <SignUp />
+            <Login />
             <CreateArticle />
         </div>
     )

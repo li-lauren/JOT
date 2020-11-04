@@ -37,6 +37,7 @@ def login():
 
             doc_list = crud.get_docs_owned_by_user_id(user.user_id)
             print(doc_list)
+            #TO DO: don't send entire docs, just title id, relevant info
             return jsonify(doc_list)
     
         else:
@@ -65,6 +66,11 @@ def register_user():
         flash('Account created!  Please log in.')
 
     return redirect('/')
+
+@app.route('/docs/<doc_id>')
+def show_doc(doc_id):
+    """Show a JOT-formatted document"""
+
 
 
 if __name__ == '__main__':
