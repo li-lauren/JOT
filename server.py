@@ -75,7 +75,11 @@ def show_doc(doc_id):
     doc = crud.get_doc_by_doc_id(doc_id)
     authors = crud.get_author_by_doc_id(doc_id)
 
-    return jsonify({'doc': doc, 'authors': authors})
+    author_list = []
+    for author in authors:
+        author_list.append(author.name)
+
+    return jsonify({'doc': doc, 'authors': " ".join(author_list)})
 
 
 

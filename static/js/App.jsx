@@ -41,7 +41,8 @@ const Doc = ({data}) => {
     if (data) {
         console.log(data.authors)
         console.log(data.doc)
-        const authors = data.authors.join(" ")
+        const authors = data.authors
+        
         const doc = data.doc
         docData = [
             <h1>{doc.title}</h1>, 
