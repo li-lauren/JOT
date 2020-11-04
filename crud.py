@@ -49,7 +49,7 @@ def get_user_by_email(email):
 
 
 ### DOC CRUD OPS ###
-def create_doc(url, title, doc_date, body, owner):
+def create_doc(url, title, publish_date, body, owner):
     """Create a document."""
     
     tz = pytz.timezone('America/Los_Angeles')
@@ -58,7 +58,7 @@ def create_doc(url, title, doc_date, body, owner):
     doc = Doc(
         url = url,
         title = title,
-        doc_date = doc_date,
+        publish_date = publish_date,
         body = body,
         owner = owner,
         created_at = created_at
@@ -70,12 +70,11 @@ def create_doc(url, title, doc_date, body, owner):
     return doc
 
 
-def create_author(fname='', lname=''):
+def create_author(name=''):
     """Create an author."""
     
     author = Author(
-        fname = fname,
-        lname = lname
+        name = name
     )
 
     db.session.add(author)

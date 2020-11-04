@@ -1,6 +1,8 @@
 from flask import (Flask, render_template, request, flash, session,
                    redirect)
 from flask_socketio import SocketIO, send, join_room
+import newspaper
+
 from model import connect_to_db
 import crud
 

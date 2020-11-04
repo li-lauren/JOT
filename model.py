@@ -35,7 +35,7 @@ class Doc(db.Model):
 
     url = db.Column(db.String, nullable=False)
     title = db.Column(db.String, nullable=False)
-    doc_date = db.Column(db.DateTime)
+    publish_date = db.Column(db.DateTime)
     body = db.Column(db.Text)
     owner = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     created_at = db.Column(db.DateTime) #date added to Jot
@@ -66,11 +66,10 @@ class Author(db.Model):
     __tablename__ = "authors"
 
     author_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
-    fname = db.Column(db.String(50))
-    lname = db.Column(db.String(50))
+    name = db.Column(db.String(50))
 
     def __repr__(self):
-        return f'<Author author_id={self.author_id} fname={self.fname} lname={self.lname}>'
+        return f'<Author author_id={self.author_id} name={self.name}>'
    
 
 class Doc_Author(db.Model):
