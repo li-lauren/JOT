@@ -52,20 +52,22 @@ def login():
 @app.route('/users', methods=['POST'])
 def register_user():
     """Create a new user."""
-    fname = request.form.get('fname')
-    lname = request.form.get('lname')
-    email = request.form.get('email')
-    pw = request.form.get('pw')
+    fname = request.json.get('fname')
+    lname = request.json.get('lname')
+    email = request.json.get('email')
+    pw = request.json.get('pw')
+    img = request.json.get('img')
 
     user = crud.get_user_by_email(email)
 
     if user:
-        flash('An account already exists with that email')
+        print('Account already exists')
+        return 'An account already exists with that email'
     else:
-        crud.create_user(fname, lname, email, pw)
-        flash('Account created!  Please log in.')
+        crud.create_user(fname, lname, email, pw, img)
+        print('Account created')
+        return f'Welcome, {fname}!  Your account has been created!  Please log in.'
 
-    return redirect('/')
 
 @app.route('/docs/<doc_id>')
 def show_doc(doc_id):

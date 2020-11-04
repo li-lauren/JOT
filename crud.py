@@ -14,14 +14,15 @@ if __name__ == '__main__':
 
 ### USER CRUD OPS ###
 
-def create_user(fname, lname, email, pw):
+def create_user(fname, lname, email, pw, img):
     """Create and return a new user."""
 
     user = User(
         fname = fname,
         lname = lname,
         email = email,
-        pw = pw
+        pw = pw,
+        img = img
     )
 
     db.session.add(user)

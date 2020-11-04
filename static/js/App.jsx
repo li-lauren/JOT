@@ -34,6 +34,7 @@ const DocList = ({docs}) => {
 }
 
 const Doc = ({data}) => {
+
     // const [doc, setDoc] = React.useState('')
     // const [authors, setAuthors] = React.useState('')
     let docData;
@@ -135,6 +136,7 @@ const SignUp = () => {
             img: ''
         }
     );
+    const [msg, setMsg] = React.useState('')
 
     const handleChange = e => {
         const name = e.target.name;
@@ -143,12 +145,36 @@ const SignUp = () => {
         setUserInput({[name]: value});
     }
 
-    // add onSubmit
+    const signUp = (e) => {
+        e.preventDefault()
+        console.log('SIGNUP')
+        console.log(`UserInput: ${userInput}`)
+
+        const reqOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+              },
+            body: JSON.stringify({
+                'fname': userInput.fname,
+                'lname': userInput.lname,
+                'email': userInput.email, 
+                'pw': userInput.pw, 
+                'img': userInput.img 
+            })
+        }
+        fetch("/users", reqOptions)
+        .then(res => res.text())
+        .then(data => {
+            console.log(data)
+            setMsg(data)
+        })
+    }
 
     return(
         <div>
             <h5>Sign Up</h5>
-            <form action="/users" method='POST'>
+            <form onSubmit={signUp}>
                 <label>First Name</label>
                 <input type="text" name="fname" value={userInput.fname} onChange={handleChange} />
                 <label>Last Name</label>
@@ -161,7 +187,8 @@ const SignUp = () => {
                 <input type="text" name="pw" value={userInput.pw} onChange={handleChange} />
                 <br/>
                 <button type="submit">Join Jot</button>
-            </form>   
+            </form> 
+            <p>{msg}</p>  
         </div>   
     )
 }
