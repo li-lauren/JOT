@@ -19,7 +19,7 @@ const DocList = ({docs}) => {
             <ul>
                 {docs.map(doc => {
                     return (
-                        <li>
+                        <li key={doc.doc_id}>
                             <a href="" key={doc.doc_id} onClick={(e)=> getDocDets(doc.doc_id, e)}>
                                 {doc.title}
                             </a>
@@ -36,22 +36,20 @@ const DocList = ({docs}) => {
 const Doc = ({data}) => {
     // const [doc, setDoc] = React.useState('')
     // const [authors, setAuthors] = React.useState('')
-    let docData = []
+    let docData;
 
     if (data) {
-        console.log(data.authors)
-        console.log(data.doc)
         const authors = data.authors
-        
         const doc = data.doc
+        const img_url = data.img_urls[0]
+        
         docData = [
             <h1>{doc.title}</h1>, 
             <p>{authors}</p>,
             <p>{doc.publish_date}</p>,
+            <img src={img_url} alt="top_image"/>,
             <p>{doc.body}</p>
         ]
-
-        console.log(doc.title)
     }
     
     return(
