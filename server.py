@@ -35,6 +35,9 @@ def login():
             session['lname'] = user.lname
             #flash('Logged in!')
             print(session)
+
+            doc_list = crud.get_docs_owned_by_user_id(user.user_id)
+            return doc_list
     
         else:
             flash('Incorrect password')
