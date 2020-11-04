@@ -7,7 +7,7 @@ const Login = () => {
         }
     );
     const [errorMsg, setErrorMsg] = React.useState('')
-    const [docList, setDocList] = React.useState([])
+    const [docs, setDocs] = React.useState([])
 
     const handleChange = e => {
         const name = e.target.name;
@@ -36,10 +36,11 @@ const Login = () => {
             if (typeof(data) === 'string') {
                 setErrorMsg(data)
             } else {
-                setDocList(data)
-                for (const doc of data) {
+                setDocs(data)
+                for (const doc of docs) {
                     console.log(`Success: ${doc.title}`)
                 }  
+                setErrorMsg('')
             }   
         })
     }
@@ -54,7 +55,9 @@ const Login = () => {
                 <input type="text" name="pw" value={userInput.pw} onChange={handleChange} />
                 <br/>
                 <button type="submit">Login</button>
-            </form>    
+            </form>
+            <p>{errorMsg}</p>  
+            <DocList docs={docs}/>  
         </div>   
     )
 }
