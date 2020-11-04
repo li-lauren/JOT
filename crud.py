@@ -167,7 +167,13 @@ def create_doc_follower(user_id, doc_id):
     return doc_follower
 
 
+### AUTHOR CRUD OPERATION ###
 
+def get_author_by_doc_id(doc_id):
+    """Return a doc's authors"""
+
+    return Doc.query.get(doc_id).authors
+    
 ### NOTE CRUD OPERATIONS ###
 
 def create_note(user_id, doc_id, body, x_pos=0, y_pos=0):

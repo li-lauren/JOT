@@ -43,10 +43,11 @@ class Doc(db.Model):
     publish_date: datetime
     owner: int #user?
     created_at: datetime
-    authors: Author
-    img_urls: Img_Url
-    tags: Tag
-    followers: User
+    body: str
+    # authors: Author
+    # img_urls: Img_Url
+    # tags: Tag
+    # followers: User
 
     __tablename__ = "docs"
 
@@ -163,7 +164,7 @@ class Doc_Follower(db.Model):
     user_id: int
     doc_id: int
     created_at: datetime
-    
+
     __tablename__ = "doc_followers"
 
     doc_follower_id = db.Column(db.Integer, 

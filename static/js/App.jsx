@@ -1,18 +1,61 @@
 const DocList = ({docs}) => {
+    const [docData, setDocData] = React.useState('')
+
+    const getDocDets = (doc_id, e) => {
+        console.log(`doc_id: ${doc_id}`)
+        e.preventDefault()
+        console.log('getDocDets')
+        fetch(`/docs/${doc_id}`)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            setDocData(data)
+        })
+    }
+
     return (
         <div>
             <h5>Doc Library</h5>
             <ul>
                 {docs.map(doc => {
                     return (
-                        <li key={doc.doc_id}>
-                            <a href={`/login/${doc.doc_id}`}>
+                        <li>
+                            <a href="" key={doc.doc_id} onClick={(e)=> getDocDets(doc.doc_id, e)}>
                                 {doc.title}
                             </a>
                         </li>    
                     )               
                 })}
             </ul>
+            <CreateArticle />
+            <Doc data={docData}/>
+        </div>
+    )
+}
+
+const Doc = ({data}) => {
+    // const [doc, setDoc] = React.useState('')
+    // const [authors, setAuthors] = React.useState('')
+    let docData = []
+
+    if (data) {
+        console.log(data.authors)
+        console.log(data.doc)
+        const authors = data.authors.join(" ")
+        const doc = data.doc
+        docData = [
+            <h1>{doc.title}</h1>, 
+            <p>{authors}</p>,
+            <p>{doc.publish_date}</p>,
+            <p>{doc.body}</p>
+        ]
+
+        console.log(doc.title)
+    }
+    
+    return(
+        <div>
+            {docData}
         </div>
     )
 }
@@ -166,7 +209,7 @@ const App = () => {
         <div>
             <SignUp />
             <Login />
-            <CreateArticle />
+            
         </div>
     )
 }
