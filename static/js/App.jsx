@@ -69,6 +69,47 @@ const Doc = ({data}) => {
     )
 }
 
+const AddFollower = () => {
+    const [followerEmail, setFollowerEmail] = React.useState('')
+
+    const handleChange = e => {
+        setFollowerEmail(e.target.value)
+    }
+
+    const addFollower = (e) => {
+        e.preventDefault()
+        console.log('Add Follower')
+
+        const reqOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+              },
+            body: JSON.stringify({
+                'email': followerEmail
+            })
+        }
+        fetch("/followers", reqOptions)
+        .then(res => res.text())
+        .then(data => console.log(`follower added: ${data}`))
+    }
+
+    return (
+        <div>
+            <h5>Invite Friends</h5>
+            <form onSubmit={addFollower}>
+                <label for="email"></label>
+                <input 
+                    type="text" name="email" 
+                    value={follower} 
+                    onChange={handleChange}
+                />
+                <button type="submit"> + </button>
+            </form>   
+        </div>  
+    )
+}
+
 const AddDoc = ({setDocs}) => {
     const [userInput, setUserInput] = React.useReducer(
         (state, newState) => ({...state, ...newState}), 
