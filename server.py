@@ -160,6 +160,7 @@ def create_follower():
 def get_followers():
     """Get all followers of a doc."""
     
+    print(session)
     doc_id = session['doc_id']
     
     followers = crud.get_followers_by_doc_id(doc_id)
@@ -167,7 +168,8 @@ def get_followers():
     if followers:
         return jsonify(followers)
     else:
-        return "No followers"
+        # return "No followers"
+        return jsonify({'msg': 'No followers'})
 
 
 

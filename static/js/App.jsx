@@ -7,11 +7,11 @@ const DocList = ({docs}) => {
     const getDocDets = (doc_id, e) => {
         console.log(`doc_id: ${doc_id}`)
         e.preventDefault()
-        console.log('getDocDets')
+        // console.log('getDocDets')
         fetch(`/docs/${doc_id}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             setDocDets(data)
         })
     }
@@ -42,19 +42,20 @@ const Doc = ({data}) => {
     // const [authors, setAuthors] = React.useState('')
     let docData;
 
-    console.log(`Data in Doc: ${data}`)
+    // console.log(`Data in Doc: ${data}`)
 
     if (data) {
         const authors = data.authors
         const doc = data.doc
         let img_url = ''
-        console.log(data.img_urls)
+        // console.log(data.img_urls)
         if (data.img_urls) {
             img_url = data.img_urls[0]
         }
         
         docData = [
             <h1>{doc.title}</h1>, 
+            <FollowerList doc_id={doc.doc_id} />,
             <p>{authors}</p>,
             <p>{doc.publish_date}</p>,
             <img src={img_url} alt="top_image"/>,
@@ -69,7 +70,39 @@ const Doc = ({data}) => {
     )
 }
 
-const AddFollower = () => {
+const FollowerList = ({doc_id}) => {
+    const [followerAdded, setFollowerAdded] = React.useState(false)
+    const [followerList, setFollowerList] = React.useState([])
+
+    console.log(`DOC ID: ${doc_id}`)
+    React.useEffect(() => {
+        getFollowers()
+    }, [followerAdded, doc_id])
+
+    const getFollowers = () => {
+        fetch('/followers')
+        .then(res => res.json())
+        .then(data => {
+            ("msg" in data) ? setFollowerList([]) : setFollowerList(data);
+        })
+    }
+
+    return (
+        <React.Fragment>
+            <h5>Following</h5>
+            {followerList.length > 0 ? (followerList.map(follower => 
+                <li key={follower.user_id}>
+                    {follower.fname} {follower.lname}
+                </li>)) : <p>None</p>}
+        <AddFollower 
+            followerAdded={followerAdded}
+            setFollowerAdded={setFollowerAdded} 
+        />
+        </React.Fragment>
+    )
+}
+
+const AddFollower = ({followerAdded, setFollowerAdded}) => {
     const [followerEmail, setFollowerEmail] = React.useState('')
 
     const handleChange = e => {
@@ -91,17 +124,19 @@ const AddFollower = () => {
         }
         fetch("/followers", reqOptions)
         .then(res => res.text())
-        .then(data => console.log(`follower added: ${data}`))
+        .then(data => {
+            console.log(data)
+            setFollowerAdded(!followerAdded)
+        })
     }
 
     return (
         <div>
             <h5>Invite Friends</h5>
             <form onSubmit={addFollower}>
-                <label for="email"></label>
                 <input 
                     type="text" name="email" 
-                    value={follower} 
+                    value={followerEmail} 
                     onChange={handleChange}
                 />
                 <button type="submit"> + </button>
