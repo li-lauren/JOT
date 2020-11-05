@@ -175,7 +175,24 @@ def get_followers():
     #     return jsonify([{'msg': 'No followers'}])
 
 
+@io.on("connect")
+def test_connect():
+    print(f"Client connected")
 
+@io.on("disconnect")
+def test_disconnect():
+    print("Client disconnected")
+
+@io.on("join")
+def handle_join_room(room):
+    print(f"User is now in Room {room}, SID: {request.sid}")
+    join_room(room)
+    io.emit('join_msg', room=room)
+
+@io.on("note")
+def handle_note(data):
+    print(f"Note: {data['note']} Room: {data['room']}")
+    io.emit('note', data['note'], room=data['room'])
 
 if __name__ == '__main__':
     connect_to_db(app)
