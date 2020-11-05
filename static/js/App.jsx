@@ -2,8 +2,6 @@ const DocList = ({docs}) => {
     const [docDets, setDocDets] = React.useState('')
     const [docList, setDocList] = React.useState(docs)
 
-    console.log(docList)
-
     const getDocDets = (doc_id, e) => {
         console.log(`doc_id: ${doc_id}`)
         e.preventDefault()
@@ -265,7 +263,7 @@ const Login = () => {
                 <label>Email</label>
                 <input type="text" name="email" value={userInput.email} onChange={handleChange} />
                 <label>Password</label>
-                <input type="text" name="pw" value={userInput.pw} onChange={handleChange} />
+                <input type="password" name="pw" value={userInput.pw} onChange={handleChange} />
                 <br/>
                 <button type="submit">Login</button>
             </form>
@@ -336,7 +334,7 @@ const SignUp = () => {
                 <label>Email</label>
                 <input type="text" name="email" value={userInput.email} onChange={handleChange} />
                 <label>Password</label>
-                <input type="text" name="pw" value={userInput.pw} onChange={handleChange} />
+                <input type="password" name="pw" value={userInput.pw} onChange={handleChange} />
                 <br/>
                 <button type="submit">Join Jot</button>
             </form> 

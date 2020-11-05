@@ -165,11 +165,12 @@ def get_followers():
     
     followers = crud.get_followers_by_doc_id(doc_id)
 
+    #TODO Look into this
     if followers:
         return jsonify(followers)
     else:
         # return "No followers"
-        return jsonify({'msg': 'No followers'})
+        return jsonify([{'msg': 'No followers'}])
 
 
 
