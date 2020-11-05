@@ -1,3 +1,6 @@
+const Dashboard = () => {
+    
+}
 const DocList = ({docs}) => {
     const [docDets, setDocDets] = React.useState('')
     const [docList, setDocList] = React.useState(docs)
@@ -67,6 +70,7 @@ const Doc = ({data}) => {
         </div>
     )
 }
+
 
 const FollowerList = ({doc_id}) => {
     const [followerAdded, setFollowerAdded] = React.useState(false)
