@@ -141,6 +141,16 @@ def get_docs_by_user_id():
     return jsonify(doc_list)
 
 
+@app.route('/followed_docs')
+def get_followed_docs_by_user_id():
+    """Get all docs followed by a user."""
+
+    user_id = session['user_id']
+    followed_docs = crud.get_followed_docs_by_user_id(user_id)
+
+    return jsonify(followed_docs)
+
+
 @app.route('/followers', methods=['POST'])
 def create_follower():
     """Create a follower for a doc."""

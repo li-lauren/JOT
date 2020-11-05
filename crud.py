@@ -173,6 +173,11 @@ def get_followers_by_doc_id(doc_id):
 
     return Doc.query.get(doc_id).followers
 
+def get_followed_docs_by_user_id(user_id):
+    """Return all docs followed by a user."""
+
+    return User.query.get(user_id).followed_docs
+
 
 ### AUTHOR CRUD OPERATIONS ###
 
