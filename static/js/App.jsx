@@ -72,7 +72,7 @@ const FollowerList = ({doc_id}) => {
     const [followerAdded, setFollowerAdded] = React.useState(false)
     const [followerList, setFollowerList] = React.useState([])
 
-    console.log(`DOC ID: ${doc_id}`)
+    // console.log(`DOC ID: ${doc_id}`)
     React.useEffect(() => {
         getFollowers()
     }, [followerAdded, doc_id])
