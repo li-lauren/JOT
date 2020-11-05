@@ -1,9 +1,27 @@
-const Dashboard = () => {
+const Dashboard = ({loggedIn}) => {
     
+    return(
+        <div>
+            <h3>Dashboard</h3>
+            {loggedIn ? <DocList /> : ''}
+        </div>
+    )
+
 }
-const DocList = ({docs}) => {
+const DocList = () => {
     const [docDets, setDocDets] = React.useState('')
-    const [docList, setDocList] = React.useState(docs)
+    const [docList, setDocList] = React.useState([])
+    const [docAdded, setDocAdded] = React.useState(false)
+
+    const getDocList = () => {
+        fetch("/docs")
+        .then(res => res.json())
+        .then(data => setDocList(data))
+    }
+
+    React.useEffect(() => {
+        getDocList()
+    }, [docAdded])
 
     const getDocDets = (doc_id, e) => {
         console.log(`doc_id: ${doc_id}`)
@@ -21,7 +39,7 @@ const DocList = ({docs}) => {
         <div>
             <h5>Doc Library</h5>
             <ul>
-                {docs.map(doc => {
+                {docList.map(doc => {
                     return (
                         <li key={doc.doc_id}>
                             <a href="" key={doc.doc_id} onClick={(e)=> getDocDets(doc.doc_id, e)}>
@@ -31,7 +49,7 @@ const DocList = ({docs}) => {
                     )               
                 })}
             </ul>
-            {/* <AddDoc setDocList={setDocList} /> */}
+            <AddDoc docAdded={docAdded} setDocAdded={setDocAdded} />
             <Doc data={docDets}/>
         </div>
     )
@@ -148,7 +166,7 @@ const AddFollower = ({followerAdded, setFollowerAdded}) => {
     )
 }
 
-const AddDoc = ({setDocs}) => {
+const AddDoc = ({docAdded, setDocAdded}) => {
     const [userInput, setUserInput] = React.useReducer(
         (state, newState) => ({...state, ...newState}), 
         {
@@ -189,7 +207,7 @@ const AddDoc = ({setDocs}) => {
             .then(res => res.json())
             .then(data => {
                 console.log(data)
-                setDocs(data)
+                setDocAdded(!docAdded)
             })
         )
     }
@@ -223,7 +241,8 @@ const Login = () => {
         }
     );
     const [errorMsg, setErrorMsg] = React.useState('')
-    const [docs, setDocs] = React.useState([])
+    const [loggedIn, setLoggedIn] = React.useState(false)
+    // const [docs, setDocs] = React.useState([])
 
     const handleChange = e => {
         const name = e.target.name;
@@ -246,18 +265,21 @@ const Login = () => {
                 'email': userInput.email, 
                 'pw': userInput.pw })
         }
+
         fetch("/login", reqOptions)
-        .then(res => res.json())
+        .then(res => res.text())
         .then(data => {
-            if (typeof(data) === 'string') {
-                setErrorMsg(data)
-            } else {
-                setDocs(data)
-                for (const doc of docs) {
-                    console.log(`Success: ${doc.title}`)
-                }  
-                setErrorMsg('')
-            }   
+            setErrorMsg(data)
+            setLoggedIn(true)
+            // if (typeof(data) === 'string') {
+            //     setErrorMsg(data)
+            // } else {
+            //     setDocs(data)
+            //     for (const doc of docs) {
+            //         console.log(`Success: ${doc.title}`)
+            //     }  
+            //     setErrorMsg('')
+            // }   
         })
     }
 
@@ -273,8 +295,9 @@ const Login = () => {
                 <button type="submit">Login</button>
             </form>
             <p>{errorMsg}</p>  
-            <AddDoc setDocs={setDocs} />
-            <DocList docs={docs}/>  
+            <Dashboard loggedIn={loggedIn} />
+            {/* <AddDoc setDocs={setDocs} />
+            <DocList docs={docs}/>   */}
             
         </div>   
     )

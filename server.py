@@ -35,10 +35,11 @@ def login():
             #flash('Logged in!')
             print(session)
 
-            doc_list = crud.get_docs_owned_by_user_id(user.user_id)
-            print(doc_list)
-            #TO DO: don't send entire docs, just title id, relevant info
-            return jsonify(doc_list)
+            # doc_list = crud.get_docs_owned_by_user_id(user.user_id)
+            # print(doc_list)
+            # #TO DO: don't send entire docs, just title id, relevant info
+            # return jsonify(doc_list)
+            return f"Welcome, {user.fname}!"
     
         else:
             #flash('Incorrect password')
