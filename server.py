@@ -145,7 +145,16 @@ def create_follower():
     """Create a follower for a doc."""
 
     doc_id = session['doc_id']
-    
+    email = request.json.get('email')
+
+    user = crud.get_user_by_email(email)
+    if user:
+        follower = crud.create_doc_follower(user.user_id, doc_id)
+        print(follower)
+        return f"{user.fname} has been added!"
+    else:
+        return f"No user associated with {email}"
+
 
 
 

@@ -149,6 +149,7 @@ def get_doc_by_doc_id(doc_id):
     
     return Doc.query.get(doc_id)
 
+### FOLLOWER CRUD OPERATIONS ###
 
 def create_doc_follower(user_id, doc_id):
     """Create a document-follower relationship."""
@@ -166,6 +167,11 @@ def create_doc_follower(user_id, doc_id):
     db.session.commit()
 
     return doc_follower
+
+def get_followers_by_doc_id(doc_id):
+    """Return a document's followers."""
+
+    return Doc.query.get(doc_id).followers
 
 
 ### AUTHOR CRUD OPERATIONS ###
