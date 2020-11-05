@@ -156,6 +156,20 @@ def create_follower():
         return f"No user associated with {email}"
 
 
+@app.route('/followers')
+def get_followers():
+    """Get all followers of a doc."""
+    
+    doc_id = session['doc_id']
+    
+    followers = crud.get_followers_by_doc_id(doc_id)
+
+    if followers:
+        return jsonify(followers)
+    else:
+        return "No followers"
+
+
 
 
 if __name__ == '__main__':
