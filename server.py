@@ -1,7 +1,7 @@
 from flask import (Flask, render_template, request, flash, session,
                    redirect, jsonify)
 from flask_socketio import SocketIO, send, join_room
-import newspaper
+from newspaper import Article
 
 from model import connect_to_db
 import crud
@@ -91,6 +91,53 @@ def show_doc(doc_id):
         'authors': " ".join(author_list), 
         'img_urls': img_url_list
     })
+
+
+@app.route('/docs', methods=['POST'])
+def create_doc():
+    """Create a doc from a url."""
+
+    url = request.json.get('url')
+
+    article = Article(url)
+    article.download()
+    article.parse()
+
+    title = article.title
+    publish_date = article.publish_date
+    body = article.text
+    owner = session['user_id']
+    doc = crud.create_doc(url, title, publish_date, body, owner)
+
+    authors = article.authors
+    author_list = []
+    for name in authors:
+        author = crud.create_author(name)
+        crud.create_doc_author(doc.doc_id, author.author_id)
+        author_list.append(author.name)
+    
+    img_url = crud.create_img_url(doc.doc_id, article.top_image)
+    img_url_list = []
+    img_url_list.append(img_url.url)
+    
+    print(f"Doc created: {doc}")
+    return jsonify({
+        'doc': doc, 
+        'authors': " ".join(author_list), 
+        'img_urls': img_url_list
+    })
+
+
+@app.route('/docs')
+def get_docs_by_user_id():
+    """Get all docs owned by a user."""
+
+    user_id = session['user_id']
+    doc_list = crud.get_docs_owned_by_user_id(user_id)
+
+    return jsonify(doc_list)
+
+
 
 
 

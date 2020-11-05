@@ -23,7 +23,8 @@ for n in range(10):
     lname = str(n)
     email = f'user{n}@test.com'
     pw = 'test'
-    user = crud.create_user(fname, lname, email, pw)
+    img = ''
+    user = crud.create_user(fname, lname, email, pw, img)
     users_in_db.append(user)
 
 

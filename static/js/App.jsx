@@ -1,5 +1,8 @@
 const DocList = ({docs}) => {
-    const [docData, setDocData] = React.useState('')
+    const [docDets, setDocDets] = React.useState('')
+    const [docList, setDocList] = React.useState(docs)
+
+    console.log(docList)
 
     const getDocDets = (doc_id, e) => {
         console.log(`doc_id: ${doc_id}`)
@@ -9,7 +12,7 @@ const DocList = ({docs}) => {
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            setDocData(data)
+            setDocDets(data)
         })
     }
 
@@ -27,8 +30,8 @@ const DocList = ({docs}) => {
                     )               
                 })}
             </ul>
-            <CreateArticle />
-            <Doc data={docData}/>
+            {/* <AddDoc setDocList={setDocList} /> */}
+            <Doc data={docDets}/>
         </div>
     )
 }
@@ -39,10 +42,16 @@ const Doc = ({data}) => {
     // const [authors, setAuthors] = React.useState('')
     let docData;
 
+    console.log(`Data in Doc: ${data}`)
+
     if (data) {
         const authors = data.authors
         const doc = data.doc
-        const img_url = data.img_urls[0]
+        let img_url = ''
+        console.log(data.img_urls)
+        if (data.img_urls) {
+            img_url = data.img_urls[0]
+        }
         
         docData = [
             <h1>{doc.title}</h1>, 
@@ -59,6 +68,71 @@ const Doc = ({data}) => {
         </div>
     )
 }
+
+const AddDoc = ({setDocs}) => {
+    const [userInput, setUserInput] = React.useReducer(
+        (state, newState) => ({...state, ...newState}), 
+        {
+            url: '', 
+            tag: '',
+        }
+    );
+
+    const handleChange = e => {
+        const name = e.target.name;
+        const value = e.target.value;
+
+        setUserInput({[name]: value});
+    }
+
+    const addDoc = (e) => {
+        e.preventDefault()
+        console.log('Add Doc')
+        console.log(`UserInput: ${userInput}`)
+
+        const reqOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+              },
+            body: JSON.stringify({
+                'url': userInput.url,
+                'tag': userInput.tag
+            })
+        }
+        fetch("/docs", reqOptions)
+        .then(res => res.text())
+        .then(data => {
+            console.log('Doc added')
+            console.log(data) })
+        .then(
+            fetch("/docs")
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                setDocs(data)
+            })
+        )
+    }
+
+    return(
+        <div>
+            <h5>Add an Article</h5>
+            <form onSubmit={addDoc}>
+                <label>URL</label>
+                <input 
+                    type="text" name="url" 
+                    value={userInput.url} 
+                    onChange={handleChange}
+                />
+                <label>Tag</label>
+
+                <button type="submit">Add</button>
+            </form>   
+        </div>   
+    )
+}
+
 
 
 const Login = () => {
@@ -120,7 +194,9 @@ const Login = () => {
                 <button type="submit">Login</button>
             </form>
             <p>{errorMsg}</p>  
+            <AddDoc setDocs={setDocs} />
             <DocList docs={docs}/>  
+            
         </div>   
     )
 }
@@ -193,38 +269,6 @@ const SignUp = () => {
     )
 }
 
-const CreateArticle = () => {
-    const [userInput, setUserInput] = React.useReducer(
-        (state, newState) => ({...state, ...newState}), 
-        {
-            url: '', 
-            tag: '',
-        }
-    );
-
-    const handleChange = e => {
-        const name = e.target.name;
-        const value = e.target.value;
-
-        setUserInput({[name]: value});
-    }
-
-    // add onSubmit
-
-    return(
-        <div>
-            <h5>Add an Article</h5>
-            <form action="/articles" method='POST'>
-                <label>URL</label>
-                <input type="text" name="url" value={userInput.url} onChange={handleChange} />
-                <label>Tag</label>
-
-               
-                <button type="submit">Add</button>
-            </form>   
-        </div>   
-    )
-}
 
 
 
