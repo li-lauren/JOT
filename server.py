@@ -78,6 +78,8 @@ def show_doc(doc_id):
     authors = crud.get_author_by_doc_id(doc_id)
     img_urls = crud.get_image_url_by_doc_id(doc_id)
 
+    session['doc_id'] = doc_id
+
     img_url_list = []
     for img_url in img_urls:
         img_url_list.append(img_url.url)
@@ -138,6 +140,12 @@ def get_docs_by_user_id():
     return jsonify(doc_list)
 
 
+@app.route('/followers', methods=['POST'])
+def create_follower():
+    """Create a follower for a doc."""
+
+    doc_id = session['doc_id']
+    
 
 
 
