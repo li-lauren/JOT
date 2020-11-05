@@ -81,7 +81,8 @@ const FollowerList = ({doc_id}) => {
         fetch('/followers')
         .then(res => res.json())
         .then(data => {
-            ("msg" in data) ? setFollowerList([]) : setFollowerList(data);
+            setFollowerList(data)
+            // ("msg" in data) ? setFollowerList([]) : setFollowerList(data);
         })
     }
 
