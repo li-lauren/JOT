@@ -210,16 +210,18 @@ def test_disconnect():
 
 @io.on("join")
 def handle_join_room(room):
-    print(f"User is now in Room {room}, SID: {request.sid}")
+    print(f"User {session['user_id']} is now in Room {room}, SID: {request.sid}")
+    session[request.sid] = session['user_id']
+    print(session)
     join_room(room)
     io.emit('join_msg', room=room)
 
 @io.on("note")
 def handle_note(data):
     print(f"Note: {data['note']} Room: {data['room']}")
-
+    print(session[request.sid])
     note_json = {
-        # 'note_id': note_obj.note_id,
+        'user_id': session[request.sid],
         'doc_id': data['room'],
         # 'created_at': note_obj.created_at,
         'body': data['note'],
