@@ -59,3 +59,7 @@ for url in article_urls:
         authors_in_db.append(a)
         doc_author = crud.create_doc_author(doc.doc_id, a.author_id)
 
+# Add in some notes
+crud.create_note(4, 3, 'Old note from user 3')
+crud.create_note(3, 3, 'Old note from user 2')
+
