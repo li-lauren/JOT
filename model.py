@@ -179,9 +179,16 @@ class Doc_Follower(db.Model):
                  f'user_id={self.user_id} '
                  f'doc_id={self.doc_id}>')
 
-
+@dataclass
 class Note(db.Model):
     """A note."""
+    note_id: int
+    user_id: int
+    doc_id: int
+    created_at: datetime
+    body: str
+    x_pos: float
+    y_pos: float
 
     __tablename__ = "notes"
 

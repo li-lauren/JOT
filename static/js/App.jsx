@@ -23,6 +23,7 @@ const getNotes = (cb) => {
 
     socket.on('note', note => {
         console.log('Note received');
+        console.log(note)
         return cb(null, note);
     });
 }
@@ -31,6 +32,21 @@ const postNote = (room, note) => {
     if (socket) {
         console.log('posting note...')
         socket.emit('note', { 'note': note, 'room': room})
+
+        // const reqOptions = {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type':'application/json'
+        //       },
+        //     body: JSON.stringify({
+        //         'note': note
+        //     })
+        // }
+        // fetch("/notes", reqOptions)
+        // .then(res => res.json())
+        // .then(data => {
+        //     console.log(data)
+        // })
     }
 }
 
@@ -122,7 +138,7 @@ const DocList = () => {
 }
 
 const Doc = ({data}) => {
-    const [note, setNote] = React.useState('');
+    // const [note, setNote] = React.useState('');
     const [noteLog, setNoteLog] = React.useState([]);
 
     const authors = data.authors
@@ -134,11 +150,25 @@ const Doc = ({data}) => {
         img_url = data.img_urls[0]
     }
 
+    // const getAllNotes = () => {
+    //     fetch('/notes')
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(data)
+    //         setNoteLog(data)
+    //     })
+    // }
+    // React.useEffect(() => {
+    //     getAllNotes()
+    // }, [])
+
     React.useEffect(() => {
+
         if (room) {
             connectSocket(room);
             console.log(`Joined Room ${room}`)
         }
+
 
         getNotes((error, data) => {
             if (error) {
@@ -150,11 +180,10 @@ const Doc = ({data}) => {
             setNoteLog(prevNoteLog => [data, ...prevNoteLog])
         });
 
-
         return () => {
             disconnectSocket()
         }
-    }, [room])
+    }, [room]);
 
     
     const docData = [
@@ -165,18 +194,27 @@ const Doc = ({data}) => {
         <img src={img_url} alt="top_image"/>,
         <p>{doc.body}</p>
     ]
-
-    const getNote = e => {
-        setNote(e.target.value);
-    }
     
     return(
         <div>
             {docData}
 
             <h3>Notes</h3>
-            { noteLog.map((note, i) => <p key={i}>{note}</p>) }
-            <input type="text" name="note" value={note} onChange={e => getNote(e)}/>
+            {/* { noteLog.map((note, i) => <p key={i}>{note}</p>) } */}
+            { noteLog.map((note, i) => <p key={i}>{note.body}</p>)}
+            <AddNote room={room}/>
+        </div>
+    )
+}
+
+const AddNote = ({room}) => {
+    const [note, setNote] = React.useState('');
+
+    const getNote = e => setNote(e.target.value);
+
+    return (
+        <div>
+            <input type="text" name="note" value={note} onChange={getNote}/>
             <button onClick={()=> postNote(room, note)}>Add Note</button>
         </div>
     )

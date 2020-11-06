@@ -1,10 +1,11 @@
 from flask import (Flask, render_template, request, flash, session,
-                   redirect, jsonify)
+                   redirect, jsonify, make_response)
 from flask_socketio import SocketIO, send, join_room
 from newspaper import Article
 
 from model import connect_to_db
 import crud
+import json
 
 import os
 
@@ -187,6 +188,18 @@ def get_notes():
 
     return jsonify(notes)
 
+@app.route('/notes', methods=['POST'])
+def create_note():
+    """Create a note."""
+    
+    note = request.json.get("note")
+    user_id = session['user_id']
+    doc_id = session['doc_id']
+    note = crud.create_note(user_id, doc_id, note)
+    print(jsonify(note))
+    return jsonify(note)
+
+
 @io.on("connect")
 def test_connect():
     print(f"Client connected")
@@ -203,14 +216,40 @@ def handle_join_room(room):
 
 @io.on("note")
 def handle_note(data):
-    note = data['note']
-    room = data['room']
-    print(f"Note: {note} Room: {room}")
-    io.emit('note', note, room=room)
+    print(f"Note: {data['note']} Room: {data['room']}")
 
-    user_id = session['user_id']
-    doc_id = room
-    crud.create_note(user_id, doc_id, note)
+    note_json = {
+        # 'note_id': note_obj.note_id,
+        'doc_id': data['room'],
+        # 'created_at': note_obj.created_at,
+        'body': data['note'],
+        'x_pos': 0,
+        'y_pos': 0
+    }
+    io.emit('note', note_json, room=data['room'])
+
+# @io.on("note")
+# def handle_note(data):
+#     note = data['note']
+#     room = data['room']
+#     print(f"Note: {note} Room: {room}")
+    
+
+#     # user_id = session['user_id']
+#     # doc_id = room
+#     # note_obj = crud.create_note(user_id, doc_id, note)
+#     # print(note_obj)
+    
+#     # note_json = {
+#     #     'note_id': note_obj.note_id,
+#     #     'doc_id': note_obj.doc_id,
+#     #     # 'created_at': note_obj.created_at,
+#     #     'body': note_obj.body,
+#     #     'x_pos': note_obj.x_pos,
+#     #     'y_pos': note_obj.y_pos
+#     # }
+
+#     io.emit('note', note, room=room)
 
 if __name__ == '__main__':
     connect_to_db(app)
