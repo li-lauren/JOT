@@ -171,19 +171,21 @@ def create_follower():
 def get_followers():
     """Get all followers of a doc."""
     
-    print(session)
     doc_id = session['doc_id']
     
     followers = crud.get_followers_by_doc_id(doc_id)
 
-    #TODO Look into this
     return jsonify(followers)
-    # if followers:
-    #     return jsonify(followers)
-    # else:
-    #     # return "No followers"
-    #     return jsonify([{'msg': 'No followers'}])
 
+
+@app.route('/notes')
+def get_notes():
+    """Get all of a doc's notes."""
+    
+    doc_id = session['doc_id']
+    notes = crud.get_notes_by_doc_id(doc_id)
+
+    return jsonify(notes)
 
 @io.on("connect")
 def test_connect():
@@ -201,8 +203,14 @@ def handle_join_room(room):
 
 @io.on("note")
 def handle_note(data):
-    print(f"Note: {data['note']} Room: {data['room']}")
-    io.emit('note', data['note'], room=data['room'])
+    note = data['note']
+    room = data['room']
+    print(f"Note: {note} Room: {room}")
+    io.emit('note', note, room=room)
+
+    user_id = session['user_id']
+    doc_id = room
+    crud.create_note(user_id, doc_id, note)
 
 if __name__ == '__main__':
     connect_to_db(app)
