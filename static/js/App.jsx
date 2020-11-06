@@ -150,17 +150,18 @@ const Doc = ({data}) => {
         img_url = data.img_urls[0]
     }
 
-    // const getAllNotes = () => {
-    //     fetch('/notes')
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         console.log(data)
-    //         setNoteLog(data)
-    //     })
-    // }
-    // React.useEffect(() => {
-    //     getAllNotes()
-    // }, [])
+    const getAllNotes = () => {
+        fetch('/notes')
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            setNoteLog(data)
+            print(`Notelog (INIT): ${noteLog}`)
+        })
+    }
+    React.useEffect(() => {
+        getAllNotes()
+    }, [])
 
     React.useEffect(() => {
 
