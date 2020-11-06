@@ -218,40 +218,25 @@ def handle_join_room(room):
 
 @io.on("note")
 def handle_note(data):
-    print(f"Note: {data['note']} Room: {data['room']}")
-    print(session[request.sid])
+    body = data['note']
+    room = data['room']
+    user_id = session[request.sid]
+    # print(f"Note: {body} Room: {room} User: {user_id}")
+    # print(f"Note: {data['note']} Room: {data['room']}")
+    # print(session[request.sid])
+
+    crud.create_note(user_id, room, body)
+
     note_json = {
-        'user_id': session[request.sid],
-        'doc_id': data['room'],
-        # 'created_at': note_obj.created_at,
-        'body': data['note'],
+        'user_id': user_id,
+        'doc_id': room,
+        # To Do: work on datetime ish
+        # 'created_at': note_obj.created_at, 
+        'body': body,
         'x_pos': 0,
         'y_pos': 0
     }
-    io.emit('note', note_json, room=data['room'])
-
-# @io.on("note")
-# def handle_note(data):
-#     note = data['note']
-#     room = data['room']
-#     print(f"Note: {note} Room: {room}")
-    
-
-#     # user_id = session['user_id']
-#     # doc_id = room
-#     # note_obj = crud.create_note(user_id, doc_id, note)
-#     # print(note_obj)
-    
-#     # note_json = {
-#     #     'note_id': note_obj.note_id,
-#     #     'doc_id': note_obj.doc_id,
-#     #     # 'created_at': note_obj.created_at,
-#     #     'body': note_obj.body,
-#     #     'x_pos': note_obj.x_pos,
-#     #     'y_pos': note_obj.y_pos
-#     # }
-
-#     io.emit('note', note, room=room)
+    io.emit('note', note_json, room=room)
 
 if __name__ == '__main__':
     connect_to_db(app)

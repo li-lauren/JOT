@@ -32,21 +32,6 @@ const postNote = (room, note) => {
     if (socket) {
         console.log('posting note...')
         socket.emit('note', { 'note': note, 'room': room})
-
-        // const reqOptions = {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type':'application/json'
-        //       },
-        //     body: JSON.stringify({
-        //         'note': note
-        //     })
-        // }
-        // fetch("/notes", reqOptions)
-        // .then(res => res.json())
-        // .then(data => {
-        //     console.log(data)
-        // })
     }
 }
 
@@ -156,13 +141,9 @@ const Doc = ({data}) => {
         .then(data => {
             console.log(data)
             setNoteLog(data)
-            console.log(`Notelog (INIT): ${noteLog}`)
         })
     }
-    // React.useEffect(() => {
-    //     getAllNotes()
-    // }, [room])
-
+    
     React.useEffect(() => {
 
         if (room) {
@@ -170,7 +151,6 @@ const Doc = ({data}) => {
             console.log(`Joined Room ${room}`)
             getAllNotes()
         }
-
 
         getNotes((error, data) => {
             if (error) {
