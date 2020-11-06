@@ -159,15 +159,16 @@ const Doc = ({data}) => {
             print(`Notelog (INIT): ${noteLog}`)
         })
     }
-    React.useEffect(() => {
-        getAllNotes()
-    }, [])
+    // React.useEffect(() => {
+    //     getAllNotes()
+    // }, [room])
 
     React.useEffect(() => {
 
         if (room) {
             connectSocket(room);
             console.log(`Joined Room ${room}`)
+            getAllNotes()
         }
 
 
