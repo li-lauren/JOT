@@ -156,7 +156,7 @@ const Doc = ({data}) => {
         .then(data => {
             console.log(data)
             setNoteLog(data)
-            print(`Notelog (INIT): ${noteLog}`)
+            console.log(`Notelog (INIT): ${noteLog}`)
         })
     }
     // React.useEffect(() => {
