@@ -20,6 +20,10 @@ io = SocketIO(app, cors_allowed_origins="*")
 def index():
     return render_template('index.html')
 
+@app.route('/login')
+def check_login():
+    return str(session.get('user_id', ''))
+
 @app.route('/login', methods=['POST'])
 def login():
 

@@ -38,17 +38,6 @@ const postNote = (room, note) => {
 
 // End Socket functions
 
-
-const Dashboard = ({loggedIn}) => {
-    
-    return(
-        <div>
-            <h3>Dashboard</h3>
-            {loggedIn ? <DocList /> : ''}
-        </div>
-    )
-
-}
 const DocList = () => {
     const [docDets, setDocDets] = React.useState('')
     const [docList, setDocList] = React.useState([])
@@ -336,21 +325,68 @@ const AddDoc = ({docAdded, setDocAdded}) => {
     )
 }
 
+const Home = () => {
+    return (
+        <h1>HOME</h1>
+    )
+}
 
+const Router = ReactRouterDOM.BrowserRouter;
+const Redirect = ReactRouterDOM.Redirect;
+const Route = ReactRouterDOM.Route;
+const Switch = ReactRouterDOM.Switch;
+const Link = ReactRouterDOM.Link;
 
-
-
-
-
-
-
+const Navbar = () => {
+    return(
+        <nav>
+            <Link to={'/'}>Home</Link>
+            <Link to={'/signup'}>Sign Up</Link>
+            <Link to={'/login'}>Login</Link>
+            <Link to={'/dashboard'}>Dashboard</Link>
+        </nav>
+    )   
+}
 
 const App = () => {
+    const [loggedIn, setLoggedIn] = React.useState(false)
+
+    console.log(loggedIn)
+    React.useEffect(() => {
+        fetch('/login')
+        .then(res => res.text())
+        .then(data => {
+            if (data) { setLoggedIn(true) }
+        })
+    }, [])
+
+    const RequireAuth = ({ children }) => {
+        if (!loggedIn) {
+            return <Redirect to={'/'} />;
+        }
+
+        return children;
+    };
 
     return(
         <div>
-            <SignUp />
-            <Login />
+            <Router>
+                <Navbar />
+                <Switch>
+                    <Route exact path={'/'} component={Home} />
+                    <Route exact path={'/signup'} component={SignUp} />
+                    <Route 
+                        exact path={'/login'} 
+                        render={(props) => (
+                            <Login {...props} setLoggedIn={setLoggedIn} />
+                        )}
+                    />
+                
+                    <RequireAuth>
+                        <Route exact path={'/dashboard'} component={Dashboard} />
+                    </RequireAuth>  
+                </Switch>     
+            </Router>
             
         </div>
     )
