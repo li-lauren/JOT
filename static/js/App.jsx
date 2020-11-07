@@ -1,8 +1,5 @@
 const Router = ReactRouterDOM.BrowserRouter;
-const Redirect = ReactRouterDOM.Redirect;
-const Route = ReactRouterDOM.Route;
-const Switch = ReactRouterDOM.Switch;
-const Link = ReactRouterDOM.Link;
+const { Redirect, Switch, Link, Route } = ReactRouterDOM;
 
 const Navbar = () => {
     return(
@@ -29,7 +26,7 @@ const App = () => {
 
     const RequireAuth = ({ children }) => {
         if (!loggedIn) {
-            return <Redirect to={'/'} />;
+            return <Redirect to={'/login'} />;
         }
 
         return children;
