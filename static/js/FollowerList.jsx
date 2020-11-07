@@ -23,10 +23,10 @@ const FollowerList = ({doc_id}) => {
                 <li key={follower.user_id}>
                     {follower.fname} {follower.lname}
                 </li>)) : <p>None</p>}
-        <AddFollower 
-            followerAdded={followerAdded}
-            setFollowerAdded={setFollowerAdded} 
-        />
+            <AddFollower 
+                followerAdded={followerAdded}
+                setFollowerAdded={setFollowerAdded} 
+            />
         </React.Fragment>
     )
 }

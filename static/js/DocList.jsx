@@ -24,13 +24,10 @@ const DocList = () => {
     const getDocDets = (doc_id, e) => {
         console.log(`doc_id: ${doc_id}`)
         e.preventDefault()
-        // console.log('getDocDets')
+        
         fetch(`/docs/${doc_id}`)
         .then(res => res.json())
-        .then(data => {
-            // console.log(data)
-            setDocDets(data)
-        })
+        .then(data => setDocDets(data))
     }
 
     return (

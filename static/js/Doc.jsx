@@ -35,19 +35,17 @@ const postNote = (room, note) => {
     }
 }
 
-
 // End Socket functions
 
 
 const Doc = ({data}) => {
-    // const [note, setNote] = React.useState('');
     const [noteLog, setNoteLog] = React.useState([]);
 
     const authors = data.authors
     const doc = data.doc
     const room = doc.doc_id
     let img_url = ''
-    // console.log(data.img_urls)
+
     if (data.img_urls) {
         img_url = data.img_urls[0]
     }
@@ -99,8 +97,8 @@ const Doc = ({data}) => {
             {docData}
 
             <h3>Notes</h3>
-            {/* { noteLog.map((note, i) => <p key={i}>{note}</p>) } */}
             { noteLog.map((note, i) => <p key={i}>{note.body}</p>)}
+            
             <AddNote room={room}/>
         </div>
     )

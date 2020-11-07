@@ -20,9 +20,11 @@ io = SocketIO(app, cors_allowed_origins="*")
 def index():
     return render_template('index.html')
 
+
 @app.route('/login')
 def check_login():
     return str(session.get('user_id', ''))
+
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -37,27 +39,20 @@ def login():
             session['user_id'] = user.user_id
             session['fname'] = user.fname
             session['lname'] = user.lname
-            #flash('Logged in!')
             print(session)
 
-            # doc_list = crud.get_docs_owned_by_user_id(user.user_id)
-            # print(doc_list)
-            # #TO DO: don't send entire docs, just title id, relevant info
-            # return jsonify(doc_list)
             return f"Welcome, {user.fname}!"
     
         else:
-            #flash('Incorrect password')
             return "Incorrect password"
     else:
-        # flash('No user associated with that email')
         return "No user associated with that email"
 
-    return redirect('/')
 
 @app.route('/users', methods=['POST'])
 def register_user():
     """Create a new user."""
+
     fname = request.json.get('fname')
     lname = request.json.get('lname')
     email = request.json.get('email')
@@ -226,8 +221,6 @@ def handle_note(data):
     room = data['room']
     user_id = session[request.sid]
     # print(f"Note: {body} Room: {room} User: {user_id}")
-    # print(f"Note: {data['note']} Room: {data['room']}")
-    # print(session[request.sid])
 
     crud.create_note(user_id, room, body)
 
