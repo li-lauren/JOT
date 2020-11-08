@@ -235,6 +235,9 @@ def handle_note(data):
     }
     io.emit('note', note_json, room=room)
 
+@io.on("update_position")
+def update_position()
+
 if __name__ == '__main__':
     connect_to_db(app)
     io.run(app, debug=True, host='0.0.0.0')
