@@ -37,10 +37,11 @@ const postNote = (room, note) => {
 
 const getPos = (cb) => {
     if (!socket) {
+        console.log('NO SOCKET')
         return true;
     }
-
-    socket.on('update_position', data => {
+    console.log('HERE in getPOS')
+    socket.on('receive_position', data => {
         console.log('New pos data received');
         console.log(data)
         return cb(null, data)
@@ -52,6 +53,7 @@ const getPos = (cb) => {
 
 const Doc = ({data}) => {
     const [noteLog, setNoteLog] = React.useState([]);
+    const [pos, setPos] = React.useState({ x: 0, y: 0 })
 
     const authors = data.authors
     const doc = data.doc
@@ -89,6 +91,15 @@ const Doc = ({data}) => {
             setNoteLog(prevNoteLog => [data, ...prevNoteLog])
         });
 
+        getPos((error, data) => {
+            if (error) {
+                return "Error getting note position"
+            }
+            console.log(`Data Pos: ${data.x} ${data.y}`)
+
+            setPos({ x: data.x, y: data.y })
+        });
+
         return () => {
             disconnectSocket()
         }
@@ -110,57 +121,34 @@ const Doc = ({data}) => {
 
             <h3>Notes</h3>
             {/* { noteLog.map((note, i) => <p key={i}>{note.body}</p>)} */}
-            { noteLog.map(note => <Note note={note} />) }
+            { noteLog.map(note => <Note note={note} setPos={setPos} pos={pos} />) }
 
             <AddNote room={room}/>
         </div>
     )
 }
 
-const NoteList = () => {
-    const [noteLog, setNoteLog] = React.useState([]);
 
-    const getAllNotes = () => {
-        fetch('/notes')
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-            setNoteLog(data)
-        })
-    }
 
-    React.useEffect(() => {
-        getAllNotes()
+const Note = ({note, setPos, pos}) => {
+    // const [pos, setPos] = React.useState({ x: 0, y: 0 })
 
-        getNotes((error, data) => {
-            if (error) {
-                return "Error getting notes"
-            }
-            console.log(`Data: ${data}`)
-            console.log(`prevNoteLog: ${noteLog}`)
+    // React.useEffect(() => {
+    //     getPos((error, data) => {
+    //         if (error) {
+    //             return "Error getting note position"
+    //         }
+    //         console.log(`Data: ${data.x} ${data.y}`)
 
-            setNoteLog(prevNoteLog => [data, ...prevNoteLog])
-        });
-
-    
-    }, []); //may have to be room
-
-    return (
-        <div>
-             <h3>Notes</h3>
-            { noteLog.map((note, i) => <p key={i}>{note.body}</p>)}
-        </div>
-       
-    )
-}
-
-const Note = ({note}) => {
-    const [pos, setPos] = React.useState({ x: 0, y: 0 })
+    //         setPos({ x: data.x, y: data.y })
+    //     });
+    // }, [note])
 
     const trackPos = (data) => {
         setPos({x: data.x, y: data.y})
-        socket.emit('receive_position', { 'pos': pos, 'note_id': note.note_id })
+        socket.emit('receive_position', { 'x': data.x, 'y': data.y })
     }
+
     return(
         <ReactDraggable
             key={note.note_id}

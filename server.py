@@ -207,6 +207,8 @@ def test_connect():
 def test_disconnect():
     print("Client disconnected")
 
+lastPos = { 'x': 0, 'y': 0}
+
 @io.on("join")
 def handle_join_room(room):
     print(f"User {session['user_id']} is now in Room {room}, SID: {request.sid}")
@@ -214,6 +216,7 @@ def handle_join_room(room):
     print(session)
     join_room(room)
     io.emit('join_msg', room=room)
+    # io.emit('update_position', lastPos, room=room)
 
 @io.on("note")
 def handle_note(data):
@@ -235,8 +238,18 @@ def handle_note(data):
     }
     io.emit('note', note_json, room=room)
 
-@io.on("update_position")
-def update_position()
+
+# @io.on("update_position")
+# def update_position():
+#     io.emit("update_position", lastPos)
+
+@io.on("receive_position")
+def receive_position(data):
+    print(f"data_x : {data['x']}")
+    print(f"data_y : {data['y']}")
+    print(session['doc_id'])
+    lastPos = data
+    io.emit('receive_position', data, room=session['doc_id'])
 
 if __name__ == '__main__':
     connect_to_db(app)
