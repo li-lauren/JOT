@@ -142,7 +142,7 @@ const Note = ({note}) => {
 
     const updatePos = (data) => {
         setPos({x: data.x, y: data.y})
-        socket.emit('fin_pos', { 'x': data.x, 'y': data.y })
+        socket.emit('fin_pos', { 'x': data.x, 'y': data.y, 'note_id': note.note_id })
     }
 
     return(

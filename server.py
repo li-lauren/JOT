@@ -254,8 +254,15 @@ def receive_position(data):
 
 @io.on("fin_pos")
 def fin_pos(data):
-    print(f"data_x : {data['x']}")
-    print(f"data_y : {data['y']}")
+    note_id = data['note_id']
+    new_x = data['x']
+    new_y = data['y']
+
+    print(f"data_note: {note_id}")
+    print(f"data_x : {new_x}")
+    print(f"data_y : {new_y}")
+    crud.update_note_pos(note_id, new_x, new_y)
+    
     io.emit("fin_pos", data, room=session['doc_id'])
 
 
