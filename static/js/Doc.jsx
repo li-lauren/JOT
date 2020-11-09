@@ -67,6 +67,7 @@ const Doc = ({data}) => {
         fetch('/notes')
         .then(res => res.json())
         .then(data => {
+            console.log(`GETTING NOTES FOR DOC ${room}`)
             console.log(data)
             setNoteLog(data)
         })
@@ -112,7 +113,7 @@ const Doc = ({data}) => {
 
             <h3>Notes</h3>
             {/* { noteLog.map((note, i) => <p key={i}>{note.body}</p>)} */}
-            { noteLog.map(note => <Note note={note} />) }
+            { noteLog.map(note => <Note key={note.note_id} note={note} />) }
 
             <AddNote room={room}/>
         </div>
@@ -123,17 +124,17 @@ const Doc = ({data}) => {
 
 const Note = ({note}) => {
     const [pos, setPos] = React.useState({ x: note.x_pos, y: note.y_pos })
+    const note_id = note.note_id
+    // React.useEffect(() => {
+    //     getPos((error, data) => {
+    //         if (error) {
+    //             return "Error getting note position"
+    //         }
+    //         console.log(`Data: ${data.x} ${data.y}`)
 
-    React.useEffect(() => {
-        getPos((error, data) => {
-            if (error) {
-                return "Error getting note position"
-            }
-            console.log(`Data: ${data.x} ${data.y}`)
-
-            setPos({ x: data.x, y: data.y })
-        });
-    }, [])
+    //         setPos({ x: data.x, y: data.y })
+    //     });
+    // }, [])
 
     const trackPos = (data) => {
         setPos({x: data.x, y: data.y})
@@ -142,7 +143,8 @@ const Note = ({note}) => {
 
     const updatePos = (data) => {
         setPos({x: data.x, y: data.y})
-        socket.emit('fin_pos', { 'x': data.x, 'y': data.y, 'note_id': note.note_id })
+        console.log(`NOTE ID ${note_id}`)
+        socket.emit('fin_pos', { 'x': data.x, 'y': data.y, 'note_id': note_id })
     }
 
     return(
