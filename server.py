@@ -48,6 +48,13 @@ def login():
     else:
         return "No user associated with that email"
 
+@app.route('/logout')
+def logout():
+    session.clear()
+    print(f"CLEAR SESSION: {session}")
+
+    return redirect('/')
+
 
 @app.route('/users', methods=['POST'])
 def register_user():
@@ -262,7 +269,7 @@ def fin_pos(data):
     print(f"data_x : {new_x}")
     print(f"data_y : {new_y}")
     crud.update_note_pos(note_id, new_x, new_y)
-    
+
     io.emit("fin_pos", data, room=session['doc_id'])
 
 

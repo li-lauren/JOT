@@ -122,7 +122,7 @@ const Doc = ({data}) => {
 
 
 const Note = ({note}) => {
-    const [pos, setPos] = React.useState({ x: note.x, y: note.y })
+    const [pos, setPos] = React.useState({ x: note.x_pos, y: note.y_pos })
 
     React.useEffect(() => {
         getPos((error, data) => {
@@ -148,7 +148,7 @@ const Note = ({note}) => {
     return(
         <ReactDraggable
             key={note.note_id}
-            defaultPosition={{x: 0, y: 0}}
+            defaultPosition={{x: pos.x, y: pos.y}}
             onDrag={(e, data) => trackPos(data)}
             onStop={(e, data) => updatePos(data)}
         >
