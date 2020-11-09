@@ -251,6 +251,14 @@ def receive_position(data):
     lastPos = data
     io.emit('receive_position', data, room=session['doc_id'])
 
+
+@io.on("fin_pos")
+def fin_pos(data):
+    print(f"data_x : {data['x']}")
+    print(f"data_y : {data['y']}")
+    io.emit("fin_pos", data, room=session['doc_id'])
+
+
 if __name__ == '__main__':
     connect_to_db(app)
     io.run(app, debug=True, host='0.0.0.0')

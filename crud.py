@@ -226,6 +226,17 @@ def get_notes_by_doc_id(doc_id):
     return Note.query.filter(Note.doc_id == doc_id).all()
 
 
+def update_note_pos(note_id, new_x, new_y):
+
+    note = Note.query.get(note_id)
+    note.x_pos = new_x
+    note.y_pos =  new_y
+
+    db.session.commit()
+
+    return note
+
+
 ### LIKE CRUD OPERATIONS ###
 def get_num_likes_by_note_id(note_id):
     """Get number of likes for a document"""

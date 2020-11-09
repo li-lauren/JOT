@@ -53,7 +53,6 @@ const getPos = (cb) => {
 
 const Doc = ({data}) => {
     const [noteLog, setNoteLog] = React.useState([]);
-    const [pos, setPos] = React.useState({ x: 0, y: 0 })
 
     const authors = data.authors
     const doc = data.doc
@@ -91,14 +90,6 @@ const Doc = ({data}) => {
             setNoteLog(prevNoteLog => [data, ...prevNoteLog])
         });
 
-        getPos((error, data) => {
-            if (error) {
-                return "Error getting note position"
-            }
-            console.log(`Data Pos: ${data.x} ${data.y}`)
-
-            setPos({ x: data.x, y: data.y })
-        });
 
         return () => {
             disconnectSocket()
@@ -121,7 +112,7 @@ const Doc = ({data}) => {
 
             <h3>Notes</h3>
             {/* { noteLog.map((note, i) => <p key={i}>{note.body}</p>)} */}
-            { noteLog.map(note => <Note note={note} setPos={setPos} pos={pos} />) }
+            { noteLog.map(note => <Note note={note} />) }
 
             <AddNote room={room}/>
         </div>
@@ -130,23 +121,28 @@ const Doc = ({data}) => {
 
 
 
-const Note = ({note, setPos, pos}) => {
-    // const [pos, setPos] = React.useState({ x: 0, y: 0 })
+const Note = ({note}) => {
+    const [pos, setPos] = React.useState({ x: note.x, y: note.y })
 
-    // React.useEffect(() => {
-    //     getPos((error, data) => {
-    //         if (error) {
-    //             return "Error getting note position"
-    //         }
-    //         console.log(`Data: ${data.x} ${data.y}`)
+    React.useEffect(() => {
+        getPos((error, data) => {
+            if (error) {
+                return "Error getting note position"
+            }
+            console.log(`Data: ${data.x} ${data.y}`)
 
-    //         setPos({ x: data.x, y: data.y })
-    //     });
-    // }, [note])
+            setPos({ x: data.x, y: data.y })
+        });
+    }, [])
 
     const trackPos = (data) => {
         setPos({x: data.x, y: data.y})
-        socket.emit('receive_position', { 'x': data.x, 'y': data.y })
+        // socket.emit('receive_position', { 'x': data.x, 'y': data.y })
+    }
+
+    const updatePos = (data) => {
+        setPos({x: data.x, y: data.y})
+        socket.emit('fin_pos', { 'x': data.x, 'y': data.y })
     }
 
     return(
@@ -154,7 +150,7 @@ const Note = ({note, setPos, pos}) => {
             key={note.note_id}
             defaultPosition={{x: 0, y: 0}}
             onDrag={(e, data) => trackPos(data)}
-            // onStop={(e, data) => updatePos(data, index)}
+            onStop={(e, data) => updatePos(data)}
         >
             <div>
                 {note.user_id}
