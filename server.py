@@ -269,11 +269,12 @@ def fin_pos(data):
     note_id = data['note_id']
     new_x = data['x']
     new_y = data['y']
+    room = data['room']
 
     print(f"data_note: {note_id}")
     print(f"data_x : {new_x}")
     print(f"data_y : {new_y}")
-    print(f"Room: {session['doc_id']}")
+    print(f"Room: {room}")
     crud.update_note_pos(note_id, new_x, new_y)
 
     # io.emit("fin_pos", data, room=session['doc_id'])
@@ -286,7 +287,7 @@ def fin_pos(data):
     #emit("fin_pos", data, broadcast=True)
 
     # no sign of emission at all
-    emit("fin_pos", data, room=session['doc_id'])
+    emit("fin_pos", data, room=room)
 
 
 if __name__ == '__main__':

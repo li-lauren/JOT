@@ -136,7 +136,7 @@ const Doc = ({data}) => {
 
             <h3>Notes</h3>
             {/* { noteLog.map((note, i) => <p key={i}>{note.body}</p>)} */}
-            { noteLog.map(note => <Note key={note.note_id} note={note} />) }
+            { noteLog.map(note => <Note note={note} room={room} />) }
 
             <AddNote room={room}/>
         </div>
@@ -145,7 +145,7 @@ const Doc = ({data}) => {
 
 
 
-const Note = ({note}) => {
+const Note = ({note, room}) => {
     const [pos, setPos] = React.useState({ x: note.x_pos, y: note.y_pos })
     const note_id = note.note_id
     React.useEffect(() => {
@@ -167,7 +167,8 @@ const Note = ({note}) => {
     const updatePos = (data) => {
         setPos({x: data.x, y: data.y})
         console.log(`NOTE ID ${note_id}`)
-        socket.emit('fin_pos', { 'x': data.x, 'y': data.y, 'note_id': note_id })
+        socket.emit('fin_pos', { 
+            'x': data.x, 'y': data.y, 'note_id': note_id, 'room': room})
     }
 
     return(
