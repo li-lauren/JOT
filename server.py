@@ -1,6 +1,6 @@
 from flask import (Flask, render_template, request, flash, session,
                    redirect, jsonify, make_response)
-from flask_socketio import SocketIO, send, join_room
+from flask_socketio import SocketIO, send, join_room, emit
 from newspaper import Article
 
 from model import connect_to_db
@@ -250,17 +250,22 @@ def handle_note(data):
 # def update_position():
 #     io.emit("update_position", lastPos)
 
-@io.on("receive_position")
-def receive_position(data):
-    print(f"data_x : {data['x']}")
-    print(f"data_y : {data['y']}")
-    print(session['doc_id'])
-    lastPos = data
-    io.emit('receive_position', data, room=session['doc_id'])
+# @io.on("receive_position")
+# def receive_position(data):
+#     print(f"data_x : {data['x']}")
+#     print(f"data_y : {data['y']}")
+#     print(session['doc_id'])
+#     lastPos = data
+#     io.emit('receive_position', data, room=session['doc_id'])
 
+def emit_check():
+    print('Data was received')
 
 @io.on("fin_pos")
 def fin_pos(data):
+    """Read in emitted x, y positions for a specific note, and then emit back 
+    to connected clients."""
+
     note_id = data['note_id']
     new_x = data['x']
     new_y = data['y']
@@ -268,9 +273,20 @@ def fin_pos(data):
     print(f"data_note: {note_id}")
     print(f"data_x : {new_x}")
     print(f"data_y : {new_y}")
+    print(f"Room: {session['doc_id']}")
     crud.update_note_pos(note_id, new_x, new_y)
 
-    io.emit("fin_pos", data, room=session['doc_id'])
+    # io.emit("fin_pos", data, room=session['doc_id'])
+    # send(data, broadcast=True)
+
+    # emits to initiator
+    # emit("fin_pos", data, callback=emit_check) 
+
+    # successfully emits to everybody
+    #emit("fin_pos", data, broadcast=True)
+
+    # no sign of emission at all
+    emit("fin_pos", data, room=session['doc_id'])
 
 
 if __name__ == '__main__':

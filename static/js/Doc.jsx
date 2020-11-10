@@ -35,18 +35,32 @@ const postNote = (room, note) => {
     }
 }
 
+
+// const getPos = (cb) => {
+//     if (!socket) {
+//         console.log('NO SOCKET')
+//         return true;
+//     }
+//     console.log('HERE in getPOS')
+//     socket.on('receive_position', data => {
+//         console.log('New pos data received');
+//         console.log(data)
+//         return cb(null, data)
+//     })
+// }
+
 const getPos = (cb) => {
-    if (!socket) {
-        console.log('NO SOCKET')
-        return true;
+        if (!socket) {
+            console.log('NO SOCKET')
+            return true;
+        }
+        console.log('HERE in getPOS')
+        socket.on('fin_pos', data => {
+            console.log('New pos data received');
+            console.log(data)
+            return cb(null, data)
+        })
     }
-    console.log('HERE in getPOS')
-    socket.on('receive_position', data => {
-        console.log('New pos data received');
-        console.log(data)
-        return cb(null, data)
-    })
-}
 
 // End Socket functions
 
@@ -91,6 +105,15 @@ const Doc = ({data}) => {
             setNoteLog(prevNoteLog => [data, ...prevNoteLog])
         });
 
+        getPos((error, data) => {
+            if (error) {
+                return "Error getting note position"
+            }
+            console.log(`Data: ${data.x} ${data.y}`)
+
+            // setPos({ x: data.x, y: data.y })
+        });
+
 
         return () => {
             disconnectSocket()
@@ -125,16 +148,16 @@ const Doc = ({data}) => {
 const Note = ({note}) => {
     const [pos, setPos] = React.useState({ x: note.x_pos, y: note.y_pos })
     const note_id = note.note_id
-    // React.useEffect(() => {
-    //     getPos((error, data) => {
-    //         if (error) {
-    //             return "Error getting note position"
-    //         }
-    //         console.log(`Data: ${data.x} ${data.y}`)
+    React.useEffect(() => {
+        getPos((error, data) => {
+            if (error) {
+                return "Error getting note position"
+            }
+            console.log(`Data: ${data.x} ${data.y}`)
 
-    //         setPos({ x: data.x, y: data.y })
-    //     });
-    // }, [])
+            setPos({ x: data.x, y: data.y })
+        });
+    }, [])
 
     const trackPos = (data) => {
         setPos({x: data.x, y: data.y})
