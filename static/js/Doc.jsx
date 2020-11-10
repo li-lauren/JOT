@@ -1,6 +1,8 @@
-let socket;
+const parse = HTMLReactParser
 
 // functions for connecting with Socket.io
+let socket;
+
 const connectSocket = (room) => {
     socket = io.connect('http://0.0.0.0:5000/');
     console.log('Connecting...');
