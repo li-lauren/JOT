@@ -105,14 +105,14 @@ const Doc = ({data}) => {
             setNoteLog(prevNoteLog => [data, ...prevNoteLog])
         });
 
-        getPos((error, data) => {
-            if (error) {
-                return "Error getting note position"
-            }
-            console.log(`Data: ${data.x} ${data.y}`)
+        // getPos((error, data) => {
+        //     if (error) {
+        //         return "Error getting note position"
+        //     }
+        //     console.log(`Data: ${data.x} ${data.y}`)
 
-            // setPos({ x: data.x, y: data.y })
-        });
+        //     // setPos({ x: data.x, y: data.y })
+        // });
 
 
         return () => {
@@ -154,8 +154,12 @@ const Note = ({note, room}) => {
                 return "Error getting note position"
             }
             console.log(`Data: ${data.x} ${data.y}`)
-
-            setPos({ x: data.x, y: data.y })
+            
+            if (note_id == data.note_id) {
+                console.log('Matching note ids')
+                setPos({ x: data.x, y: data.y })
+            }
+            
         });
     }, [])
 
@@ -174,7 +178,9 @@ const Note = ({note, room}) => {
     return(
         <ReactDraggable
             key={note.note_id}
-            defaultPosition={{x: pos.x, y: pos.y}}
+            // defaultPosition={{x: pos.x, y: pos.y}}
+            axis="none"
+            position={{x: pos.x, y: pos.y}}
             onDrag={(e, data) => trackPos(data)}
             onStop={(e, data) => updatePos(data)}
         >
