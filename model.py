@@ -58,7 +58,8 @@ class Doc(db.Model):
     url = db.Column(db.String, nullable=False)
     title = db.Column(db.String, nullable=False)
     publish_date = db.Column(db.DateTime)
-    body = db.Column(db.Text)
+    # body = db.Column(db.Text)
+    body = db.Column(db.String)
     owner = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     created_at = db.Column(db.DateTime) #date added to Jot
 

@@ -1,4 +1,4 @@
-const parse = HTMLReactParser
+// const parse = HTMLReactParser
 
 // functions for connecting with Socket.io
 let socket;
@@ -73,6 +73,8 @@ const Doc = ({data}) => {
     const authors = data.authors
     const doc = data.doc
     const room = doc.doc_id
+
+    console.log(doc.body)
     let img_url = ''
 
     if (data.img_urls) {
@@ -129,7 +131,7 @@ const Doc = ({data}) => {
         <p>{authors}</p>,
         <p>{doc.publish_date}</p>,
         <img src={img_url} alt="top_image"/>,
-        <p>{doc.body}</p>
+        <div id="BODY">{HTMLReactParser(doc.body)}</div>
     ]
     
     return(

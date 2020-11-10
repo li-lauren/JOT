@@ -39,14 +39,14 @@ docs_in_db = []
 img_urls_in_db = []
 authors_in_db = []
 for url in article_urls: 
-    article = Article(url)
+    article = Article(url, keep_article_html=True)
     article.download()
     article.parse()
 
     title = article.title
     publish_date = article.publish_date
     #body = article.text
-    body = article.article_html
+    body = str(article.article_html)
     owner = 4
     doc = crud.create_doc(url, title, publish_date, body, owner)
     docs_in_db.append(doc)
