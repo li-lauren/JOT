@@ -109,13 +109,13 @@ def create_doc():
 
     url = request.json.get('url')
 
-    article = Article(url)
+    article = Article(url, keep_article_html=True)
     article.download()
     article.parse()
 
     title = article.title
     publish_date = article.publish_date
-    body = article.text
+    body = str(article.article_html)
     owner = session['user_id']
     doc = crud.create_doc(url, title, publish_date, body, owner)
 
