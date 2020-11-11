@@ -16,29 +16,23 @@ const disconnectSocket = () => {
     }
 }
 
-const getNotes = (cb) => {
-    if (!socket) {
-        return true;
-    };
+// const getNotes = (cb) => {
+//     if (!socket) {
+//         return true;
+//     };
 
-    socket.on('note', note => {
-        console.log('Note received');
-        console.log(note)
-        return cb(null, note);
-    });
-}
+//     socket.on('note', note => {
+//         console.log('Note received');
+//         console.log(note)
+//         return cb(null, note);
+//     });
+// }
 
-const postNote = (room, note) => {
-    if (socket) {
-        console.log('posting note...')
-        socket.emit('note', { 'note': note, 'room': room})
-    }
-}
 // End Socket functions
 
 
 const Doc = ({data}) => {
-    const [noteLog, setNoteLog] = React.useState([]);
+    // const [noteLog, setNoteLog] = React.useState([]);
 
     const authors = data.authors
     const doc = data.doc
@@ -51,33 +45,33 @@ const Doc = ({data}) => {
         img_url = data.img_urls[0]
     }
 
-    const getAllNotes = () => {
-        fetch('/notes')
-        .then(res => res.json())
-        .then(data => {
-            console.log(`GETTING NOTES FOR DOC ${room}`)
-            console.log(data)
-            setNoteLog(data)
-        })
-    }
+    // const getAllNotes = () => {
+    //     fetch('/notes')
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(`GETTING NOTES FOR DOC ${room}`)
+    //         console.log(data)
+    //         setNoteLog(data)
+    //     })
+    // }
     
     React.useEffect(() => {
 
         if (room) {
             connectSocket(room);
             console.log(`Joined Room ${room}`)
-            getAllNotes()
+            // getAllNotes()
         }
 
-        getNotes((error, data) => {
-            if (error) {
-                return "Error getting notes"
-            }
-            console.log(`Data: ${data}`)
-            console.log(`prevNoteLog: ${noteLog}`)
+        // getNotes((error, data) => {
+        //     if (error) {
+        //         return "Error getting notes"
+        //     }
+        //     console.log(`Data: ${data}`)
+        //     console.log(`prevNoteLog: ${noteLog}`)
 
-            setNoteLog(prevNoteLog => [data, ...prevNoteLog])
-        });
+        //     setNoteLog(prevNoteLog => [data, ...prevNoteLog])
+        // });
 
         return () => {
             disconnectSocket()
@@ -98,11 +92,13 @@ const Doc = ({data}) => {
         <div>
             {docData}
 
-            <h3>Notes</h3>
+            {/* <h3>Notes</h3> */}
             {/* { noteLog.map((note, i) => <p key={i}>{note.body}</p>)} */}
-            { noteLog.map(note => <Note note={note} room={room} />) }
+            {/* { noteLog.map(note => <Note note={note} room={room} />) } */}
 
-            <AddNote room={room}/>
+            <NoteList room={room} />
+
+            {/* <AddNote room={room}/> */}
         </div>
     )
 }

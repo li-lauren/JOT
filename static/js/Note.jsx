@@ -15,6 +15,7 @@ const getPos = (cb) => {
 const Note = ({note, room}) => {
     const [pos, setPos] = React.useState({ x: note.x_pos, y: note.y_pos })
     const note_id = note.note_id
+
     React.useEffect(() => {
         getPos((error, data) => {
             if (error) {
@@ -23,12 +24,12 @@ const Note = ({note, room}) => {
             console.log(`Data: ${data.x} ${data.y}`)
             
             if (note_id == data.note_id) {
-                console.log('Matching note ids')
+                console.log(`Matching note ids: ${note_id} and ${data.note_id} `)
                 setPos({ x: data.x, y: data.y })
             }
             
         });
-    }, [])
+    })
 
     const trackPos = (data) => {
         setPos({x: data.x, y: data.y})
@@ -44,15 +45,14 @@ const Note = ({note, room}) => {
 
     return(
         <ReactDraggable
-            key={note.note_id}
             // defaultPosition={{x: pos.x, y: pos.y}}
             axis="none"
             position={{x: pos.x, y: pos.y}}
             onDrag={(e, data) => trackPos(data)}
             onStop={(e, data) => updatePos(data)}
         >
-            <div id="note">
-                <span>{note.user_id}:</span>
+            <div id="note" onClick={()=>console.log(note_id)}>
+                <span>{note.note_id}:</span>
                 <br/>
                 {note.body}
                 <br/>

@@ -41,7 +41,8 @@ def login():
             session['lname'] = user.lname
             print(session)
 
-            return f"Welcome, {user.fname}!"
+            # return f"Welcome, {user.fname}!"
+            return f"{user.user_id} {user.fname} {user.lname}"
     
         else:
             return "Incorrect password"
@@ -202,7 +203,7 @@ def create_note():
     user_id = session['user_id']
     doc_id = session['doc_id']
     note = crud.create_note(user_id, doc_id, note)
-    print(jsonify(note))
+    
     return jsonify(note)
 
 
@@ -232,9 +233,10 @@ def handle_note(data):
     user_id = session[request.sid]
     # print(f"Note: {body} Room: {room} User: {user_id}")
 
-    crud.create_note(user_id, room, body)
+    note = crud.create_note(user_id, room, body)
 
     note_json = {
+        'note_id': note.note_id,
         'user_id': user_id,
         'doc_id': room,
         # To Do: work on datetime ish
@@ -243,6 +245,7 @@ def handle_note(data):
         'x_pos': 0,
         'y_pos': 0
     }
+    # io.emit('note', note_json, room=room)
     io.emit('note', note_json, room=room)
 
 
@@ -286,8 +289,7 @@ def fin_pos(data):
     # successfully emits to everybody
     #emit("fin_pos", data, broadcast=True)
 
-    # no sign of emission at all
-    emit("fin_pos", data, room=room)
+    io.emit("fin_pos", data, room=room, include_self=False)
 
 
 if __name__ == '__main__':

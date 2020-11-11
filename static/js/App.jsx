@@ -13,16 +13,16 @@ const Navbar = () => {
 }
 
 const App = () => {
-    const [loggedIn, setLoggedIn] = React.useState(false)
+    const [loggedIn, setLoggedIn] = React.useState(localStorage.getItem('user_id') !== null)
 
     console.log(loggedIn)
-    React.useEffect(() => {
-        fetch('/login')
-        .then(res => res.text())
-        .then(data => {
-            if (data) { setLoggedIn(true) }
-        })
-    }, [])
+    // React.useEffect(() => {
+    //     fetch('/login')
+    //     .then(res => res.text())
+    //     .then(data => {
+    //         if (data) { setLoggedIn(true) }
+    //     })
+    // }, [])
 
     const RequireAuth = ({ children }) => {
         if (!loggedIn) {
@@ -47,7 +47,12 @@ const App = () => {
                     />
                 
                     <RequireAuth>
-                        <Route exact path={'/dashboard'} component={Dashboard} />
+                        <Route 
+                            exact path={'/dashboard'}
+                            render={(props) => (
+                               <Dashboard {...props} setLoggedIn={setLoggedIn} /> 
+                            )} 
+                        />
                     </RequireAuth>  
                 </Switch>     
             </Router>

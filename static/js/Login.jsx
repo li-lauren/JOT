@@ -15,6 +15,7 @@ const Login = ({setLoggedIn}) => {
         setUserInput({[name]: value});
     }
 
+    const loginErrors = ["Incorrect password", "No user associated with that email"]
     const login = (e) => {
         e.preventDefault()
         console.log('LOGIN')
@@ -33,8 +34,16 @@ const Login = ({setLoggedIn}) => {
         fetch("/login", reqOptions)
         .then(res => res.text())
         .then(data => {
-            setErrorMsg(data)
-            setLoggedIn(true)
+            setUserInput({ email: '', pw: ''})
+            if (loginErrors.includes(data)) {
+                setErrorMsg(data)
+            } else {
+                const info = data.split(" ")
+                localStorage.setItem('user_id', info[0])
+                localStorage.setItem('fname', info[1])
+                localStorage.setItem('lname', info[2])
+                setLoggedIn(true)
+            }  
         })
     }
 
