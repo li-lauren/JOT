@@ -3,7 +3,7 @@ const getPos = (cb) => {
         console.log('NO SOCKET')
         return true;
     }
-    console.log('HERE in getPOS')
+    // console.log('HERE in getPOS')
     socket.on('fin_pos', data => {
         console.log('New pos data received');
         console.log(data)
@@ -56,7 +56,8 @@ const Note = ({note, room}) => {
                 <br/>
                 {note.body}
                 <br/>
-                {`x: ${pos.x.toFixed(0)}, y: ${pos.y.toFixed(0)}`}
+                {/* {`x: ${pos.x.toFixed(0)}, y: ${pos.y.toFixed(0)}`} */}
+                {`x: ${pos.x}, y: ${pos.y}`}
             </div>
 
         </ReactDraggable>

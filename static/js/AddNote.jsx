@@ -17,7 +17,8 @@ const AddNote = ({room}) => {
             <input 
                 type="text" name="note" 
                 value={note} 
-                onChange={e => setNote(e.target.value)}/>
+                onChange={e => setNote(e.target.value)}
+            />
             <button onClick={()=> postNote(room, note)}>Add Note</button>
         </div>
     )

@@ -46,13 +46,17 @@ const NoteList = ({room}) => {
     
     }); //may have to be room
 
+    // const notes = (noteLog.map(note => 
+    //     <Note key={note.note_id} note={note} room={room} />))
+
+    console.log(`NOTELOG: ${noteLog}`)
     return (
         <div>
-             <h3>Notes</h3>
-             { noteLog.map(note => 
+            <h3>Notes</h3>
+            { noteLog.map(note => 
                 <Note key={note.note_id} note={note} room={room} />) }
-
-             <AddNote room={room} />
+           
+            <AddNote room={room} />
         </div>
        
     )
