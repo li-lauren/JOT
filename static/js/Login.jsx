@@ -1,4 +1,5 @@
 const { Redirect } = ReactRouterDOM;
+// const { Button } = ReactBootstrap;
 
 const Login = ({loggedIn, setLoggedIn}) => {
     if (loggedIn) {
@@ -62,7 +63,8 @@ const Login = ({loggedIn, setLoggedIn}) => {
                 <label>Password</label>
                 <input type="password" name="pw" value={userInput.pw} onChange={handleChange} />
                 <br/>
-                <button type="submit">Login</button>
+                {/* <button type="submit">Login</button> */}
+                <Button variation="primary" type="submit">Login</Button>
             </form>
             <p>{errorMsg}</p>  
             

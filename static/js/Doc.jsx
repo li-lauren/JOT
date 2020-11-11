@@ -89,7 +89,7 @@ const Doc = ({data}) => {
     ]
     
     return(
-        <div>
+        <Container>
             {docData}
 
             {/* <h3>Notes</h3> */}
@@ -99,7 +99,7 @@ const Doc = ({data}) => {
             <NoteList room={room} />
 
             {/* <AddNote room={room}/> */}
-        </div>
+        </Container>
     )
 }
 

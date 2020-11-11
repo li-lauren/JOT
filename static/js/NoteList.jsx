@@ -37,8 +37,7 @@ const NoteList = ({room}) => {
             socket.on('note', note => {
                 setNoteAdded(note)
             })
-        }
-        
+        }    
     })
 
     React.useEffect(() => {
