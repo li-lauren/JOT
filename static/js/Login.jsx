@@ -1,4 +1,10 @@
-const Login = ({setLoggedIn}) => {
+const { Redirect } = ReactRouterDOM;
+
+const Login = ({loggedIn, setLoggedIn}) => {
+    if (loggedIn) {
+        return <Redirect to={'/dashboard'} />
+    }
+    
     const [userInput, setUserInput] = React.useReducer(
         (state, newState) => ({...state, ...newState}), 
         {

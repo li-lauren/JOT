@@ -42,7 +42,9 @@ const App = () => {
                     <Route 
                         exact path={'/login'} 
                         render={(props) => (
-                            <Login {...props} setLoggedIn={setLoggedIn} />
+                            <Login {...props} 
+                            loggedIn={loggedIn}
+                            setLoggedIn={setLoggedIn} />
                         )}
                     />
                 
