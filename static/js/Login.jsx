@@ -7,8 +7,6 @@ const Login = ({setLoggedIn}) => {
         }
     );
     const [errorMsg, setErrorMsg] = React.useState('')
-    // const [loggedIn, setLoggedIn] = React.useState(false)
-    // const [docs, setDocs] = React.useState([])
 
     const handleChange = e => {
         const name = e.target.name;
@@ -37,15 +35,6 @@ const Login = ({setLoggedIn}) => {
         .then(data => {
             setErrorMsg(data)
             setLoggedIn(true)
-            // if (typeof(data) === 'string') {
-            //     setErrorMsg(data)
-            // } else {
-            //     setDocs(data)
-            //     for (const doc of docs) {
-            //         console.log(`Success: ${doc.title}`)
-            //     }  
-            //     setErrorMsg('')
-            // }   
         })
     }
 
@@ -61,9 +50,6 @@ const Login = ({setLoggedIn}) => {
                 <button type="submit">Login</button>
             </form>
             <p>{errorMsg}</p>  
-            {/* <Dashboard loggedIn={loggedIn} /> */}
-            {/* <AddDoc setDocs={setDocs} />
-            <DocList docs={docs}/>   */}
             
         </div>   
     )
