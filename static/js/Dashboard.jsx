@@ -1,11 +1,8 @@
-const { Redirect } = ReactRouterDOM;
-
 const Dashboard = ({setLoggedIn}) => {
 
     const logout = () => {
         localStorage.clear()
         setLoggedIn(false)
-        return <Redirect to={'/'} />
     }
     
     return(

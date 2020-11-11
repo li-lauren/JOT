@@ -26,7 +26,7 @@ const App = () => {
 
     const RequireAuth = ({ children }) => {
         if (!loggedIn) {
-            return <Redirect to={'/login'} />;
+            return <Redirect to={'/'} />;
         }
 
         return children;
