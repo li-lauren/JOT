@@ -45,9 +45,9 @@ for url in article_urls:
 
     title = article.title
     publish_date = article.publish_date
-    #body = article.text
     body = str(article.article_html)
     owner = 4
+    
     doc = crud.create_doc(url, title, publish_date, body, owner)
     docs_in_db.append(doc)
 

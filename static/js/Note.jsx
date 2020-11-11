@@ -51,9 +51,11 @@ const Note = ({note, room}) => {
             onDrag={(e, data) => trackPos(data)}
             onStop={(e, data) => updatePos(data)}
         >
-            <div>
-                {note.user_id}
+            <div id="note">
+                <span>{note.user_id}:</span>
+                <br/>
                 {note.body}
+                <br/>
                 {`x: ${pos.x.toFixed(0)}, y: ${pos.y.toFixed(0)}`}
             </div>
 
