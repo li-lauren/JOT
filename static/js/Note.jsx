@@ -65,7 +65,7 @@ const Note = ({note, room}) => {
                 {note.body}
                 <br/>
                 {/* {`x: ${pos.x.toFixed(0)}, y: ${pos.y.toFixed(0)}`} */}
-                {`x: ${pos.x}, y: ${pos.y}`}
+                {`x: ${(pos.x / width).toFixed(2)}, y: ${(pos.y / height).toFixed(2)}`}
             </Button>
 
         </ReactDraggable>
