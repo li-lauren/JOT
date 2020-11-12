@@ -51,14 +51,14 @@ const Note = ({note, room}) => {
             onDrag={(e, data) => trackPos(data)}
             onStop={(e, data) => updatePos(data)}
         >
-            <div id="note" onClick={()=>console.log(note_id)}>
+            <Button id="note" onClick={()=>console.log(note_id)}>
                 <span>{note.note_id}:</span>
                 <br/>
                 {note.body}
                 <br/>
                 {/* {`x: ${pos.x.toFixed(0)}, y: ${pos.y.toFixed(0)}`} */}
                 {`x: ${pos.x}, y: ${pos.y}`}
-            </div>
+            </Button>
 
         </ReactDraggable>
         

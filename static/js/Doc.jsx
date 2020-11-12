@@ -80,12 +80,21 @@ const Doc = ({data}) => {
 
     
     const docData = [
-        <h1>{doc.title}</h1>, 
-        <FollowerList doc_id={doc.doc_id} />,
-        <p>{authors}</p>,
-        <p>{doc.publish_date}</p>,
+        <Row>
+            <h1>{doc.title}</h1>
+        </Row>, 
+        <Row>
+            <FollowerList doc_id={doc.doc_id} />
+        </Row>,
+        <Row>
+            <p>{authors}</p>
+            <p>{doc.publish_date}</p>
+        </Row>,
         <img src={img_url} alt="top_image"/>,
-        <div id="a-body">{HTMLReactParser(doc.body)}</div>
+        <Row>
+             <div id="a-body">{HTMLReactParser(doc.body)}</div>
+        </Row>
+       
     ]
     
     return(
@@ -96,7 +105,9 @@ const Doc = ({data}) => {
             {/* { noteLog.map((note, i) => <p key={i}>{note.body}</p>)} */}
             {/* { noteLog.map(note => <Note note={note} room={room} />) } */}
 
-            <NoteList room={room} />
+            <Row>
+                <NoteList room={room} />
+            </Row>
 
             {/* <AddNote room={room}/> */}
         </Container>
