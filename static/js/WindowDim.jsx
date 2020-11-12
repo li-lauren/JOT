@@ -3,16 +3,13 @@ const getWindowDim = () => {
 
     const { innerWidth: width, innerHeight: height } = window;
 
-    console.log(width)
-    console.log(height)
     return { width, height };
 }
 
 // get Window Width x Height for XY position normalization
 const updateWindowDim = () => {
     const [windowDim, setWindowDim] = useState(getWindowDim())
-
-    console.log(windowDim)
+    
     const handleResize = () => {
         setWindowDim(getWindowDim());
     }
