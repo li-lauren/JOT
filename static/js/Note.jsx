@@ -13,9 +13,11 @@ const getPos = (cb) => {
 
 
 const Note = ({note, room}) => {
-    const [pos, setPos] = React.useState({ x: note.x_pos, y: note.y_pos })
+    const { width, height } = updateWindowDim()
+    const [pos, setPos] = React.useState(
+        { x: note.x_pos * width , y: note.y_pos * height })
     const note_id = note.note_id
-
+    
     React.useEffect(() => {
         getPos((error, data) => {
             if (error) {
@@ -25,7 +27,10 @@ const Note = ({note, room}) => {
             
             if (note_id == data.note_id) {
                 console.log(`Matching note ids: ${note_id} and ${data.note_id} `)
-                setPos({ x: data.x, y: data.y })
+                const normX = data.x * width
+                const normY = data.y * height
+                console.log({ normX, normY })
+                setPos({ x: normX, y: normY })
             }
             
         });
@@ -40,7 +45,10 @@ const Note = ({note, room}) => {
         setPos({x: data.x, y: data.y})
         console.log(`NOTE ID ${note_id}`)
         socket.emit('fin_pos', { 
-            'x': data.x, 'y': data.y, 'note_id': note_id, 'room': room})
+            'x': data.x / width, 
+            'y': data.y / height, 
+            'note_id': note_id, 
+            'room': room })
     }
 
     return(

@@ -1,7 +1,10 @@
 const getWindowDim = () => {
     // get inner width and height of the window
 
-    const { w: width, h: height } = window;
+    const { innerWidth: width, innerHeight: height } = window;
+
+    console.log(width)
+    console.log(height)
     return { width, height };
 }
 
@@ -9,6 +12,7 @@ const getWindowDim = () => {
 const updateWindowDim = () => {
     const [windowDim, setWindowDim] = useState(getWindowDim())
 
+    console.log(windowDim)
     const handleResize = () => {
         setWindowDim(getWindowDim());
     }
