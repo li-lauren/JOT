@@ -33,15 +33,21 @@ const AddDoc = ({docAdded, setDocAdded}) => {
         .then(res => res.text())
         .then(data => {
             console.log('Doc added')
-            console.log(data) })
-        .then(
-            fetch("/docs")
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                setDocAdded(!docAdded)
+            console.log(data) 
+            setDocAdded(!docAdded)
+            setUserInput({
+                url: '', 
+                tag: '',
             })
-        )
+        })
+        // .then(
+        //     fetch("/docs")
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data)
+        //         setDocAdded(!docAdded)
+        //     })
+        // )
     }
 
     return(
