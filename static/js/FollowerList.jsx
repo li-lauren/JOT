@@ -17,16 +17,17 @@ const FollowerList = ({doc_id}) => {
     }
 
     return (
-        <React.Fragment>
+        <div>
             <h5>Following</h5>
             {followerList.length > 0 ? (followerList.map(follower => 
                 <li key={follower.user_id}>
                     {follower.fname} {follower.lname}
                 </li>)) : <p>None</p>}
+            <br/>
             <AddFollower 
                 followerAdded={followerAdded}
                 setFollowerAdded={setFollowerAdded} 
             />
-        </React.Fragment>
+        </div>
     )
 }
