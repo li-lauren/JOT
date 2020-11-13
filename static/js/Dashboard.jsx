@@ -7,7 +7,7 @@ const Dashboard = ({setLoggedIn}) => {
     
     return(
         <div>
-            <h3>Dashboard</h3>
+            <h3>{`${localStorage.getItem('fname')}'s`} Dashboard</h3>
             <a href="" onClick={logout}>Logout</a>
             <DocList />
         </div>
