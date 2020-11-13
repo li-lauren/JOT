@@ -1,5 +1,5 @@
 const SignUp = () => {
-    const [userInput, setUserInput] = React.useReducer(
+    const [userInput, setUserInput] = useReducer(
         (state, newState) => ({...state, ...newState}), 
         {
             fname: '', 
@@ -9,7 +9,7 @@ const SignUp = () => {
             img: ''
         }
     );
-    const [msg, setMsg] = React.useState('')
+    const [msg, setMsg] = useState('')
 
     const handleChange = e => {
         const name = e.target.name;
@@ -41,6 +41,13 @@ const SignUp = () => {
         .then(data => {
             console.log(data)
             setMsg(data)
+            setUserInput({
+                fname: '', 
+                lname: '',
+                email: '', 
+                pw: '', 
+                img: ''
+            })
         })
     }
 
