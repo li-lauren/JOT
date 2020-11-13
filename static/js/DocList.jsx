@@ -34,7 +34,7 @@ const DocList = () => {
         <div>
             <h5>Doc Library</h5>
             <ul>
-                {docList.map(doc => {
+                {docList.length !== 0 ? docList.map(doc => {
                     return (
                         <li key={doc.doc_id}>
                             <a href="" key={doc.doc_id} onClick={(e)=> getDocDets(doc.doc_id, e)}>
@@ -42,9 +42,9 @@ const DocList = () => {
                             </a>
                         </li>    
                     )               
-                })}
+                }) : <p>Get started by adding an article!</p>}
 
-                <h6>Followed Docs</h6>
+                {sharedList.length !== 0 && <h6>Followed Docs</h6>}
                 {sharedList.map(doc => {
                     return (
                         <li key={doc.doc_id}>
@@ -55,6 +55,7 @@ const DocList = () => {
                     )               
                 })}
             </ul>
+            
             <AddDoc docAdded={docAdded} setDocAdded={setDocAdded} />
             {docDets ? <Doc data={docDets}/> : ''}
         </div>
