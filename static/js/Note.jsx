@@ -77,6 +77,8 @@ const Note = ({note, room}) => {
     // const { width, height } = updateWindowDim()
     const [pos, setPos] = React.useState(
         { x: note.x_pos, y: note.y_pos })
+    const [isHovering, setIsHovering] = React.useState(false)
+
     const note_id = note.note_id
     
     React.useEffect(() => {
@@ -112,6 +114,7 @@ const Note = ({note, room}) => {
             'room': room })
     }
 
+
     return(
         <ReactDraggable
             // defaultPosition={{x: pos.x, y: pos.y}}
@@ -120,15 +123,24 @@ const Note = ({note, room}) => {
             onDrag={(e, data) => trackPos(data)}
             onStop={(e, data) => updatePos(data)}
         >
-            <Button id="note" onClick={()=>console.log(note_id)}>
-                <span>{note.note_id}:</span>
-                <br/>
-                {note.body}
-                <br/>
-                {/* {`x: ${pos.x.toFixed(0)}, y: ${pos.y.toFixed(0)}`} */}
-                {`x: ${(pos.x).toFixed(2)}, y: ${(pos.y).toFixed(2)}`}
-            </Button>
+            <div
+                onMouseEnter={() => setIsHovering(true)}
+                onMouseLeave={() => setIsHovering(false)}
+            >
+                { isHovering ? 
+                <Button className="note" onClick={()=>console.log(note_id)}>
+                    <span>{note.note_id}:</span>
+                    <br/>
+                    {note.body}
+                    <br/>
+                    {`x: ${(pos.x).toFixed(2)}, y: ${(pos.y).toFixed(2)}`}
+                </Button>
+                :
+                <Button className="note">
+                    {note_id}
+                </Button> }
 
+            </div>
         </ReactDraggable>
         
     )
