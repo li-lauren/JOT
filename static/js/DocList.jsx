@@ -44,6 +44,8 @@ const DocList = () => {
                     )               
                 }) : <p>Get started by adding an article!</p>}
 
+                <br/>
+                
                 {sharedList.length !== 0 && <h6>Followed Docs</h6>}
                 {sharedList.map(doc => {
                     return (

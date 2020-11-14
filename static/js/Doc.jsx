@@ -92,7 +92,7 @@ const Doc = ({data}) => {
         </Row>,
         <img src={img_url} alt="top_image"/>,
         <Row>
-             <div id="a-body">{HTMLReactParser(doc.body)}</div>
+             <div id="wrapper">{HTMLReactParser(doc.body)}</div>
         </Row>
        
     ]

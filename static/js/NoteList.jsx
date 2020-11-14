@@ -63,7 +63,6 @@ const NoteList = ({room}) => {
     console.log(`NOTELOG: ${noteLog}`)
     return (
         <div>
-            <h3>Notes</h3>
             { noteLog ? noteLog.map(note => {
                 if (note) {
                     return <Note key={note.note_id} note={note} room={room} /> 
