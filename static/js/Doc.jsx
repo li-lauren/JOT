@@ -92,24 +92,27 @@ const Doc = ({data}) => {
         </Row>,
         <img src={img_url} alt="top_image"/>,
         <Row>
-             <div id="wrapper">{HTMLReactParser(doc.body)}</div>
+             <div>{HTMLReactParser(doc.body)}</div>
         </Row>
        
     ]
     
     return(
         <Container>
-            {docData}
+            <div id="wrapper">
+                {docData}
 
-            {/* <h3>Notes</h3> */}
-            {/* { noteLog.map((note, i) => <p key={i}>{note.body}</p>)} */}
-            {/* { noteLog.map(note => <Note note={note} room={room} />) } */}
+                {/* <h3>Notes</h3> */}
+                {/* { noteLog.map((note, i) => <p key={i}>{note.body}</p>)} */}
+                {/* { noteLog.map(note => <Note note={note} room={room} />) } */}
 
-            <Row>
-                <NoteList room={room} />
-            </Row>
+                <Row>
+                    <NoteList room={room} />
+                </Row>
 
-            {/* <AddNote room={room}/> */}
+                {/* <AddNote room={room}/> */}
+
+            </div>
         </Container>
     )
 }
