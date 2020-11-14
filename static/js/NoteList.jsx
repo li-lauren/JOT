@@ -67,6 +67,7 @@ const NoteList = ({room}) => {
     console.log(`NOTELOG: ${noteLog}`)
     return (
         <div>
+            
             <div id="note-list">
                 { noteLog ? noteLog.map(note => {
                     if (note) {

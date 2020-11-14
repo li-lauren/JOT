@@ -12,14 +12,14 @@
 #wrapper {
     margin-left: auto !important;
     margin-right: auto !important;
-    width: 960px !important;
-    min-width: 960px !important;
+    width: 900px !important;
+    min-width: 900px !important;
 }
 
 #add-note {
     position: fixed;
     top: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-110%, -50%);
 }
 
 /* #noteList {
