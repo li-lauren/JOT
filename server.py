@@ -230,8 +230,10 @@ def handle_join_room(room):
 def handle_note(data):
     body = data['note']
     room = data['room']
+    x_pos = data['x_pos']
+    y_pos = data['y_pos']
     user_id = session[request.sid]
-    # print(f"Note: {body} Room: {room} User: {user_id}")
+    print(f"Note: {body} Room: {room} User: {user_id} X: {x_pos} Y: {y_pos}")
 
     note = crud.create_note(user_id, room, body)
 
@@ -242,8 +244,8 @@ def handle_note(data):
         # To Do: work on datetime ish
         # 'created_at': note_obj.created_at, 
         'body': body,
-        'x_pos': 0,
-        'y_pos': 0
+        'x_pos': x_pos,
+        'y_pos': y_pos
     }
     # io.emit('note', note_json, room=room)
     io.emit('note', note_json, room=room)

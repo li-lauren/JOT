@@ -51,9 +51,13 @@ const NoteList = ({room}) => {
 
         //     setNoteLog(prevNoteLog => [data, ...prevNoteLog])
         // });
-
+        
 
         setNoteLog(prevNoteLog => [noteAdded, ...prevNoteLog])
+        if (noteAdded) {
+            console.log(noteAdded.x_pos)
+            console.log(noteAdded.y_pos)
+        }
     
     }, [noteAdded]); //may have to be room
 
@@ -63,11 +67,14 @@ const NoteList = ({room}) => {
     console.log(`NOTELOG: ${noteLog}`)
     return (
         <div>
-            { noteLog ? noteLog.map(note => {
-                if (note) {
-                    return <Note key={note.note_id} note={note} room={room} /> 
-                }
-            }) : 'No notes' }
+            <div id="note-list">
+                { noteLog ? noteLog.map(note => {
+                    if (note) {
+                        return <Note key={note.note_id} note={note} room={room} /> 
+                    }
+                }) : 'No notes' }
+            </div>
+            
            
             <AddNote room={room} />
         </div>

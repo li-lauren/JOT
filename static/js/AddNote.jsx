@@ -8,11 +8,12 @@ const AddNote = ({room}) => {
     
         if (socket) {
             console.log('posting note...')
-            const elem = document.getElementById('add-note')
-            const box = elem.getBoundingClientRect();
-            const x = box.top + window.pageYOffset
-            const y = box.left + window.pageXOffset
-
+            const addNoteElem = document.getElementById('add-note').getBoundingClientRect()
+            const noteOriginElem = document.getElementById('note-list').getBoundingClientRect()
+        
+            const y = addNoteElem.top - noteOriginElem.top - 80
+            const x = addNoteElem.left - noteOriginElem.left
+            console.log({x, y})
             socket.emit('note', {
                 'note': note, 
                 'room': room, 
