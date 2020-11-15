@@ -240,7 +240,7 @@ def handle_note(data):
     fname = user.fname
     lname = user.lname
 
-    note = crud.create_note(user_id, room, body)
+    note = crud.create_note(user_id, room, body, x_pos, y_pos, fname, lname)
 
     note_json = {
         'note_id': note.note_id,
