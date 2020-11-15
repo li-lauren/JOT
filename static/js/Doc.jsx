@@ -78,6 +78,7 @@ const Doc = ({data}) => {
         }
     }, [room]);
 
+    const publish_date = new Date(doc.publish_date)
     
     const docData = [
         <Row>
@@ -87,8 +88,10 @@ const Doc = ({data}) => {
             <FollowerList doc_id={doc.doc_id} />
         </Row>,
         <Row>
+            <p>{moment(publish_date).format("MMMM Do YYYY")} </p>
+        </Row>,
+        <Row>
             <p>{authors}</p>
-            <p>{doc.publish_date}</p>
         </Row>,
         <img src={img_url} alt="top_image"/>,
         <Row>

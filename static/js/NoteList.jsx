@@ -69,11 +69,11 @@ const NoteList = ({room}) => {
         <div>
             
             <div id="note-list">
-                { noteLog ? noteLog.map(note => {
+                { noteLog.map(note => {
                     if (note) {
                         return <Note key={note.note_id} note={note} room={room} /> 
                     }
-                }) : 'No notes' }
+                }) }
             </div>
             
            

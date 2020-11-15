@@ -241,7 +241,7 @@ def handle_note(data):
         'note_id': note.note_id,
         'user_id': user_id,
         'doc_id': room,
-        # To Do: work on datetime ish
+        # TODO: work on datetime ish
         # 'created_at': note_obj.created_at, 
         'body': body,
         'x_pos': x_pos,
