@@ -6,6 +6,7 @@ from newspaper import Article
 from model import connect_to_db
 import crud
 import json
+import datetime, time
 
 import os
 
@@ -195,16 +196,16 @@ def get_notes():
 
     return jsonify(notes)
 
-@app.route('/notes', methods=['POST'])
-def create_note():
-    """Create a note."""
+# @app.route('/notes', methods=['POST'])
+# def create_note():
+#     """Create a note."""
     
-    note = request.json.get("note")
-    user_id = session['user_id']
-    doc_id = session['doc_id']
-    note = crud.create_note(user_id, doc_id, note)
+#     note = request.json.get("note")
+#     user_id = session['user_id']
+#     doc_id = session['doc_id']
+#     note = crud.create_note(user_id, doc_id, note)
     
-    return jsonify(note)
+#     return jsonify(note)
 
 
 @io.on("connect")
@@ -240,14 +241,17 @@ def handle_note(data):
     fname = user.fname
     lname = user.lname
 
-    note = crud.create_note(user_id, room, body, x_pos, y_pos, fname, lname)
+    created_at = datetime.datetime.utcnow()
+    date_as_int = int(time.mktime(created_at.timetuple())) * 1000
+
+    note = crud.create_note(user_id, room, created_at, body, x_pos, y_pos, fname, lname)
 
     note_json = {
         'note_id': note.note_id,
         'user_id': user_id,
         'doc_id': room,
         # TODO: work on datetime ish
-        # 'created_at': note_obj.created_at, 
+        'created_at': date_as_int, 
         'body': body,
         'x_pos': x_pos,
         'y_pos': y_pos, 

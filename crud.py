@@ -196,12 +196,12 @@ def get_image_url_by_doc_id(doc_id):
 
 ### NOTE CRUD OPERATIONS ###
 
-def create_note(user_id, doc_id, body, x_pos, y_pos, fname, lname):
+def create_note(user_id, doc_id, created_at, body, x_pos, y_pos, fname, lname):
     """Create a note."""
     # figure out x and y pos
 
-    tz = pytz.timezone('America/Los_Angeles')
-    created_at = datetime.now(tz)
+    # tz = pytz.timezone('America/Los_Angeles')
+    # created_at = datetime.now(tz)
 
     note = Note(
         user_id = user_id,

@@ -82,6 +82,7 @@ const Note = ({note, room}) => {
     const note_id = note.note_id
     const fname = note.fname
     const lname = note.lname
+    const created_at = new Date(note.created_at)
     
     React.useEffect(() => {
         getPos((error, data) => {
@@ -136,6 +137,7 @@ const Note = ({note, room}) => {
                     <br/>
                     {note.body}
                     <br/>
+                    {moment(created_at).startOf('minute').fromNow()}
                     {/* {`x: ${(pos.x).toFixed(2)}, y: ${(pos.y).toFixed(2)}`} */}
                 </Button>
                 :
