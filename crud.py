@@ -196,7 +196,7 @@ def get_image_url_by_doc_id(doc_id):
 
 ### NOTE CRUD OPERATIONS ###
 
-def create_note(user_id, doc_id, body, x_pos=0, y_pos=0):
+def create_note(user_id, doc_id, body, x_pos, y_pos, fname, lname):
     """Create a note."""
     # figure out x and y pos
 
@@ -209,7 +209,9 @@ def create_note(user_id, doc_id, body, x_pos=0, y_pos=0):
         created_at = created_at, 
         body = body,
         x_pos = x_pos,
-        y_pos = y_pos
+        y_pos = y_pos,
+        fname = fname,
+        lname = lname
     )
 
     db.session.add(note)
