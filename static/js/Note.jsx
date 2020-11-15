@@ -80,6 +80,8 @@ const Note = ({note, room}) => {
     const [isHovering, setIsHovering] = React.useState(false)
 
     const note_id = note.note_id
+    const fname = note.fname
+    const lname = note.lname
     
     React.useEffect(() => {
         getPos((error, data) => {
@@ -129,7 +131,8 @@ const Note = ({note, room}) => {
             >
                 { isHovering ? 
                 <Button className="note" onClick={()=>console.log(note_id)}>
-                    <span>{note.note_id}:</span>
+                    {/* <span>{note.note_id}</span> */}
+                    <span>{fname}:</span>
                     <br/>
                     {note.body}
                     <br/>
@@ -137,7 +140,7 @@ const Note = ({note, room}) => {
                 </Button>
                 :
                 <Button className="note">
-                    {note_id}
+                    {fname[0]}
                 </Button> }
 
             </div>
