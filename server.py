@@ -234,6 +234,11 @@ def handle_note(data):
     y_pos = data['y_pos']
     user_id = session[request.sid]
     print(f"Note: {body} Room: {room} User: {user_id} X: {x_pos} Y: {y_pos}")
+    print(f"NAME {crud.get_user_by_id(user_id).fname}")
+
+    user = crud.get_user_by_id(user_id)
+    fname = user.fname
+    lname = user.lname
 
     note = crud.create_note(user_id, room, body)
 

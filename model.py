@@ -190,6 +190,8 @@ class Note(db.Model):
     body: str
     x_pos: float
     y_pos: float
+    fname: str
+    lname: str
 
     __tablename__ = "notes"
 
@@ -204,6 +206,8 @@ class Note(db.Model):
     body = db.Column(db.Text)
     x_pos = db.Column(db.Float)
     y_pos = db.Column(db.Float)
+    fname = db.Column(db.String)
+    lname = db.Column(db.String)
 
     doc = db.relationship("Doc")
     user = db.relationship("User")

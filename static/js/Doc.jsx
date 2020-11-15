@@ -37,8 +37,8 @@ const Doc = ({data}) => {
     const authors = data.authors
     const doc = data.doc
     const room = doc.doc_id
+    const publish_date = new Date(doc.publish_date)
 
-    console.log(doc.body)
     let img_url = ''
 
     if (data.img_urls) {
@@ -78,7 +78,7 @@ const Doc = ({data}) => {
         }
     }, [room]);
 
-    const publish_date = new Date(doc.publish_date)
+    
     
     const docData = [
         <Row>

@@ -133,7 +133,7 @@ const Note = ({note, room}) => {
                     <br/>
                     {note.body}
                     <br/>
-                    {`x: ${(pos.x).toFixed(2)}, y: ${(pos.y).toFixed(2)}`}
+                    {/* {`x: ${(pos.x).toFixed(2)}, y: ${(pos.y).toFixed(2)}`} */}
                 </Button>
                 :
                 <Button className="note">
