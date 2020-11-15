@@ -234,7 +234,7 @@ def handle_note(data):
     y_pos = data['y_pos']
     user_id = session[request.sid]
     print(f"Note: {body} Room: {room} User: {user_id} X: {x_pos} Y: {y_pos}")
-    print(f"NAME {crud.get_user_by_id(user_id).fname}")
+    # print(f"NAME {crud.get_user_by_id(user_id).fname}")
 
     user = crud.get_user_by_id(user_id)
     fname = user.fname
@@ -250,9 +250,11 @@ def handle_note(data):
         # 'created_at': note_obj.created_at, 
         'body': body,
         'x_pos': x_pos,
-        'y_pos': y_pos
+        'y_pos': y_pos, 
+        'fname': fname,
+        'lname': lname
     }
-    # io.emit('note', note_json, room=room)
+    
     io.emit('note', note_json, room=room)
 
 
