@@ -55,6 +55,10 @@ const App = () => {
                                <Dashboard {...props} setLoggedIn={setLoggedIn} /> 
                             )} 
                         />
+                        <Route 
+                            exact path={'/article'}
+                            component={Doc}
+                        />
                     </RequireAuth>  
                 </Switch>     
             </Router>

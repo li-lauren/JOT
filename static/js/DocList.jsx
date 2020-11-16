@@ -1,8 +1,13 @@
+const Router = ReactRouterDOM.BrowserRouter;
+const { Redirect, Route } = ReactRouterDOM;
+
 const DocList = () => {
     const [docDets, setDocDets] = React.useState('')
     const [docList, setDocList] = React.useState([])
     const [sharedList, setSharedList] = React.useState([])
     const [docAdded, setDocAdded] = React.useState(false)
+
+    const history = useHistory()
 
     const getDocList = () => {
         fetch("/docs")
@@ -27,7 +32,14 @@ const DocList = () => {
         
         fetch(`/docs/${doc_id}`)
         .then(res => res.json())
-        .then(data => setDocDets(data))
+        .then(data => {
+            setDocDets(data)
+            history.push('/article', {params: data})
+        })
+    }
+
+    if (docDets) {
+        <Redirect to='/article' />
     }
 
     return (
@@ -45,7 +57,7 @@ const DocList = () => {
                 }) : <p>Get started by adding an article!</p>}
 
                 <br/>
-                
+
                 {sharedList.length !== 0 && <h6>Followed Docs</h6>}
                 {sharedList.map(doc => {
                     return (
@@ -59,7 +71,8 @@ const DocList = () => {
             </ul>
             
             <AddDoc docAdded={docAdded} setDocAdded={setDocAdded} />
-            {docDets ? <Doc data={docDets}/> : ''}
+            {/* {docDets ? <Doc data={docDets}/> : ''} */}
+            
         </div>
     )
 }

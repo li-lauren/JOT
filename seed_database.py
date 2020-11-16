@@ -29,7 +29,7 @@ model.db.create_all()
 
 user_1 = crud.create_user('John', 'Smith', 'john@example.com', 'test', '')
 user_2 = crud.create_user('Marie', 'Brener', 'marie@example.com', 'test', '')
-
+user_3 = crud.create_user('Lauren', 'Li', 'lauren@example.com', 'test', '')
 
 article_urls_1 = [
     'https://www.archpaper.com/2020/09/public-opinion-has-softened-on-brutalism-isnt-enough-to-stay-the-wrecking-ball/',

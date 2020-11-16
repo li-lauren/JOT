@@ -220,6 +220,7 @@ lastPos = { 'x': 0, 'y': 0}
 
 @io.on("join")
 def handle_join_room(room):
+    """Add user to the session when they join a room"""
     print(f"User {session['user_id']} is now in Room {room}, SID: {request.sid}")
     session[request.sid] = session['user_id']
     print(session)
@@ -229,6 +230,7 @@ def handle_join_room(room):
 
 @io.on("note")
 def handle_note(data):
+    """Receive emitted note data, creates a new note, & emit to others in the room"""
     body = data['note']
     room = data['room']
     x_pos = data['x_pos']

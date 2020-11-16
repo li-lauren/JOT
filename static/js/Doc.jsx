@@ -19,8 +19,10 @@ const disconnectSocket = () => {
 // End Socket functions
 
 
-const Doc = ({data}) => {
-
+const Doc = (props) => {
+    const location = useLocation()
+    const data = location.state.params
+    console.log(`data: ${data.doc}`)
     const authors = data.authors
     const doc = data.doc
     const room = doc.doc_id
