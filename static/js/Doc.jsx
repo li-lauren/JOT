@@ -1,11 +1,12 @@
 // functions for connecting with Socket.io
-let socket;
+//let socket;
 
 const connectSocket = (room) => {
-    socket = io.connect('http://0.0.0.0:5000/');
-    console.log('Connecting...');
+    // socket = io.connect('http://0.0.0.0:5000/');
+    // console.log('Connecting...');
     if (socket && room) {
         socket.emit('join', room)
+        console.log('joining room')
     }
 }
 
@@ -36,16 +37,20 @@ const Doc = (props) => {
     if (data.img_urls) {
         img_url = data.img_urls[0]
     }
+    console.log(socket)
     
     useEffect(() => {
 
-        if (room) {
-            connectSocket(room);
+        if (socket && room) {
+            socket.emit('join', room)
+            console.log('joining room')
             console.log(`Joined Room ${room}`)
-        }
+        };
 
         return () => {
-            disconnectSocket()
+            // disconnectSocket()
+            socket.emit('leave', room)
+            console.log('leaving room')
         }
     }, [room]);
 

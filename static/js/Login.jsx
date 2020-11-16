@@ -23,6 +23,7 @@ const Login = ({loggedIn, setLoggedIn}) => {
     }
 
     const loginErrors = ["Incorrect password", "No user associated with that email"]
+
     const login = (e) => {
         e.preventDefault()
         console.log('LOGIN')

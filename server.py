@@ -231,6 +231,16 @@ def handle_join_room(room):
     io.emit('join_msg', msg, room=room, include_self=False)
     # io.emit('update_position', lastPos, room=room)
 
+@io.on("leave")
+def handle_leave_room(room):
+    """Remove user from session when they leave a room"""
+    user_id = session['user_id']
+    user = crud.get_user_by_id(user_id)
+    msg = f"{user.fname} has left"
+    print(msg)
+    del session[request.sid]
+    io.emit('leave_msg', msg, room=room, include_self=False)
+
 @io.on("note")
 def handle_note(data):
     """Receive emitted note data, creates a new note, & emit to others in the room"""
