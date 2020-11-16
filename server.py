@@ -221,11 +221,14 @@ lastPos = { 'x': 0, 'y': 0}
 @io.on("join")
 def handle_join_room(room):
     """Add user to the session when they join a room"""
+    user_id = session['user_id']
     print(f"User {session['user_id']} is now in Room {room}, SID: {request.sid}")
-    session[request.sid] = session['user_id']
+    session[request.sid] = user_id
     print(session)
     join_room(room)
-    io.emit('join_msg', room=room)
+    user = crud.get_user_by_id(user_id)
+    msg = f"{user.fname} is here to Jot!"
+    io.emit('join_msg', msg, room=room, include_self=False)
     # io.emit('update_position', lastPos, room=room)
 
 @io.on("note")

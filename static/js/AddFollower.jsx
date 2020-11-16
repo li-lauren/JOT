@@ -35,7 +35,8 @@ const AddFollower = ({followerAdded, setFollowerAdded}) => {
                     value={followerEmail} 
                     onChange={handleChange}
                 />
-                <button type="submit"> + </button>
+                {/* <button type="submit"> + </button> */}
+                <Button variant="outline-dark" type="submit" size="sm"> + </Button>
             </form>   
         </div>  
     )

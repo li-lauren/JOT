@@ -22,6 +22,12 @@
     transform: translate(-110%, -50%);
 }
 
+/* #joinMsg {
+    position: fixed;
+    top: 40%;
+    transform: translate(-110%, -50%);
+} */
+
 /* #noteList {
     position: absolute;
     top: 0px;

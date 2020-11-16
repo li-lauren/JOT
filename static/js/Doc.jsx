@@ -28,6 +28,9 @@ const Doc = (props) => {
     const room = doc.doc_id
     const publish_date = new Date(doc.publish_date)
 
+    const [joinMsg, setJoinMsg] = useState('')
+    const [show, setShow] = useState(false)
+
     let img_url = ''
 
     if (data.img_urls) {
@@ -46,7 +49,23 @@ const Doc = (props) => {
         }
     }, [room]);
 
-    
+    useEffect(() => {
+        if (!socket) { 
+            console.log('NO SOCKET') 
+        } else {
+            socket.on('join_msg', msg => {
+                setJoinMsg(msg)
+                setShow(true)
+                console.log(msg)
+
+                setTimeout(() => {
+                    setShow(false)
+                    setJoinMsg('')
+                }, 3000)
+            })
+        }
+    })
+
     
     const docData = [
         <Row>
@@ -67,9 +86,18 @@ const Doc = (props) => {
         </Row>
        
     ]
+
+    const handleJoinMsg = () => {
+        setShowMsg(false)
+        setJoinMsg('')
+    }
     
     return(
         <Container>
+            <Alert id="joinMsg" show={show} variant="info">
+                {joinMsg}
+            </Alert>
+            
             <div id="wrapper">
                 {docData}
 
