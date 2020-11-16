@@ -22,11 +22,11 @@
     transform: translate(-110%, -50%);
 }
 
-/* #joinMsg {
+#joinMsg {
     position: fixed;
-    top: 40%;
-    transform: translate(-110%, -50%);
-} */
+    top: 10%;
+    left: 50%;
+}
 
 /* #noteList {
     position: absolute;
