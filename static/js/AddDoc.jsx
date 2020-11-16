@@ -40,14 +40,6 @@ const AddDoc = ({docAdded, setDocAdded}) => {
                 tag: '',
             })
         })
-        // .then(
-        //     fetch("/docs")
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data)
-        //         setDocAdded(!docAdded)
-        //     })
-        // )
     }
 
     return(
