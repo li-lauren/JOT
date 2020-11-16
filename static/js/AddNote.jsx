@@ -20,6 +20,7 @@ const AddNote = ({room}) => {
                 'x_pos': x,
                 'y_pos': y
             })
+            setNote('')
         }
     }
 
