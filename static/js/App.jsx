@@ -18,8 +18,6 @@ const App = () => {
     const [loggedIn, setLoggedIn] = React.useState(
         localStorage.getItem('user_id') !== null)
 
-    // const SocketContext = React.createContext();
-
     console.log(loggedIn)
     // React.useEffect(() => {
     //     fetch('/login')

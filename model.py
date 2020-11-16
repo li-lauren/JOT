@@ -173,6 +173,7 @@ class Doc_Follower(db.Model):
                                 primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     doc_id = db.Column(db.Integer, db.ForeignKey('docs.doc_id'))
+    accepted = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime)
 
     def __repr__(self):

@@ -1,21 +1,21 @@
 // functions for connecting with Socket.io
 //let socket;
 
-const connectSocket = (room) => {
-    // socket = io.connect('http://0.0.0.0:5000/');
-    // console.log('Connecting...');
-    if (socket && room) {
-        socket.emit('join', room)
-        console.log('joining room')
-    }
-}
+// const connectSocket = (room) => {
+//     // socket = io.connect('http://0.0.0.0:5000/');
+//     // console.log('Connecting...');
+//     if (socket && room) {
+//         socket.emit('join', room)
+//         console.log('joining room')
+//     }
+// }
 
-const disconnectSocket = () => {
-    console.log('Disconnecting...');
-    if (socket) {
-        socket.disconnect();
-    }
-}
+// const disconnectSocket = () => {
+//     console.log('Disconnecting...');
+//     if (socket) {
+//         socket.disconnect();
+//     }
+// }
 
 // End Socket functions
 

@@ -320,6 +320,15 @@ def fin_pos(data):
     io.emit("fin_pos", data, room=room, include_self=False)
 
 
+    @io.on("invite_to_follow")
+    def invite_to_follow(data):
+        email = data['email']
+        title = data['title']
+
+        user = crud.get_user_by_email(email)
+
+
+
 if __name__ == '__main__':
     connect_to_db(app)
     io.run(app, debug=True, host='0.0.0.0')
