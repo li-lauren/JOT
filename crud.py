@@ -178,6 +178,29 @@ def get_followed_docs_by_user_id(user_id):
 
     return User.query.get(user_id).followed_docs
 
+def get_invites_by_user_id(user_id):
+    """Return all of a user's article invites."""
+    invites = []
+    all_followed_docs = User.query.get(user_id).followed_docs
+
+    for fdoc in all_followed_docs:
+        if fdoc.accepted == False:
+
+            fdoc_id = fdoc.doc_id
+            doc = Doc.query.get(fdoc_id)
+            inviter = doc.owner
+            title = doc.title
+
+            invites.append({
+                'invite_id' : fdoc.doc_follower_id,
+                'inviter': f"{inviter.fname} {inviter.lname}",
+                'title' : title,
+                'doc_id': fdoc_id,
+                'created_at': fdoc.created_at
+            })
+
+    return invites
+
 
 ### AUTHOR CRUD OPERATIONS ###
 

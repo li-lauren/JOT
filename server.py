@@ -207,6 +207,18 @@ def get_notes():
     
 #     return jsonify(note)
 
+@app.route('/invitations')
+def get_invitations():
+    """Get all of a user's article invitations."""
+    user_id = session['user_id']
+    invites = crud.get_invites_by_user_id(user_id)
+    
+    return jsonify(invites)
+
+
+
+
+
 
 @io.on("connect")
 def test_connect():
