@@ -1,18 +1,8 @@
-const getPos = (cb) => {
-    if (!socket) {
-        console.log('NO SOCKET')
-        return true;
-    }
-    // console.log('HERE in getPOS')
-    socket.on('fin_pos', data => {
-        console.log('New pos data received');
-        console.log(data)
-        return cb(null, data)
-    })
-}
 
-const Note = ({note, room}) => {
+
+const Note = ({note, room, socket}) => {
     // const { width, height } = updateWindowDim()
+    
     const [pos, setPos] = useState(
         { x: note.x_pos, y: note.y_pos })
     const [isHovering, setIsHovering] = useState(false)
@@ -21,6 +11,19 @@ const Note = ({note, room}) => {
     const fname = note.fname
     const lname = note.lname
     const created_at = new Date(note.created_at)
+
+    const getPos = (cb) => {
+        if (socket == null) {
+            console.log('NO SOCKET')
+            return true;
+        }
+        // console.log('HERE in getPOS')
+        socket.on('fin_pos', data => {
+            console.log('New pos data received');
+            console.log(data)
+            return cb(null, data)
+        })
+    }
     
     useEffect(() => {
         getPos((error, data) => {

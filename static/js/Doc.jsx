@@ -20,7 +20,7 @@ const disconnectSocket = () => {
 // End Socket functions
 
 
-const Doc = (props) => {
+const Doc = ({socket}) => {
     const location = useLocation()
     const data = location.state.params
     console.log(`data: ${data.doc}`)
@@ -107,7 +107,7 @@ const Doc = (props) => {
                 {docData}
 
                 <Row>
-                    <NoteList room={room} />
+                    <NoteList room={room} socket={socket}/>
                 </Row>
 
             </div>

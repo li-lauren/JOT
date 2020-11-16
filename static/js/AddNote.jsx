@@ -1,6 +1,6 @@
 
 
-const AddNote = ({room}) => {
+const AddNote = ({room, socket}) => {
     const [note, setNote] = React.useState('');
 
     const postNote = (room, note) => {

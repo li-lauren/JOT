@@ -11,7 +11,7 @@
 //     });
 // }
 
-const NoteList = ({room}) => {
+const NoteList = ({room, socket}) => {
     const [noteLog, setNoteLog] = React.useState([]);
     const [noteAdded, setNoteAdded] = React.useState(null);
 
@@ -71,13 +71,16 @@ const NoteList = ({room}) => {
             <div id="note-list">
                 { noteLog.map(note => {
                     if (note) {
-                        return <Note key={note.note_id} note={note} room={room} /> 
+                        return <Note 
+                                key={note.note_id} 
+                                note={note} room={room}
+                                socket={socket} /> 
                     }
                 }) }
             </div>
             
            
-            <AddNote room={room} />
+            <AddNote room={room} socket={socket}/>
         </div>
        
     )

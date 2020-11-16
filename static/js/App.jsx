@@ -12,8 +12,13 @@ const Navbar = () => {
     )   
 }
 
+
+
 const App = () => {
-    const [loggedIn, setLoggedIn] = React.useState(localStorage.getItem('user_id') !== null)
+    const [loggedIn, setLoggedIn] = React.useState(
+        localStorage.getItem('user_id') !== null)
+
+    // const SocketContext = React.createContext();
 
     console.log(loggedIn)
     // React.useEffect(() => {
@@ -23,6 +28,24 @@ const App = () => {
     //         if (data) { setLoggedIn(true) }
     //     })
     // }, [])
+    let socket;
+    const connectSocket = () => {
+        socket = io.connect('http://0.0.0.0:5000/')
+        console.log('Connecting')
+    }
+
+    useEffect(() => {
+        if (loggedIn) {
+            connectSocket()
+        }
+
+        if (!loggedIn) {
+            if (socket) {
+                socket.disconnect()
+                console.log('Disconnecting')
+            }
+        }
+    }, [loggedIn])
 
     const RequireAuth = ({ children }) => {
         if (!loggedIn) {
@@ -34,6 +57,7 @@ const App = () => {
 
     return(
         <div>
+            
             <Router>
                 <Navbar />
                 <Switch>
@@ -52,16 +76,23 @@ const App = () => {
                         <Route 
                             exact path={'/dashboard'}
                             render={(props) => (
-                               <Dashboard {...props} setLoggedIn={setLoggedIn} /> 
+                            <Dashboard {...props} 
+                                setLoggedIn={setLoggedIn}
+                                socket={socket} /> 
                             )} 
                         />
                         <Route 
                             exact path={'/article'}
-                            component={Doc}
+                            // component={Doc}
+                            render={(props) => (
+                                <Doc {...props} socket={socket}/>
+                            )}
                         />
                     </RequireAuth>  
                 </Switch>     
             </Router>
+        
+            
             
         </div>
     )
