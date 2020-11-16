@@ -320,12 +320,26 @@ def fin_pos(data):
     io.emit("fin_pos", data, room=room, include_self=False)
 
 
-    @io.on("invite_to_follow")
-    def invite_to_follow(data):
-        email = data['email']
-        title = data['title']
+@io.on("invite_to_follow")
+def invite_to_follow(data):
+    email = data['email']
+    title = data['title']
 
-        user = crud.get_user_by_email(email)
+    doc_id = session['doc_id']
+    inviter_id = session['user_id']
+    inviter = crud.get_user_by_id(inviter_id)
+
+    user = crud.get_user_by_email(email)
+
+    if user:
+        follower = crud.create_doc_follower(user.user_id, doc_id)
+        print(follower)
+        msg = f"{inviter.fname} {inviter.lname} shared '{title}' with you"
+        pkg = {'invitee': user.user_id, 'msg': msg }
+        io.emit("invite", pkg, include_self=False)
+    else:
+        msg = f"No user associated with {email}"
+        #TODO: Finish this case
 
 
 

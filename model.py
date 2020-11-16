@@ -165,6 +165,7 @@ class Doc_Follower(db.Model):
     user_id: int
     doc_id: int
     created_at: datetime
+    accepted: bool
 
     __tablename__ = "doc_followers"
 
