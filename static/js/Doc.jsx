@@ -16,23 +16,10 @@ const disconnectSocket = () => {
     }
 }
 
-// const getNotes = (cb) => {
-//     if (!socket) {
-//         return true;
-//     };
-
-//     socket.on('note', note => {
-//         console.log('Note received');
-//         console.log(note)
-//         return cb(null, note);
-//     });
-// }
-
 // End Socket functions
 
 
 const Doc = ({data}) => {
-    // const [noteLog, setNoteLog] = React.useState([]);
 
     const authors = data.authors
     const doc = data.doc
@@ -44,34 +31,13 @@ const Doc = ({data}) => {
     if (data.img_urls) {
         img_url = data.img_urls[0]
     }
-
-    // const getAllNotes = () => {
-    //     fetch('/notes')
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         console.log(`GETTING NOTES FOR DOC ${room}`)
-    //         console.log(data)
-    //         setNoteLog(data)
-    //     })
-    // }
     
-    React.useEffect(() => {
+    useEffect(() => {
 
         if (room) {
             connectSocket(room);
             console.log(`Joined Room ${room}`)
-            // getAllNotes()
         }
-
-        // getNotes((error, data) => {
-        //     if (error) {
-        //         return "Error getting notes"
-        //     }
-        //     console.log(`Data: ${data}`)
-        //     console.log(`prevNoteLog: ${noteLog}`)
-
-        //     setNoteLog(prevNoteLog => [data, ...prevNoteLog])
-        // });
 
         return () => {
             disconnectSocket()
@@ -105,15 +71,9 @@ const Doc = ({data}) => {
             <div id="wrapper">
                 {docData}
 
-                {/* <h3>Notes</h3> */}
-                {/* { noteLog.map((note, i) => <p key={i}>{note.body}</p>)} */}
-                {/* { noteLog.map(note => <Note note={note} room={room} />) } */}
-
                 <Row>
                     <NoteList room={room} />
                 </Row>
-
-                {/* <AddNote room={room}/> */}
 
             </div>
         </Container>
