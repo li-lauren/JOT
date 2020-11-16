@@ -19,8 +19,8 @@ const Invitations = () => {
         <div>
             <h5>Invitations</h5>
             {invitationList.length > 0 ? (invitationList.map(invitation => 
-                <li key={invitation.invitation_id}>
-                    {invitation.title} from {invitation.fname} {invitation.lname}
+                <li key={invitation.doc_id}>
+                    {invitation.title} from {invitation.inviter} {invitation.created_at}
                 </li>)) : <p>None</p>}
             <br/>
         </div>
