@@ -1,10 +1,20 @@
-const Invitations = () => {
+const Invitations = ({socket}) => {
     const [invitationAdded, setInvitationAdded] = React.useState(false)
     const [invitationList, setInvitationList] = React.useState([])
 
-    React.useEffect(() => {
+    useEffect(() => {
         getInvitations()
     }, [invitationAdded])
+
+    useEffect(() => {
+        if (!socket) {
+            console.log('NO SOCKET');
+        } else {
+            socket.on('invite', data => {
+                setInvitationAdded(true)
+            })
+        }    
+    })
 
     const getInvitations = () => {
         fetch('/invitations')
