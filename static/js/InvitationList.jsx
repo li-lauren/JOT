@@ -1,10 +1,10 @@
 const InvitationList = ({socket}) => {
-    const [invitationAdded, setInvitationAdded] = React.useState(false)
+    const [invAction, setInvAction] = React.useState(false)
     const [invitationList, setInvitationList] = React.useState([])
 
     useEffect(() => {
         getInvitations()
-    }, [invitationAdded])
+    }, [invAction])
 
     useEffect(() => {
         let isMounted = true;
@@ -14,7 +14,7 @@ const InvitationList = ({socket}) => {
             socket.on('invite', data => {
                 console.log('invite received')
                 if (isMounted && data.invitee == localStorage.getItem('user_id')) {
-                    setInvitationAdded(true)
+                    setInvAction(true)
                 }   
             })
         } 
@@ -27,7 +27,6 @@ const InvitationList = ({socket}) => {
         .then(res => res.json())
         .then(data => {
             setInvitationList(data)
-            // ("msg" in data) ? setFollowerList([]) : setFollowerList(data);
         })
     }
 
@@ -35,9 +34,13 @@ const InvitationList = ({socket}) => {
         <div>
             <h5>Invitations</h5>
             {invitationList.length > 0 ? (invitationList.map(invitation => 
-                <li key={invitation.invite_id}>
-                    {invitation.title} from {invitation.inviter} {invitation.created_at}
-                </li>)) : <p>None</p>}
+                <Invitation 
+                    key={invitation.invite_id} 
+                    invitation={invitation}
+                    invAction={invAction}
+                    setInvAction={setInvAction}
+                />))
+                : <p>None</p>}
             <br/>
         </div>
     )

@@ -178,6 +178,7 @@ def get_followed_docs_by_user_id(user_id):
 
     return User.query.get(user_id).followed_docs
 
+### INVITE CRUD OPERATIONS ###
 def get_invites_by_user_id(user_id):
     """Return all of a user's article invites."""
     invites = []
@@ -199,6 +200,15 @@ def get_invites_by_user_id(user_id):
         })
 
     return invites
+
+def accept_invite_by_follow_id(follow_id):
+    """Accept an invite"""
+    follow = Doc_Follower.query.get(follow_id)
+    follow.accepted = True
+
+    db.session.commit()
+
+    return follow
 
 
 ### AUTHOR CRUD OPERATIONS ###
