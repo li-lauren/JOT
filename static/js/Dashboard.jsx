@@ -33,7 +33,7 @@ const Dashboard = ({setLoggedIn, socket}) => {
             <h3>{`${localStorage.getItem('fname')}'s`} Dashboard</h3>
             <a href="" onClick={logout}>Logout</a>
             <DocList />
-            <Invitations socket={socket}/>
+            <InvitationList socket={socket}/>
         </div>
     )
 

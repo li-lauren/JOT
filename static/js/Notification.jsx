@@ -22,6 +22,14 @@ const Notification = ({msg}) => {
                 </Button>
                 </Modal.Footer>
             </Modal> 
+            <Toast show={show} onHide={()=>setShow(false)}>
+                <Toast.Header>
+                    {/* <img src="holder.js/20x20?text=%20" className="rounded mr-2" alt="" /> */}
+                    <strong className="mr-auto">Bootstrap</strong>
+                    {/* <small>11 mins ago</small> */}
+                </Toast.Header>
+                <Toast.Body>{msg}</Toast.Body>
+            </Toast>
         </div>
     )
 }

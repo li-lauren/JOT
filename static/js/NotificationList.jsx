@@ -32,7 +32,7 @@ const Notifications = ({socket}) => {
                 (notificationList.map((notification) => 
                     <Notification 
                         key={notification.follow_id} 
-                        msg={notification.msg} 
+                        data={notification} 
                     />
                 )) 
                 : ''}            

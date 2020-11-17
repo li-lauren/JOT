@@ -350,7 +350,10 @@ def invite_to_follow(data):
         msg = f"{inviter.fname} {inviter.lname} shared '{title}' with you"
         pkg = {
             'invitee': user.user_id, 
-            'msg': msg, 
+            # 'inviter_fname': inviter.fname,
+            # 'inviter_lname': inviter.lname,
+            # 'title': title, 
+            'msg': msg,
             'follow_id': follower.doc_follower_id }
         io.emit("invite", pkg, include_self=False)
     else:
