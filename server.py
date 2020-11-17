@@ -348,7 +348,10 @@ def invite_to_follow(data):
         follower = crud.create_doc_follower(user.user_id, doc_id)
         print(follower)
         msg = f"{inviter.fname} {inviter.lname} shared '{title}' with you"
-        pkg = {'invitee': user.user_id, 'msg': msg }
+        pkg = {
+            'invitee': user.user_id, 
+            'msg': msg, 
+            'follow_id': follower.doc_follower_id }
         io.emit("invite", pkg, include_self=False)
     else:
         msg = f"No user associated with {email}"

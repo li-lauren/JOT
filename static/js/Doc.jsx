@@ -91,11 +91,6 @@ const Doc = ({socket}) => {
         </Row>
        
     ]
-
-    const handleJoinMsg = () => {
-        setShowMsg(false)
-        setJoinMsg('')
-    }
     
     return(
         <Container>

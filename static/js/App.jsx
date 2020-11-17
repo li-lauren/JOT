@@ -86,6 +86,12 @@ const App = () => {
                                 <Doc {...props} socket={socket}/>
                             )}
                         />
+                        <Route 
+                            path={['/dashboard', '/article']}
+                            render={(props) => (
+                                <Notifications {...props} socket={socket} />
+                            )}
+                        />
                     </RequireAuth>  
                 </Switch>     
             </Router>
