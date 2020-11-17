@@ -7,13 +7,19 @@ const Invitations = ({socket}) => {
     }, [invitationAdded])
 
     useEffect(() => {
+        let isMounted = true;
         if (!socket) {
             console.log('NO SOCKET');
         } else {
             socket.on('invite', data => {
-                setInvitationAdded(true)
+                console.log('invite received')
+                if (isMounted && data.invitee == localStorage.getItem('user_id')) {
+                    setInvitationAdded(true)
+                }   
             })
-        }    
+        } 
+        
+        return () => { isMounted = false };
     })
 
     const getInvitations = () => {
@@ -29,7 +35,7 @@ const Invitations = ({socket}) => {
         <div>
             <h5>Invitations</h5>
             {invitationList.length > 0 ? (invitationList.map(invitation => 
-                <li key={invitation.doc_id}>
+                <li key={invitation.invite_id}>
                     {invitation.title} from {invitation.inviter} {invitation.created_at}
                 </li>)) : <p>None</p>}
             <br/>
