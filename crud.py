@@ -210,6 +210,13 @@ def accept_invite_by_follow_id(follow_id):
 
     return follow
 
+def decline_invite_by_follow_id(follow_id):
+    """Decline an invite"""
+    follow = Doc_Follower.query.get(follow_id)
+    
+    db.session.delete(follow)
+    db.session.commit()
+
 
 ### AUTHOR CRUD OPERATIONS ###
 
