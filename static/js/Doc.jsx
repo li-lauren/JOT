@@ -77,7 +77,7 @@ const Doc = ({socket}) => {
             <h1>{doc.title}</h1>
         </Row>, 
         <Row>
-            <FollowerList doc_id={doc.doc_id} />
+            <FollowerList doc_id={doc.doc_id} socket={socket} />
         </Row>,
         <Row>
             <p>{moment(publish_date).format("MMMM Do YYYY")} </p>

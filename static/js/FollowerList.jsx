@@ -1,4 +1,4 @@
-const FollowerList = ({doc_id}) => {
+const FollowerList = ({doc_id, socket}) => {
     const [followerAdded, setFollowerAdded] = React.useState(false)
     const [followerList, setFollowerList] = React.useState([])
 
@@ -27,6 +27,7 @@ const FollowerList = ({doc_id}) => {
             <AddFollower 
                 followerAdded={followerAdded}
                 setFollowerAdded={setFollowerAdded} 
+                socket={socket}
             />
         </div>
     )

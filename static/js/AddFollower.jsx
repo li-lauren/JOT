@@ -1,4 +1,4 @@
-const AddFollower = ({followerAdded, setFollowerAdded}) => {
+const AddFollower = ({followerAdded, setFollowerAdded, socket}) => {
     const [followerEmail, setFollowerEmail] = React.useState('')
 
     const handleChange = e => {
@@ -9,21 +9,26 @@ const AddFollower = ({followerAdded, setFollowerAdded}) => {
         e.preventDefault()
         console.log('Add Follower')
 
-        const reqOptions = {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/json'
-              },
-            body: JSON.stringify({
-                'email': followerEmail
-            })
+        if (socket) {
+            console.log('inviting follower...')
+            socket.emit('invite_to_follow', {'email': followerEmail})
+            setFollowerEmail('')
         }
-        fetch("/followers", reqOptions)
-        .then(res => res.text())
-        .then(data => {
-            console.log(data)
-            setFollowerAdded(!followerAdded)
-        })
+        // const reqOptions = {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type':'application/json'
+        //       },
+        //     body: JSON.stringify({
+        //         'email': followerEmail
+        //     })
+        // }
+        // fetch("/followers", reqOptions)
+        // .then(res => res.text())
+        // .then(data => {
+        //     console.log(data)
+        //     setFollowerAdded(!followerAdded)
+        // })
     }
 
     return (

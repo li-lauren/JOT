@@ -335,10 +335,11 @@ def fin_pos(data):
 @io.on("invite_to_follow")
 def invite_to_follow(data):
     email = data['email']
-    title = data['title']
 
     doc_id = session['doc_id']
     inviter_id = session['user_id']
+    doc = crud.get_doc_by_doc_id(doc_id)
+    title = doc.title
     inviter = crud.get_user_by_id(inviter_id)
 
     user = crud.get_user_by_email(email)
