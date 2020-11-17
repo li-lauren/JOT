@@ -19,12 +19,16 @@ const Notifications = ({socket}) => {
     })
 
     useEffect(() => {
-        setNotificationList(prev => [notificationAdded, ...prev])
+        if (notificationAdded) {
+            setNotificationList(prev => [notificationAdded, ...prev])
+        }
     }, [notificationAdded])
+
+    console.log(notificationList)
 
     return (
         <div>
-            {notificationList.length > 0 ? 
+            {notificationList.length ? 
                 (notificationList.map((notification) => 
                     <Notification 
                         key={notification.follow_id} 
