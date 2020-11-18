@@ -10,7 +10,18 @@ const Invitation = ({invitation, invAction, setInvAction, socket}) => {
     }
 
     const decline = () => {
-        return
+        const reqOptions = {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+              },
+            body: JSON.stringify({
+                'followId': invitation.invite_id, 
+            })
+        }
+
+        fetch("/decline", reqOptions)
+        .then(res => res.text())
     }
     return(
         <div>
@@ -21,7 +32,7 @@ const Invitation = ({invitation, invAction, setInvAction, socket}) => {
             <Button variant="outline-secondary" size="sm" onClick={()=> accept}>
                 Accept
             </Button> 
-            <Button variant="outline-secondary" size="sm">
+            <Button variant="outline-secondary" size="sm" onClick={()=> decline}>
                 Decline
             </Button>
         </div>

@@ -215,7 +215,13 @@ def get_invitations():
     
     return jsonify(invites)
 
+@app.route('/decline', methods=['POST'])
+def decline_invitations():
+    
+    follow_id = request.json.get('followId')
+    crud.decline_invite_by_follow_id(follow_id)
 
+    return 'Invite declined'
 
 
 
