@@ -23,6 +23,7 @@ const Invitation = ({invitation, invAction, setInvAction, socket}) => {
 
         fetch("/decline", reqOptions)
         .then(res => res.text())
+        .then(data => setInvAction(!invAction))
     }
     return(
         <div>
