@@ -1,7 +1,7 @@
 const Router = ReactRouterDOM.BrowserRouter;
 const { Redirect, Route } = ReactRouterDOM;
 
-const DocList = () => {
+const DocList = ({socket}) => {
     const [docDets, setDocDets] = React.useState('')
     const [docList, setDocList] = React.useState([])
     const [sharedList, setSharedList] = React.useState([])
@@ -37,6 +37,24 @@ const DocList = () => {
             history.push('/article', {params: data})
         })
     }
+
+    
+    useEffect(() => {
+        let isMounted = true;
+        if (!socket) {
+            console.log('NO SOCKET');
+        } else {
+            socket.on('invite_accepted', data => {
+                console.log('invite accepted')
+                if (isMounted && data.follower == localStorage.getItem('user_id')) {
+                    setDocAdded(!docAdded)
+                }   
+            })
+        } 
+        
+        return () => { isMounted = false };
+    })
+    
 
     if (docDets) {
         <Redirect to='/article' />

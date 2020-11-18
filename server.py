@@ -342,7 +342,9 @@ def fin_pos(data):
 def invite_to_follow(data):
     email = data['email']
     print(f"EMAIL {email}")
-    doc_id = session['doc_id']
+    doc_id = data['doc_id']
+    print('DOC ID for invite to follow')
+    print(doc_id)
     inviter_id = session['user_id']
     doc = crud.get_doc_by_doc_id(doc_id)
     title = doc.title
@@ -375,9 +377,10 @@ def accept_invite(data):
     print('accept-invite')
     notification = {
         'msg': msg,
-        'inviter': inviter.user_id
+        'inviter': inviter.user_id,
+        'follower': session['user_id']
     }
-    io.emit("invite_accepted", notification, include_self=False)
+    io.emit("invite_accepted", notification)
 
 
 

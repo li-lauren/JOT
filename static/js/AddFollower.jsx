@@ -1,4 +1,4 @@
-const AddFollower = ({followerAdded, setFollowerAdded, socket}) => {
+const AddFollower = ({followerAdded, setFollowerAdded, socket, doc_id}) => {
     const [followerEmail, setFollowerEmail] = React.useState('')
 
     const handleChange = e => {
@@ -11,7 +11,7 @@ const AddFollower = ({followerAdded, setFollowerAdded, socket}) => {
 
         if (socket) {
             console.log('inviting follower...')
-            socket.emit('invite_to_follow', {'email': followerEmail})
+            socket.emit('invite_to_follow', {'email': followerEmail, 'doc_id': doc_id})
             setFollowerEmail('')
         }
         // const reqOptions = {

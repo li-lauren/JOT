@@ -44,6 +44,7 @@ const FollowerList = ({doc_id, socket}) => {
                 followerAdded={followerAdded}
                 setFollowerAdded={setFollowerAdded} 
                 socket={socket}
+                doc_id={doc_id}
             />
         </div>
     )
