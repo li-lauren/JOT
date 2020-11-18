@@ -8,6 +8,10 @@ const Invitation = ({invitation, invAction, setInvAction, socket}) => {
             'msg': `${localStorage.getItem('fname')} accepted your invite`
         })
     }
+
+    const decline = () => {
+        return
+    }
     return(
         <div>
             {invitation.title}
