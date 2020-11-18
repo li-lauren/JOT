@@ -312,6 +312,14 @@ def get_num_likes_by_note_id(note_id):
     return Like.query.filter(Like.note_id == note_id).count()
 
 
+def get_if_user_likes_a_note(user_id, note_id):
+
+    like = Like.query.\
+        filter(Like.note_id == note_id, Like.user_id == user_id).first()
+
+    return (like is not None)
+
+
 
 
 

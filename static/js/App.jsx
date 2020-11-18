@@ -18,8 +18,6 @@ const App = () => {
     const [loggedIn, setLoggedIn] = React.useState(
         localStorage.getItem('user_id') !== null)
 
-    // const notify = () => toast("Wow so easy !");
-
     console.log(loggedIn)
     // React.useEffect(() => {
     //     fetch('/login')
@@ -97,11 +95,6 @@ const App = () => {
                     </RequireAuth>  
                 </Switch>     
             </Router>
-            {/* <div>
-                <button onClick={notify}>Notify !</button>
-                <ToastContainer />
-            </div>
-                     */}
             
         </div>
     )

@@ -1,7 +1,12 @@
+const { ToastContainer, toast} = ReactToastify;
+
 const Notifications = ({socket}) => {
     const [notificationList, setNotificationList] = useState([])
     const [notificationAdded, setNotificationAdded] = useState(null)
     
+    // Toast test notification
+    const notify = () => toast("Wow so easy !");
+
     useEffect(() => {
         let isMounted = true;
         if (!socket) {
@@ -28,6 +33,12 @@ const Notifications = ({socket}) => {
 
     return (
         <div>
+            {/* Test Toast Container */}
+             <div>
+                <button onClick={notify}>Notify !</button>
+                <ToastContainer />
+            </div>
+
             {notificationList.length ? 
                 (notificationList.map((notification) => 
                     <Notification 
