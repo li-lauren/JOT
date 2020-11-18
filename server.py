@@ -394,6 +394,36 @@ def accept_invite(data):
     }
     io.emit("invite_accepted", notification)
 
+@io.on("like_note")
+def like_note(data):
+    note_id = data['note_id']
+    user_id = data['user_id']
+
+    crud.create_like(user_id, note_id)
+    new_num_likes = crud.get_num_likes_by_note_id(note_id)
+
+    data = {'numLikes': new_num_likes, 
+        'liked': True, 
+        'noteId': note_id}
+
+    io.emit("note_liked", data)
+
+
+@io.on("unlike_note")
+def unlike_note(data):
+    note_id = data['note_id']
+    user_id = data['user_id']
+
+    crud.unlike(user_id, note_id)
+
+    new_num_likes = crud.get_num_likes_by_note_id(note_id)
+
+    data = {'numLikes': new_num_likes, 
+        'liked': False, 
+        'noteId': note_id}
+
+    io.emit("note_unliked", data)
+    
 
 
 

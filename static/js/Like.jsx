@@ -1,10 +1,36 @@
-const Like = ({noteId}) => {
-    const [liked, setLiked] = useState(False)
+const Like = ({noteId, socket}) => {
+    const [liked, setLiked] = useState(false)
     const [numLikes, setNumLikes] = useState(0)
+    const userId = localStorage.getItem('user_id')
+
+    const info = {'note_id': noteId, 'user_id': userId }
 
     useEffect(() => {
         getLikeInfo()
     }, [liked, numLikes])
+
+    useEffect(() => {
+        let isMounted = true;
+        if (!socket) {
+            console.log('NO SOCKET');
+        } else {
+            socket.on('note_liked', data => {
+                console.log('noted liked!')
+                if (isMounted && data.noteId == noteId) {
+                    setLiked(true)
+                }   
+            })
+
+            socket.on('note_unliked', data => {
+                console.log('noted unliked!')
+                if (isMounted && data.noteId == noteId) {
+                    setLiked(false)
+                }   
+            })
+        } 
+        
+        return () => { isMounted = false };
+    })
 
     const getLikeInfo = () => {
         const reqOptions = {
@@ -12,12 +38,10 @@ const Like = ({noteId}) => {
             headers: {
                 'Content-Type':'application/json'
               },
-            body: JSON.stringify({
-                'note_id': noteId, 
-                'user_id': localStorage.get('user_id') })
+            body: JSON.stringify(info)
         }
 
-        fetch("/login", reqOptions)
+        fetch("/likes", reqOptions)
         .then(res => res.json())
         .then(data => {
             setNumLikes(data.numLikes)
@@ -26,22 +50,20 @@ const Like = ({noteId}) => {
     }
 
     const like = () => {
-        
+        console.log('liking note...')
+        socket.emit('like_note', info)
     }
 
     const unlike = () => {
-
+        console.log('unliking note...')
+        socket.emit('unlike_note', info)
     }
 
     return(
         <div>
             { liked ? 
-                <Button onClick={unlike}>
-                    <i class="fas fa-heart"></i>
-                </Button> :
-                <Button onClick={like}>
-                    <i class="far fa-heart"></i>
-                </Button>
+                <i className="fas fa-heart" onClick={unlike}></i> :
+                <i className="far fa-heart" onClick={like}></i>
             }
         </div>
         

@@ -322,6 +322,32 @@ def get_if_user_likes_a_note(user_id, note_id):
     return (like is not None)
 
 
+def create_like(user_id, note_id):
+    """Create a like for a note."""
+
+    like = Like(
+        user_id = user_id,
+        note_id = note_id
+    )
+
+    db.session.add(like)
+    db.session.commit()
+
+    return like
+
+
+def unlike(user_id, note_id):
+    """Unlike a note."""
+
+    like = Like.query.\
+        filter(Like.note_id == note_id, Like.user_id == user_id).first()
+
+    db.session.delete(like)
+    db.session.commit()
+
+    return 'Note unliked'
+
+
 
 
 
