@@ -360,6 +360,19 @@ def invite_to_follow(data):
         msg = f"No user associated with {email}"
         #TODO: Finish this case
 
+@io.on("accept_invite")
+def accept_invite(data):
+    follow_id = data['followId']
+    msg = data['msg']
+
+    inviter = crud.accept_invite_by_follow_id(follow_id)
+    notification = {
+        'msg': msg,
+        'inviter': inviter
+    }
+    io.emit("invite_accepted", notification, include_self=False)
+
+
 
 
 if __name__ == '__main__':

@@ -39,6 +39,7 @@ const InvitationList = ({socket}) => {
                     invitation={invitation}
                     invAction={invAction}
                     setInvAction={setInvAction}
+                    socket={socket}
                 />))
                 : <p>None</p>}
             <br/>

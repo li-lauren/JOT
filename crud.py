@@ -205,10 +205,13 @@ def accept_invite_by_follow_id(follow_id):
     """Accept an invite"""
     follow = Doc_Follower.query.get(follow_id)
     follow.accepted = True
+    fdoc_id = follow.doc_id
+    doc = Doc.query.get(fdoc_id)
+    inviter = User.query.get(doc.owner)
 
     db.session.commit()
 
-    return follow
+    return inviter #for notification of acceptance
 
 def decline_invite_by_follow_id(follow_id):
     """Decline an invite"""
