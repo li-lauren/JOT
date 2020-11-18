@@ -372,9 +372,10 @@ def accept_invite(data):
     msg = data['msg']
 
     inviter = crud.accept_invite_by_follow_id(follow_id)
+    print('accept-invite')
     notification = {
         'msg': msg,
-        'inviter': inviter
+        'inviter': inviter.user_id
     }
     io.emit("invite_accepted", notification, include_self=False)
 

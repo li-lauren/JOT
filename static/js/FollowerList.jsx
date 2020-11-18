@@ -16,6 +16,22 @@ const FollowerList = ({doc_id, socket}) => {
         })
     }
 
+    useEffect(() => {
+        let isMounted = true;
+        if (!socket) {
+            console.log('NO SOCKET');
+        } else {
+            socket.on('invite_accepted', data => {
+                console.log('invite accepted in follower list')
+                if (isMounted && data.inviter == localStorage.getItem('user_id')) {
+                    setFollowerAdded(!followerAdded)
+                }   
+            })
+        } 
+        
+        return () => { isMounted = false };
+    })
+
     return (
         <div>
             <h5>Following</h5>

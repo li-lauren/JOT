@@ -171,7 +171,23 @@ def create_doc_follower(user_id, doc_id):
 def get_followers_by_doc_id(doc_id):
     """Return a document's followers."""
 
-    return Doc.query.get(doc_id).followers
+    # used to be all followers
+    # return Doc.query.get(doc_id).followers
+
+    # narrow down to accepted followers
+    # follows = Doc_Follower.query.filter(Doc_Follower.doc_id == doc_id,
+    # Doc_Follower.accepted == True)
+
+    # users = []
+
+    # for follow in follows:
+    #     users.append(follow.user_id)
+
+    followers =  db.session.query(User).\
+                    join(Doc_Follower, Doc_Follower.user_id == User.user_id).\
+                    filter(Doc_Follower.doc_id == doc_id, Doc_Follower.accepted == True).all()
+
+    return followers
 
 def get_followed_docs_by_user_id(user_id):
     """Return all docs followed by a user."""
@@ -210,6 +226,8 @@ def accept_invite_by_follow_id(follow_id):
     inviter = User.query.get(doc.owner)
 
     db.session.commit()
+
+    print(f"{follow.accepted} ACCEPTED?")
 
     return inviter #for notification of acceptance
 

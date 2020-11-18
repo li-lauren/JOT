@@ -7,6 +7,7 @@ const Invitation = ({invitation, invAction, setInvAction, socket}) => {
             'followId': invitation.invite_id,
             'msg': `${localStorage.getItem('fname')} accepted your invite`
         })
+        setInvAction(!invAction)
     }
 
     const decline = () => {
@@ -29,10 +30,10 @@ const Invitation = ({invitation, invAction, setInvAction, socket}) => {
             <br/>
             {invitation.inviter} {moment(created_at).startOf('minute').fromNow()}
             <br/>
-            <Button variant="outline-secondary" size="sm" onClick={()=> accept}>
+            <Button variant="outline-secondary" size="sm" onClick={accept}>
                 Accept
             </Button> 
-            <Button variant="outline-secondary" size="sm" onClick={()=> decline}>
+            <Button variant="outline-secondary" size="sm" onClick={decline}>
                 Decline
             </Button>
         </div>
