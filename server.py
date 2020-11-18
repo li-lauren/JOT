@@ -233,7 +233,7 @@ def get_like_info():
     num_likes = crud.get_num_likes_by_note_id(note_id)
     liked_by_user = crud.get_if_user_likes_a_note(user_id, note_id)
 
-    return [num_likes, liked_by_user]
+    return { 'numLikes': num_likes, 'likedByUser': liked_by_user }
 
 
 

@@ -80,6 +80,7 @@ const Note = ({note, room, socket}) => {
                     <br/>
                     {moment(created_at).startOf('minute').fromNow()}
                     {/* {`x: ${(pos.x).toFixed(2)}, y: ${(pos.y).toFixed(2)}`} */}
+                    <Like noteId={note_id}/>
                 </Button>
                 :
                 <Button className="note">
