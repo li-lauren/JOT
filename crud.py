@@ -192,7 +192,13 @@ def get_followers_by_doc_id(doc_id):
 def get_followed_docs_by_user_id(user_id):
     """Return all docs followed by a user."""
 
-    return User.query.get(user_id).followed_docs
+    # return User.query.get(user_id).followed_docs
+
+    followed_docs = db.session.query(Doc).\
+        join(Doc_Follower, Doc_Follower.doc_id == Doc.doc_id).\
+        filter(Doc_Follower.user_id == user_id, Doc_Follower.accepted == True).all()
+
+    return followed_docs
 
 ### INVITE CRUD OPERATIONS ###
 def get_invites_by_user_id(user_id):
