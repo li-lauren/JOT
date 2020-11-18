@@ -295,6 +295,7 @@ def get_notes_by_doc_id(doc_id):
 
 
 def update_note_pos(note_id, new_x, new_y):
+    """Update note position."""
 
     note = Note.query.get(note_id)
     note.x_pos = new_x
@@ -313,6 +314,7 @@ def get_num_likes_by_note_id(note_id):
 
 
 def get_if_user_likes_a_note(user_id, note_id):
+    """Return a bool representing if a user has liked a certain note."""
 
     like = Like.query.\
         filter(Like.note_id == note_id, Like.user_id == user_id).first()

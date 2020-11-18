@@ -224,6 +224,18 @@ def decline_invitations():
     return 'Invite declined'
 
 
+@app.route('/likes', methods=['POST'])
+def get_like_info():
+
+    note_id = request.json.get('note_id')
+    user_id = request.json.get('user_id')
+
+    num_likes = crud.get_num_likes_by_note_id(note_id)
+    liked_by_user = crud.get_if_user_likes_a_note(user_id, note_id)
+
+    return [num_likes, liked_by_user]
+
+
 
 
 @io.on("connect")
