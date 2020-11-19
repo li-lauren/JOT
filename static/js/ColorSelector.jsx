@@ -14,7 +14,7 @@ const ColorSelector = ({doc_id}) => {
     })
 
     const assignColor = (colorOpt) => {
-        socket.emit('note_color', {'note_color' : colorOpt})
+        socket.emit('note_color', {'note_color' : colorOpt, 'doc_id' : doc_id})
     }
 
     return(

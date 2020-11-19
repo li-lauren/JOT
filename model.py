@@ -194,6 +194,7 @@ class Note(db.Model):
     y_pos: float
     fname: str
     lname: str
+    color: str
 
     __tablename__ = "notes"
 
@@ -210,6 +211,7 @@ class Note(db.Model):
     y_pos = db.Column(db.Float)
     fname = db.Column(db.String)
     lname = db.Column(db.String)
+    color = db.Column(db.String, default='#C2D6C4')
 
     doc = db.relationship("Doc")
     user = db.relationship("User")

@@ -423,6 +423,17 @@ def unlike_note(data):
         'noteId': note_id}
 
     io.emit("note_unliked", data)
+
+
+@io.on("note_color")
+def set_note_color(data):
+    user_id = session['user_id']
+    doc_id = data['doc_id']
+    color = data['note_color']
+
+    crud.update_note_color(user_id, doc_id, color)
+
+    io.emit("note_color_changed", {'color': color}, room=doc_id)
     
 
 

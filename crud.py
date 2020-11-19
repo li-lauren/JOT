@@ -305,6 +305,29 @@ def update_note_pos(note_id, new_x, new_y):
 
     return note
 
+def update_note_color(user_id, doc_id, color):
+    """Update color for all of a user's notes in a doc."""
+
+    db.session.query(Note).\
+        filter(Note.user_id == user_id, Note.doc_id == doc_id).\
+        update({Note.color: color}, synchronize_session=False)
+
+    db.session.commit()
+
+
+def check_prev_note_color(user_id, doc_id):
+    """Check for the color of a user's prev note for a doc."""
+
+    note = Note.query.\
+        filter(Note.user_id == user_id, Note.doc_id == doc_id).first()
+
+    if note:
+        return note.color
+    else:
+        return None
+
+    
+
 
 ### LIKE CRUD OPERATIONS ###
 def get_num_likes_by_note_id(note_id):
