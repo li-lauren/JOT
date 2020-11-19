@@ -272,7 +272,7 @@ def check_prev_note_color(user_id, doc_id):
         return note.color
     else:
         return None
-        
+
 
 def create_note(user_id, doc_id, created_at, body, x_pos, y_pos, fname, lname):
     """Create a note."""
@@ -302,7 +302,7 @@ def create_note(user_id, doc_id, created_at, body, x_pos, y_pos, fname, lname):
     db.session.add(note)
     db.session.commit()
 
-    return note
+    return {'note': note, 'color': color}
 
 
 def get_notes_by_doc_id(doc_id):

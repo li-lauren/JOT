@@ -289,19 +289,21 @@ def handle_note(data):
     created_at = datetime.datetime.utcnow()
     date_as_int = int(time.mktime(created_at.timetuple())) * 1000
 
-    note = crud.create_note(user_id, room, created_at, body, x_pos, y_pos, fname, lname)
+    note_info = crud.create_note(user_id, room, created_at, body, x_pos, y_pos, fname, lname)
+    color = note_info['color']
+    note = note_info['note']
 
     note_json = {
         'note_id': note.note_id,
         'user_id': user_id,
         'doc_id': room,
-        # TODO: work on datetime ish
         'created_at': date_as_int, 
         'body': body,
         'x_pos': x_pos,
         'y_pos': y_pos, 
         'fname': fname,
-        'lname': lname
+        'lname': lname, 
+        'color': color
     }
     
     io.emit('note', note_json, room=room)

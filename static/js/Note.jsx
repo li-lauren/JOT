@@ -1,9 +1,9 @@
 
 
-const Note = ({note, room, socket}) => {
+const Note = ({note, room, noteColor, socket}) => {
     // const { width, height } = updateWindowDim()
-    const [color, setColor] = useState('#afd9de')
-    
+    // const [color, setColor] = useState(noteColor)
+    // console.log(color)
     const [pos, setPos] = useState(
         { x: note.x_pos, y: note.y_pos })
     const [isHovering, setIsHovering] = useState(false)
@@ -76,6 +76,7 @@ const Note = ({note, room, socket}) => {
                 <Button 
                     className="note" 
                     onClick={()=>console.log(note_id)}
+                    style={{backgroundColor: noteColor}}
                 >
                     {/* <span>{note.note_id}</span> */}
                     <span>{fname}:</span>
@@ -87,7 +88,7 @@ const Note = ({note, room, socket}) => {
                     <Like noteId={note_id} socket={socket} />
                 </Button>
                 :
-                <Button className="note">
+                <Button className="note" style={{backgroundColor: noteColor}}>
                     {fname[0]}
                 </Button> }
 

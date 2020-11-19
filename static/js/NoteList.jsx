@@ -1,23 +1,10 @@
-// const getNotes = (cb) => {
-//     if (!socket) {
-//         console.log('NO SOCKET')
-//         return true;
-//     };
-
-//     socket.on('note', note => {
-//         console.log('Note received');
-//         console.log(note)
-//         return cb(null, note);
-//     });
-// }
-
 const NoteList = ({room, socket}) => {
     const [noteLog, setNoteLog] = React.useState([]);
     const [noteAdded, setNoteAdded] = React.useState(null);
-
-    // console.log(noteAdded)
+    const [colorChange, setColorChange] = React.useState(null)
 
     const getAllNotes = () => {
+        console.log('GETTING NOTES')
         fetch('/notes')
         .then(res => res.json())
         .then(data => {
@@ -28,30 +15,26 @@ const NoteList = ({room, socket}) => {
 
     React.useEffect(() => {
         getAllNotes()
-    }, [room])
+    }, [room, colorChange])
 
     React.useEffect(() => {
+        let isMounted = true;
         if (!socket) {
             console.log('NO SOCKET');
         } else {
             socket.on('note', note => {
                 setNoteAdded(note)
             })
+            socket.on('note_color_changed', data => {
+                setColorChange(data.color)
+                console.log(data.color)
+            })
         }    
+
+        return () => { isMounted = false };
     })
 
     React.useEffect(() => {
-
-        // getNotes((error, data) => {
-        //     if (error) {
-        //         return "Error getting notes"
-        //     }
-        //     console.log(`Data: ${data}`)
-        //     console.log(`prevNoteLog: ${noteLog}`)
-
-        //     setNoteLog(prevNoteLog => [data, ...prevNoteLog])
-        // });
-        
 
         setNoteLog(prevNoteLog => [noteAdded, ...prevNoteLog])
         if (noteAdded) {
@@ -60,9 +43,6 @@ const NoteList = ({room, socket}) => {
         }
     
     }, [noteAdded]); //may have to be room
-
-    // const notes = (noteLog.map(note => 
-    //     <Note key={note.note_id} note={note} room={room} />))
 
     console.log(`NOTELOG: ${noteLog}`)
     return (
@@ -73,7 +53,7 @@ const NoteList = ({room, socket}) => {
                     if (note) {
                         return <Note 
                                 key={note.note_id} 
-                                note={note} room={room}
+                                note={note} room={room} noteColor={note.color}
                                 socket={socket} /> 
                     }
                 }) }
