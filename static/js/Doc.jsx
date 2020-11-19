@@ -1,25 +1,3 @@
-// functions for connecting with Socket.io
-//let socket;
-
-// const connectSocket = (room) => {
-//     // socket = io.connect('http://0.0.0.0:5000/');
-//     // console.log('Connecting...');
-//     if (socket && room) {
-//         socket.emit('join', room)
-//         console.log('joining room')
-//     }
-// }
-
-// const disconnectSocket = () => {
-//     console.log('Disconnecting...');
-//     if (socket) {
-//         socket.disconnect();
-//     }
-// }
-
-// End Socket functions
-
-
 const Doc = () => {
     const location = useLocation()
     const data = location.state.params
@@ -33,9 +11,7 @@ const Doc = () => {
     const [show, setShow] = useState(false)
     const socket = useContext(SocketContext)
 
-    // const [color, setColor] = useState('#afd9de')
-    const colors = ['#D29DC0', '#E7DCCA', '#9CCBC0', '#C2D6C4', '#92A0CF', '#E6C9C5' ]
-
+    
     let img_url = ''
 
     if (data.img_urls) {
@@ -74,9 +50,22 @@ const Doc = () => {
             })
         }
     })
-
+    
+    const colors = ['#D29DC0', '#E7DCCA', '#9CCBC0', '#C2D6C4', '#92A0CF', '#E6C9C5' ]
+    const colorSelectors = colors.map(colorOpt => {
+        return(
+            <div 
+                style={{backgroundColor: colorOpt}}
+                onClick={() => assignColor(colorOpt)}
+                className="color-selector"
+                key={colorOpt}
+            >
+            </div>
+        ) 
+    })
     
     const docData = [
+         <Row>{colorSelectors}</Row>,
         <Row>
             <h1>{doc.title}</h1>
         </Row>, 
@@ -100,14 +89,7 @@ const Doc = () => {
         socket.emit('note_color', {'note_color' : colorOpt})
     }
 
-    const colorSelectors = colors.map(colorOpt => {
-        <div 
-            style={{backgroundColor: colorOpt}}
-            onClick={() => assignColor(colorOpt)}
-            className="color-selector"
-        >
-        </div>
-    })
+   
     
     return(
         <Container>
@@ -116,6 +98,7 @@ const Doc = () => {
             </Alert>
             
             <div id="wrapper">
+                
                 {docData}
 
                 <Row>
