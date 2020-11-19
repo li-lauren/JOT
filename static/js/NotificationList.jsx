@@ -1,11 +1,26 @@
+// const { ToastContainer, toast} = 'react-toastify';
 // const { ToastContainer, toast} = ReactToastify;
 
-const Notifications = ({socket}) => {
+const Notifications = () => {
     const [notificationList, setNotificationList] = useState([])
     const [notificationAdded, setNotificationAdded] = useState(null)
     
     // Toast test notification
     // const notify = () => toast("Wow so easy !");
+
+    // Toastify JS
+    // const notify = () => (Toastify({
+    //     text: 'WOW SO EASY',
+    //     duration: 3000,
+    //     newWindow: true,
+    //     close: true,
+    //     gravity: "top", 
+    //     position: 'right',
+    //     backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+    //     stopOnFocus: true, 
+    //   }).showToast());
+
+    const socket = useContext(SocketContext)
 
     useEffect(() => {
         let isMounted = true;

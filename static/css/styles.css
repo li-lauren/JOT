@@ -28,6 +28,13 @@
     left: 50%;
 }
 
+.color-selector{
+    border-radius: 50px;
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+}
+
 /* #noteList {
     position: absolute;
     top: 0px;

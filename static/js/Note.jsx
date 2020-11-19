@@ -2,6 +2,7 @@
 
 const Note = ({note, room, socket}) => {
     // const { width, height } = updateWindowDim()
+    const [color, setColor] = useState('#afd9de')
     
     const [pos, setPos] = useState(
         { x: note.x_pos, y: note.y_pos })
@@ -72,7 +73,10 @@ const Note = ({note, room, socket}) => {
                 onMouseLeave={() => setIsHovering(false)}
             >
                 { isHovering ? 
-                <Button className="note" onClick={()=>console.log(note_id)}>
+                <Button 
+                    className="note" 
+                    onClick={()=>console.log(note_id)}
+                >
                     {/* <span>{note.note_id}</span> */}
                     <span>{fname}:</span>
                     <br/>

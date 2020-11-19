@@ -12,11 +12,15 @@ const Navbar = () => {
     )   
 }
 
+const SocketContext = React.createContext();
+
 
 
 const App = () => {
     const [loggedIn, setLoggedIn] = React.useState(
         localStorage.getItem('user_id') !== null)
+
+    const [socket, setSocket] = useState(null)
 
     console.log(loggedIn)
     // React.useEffect(() => {
@@ -26,15 +30,17 @@ const App = () => {
     //         if (data) { setLoggedIn(true) }
     //     })
     // }, [])
-    let socket;
+    // let socket;
     const connectSocket = () => {
-        socket = io.connect('http://0.0.0.0:5000/')
+        // socket = io.connect('http://0.0.0.0:5000/')
+        setSocket(io.connect('http://0.0.0.0:5000/'))
         console.log('Connecting')
     }
 
     useEffect(() => {
         if (loggedIn) {
             connectSocket()
+            // setSocket(socket)
         }
 
         if (!loggedIn) {
@@ -53,9 +59,11 @@ const App = () => {
         return children;
     };
 
+    console.log(socket)
+
     return(
-        <div>
-            
+        
+        <SocketContext.Provider value={socket}>
             <Router>
                 <Navbar />
                 <Switch>
@@ -76,27 +84,32 @@ const App = () => {
                             render={(props) => (
                             <Dashboard {...props} 
                                 setLoggedIn={setLoggedIn}
-                                socket={socket} /> 
+                                // socket={socket} 
+                            /> 
                             )} 
                         />
                         <Route 
                             exact path={'/article'}
                             // component={Doc}
                             render={(props) => (
-                                <Doc {...props} socket={socket}/>
+                                <Doc {...props} 
+                                // socket={socket}
+                                />
                             )}
                         />
                         <Route 
                             path={['/dashboard', '/article']}
                             render={(props) => (
-                                <Notifications {...props} socket={socket} />
+                                <Notifications {...props} 
+                                // socket={socket} 
+                                />
                             )}
                         />
                     </RequireAuth>  
                 </Switch>     
             </Router>
-            
-        </div>
+        </SocketContext.Provider>
+        
     )
 }
 

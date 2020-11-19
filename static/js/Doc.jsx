@@ -20,7 +20,7 @@
 // End Socket functions
 
 
-const Doc = ({socket}) => {
+const Doc = () => {
     const location = useLocation()
     const data = location.state.params
     console.log(`data: ${data.doc}`)
@@ -31,6 +31,10 @@ const Doc = ({socket}) => {
 
     const [joinMsg, setJoinMsg] = useState('')
     const [show, setShow] = useState(false)
+    const socket = useContext(SocketContext)
+
+    // const [color, setColor] = useState('#afd9de')
+    const colors = ['#D29DC0', '#E7DCCA', '#9CCBC0', '#C2D6C4', '#92A0CF', '#E6C9C5' ]
 
     let img_url = ''
 
@@ -91,6 +95,19 @@ const Doc = ({socket}) => {
         </Row>
        
     ]
+
+    const assignColor = (colorOpt) => {
+        socket.emit('note_color', {'note_color' : colorOpt})
+    }
+
+    const colorSelectors = colors.map(colorOpt => {
+        <div 
+            style={{backgroundColor: colorOpt}}
+            onClick={() => assignColor(colorOpt)}
+            className="color-selector"
+        >
+        </div>
+    })
     
     return(
         <Container>

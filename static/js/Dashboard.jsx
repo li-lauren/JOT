@@ -1,6 +1,6 @@
 
 
-const Dashboard = ({setLoggedIn, socket}) => {
+const Dashboard = ({setLoggedIn}) => {
     
     // const [addSocket, setAddSocket] = useState('')
 
@@ -10,6 +10,8 @@ const Dashboard = ({setLoggedIn, socket}) => {
     //     console.log('Connecting')
     // }
 
+    const socket = useContext(SocketContext)
+    console.log(socket)
     
     const logout = () => {
         console.log('Disconnecting...')
