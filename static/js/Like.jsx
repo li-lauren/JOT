@@ -62,8 +62,14 @@ const Like = ({noteId, socket}) => {
     return(
         <div>
             { liked ? 
-                <i className="fas fa-heart" onClick={unlike}></i> :
-                <i className="far fa-heart" onClick={like}></i>
+                <span>
+                    <i className="fas fa-heart" onClick={unlike}></i> 
+                    {` ${numLikes}`}
+                </span>:
+                <span>
+                     <i className="far fa-heart" onClick={like}></i>
+                     {` ${numLikes}`}
+                </span>
             }
         </div>
         
