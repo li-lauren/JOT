@@ -47,7 +47,7 @@ const Notifications = () => {
     console.log(notificationList)
 
     return (
-        <div>
+        <div className="notification">
             {/* Test Toast Container */}
              {/* <div>
                 <button onClick={notify}>Notify !</button>

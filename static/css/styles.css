@@ -37,6 +37,14 @@
     cursor: pointer;
 }
 
+.notification {
+    position: fixed;
+    top: 10%;
+    left: 75%;
+    width: 20%;
+    clear: both;
+}
+
 /* #noteList {
     position: absolute;
     top: 0px;
