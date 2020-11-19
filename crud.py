@@ -262,12 +262,30 @@ def get_image_url_by_doc_id(doc_id):
 
 ### NOTE CRUD OPERATIONS ###
 
+def check_prev_note_color(user_id, doc_id):
+    """Check for the color of a user's prev note for a doc."""
+
+    note = Note.query.\
+        filter(Note.user_id == user_id, Note.doc_id == doc_id).first()
+
+    if note:
+        return note.color
+    else:
+        return None
+        
+
 def create_note(user_id, doc_id, created_at, body, x_pos, y_pos, fname, lname):
     """Create a note."""
     # figure out x and y pos
 
     # tz = pytz.timezone('America/Los_Angeles')
     # created_at = datetime.now(tz)
+
+    color_check = check_prev_note_color(user_id, doc_id)
+    if color_check:
+        color = color_check
+    else:
+        color = '#C2D6C4'
 
     note = Note(
         user_id = user_id,
@@ -277,7 +295,8 @@ def create_note(user_id, doc_id, created_at, body, x_pos, y_pos, fname, lname):
         x_pos = x_pos,
         y_pos = y_pos,
         fname = fname,
-        lname = lname
+        lname = lname,
+        color = color
     )
 
     db.session.add(note)
@@ -314,17 +333,6 @@ def update_note_color(user_id, doc_id, color):
 
     db.session.commit()
 
-
-def check_prev_note_color(user_id, doc_id):
-    """Check for the color of a user's prev note for a doc."""
-
-    note = Note.query.\
-        filter(Note.user_id == user_id, Note.doc_id == doc_id).first()
-
-    if note:
-        return note.color
-    else:
-        return None
 
     
 
