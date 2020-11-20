@@ -2,6 +2,7 @@
 
 from datetime import datetime
 import pytz
+from sqlalchemy import func
 
 from model import (db, connect_to_db, User, Doc, Author, Doc_Author, Img_Url,
                     Tag, Doc_Tag, Doc_Follower, Note, Like, Relationship_Type,
@@ -402,8 +403,23 @@ def search_by_title(search_term):
             
 ### USER PROFILE QUERIES ###
 def get_total_num_likes(user_id):
+    """Get the a user's total number of likes (cumulative across all their notes)."""
     total_likes = Like.query.filter(Like.note.has(user_id=user_id)).count()
     return total_likes
+
+
+def get_most_liked_note(user_id):
+    most_liked_note_id = db.session.query(Like.note_id, func.count(Like.note_id)).\
+        filter(Like.note.has(user_id=user_id)).\
+        group_by(Like.note_id).\
+        order_by(func.count(Like.note_id).desc()).first()
+
+    note = None
+    if most_liked_note_id:
+        note = Note.query.get(most_liked_note_id[0])
+
+    return note
+
 
 
 
