@@ -21,6 +21,7 @@ const Dashboard = ({setLoggedIn}) => {
             <a href="" onClick={logout}>Logout</a>
             <DocList socket={socket}/>
             <InvitationList socket={socket}/>
+            <Search />
         </div>
     )
 
