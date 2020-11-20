@@ -379,6 +379,31 @@ def unlike(user_id, note_id):
     return 'Note unliked'
 
 
+### SEARCH OPERATIONS ###
+def calculate_similarity(search_term, str):
+    """Provide a similarity score (0 - 10) for a search term and a string."""
+    score = 0
+
+    l = len(search_term)
+
+    return score
+
+def search_by_title(search_term):
+    """Search for docs with titles with the highest similarity score to 
+       the given search term."""
+
+    titles = db.session.query(Doc.title, Doc.doc_id).all()
+    #loop through titles, assign a score
+    #add to heap
+
+    for title in titles:
+        score = calculate_similarity(search_term, title)
+    
+            
+### USER PROFILE QUERIES ###
+def get_total_num_likes(user_id):
+    total_likes = Like.query.filter(Like.note.has(user_id=user_id)).count()
+    return total_likes
 
 
 

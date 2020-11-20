@@ -1,9 +1,30 @@
 const Search = () => {
     const [searchTerm, setSearchTerm] = useState('')
 
+    const handleSubmit = e => {
+        e.preventDefault()
+        console.log('Submit Search')
+
+        const reqOptions = {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'searchTerm': searchTerm
+            })
+        }
+
+        fetch('/search', reqOptions)
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+    }
+
     return(
         <div>
-            <Form inline>
+            <Form inline onSubmit={handleSubmit}>
                 <Form.Label htmlFor="inlineFormInputName2" srOnly>
                     Search
                 </Form.Label>
@@ -19,7 +40,6 @@ const Search = () => {
                     Submit
                 </Button>
             </Form>
-
         </div>
     )
 }

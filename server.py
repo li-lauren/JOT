@@ -236,6 +236,11 @@ def get_like_info():
     return { 'numLikes': num_likes, 'likedByUser': liked_by_user }
 
 
+@app.route('/search', methods=['POST'])
+def search():
+
+    search_term = request.json.get('search_term')
+    
 
 
 @io.on("connect")
@@ -307,6 +312,7 @@ def handle_note(data):
     }
     
     io.emit('note', note_json, room=room)
+
 
 
 # @io.on("update_position")
