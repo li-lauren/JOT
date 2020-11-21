@@ -56,13 +56,13 @@ def get_user_by_email(email):
     return User.query.filter(User.email == email).first()
 
 
-def search_user_email_matches(search_term):
+def get_user_email_matches(search_term):
     """Get autocomplete results for a user email query."""
 
     matches = email_trie.search(search_term.lower())
 
     return matches
-    
+
 
 ### DOC CRUD OPS ###
 def create_doc(url, title, publish_date, body, owner):

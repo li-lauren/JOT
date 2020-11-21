@@ -462,6 +462,17 @@ def set_note_color(data):
     crud.update_note_color(user_id, doc_id, color)
 
     io.emit("note_color_changed", {'color': color}, room=doc_id)
+
+@io.on("search")
+def get_autocomplete_results(data):
+    user_id = data['user_id']
+    search_term = data['search_term']
+
+    options = crud.get_user_email_matches(search_term)
+
+    io.emit("autocomplete", {'user_id':user_id, 'options':options})
+
+
     
 
 

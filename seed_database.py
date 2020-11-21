@@ -30,6 +30,18 @@ model.db.create_all()
 user_1 = crud.create_user('John', 'Smith', 'john@example.com', 'test', '')
 user_2 = crud.create_user('Marie', 'Brener', 'marie@example.com', 'test', '')
 user_3 = crud.create_user('Lauren', 'Li', 'lauren@example.com', 'test', '')
+user_4 = crud.create_user('John Paul', 'Roberts', 'johnpaul@example.com', 'test', '')
+user_5 = crud.create_user('Jonas', 'Hill', 'jonas@example.com', 'test', '')
+user_6 = crud.create_user('Jonathan', 'Lee', 'jonathan@example.com', 'test', '')
+user_7 = crud.create_user('Jon', 'Nakayama', 'jon@example.com', 'test', '')
+user_8 = crud.create_user('Jose', 'Gonzales', 'jose@example.com', 'test', '')
+user_9 = crud.create_user('Jacob', 'Smith', 'jacob@example.com', 'test', '')
+user_10 = crud.create_user('Johannes', 'Muller', 'johannes@example.com', 'test', '')
+user_11 = crud.create_user('Jason', 'Jones', 'jason@example.com', 'test', '')
+user_12 = crud.create_user('Janice', 'Joplin', 'janice@example.com', 'test', '')
+
+
+
 
 article_urls_1 = [
     'https://www.archpaper.com/2020/09/public-opinion-has-softened-on-brutalism-isnt-enough-to-stay-the-wrecking-ball/',
