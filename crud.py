@@ -404,21 +404,49 @@ def search_by_title(search_term):
 ### USER PROFILE QUERIES ###
 def get_total_num_likes(user_id):
     """Get the a user's total number of likes (cumulative across all their notes)."""
+    
     total_likes = Like.query.filter(Like.note.has(user_id=user_id)).count()
     return total_likes
 
 
 def get_most_liked_note(user_id):
+    """Get a user's most-liked note."""
+
     most_liked_note_id = db.session.query(Like.note_id, func.count(Like.note_id)).\
         filter(Like.note.has(user_id=user_id)).\
         group_by(Like.note_id).\
         order_by(func.count(Like.note_id).desc()).first()
 
     note = None
+    num_likes = None
     if most_liked_note_id:
         note = Note.query.get(most_liked_note_id[0])
+        num_likes = most_liked_note_id[1]
 
-    return note
+    return note, num_likes
+
+
+def get_most_followed_doc(user_id):
+    """Get a user's doc with the most followers."""
+
+    doc_info = db.session.query(Doc_Follower.doc_id, func.count(Doc_Follower.doc_id)).\
+            filter(Doc_Follower.docs.has(owner=user_id)).\
+            group_by(Doc_Follower.doc_id).\
+            order_by(func.count(Doc_Follower.doc_id).desc()).first()
+
+    doc = None
+    followers = None
+    if doc_info:
+        doc = Doc.query.get(doc_info[0])
+        followers = doc_info[1]
+
+    return doc, followers
+
+
+
+
+
+
 
 
 

@@ -73,9 +73,11 @@ class Doc(db.Model):
                             secondary="doc_tags", 
                             backref="docs")
 
-    followers = db.relationship("User", 
-                                secondary="doc_followers", 
-                                backref="followed_docs")
+    # followers = db.relationship("User", 
+    #                             secondary="doc_followers", 
+    #                             backref="followed_docs")
+
+    followers = db.relationship("Doc_Follower", backref="docs")
 
     notes = db.relationship("Note")
 
