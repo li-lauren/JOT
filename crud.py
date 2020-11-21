@@ -8,12 +8,17 @@ from model import (db, connect_to_db, User, Doc, Author, Doc_Author, Img_Url,
                     Tag, Doc_Tag, Doc_Follower, Note, Like, Relationship_Type,
                     User_Relationship)
 
+from trie import Trie
+
 if __name__ == '__main__':
     from server import app
     connect_to_db(app)
 
 
 ### USER CRUD OPS ###
+
+# Initiate a trie to store user emails
+email_trie = Trie()
 
 def create_user(fname, lname, email, pw, img):
     """Create and return a new user."""
@@ -26,6 +31,7 @@ def create_user(fname, lname, email, pw, img):
         img = img
     )
 
+    email_trie.insert(email.lower())
     db.session.add(user)
     db.session.commit()
 
@@ -48,6 +54,10 @@ def get_user_by_email(email):
     """Return a user by email."""
 
     return User.query.filter(User.email == email).first()
+
+
+def search_user_email_matches(search_term):
+    """Get autocomplete results for a user email query."""
 
 
 ### DOC CRUD OPS ###
