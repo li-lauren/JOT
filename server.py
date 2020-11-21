@@ -240,7 +240,27 @@ def get_like_info():
 def search():
 
     search_term = request.json.get('search_term')
+
+
+@app.route('/user/<int:user_id>')
+def get_user_profile(user_id):
+    """Get profile stats for a user."""
+
+    total_likes = crud.get_total_num_likes(user_id)
+    top_note, top_note_likes = crud.get_most_liked_note(user_id)
+    top_doc, top_doc_followers = crud.get_most_followed_doc(user_id)
+
+    stats = {
+        'totalLikes': total_likes,
+        'topNote': top_note,
+        'topNoteLikes': top_note_likes,
+        'topDoc' : top_doc,
+        'topDocFollowers': top_doc_followers
+    }
     
+    return jsonify(stats)
+
+
 
 
 @io.on("connect")

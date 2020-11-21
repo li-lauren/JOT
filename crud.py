@@ -430,7 +430,7 @@ def get_most_followed_doc(user_id):
     """Get a user's doc with the most followers."""
 
     doc_info = db.session.query(Doc_Follower.doc_id, func.count(Doc_Follower.doc_id)).\
-            filter(Doc_Follower.docs.has(owner=user_id)).\
+            filter(Doc_Follower.doc.has(owner=user_id)).\
             group_by(Doc_Follower.doc_id).\
             order_by(func.count(Doc_Follower.doc_id).desc()).first()
 

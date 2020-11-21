@@ -77,7 +77,7 @@ class Doc(db.Model):
     #                             secondary="doc_followers", 
     #                             backref="followed_docs")
 
-    followers = db.relationship("Doc_Follower", backref="docs")
+    # followers = db.relationship("Doc_Follower", backref="doc")
 
     notes = db.relationship("Note")
 
@@ -178,6 +178,8 @@ class Doc_Follower(db.Model):
     doc_id = db.Column(db.Integer, db.ForeignKey('docs.doc_id'))
     accepted = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime)
+
+    doc = db.relationship("Doc")
 
     def __repr__(self):
         return (f'<Doc_Follower doc_follower_id={self.doc_follower_id} '
