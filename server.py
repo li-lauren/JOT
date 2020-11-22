@@ -495,10 +495,15 @@ def add_friend(data):
 
 @io.on("doc_search")
 def get_autocomplete_doc_results(data):
-    user_id = data['user_id']
+    
     search_term = data['search_term']
+    user_id = data['user_id']
 
-    # options = crud.get_doc_matches(search_term, user_id)
+    options = crud.get_doc_matches(search_term, user_id)
+
+    io.emit("docMatches", {'options':options}, room=request.sid)
+
+   
 
 
 

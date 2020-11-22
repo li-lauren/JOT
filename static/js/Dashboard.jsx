@@ -22,6 +22,9 @@ const Dashboard = ({setLoggedIn}) => {
             <DocList socket={socket}/>
             <InvitationList socket={socket}/>
             <Search />
+            <br/>
+            Doc Search
+            <DocSearch />
         </div>
     )
 

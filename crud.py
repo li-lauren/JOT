@@ -399,27 +399,6 @@ def unlike(user_id, note_id):
     return 'Note unliked'
 
 
-### SEARCH OPERATIONS ###
-def calculate_similarity(search_term, str):
-    """Provide a similarity score (0 - 10) for a search term and a string."""
-    score = 0
-
-    l = len(search_term)
-
-    return score
-
-def search_by_title(search_term):
-    """Search for docs with titles with the highest similarity score to 
-       the given search term."""
-
-    titles = db.session.query(Doc.title, Doc.doc_id).all()
-    #loop through titles, assign a score
-    #add to heap
-
-    for title in titles:
-        score = calculate_similarity(search_term, title)
-    
-            
 ### USER PROFILE QUERIES ###
 def get_total_num_likes(user_id):
     """Get the a user's total number of likes (cumulative across all their notes)."""
@@ -499,6 +478,71 @@ def add_friend(user_1_id, user_2_id):
 
     return friendship
 
+
+### SEARCH OPERATIONS ###
+def binary_similarity_score(pattern, string):
+    """Return 1 or 0 if pattern is and is not in a string, respectively."""
+    
+    l = len(pattern)
+    s = len(string)
+
+    score = 0
+
+    for i in range(s - l + 1):
+        if string[i:i+l] == pattern:
+            score = 1
+            break
+
+    return score
+
+
+def frequency_similarity_score(pattern, string):
+    """Return a similarity score that is the percentage of occurrences of
+        a pattern in a string."""
+    
+    l = len(pattern)
+    s = len(string)
+
+    count = 0
+
+    for i in range(s - l + 1):
+        if string[i:i+l] == pattern:
+            count += 1
+    
+    return count * l / s
+
+    
+def calculate_similarity_score(search_term, doc):
+    """Provide a similarity score (0 - 10) for a search term and a string."""
+    doc_id = doc[0]
+    author = doc[1]
+    title = doc[2]
+    body = doc[3]
+
+    score = sum([
+        0.3 * binary_similarity_score(search_term, author), 
+        0.5 * binary_similarity_score(search_term, title), 
+        100 * frequency_similarity_score(search_term, body)
+    ])
+
+    return (doc_id, score, title)
+
+
+def get_doc_matches(search_term, user_id):
+    """Search for docs with the highest similarity score to 
+       the given search term."""
+
+    docs = db.session.query(Doc.doc_id, Doc.author, Doc.title, Doc.body).\
+        filter(Doc.owner == user_id).all()
+
+    scores = []
+
+    for doc in docs:
+        scores.append(calculate_similarity_score(search_term, doc))
+
+    return sorted(scores, key=lambda score: score[1]) 
+    
+            
 
 
 
