@@ -514,13 +514,19 @@ def frequency_similarity_score(pattern, string):
     
 def calculate_similarity_score(search_term, doc):
     """Provide a similarity score (0 - 10) for a search term and a string."""
-    doc_id = doc[0]
-    author = doc[1]
-    title = doc[2]
-    body = doc[3]
+    doc_id = doc.doc_id
+    title = doc.title
+    body = doc.body
+
+    authors = doc.authors
+    print(doc.authors)
+    author_list = []
+    for author in authors:
+        author_list.append(author.name)
+    print(" ".join(author_list))
 
     score = sum([
-        0.3 * binary_similarity_score(search_term, author), 
+        0.3 * binary_similarity_score(search_term, " ".join(author_list)), 
         0.5 * binary_similarity_score(search_term, title), 
         100 * frequency_similarity_score(search_term, body)
     ])
@@ -532,15 +538,14 @@ def get_doc_matches(search_term, user_id):
     """Search for docs with the highest similarity score to 
        the given search term."""
 
-    docs = db.session.query(Doc.doc_id, Doc.author, Doc.title, Doc.body).\
-        filter(Doc.owner == user_id).all()
+    docs = Doc.query.filter(Doc.owner == user_id).all()
 
     scores = []
 
     for doc in docs:
         scores.append(calculate_similarity_score(search_term, doc))
 
-    return sorted(scores, key=lambda score: score[1]) 
+    return sorted(scores, key=lambda score: score[1], reverse=True) 
     
             
 
