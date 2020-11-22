@@ -18,9 +18,9 @@ if __name__ == '__main__':
 ### USER CRUD OPS ###
 
 # Initiate a trie to store user emails
-email_trie = Trie()
+# email_trie = Trie()
 
-def create_user(fname, lname, email, pw, img):
+def create_user(fname, lname, email, pw, img, trie):
     """Create and return a new user."""
 
     user = User(
@@ -31,7 +31,7 @@ def create_user(fname, lname, email, pw, img):
         img = img
     )
 
-    email_trie.insert(email.lower())
+    trie.insert(email.lower())
     db.session.add(user)
     db.session.commit()
 
@@ -55,11 +55,16 @@ def get_user_by_email(email):
 
     return User.query.filter(User.email == email).first()
 
+def get_all_emails():
+    """Return a list of all emails."""
 
-def get_user_email_matches(search_term):
+    return db.session.query(User.email).all()
+
+
+def get_user_email_matches(search_term, trie):
     """Get autocomplete results for a user email query."""
 
-    matches = email_trie.search(search_term.lower())
+    matches = trie.search(search_term.lower())
 
     return matches
 

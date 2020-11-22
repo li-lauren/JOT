@@ -13,6 +13,7 @@ const Search = () => {
                 console.log('autocomplete res received')
                 if (isMounted && data.user_id == user_id) {
                     setOptions(data.options)
+                    console.log(data.options)
                 }   
             })
         } 
@@ -41,9 +42,9 @@ const Search = () => {
         })
     }
 
-    const getAutocomplete = () => {
+    const getAutocomplete = e => {
         setSearchTerm(e.target.value)
-        socket.emit('search', {'search_term':searchTerm, 'user_id':user_id})
+        socket.emit('search', {'search_term':e.target.value, 'user_id':user_id})
     }
 
     return(
@@ -57,13 +58,18 @@ const Search = () => {
                     id="inlineFormInputName2"
                     placeholder="Search"
                     value={searchTerm}
-                    onChange={getAutocomplete}
+                    onChange={e => getAutocomplete(e)}
                 />
                
                 <Button type="submit" className="mb-2">
                     Submit
                 </Button>
             </Form>
+            {options ? options.map((option, i) => 
+                <div key={i}>
+                    {option}
+                </div>
+                    ): ''}
         </div>
     )
 }

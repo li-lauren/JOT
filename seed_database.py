@@ -26,19 +26,20 @@ model.db.create_all()
 #     img = ''
 #     user = crud.create_user(fname, lname, email, pw, img)
 #     users_in_db.append(user)
+trie = server.email_trie
 
-user_1 = crud.create_user('John', 'Smith', 'john@example.com', 'test', '')
-user_2 = crud.create_user('Marie', 'Brener', 'marie@example.com', 'test', '')
-user_3 = crud.create_user('Lauren', 'Li', 'lauren@example.com', 'test', '')
-user_4 = crud.create_user('John Paul', 'Roberts', 'johnpaul@example.com', 'test', '')
-user_5 = crud.create_user('Jonas', 'Hill', 'jonas@example.com', 'test', '')
-user_6 = crud.create_user('Jonathan', 'Lee', 'jonathan@example.com', 'test', '')
-user_7 = crud.create_user('Jon', 'Nakayama', 'jon@example.com', 'test', '')
-user_8 = crud.create_user('Jose', 'Gonzales', 'jose@example.com', 'test', '')
-user_9 = crud.create_user('Jacob', 'Smith', 'jacob@example.com', 'test', '')
-user_10 = crud.create_user('Johannes', 'Muller', 'johannes@example.com', 'test', '')
-user_11 = crud.create_user('Jason', 'Jones', 'jason@example.com', 'test', '')
-user_12 = crud.create_user('Janice', 'Joplin', 'janice@example.com', 'test', '')
+user_1 = crud.create_user('John', 'Smith', 'john@example.com', 'test', '', trie)
+user_2 = crud.create_user('Marie', 'Brener', 'marie@example.com', 'test', '', trie)
+user_3 = crud.create_user('Lauren', 'Li', 'lauren@example.com', 'test', '', trie)
+user_4 = crud.create_user('John Paul', 'Roberts', 'johnpaul@example.com', 'test', '', trie)
+user_5 = crud.create_user('Jonas', 'Hill', 'jonas@example.com', 'test', '', trie)
+user_6 = crud.create_user('Jonathan', 'Lee', 'jonathan@example.com', 'test', '', trie)
+user_7 = crud.create_user('Jon', 'Nakayama', 'jon@example.com', 'test', '', trie)
+user_8 = crud.create_user('Jose', 'Gonzales', 'jose@example.com', 'test', '', trie)
+user_9 = crud.create_user('Jacob', 'Smith', 'jacob@example.com', 'test', '', trie)
+user_10 = crud.create_user('Johannes', 'Muller', 'johannes@example.com', 'test', '', trie)
+user_11 = crud.create_user('Jason', 'Jones', 'jason@example.com', 'test', '', trie)
+user_12 = crud.create_user('Janice', 'Joplin', 'janice@example.com', 'test', '', trie)
 
 
 

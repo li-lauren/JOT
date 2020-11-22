@@ -7,6 +7,7 @@ from model import connect_to_db
 import crud
 import json
 import datetime, time
+from trie import Trie
 
 import os
 
@@ -16,6 +17,9 @@ app = Flask(__name__)
 app.secret_key = SECRET_KEY
 
 io = SocketIO(app, cors_allowed_origins="*")
+
+
+
 
 @app.route('/')
 def index():
@@ -74,7 +78,7 @@ def register_user():
         print('Account already exists')
         return 'An account already exists with that email'
     else:
-        crud.create_user(fname, lname, email, pw, img)
+        crud.create_user(fname, lname, email, pw, img, email_trie)
         print('Account created')
         return f'Welcome, {fname}!  Your account has been created!  Please log in.'
 
@@ -468,7 +472,10 @@ def get_autocomplete_results(data):
     user_id = data['user_id']
     search_term = data['search_term']
 
-    options = crud.get_user_email_matches(search_term)
+    print(search_term)
+
+    options = crud.get_user_email_matches(search_term, email_trie)
+    print(options)
 
     io.emit("autocomplete", {'user_id':user_id, 'options':options})
 
@@ -479,4 +486,10 @@ def get_autocomplete_results(data):
 
 if __name__ == '__main__':
     connect_to_db(app)
+
+    email_trie = Trie()
+    emails = crud.get_all_emails()
+    for email in emails:
+        email_trie.insert(email[0])
+        
     io.run(app, debug=True, host='0.0.0.0')
