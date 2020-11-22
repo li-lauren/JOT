@@ -543,7 +543,9 @@ def get_doc_matches(search_term, user_id):
     scores = []
 
     for doc in docs:
-        scores.append(calculate_similarity_score(search_term, doc))
+        score = calculate_similarity_score(search_term, doc)
+        if score[1] > 0:
+            scores.append(score)
 
     return sorted(scores, key=lambda score: score[1], reverse=True) 
     
