@@ -477,7 +477,7 @@ def get_autocomplete_results(data):
     options = crud.get_user_email_matches(search_term, email_trie)
     print(options)
 
-    io.emit("autocomplete", {'user_id':user_id, 'options':options})
+    io.emit("autocomplete", {'user_id':user_id, 'options':options}, room=request.sid)
 
 
     
