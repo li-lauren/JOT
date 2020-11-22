@@ -200,16 +200,6 @@ def get_notes():
 
     return jsonify(notes)
 
-# @app.route('/notes', methods=['POST'])
-# def create_note():
-#     """Create a note."""
-    
-#     note = request.json.get("note")
-#     user_id = session['user_id']
-#     doc_id = session['doc_id']
-#     note = crud.create_note(user_id, doc_id, note)
-    
-#     return jsonify(note)
 
 @app.route('/invitations')
 def get_invitations():
@@ -265,7 +255,34 @@ def get_user_profile(user_id):
     return jsonify(stats)
 
 
+@app.route('/profile/<email>')
+def get_user_info(email):
+    """Get another user's info."""
 
+    user = crud.get_user_by_email(email)
+    user_id = user.user_id 
+
+    total_likes = crud.get_total_num_likes(user_id)
+    top_note, top_note_likes = crud.get_most_liked_note(user_id)
+    top_doc, top_doc_followers = crud.get_most_followed_doc(user_id)
+
+    stats = {
+        'fname': user.fname,
+        'lname': user.lname,
+        'email': email,
+        'totalLikes': total_likes,
+        'topNote': top_note,
+        'topNoteLikes': top_note_likes,
+        'topDoc' : top_doc,
+        'topDocFollowers': top_doc_followers
+    }
+    
+    return jsonify(stats)
+    
+
+
+
+###### SOCKET FUNCTIONS #########
 
 @io.on("connect")
 def test_connect():
@@ -337,22 +354,6 @@ def handle_note(data):
     
     io.emit('note', note_json, room=room)
 
-
-
-# @io.on("update_position")
-# def update_position():
-#     io.emit("update_position", lastPos)
-
-# @io.on("receive_position")
-# def receive_position(data):
-#     print(f"data_x : {data['x']}")
-#     print(f"data_y : {data['y']}")
-#     print(session['doc_id'])
-#     lastPos = data
-#     io.emit('receive_position', data, room=session['doc_id'])
-
-def emit_check():
-    print('Data was received')
 
 @io.on("fin_pos")
 def fin_pos(data):
@@ -467,15 +468,13 @@ def set_note_color(data):
 
     io.emit("note_color_changed", {'color': color}, room=doc_id)
 
+
 @io.on("search")
 def get_autocomplete_results(data):
     user_id = data['user_id']
     search_term = data['search_term']
 
-    print(search_term)
-
     options = crud.get_user_email_matches(search_term, email_trie)
-    print(options)
 
     io.emit("autocomplete", {'user_id':user_id, 'options':options}, room=request.sid)
 

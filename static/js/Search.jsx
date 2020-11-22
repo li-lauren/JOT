@@ -4,16 +4,16 @@ const Search = () => {
 
     const socket = useContext(SocketContext)
     const user_id = localStorage.getItem('user_id')
+    const history = useHistory()
 
     useEffect(() => {
         let isMounted = true;
        
         if (socket) {
             socket.on('autocomplete', data => {
-                console.log('autocomplete res received')
+                // console.log('autocomplete res received')
                 if (isMounted && data.user_id == user_id) {
                     setOptions(data.options)
-                    console.log(data.options)
                 }   
             })
         } 
@@ -21,24 +21,15 @@ const Search = () => {
         return () => { isMounted = false };
     })
 
-    const handleSubmit = e => {
-        e.preventDefault()
-        console.log('Submit Search')
+    const getProfile = email => {
+        
+        console.log('Get profile')
 
-        const reqOptions = {
-            method: 'POST', 
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                'searchTerm': searchTerm
-            })
-        }
-
-        fetch('/search', reqOptions)
+        fetch(`/profile/${email}`)
         .then(res => res.json())
         .then(data => {
             console.log(data)
+            history.push('/profile', {params: data})
         })
     }
 
@@ -49,7 +40,9 @@ const Search = () => {
 
     return(
         <div>
-            <Form inline onSubmit={handleSubmit}>
+            <Form inline 
+                // onSubmit={handleSubmit}
+            >
                 <Form.Label htmlFor="inlineFormInputName2" srOnly>
                     Search
                 </Form.Label>
@@ -61,12 +54,12 @@ const Search = () => {
                     onChange={e => getAutocomplete(e)}
                 />
                
-                <Button type="submit" className="mb-2">
+                {/* <Button type="submit" className="mb-2">
                     Submit
-                </Button>
+                </Button> */}
             </Form>
             {options ? options.map((option, i) => 
-                <div key={i}>
+                <div key={i} onClick={() => getProfile(option)}>
                     {option}
                 </div>
                     ): ''}
