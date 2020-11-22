@@ -7,16 +7,15 @@ const UserProfile = () => {
     // const [totalLikes, setTotalLikes] = useState(null)
 
     // const [numFriends, setNumFriends] = useState(null)
-    // const [friends, setFriends] = useState(null)
+    const [friends, setFriends] = useState(false)
 
-    //const user_id = localStorage.getItem('user_id')
+    const userId = localStorage.getItem('user_id')
+    const socket = useContext(SocketContext)
     const location = useLocation()
     const data = location.state.params
     
     
-    const fname = data.fname
-    const lname = data.lname
-    const email = data.email
+    const user = data.user
 
     const totalLikes = data.totalLikes
     const topNote = data.topNote
@@ -38,11 +37,28 @@ const UserProfile = () => {
     //     })
     // }, [])
 
+    userEffect(() => {
+        getFriendStatus()
+    }, [])
+
+    const getFriendStatus = () => {
+        fetch(`/friend/${user.user_id}`)
+        .then(res => res.json())
+        .then(data => setFriends(data.isFriends))
+
+    }
+
+    const addFriend = () => {
+        console.log('adding friend...')
+        socket.emit('add_friend', {'id_to_friend': user.user_id, 'user_id': userId})
+    }
+
     return(
         <div>
             <h4>User Profile</h4>
             <h1>{fname} {lname}</h1>
             <h5>{email}</h5>
+            <Button onClick={addFriend}>Add Friend</Button>
             
             <div>
                 <span>{totalLikes}</span>

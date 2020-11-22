@@ -267,9 +267,7 @@ def get_user_info(email):
     top_doc, top_doc_followers = crud.get_most_followed_doc(user_id)
 
     stats = {
-        'fname': user.fname,
-        'lname': user.lname,
-        'email': email,
+        'user': user,
         'totalLikes': total_likes,
         'topNote': top_note,
         'topNoteLikes': top_note_likes,
