@@ -230,11 +230,6 @@ def get_like_info():
     return { 'numLikes': num_likes, 'likedByUser': liked_by_user }
 
 
-@app.route('/search', methods=['POST'])
-def search():
-
-    search_term = request.json.get('search_term')
-
 
 @app.route('/user/<int:user_id>')
 def get_user_profile(user_id):
@@ -496,6 +491,25 @@ def add_friend(data):
     crud.add_friend(user_id, id_to_friend)
 
     io.emit("friend_added")
+
+
+@io.on("doc_search")
+def get_autocomplete_doc_results(data):
+    user_id = data['user_id']
+    search_term = data['search_term']
+
+    # options = crud.get_doc_matches(search_term, user_id)
+
+
+
+
+
+
+
+
+
+
+
 
 email_trie = Trie()
 
