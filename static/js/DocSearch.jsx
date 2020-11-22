@@ -19,16 +19,15 @@ const DocSearch = () => {
         return () => { isMounted = true }
     })
 
-    const getDoc = doc => {
+    const getDoc = doc_id => {
         
-        // console.log('Get profile')
+        console.log(`Get Doc ${doc_id}`)
 
-        // fetch(`/profile/${email}`)
-        // .then(res => res.json())
-        // .then(data => {
-        //     console.log(data)
-        //     history.push('/profile', {params: data})
-        // })
+        fetch(`/docs/${doc_id}`)
+        .then(res => res.json())
+        .then(data => {
+            history.push('/article', {params: data})
+        })
     }
 
 
@@ -53,8 +52,8 @@ const DocSearch = () => {
             </Form>
 
             {options ? options.map((option, i) => 
-                <div key={i} onClick={() => getDoc(option)}>
-                    {option}
+                <div key={option[0]} onClick={() => getDoc(option[0])}>
+                    {option[2]}
                 </div>
                     ): ''}
 
