@@ -463,6 +463,15 @@ def get_most_followed_doc(user_id):
 
 
 ### FRIEND OPERATIONS ###
+def create_friend_relationship_type():
+    friend_relationship = Relationship_Type(
+        relationship_type = 'friends'
+    )
+
+    db.session.add(friend_relationship)
+    db.session.commit()
+
+    return friend_relationship
 
 def check_if_friends(user_1_id, user_2_id):
     friends = User_Relationship.query.\

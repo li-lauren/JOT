@@ -103,3 +103,6 @@ for url in article_urls_2:
         authors_in_db.append(a)
         doc_author = crud.create_doc_author(doc.doc_id, a.author_id)
 
+# CREATE FRIEND RELATIONSHIP TYPE
+crud.create_friend_relationship_type()
+

@@ -66,7 +66,10 @@ const UserProfile = () => {
             <h4>User Profile</h4>
             <h1>{fname} {lname}</h1>
             <h5>{email}</h5>
-            <Button onClick={addFriend}>Add Friend</Button>
+            {friends ? 
+                <Button>Unfriend</Button> :
+                <Button onClick={addFriend}>Add Friend</Button> 
+            }
             
             <div>
                 <span>{totalLikes}</span>
