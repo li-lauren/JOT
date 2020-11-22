@@ -47,7 +47,20 @@ user_12 = crud.create_user('Janice', 'Joplin', 'janice@example.com', 'test', '',
 article_urls_1 = [
     'https://www.archpaper.com/2020/09/public-opinion-has-softened-on-brutalism-isnt-enough-to-stay-the-wrecking-ball/',
     'https://www.theatlantic.com/politics/archive/2020/05/is-flying-safe-coronavirus/611335/',
-    'https://www.popularmechanics.com/technology/infrastructure/a34313925/whale-tail-train-derailment/'
+    'https://www.popularmechanics.com/technology/infrastructure/a34313925/whale-tail-train-derailment/',
+    'https://abduzeedo.com/editorial-design-new-brutalism-controversial-concrete',
+    'https://www.artnews.com/art-news/market/david-ross-hockney-royal-opera-house-1234577007/',
+    'https://www.theatlantic.com/magazine/archive/2020/12/the-last-children-of-down-syndrome/616928/',
+    'https://www.caltech.edu/campus-life-events/master-calendar/watson-lecture-2020-12',
+    'https://www.caltech.edu/about/news/caltech-awards-10000th-phd-degree-during-october-conferral-students-impacted-pandemic',
+    'https://www.caltech.edu/about/news/hundreds-copies-newtons-emprincipiaem-found-new-census',
+    'https://www.caltech.edu/about/news/neuroscientist-viviana-gradinaru-receives-young-investigator-award',
+    'https://www.caltech.edu/about/news/how-stem-cells-choose-their-careers',
+    'https://www.theverge.com/2020/10/24/21531089/netflix-rebecca-review-hitchcock-disney-remake',
+    'https://www.newyorker.com/culture/the-front-row/on-the-rocks-reviewed-sofia-coppolas-self-questioning-film-of-a-fathers-destructive-dazzle',
+    'https://www.newyorker.com/culture/the-front-row/highlights-from-week-one-of-the-new-york-film-festival',
+    'https://news.mit.edu/2020/neural-network-uncertainty-1120',
+    'https://news.mit.edu/2020/erik-demaine-mit-bose-award-excellence-teaching-1120'
 ]
 
 
