@@ -41,6 +41,14 @@ const UserProfile = () => {
         getFriendStatus()
     }, [])
 
+    useEffect(() => {
+        if (socket) {
+            socket.on('friend_added', () => {
+                setFriends(true)
+            })
+        }
+    })
+
     const getFriendStatus = () => {
         fetch(`/friend/${user.user_id}`)
         .then(res => res.json())

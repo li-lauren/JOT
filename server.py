@@ -283,7 +283,9 @@ def check_if_friends(user_id):
     curr_user_id = session['user_id']
     other_user_id = user_id
 
-    return crud.check_if_friends(curr_user_id, other_user_id)
+    data = {'isFriends' : crud.check_if_friends(curr_user_id, other_user_id)}
+
+    return jsonify(data)
 
     
 
@@ -486,8 +488,14 @@ def get_autocomplete_results(data):
     io.emit("autocomplete", {'user_id':user_id, 'options':options}, room=request.sid)
 
 
-    
+@io.on("add_friend")
+def add_friend(data):
+    id_to_friend = data['id_to_friend']
+    user_id = data['user_id']
 
+    crud.add_friend(user_id, id_to_friend)
+
+    io.emit("friend_added")
 
 
 if __name__ == '__main__':

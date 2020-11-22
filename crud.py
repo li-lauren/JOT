@@ -470,10 +470,27 @@ def check_if_friends(user_1_id, user_2_id):
                     User_Relationship.user_2_id == user_2_id, 
                     User_Relationship.relationship_type_id == 1).first()
 
-    if friends:
-        return True
-    else:
-        return False
+    return True if friends else False
+
+
+def add_friend(user_1_id, user_2_id):
+    tz = pytz.timezone('America/Los_Angeles')
+    created_at = datetime.now(tz)
+
+    friendship = User_Relationship(
+        user_1_id = user_1_id,
+        user_2_id = user_2_id,
+        relationship_type_id = 1,
+        created_at = created_at
+    )
+
+    db.session.add(friendship)
+    db.session.commit()
+
+    return friendship
+
+
+
 
 
 
