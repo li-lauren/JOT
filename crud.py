@@ -540,6 +540,12 @@ def get_doc_matches(search_term, user_id):
 
     docs = Doc.query.filter(Doc.owner == user_id).all()
 
+    followed_docs = db.session.query(Doc).\
+        join(Doc_Follower, Doc_Follower.doc_id == Doc.doc_id).\
+        filter(Doc_Follower.user_id == user_id, Doc_Follower.accepted == True).all()
+
+    docs.extend(followed_docs)
+
     scores = []
 
     for doc in docs:
@@ -549,9 +555,6 @@ def get_doc_matches(search_term, user_id):
 
     return sorted(scores, key=lambda score: score[1], reverse=True) 
     
-            
-
-
 
 
 
