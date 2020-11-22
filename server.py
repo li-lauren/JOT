@@ -497,11 +497,11 @@ def add_friend(data):
 
     io.emit("friend_added")
 
+email_trie = Trie()
 
 if __name__ == '__main__':
     connect_to_db(app)
 
-    email_trie = Trie()
     emails = crud.get_all_emails()
     for email in emails:
         email_trie.insert(email[0])

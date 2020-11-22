@@ -23,7 +23,7 @@ const UserProfile = () => {
     const topDoc = data.topDoc
     const topDocFollowers = data.topDocFollowers
 
-    console.log(topDoc.title)
+    // console.log(topDoc.title)
     
     // useEffect(() => {
     //     fetch(`/user/${user_id}`)
@@ -37,7 +37,7 @@ const UserProfile = () => {
     //     })
     // }, [])
 
-    userEffect(() => {
+    useEffect(() => {
         getFriendStatus()
     }, [])
 
@@ -64,8 +64,8 @@ const UserProfile = () => {
     return(
         <div>
             <h4>User Profile</h4>
-            <h1>{fname} {lname}</h1>
-            <h5>{email}</h5>
+            <h1>{user.fname} {user.lname}</h1>
+            <h5>{user.email}</h5>
             {friends ? 
                 <Button>Unfriend</Button> :
                 <Button onClick={addFriend}>Add Friend</Button> 

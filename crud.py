@@ -474,12 +474,13 @@ def create_friend_relationship_type():
     return friend_relationship
 
 def check_if_friends(user_1_id, user_2_id):
+    users = [user_1_id, user_2_id]
     friends = User_Relationship.query.\
-                filter(User_Relationship.user_1_id == user_1_id,
-                    User_Relationship.user_2_id == user_2_id, 
+                filter(User_Relationship.user_1_id.in_(users),
+                    User_Relationship.user_2_id.in_(users), 
                     User_Relationship.relationship_type_id == 1).first()
 
-    return True if friends else False
+    return True if (friends and user_1_id != user_2_id) else False
 
 
 def add_friend(user_1_id, user_2_id):
