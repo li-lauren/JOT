@@ -276,6 +276,15 @@ def get_user_info(email):
     }
     
     return jsonify(stats)
+
+
+@app.route('/friend/<int:user_id>')
+def check_if_friends(user_id):
+    curr_user_id = session['user_id']
+    other_user_id = user_id
+
+    return crud.check_if_friends(curr_user_id, other_user_id)
+
     
 
 

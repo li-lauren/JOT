@@ -462,6 +462,24 @@ def get_most_followed_doc(user_id):
     return doc, followers
 
 
+### FRIEND OPERATIONS ###
+
+def check_if_friends(user_1_id, user_2_id):
+    friends = User_Relationship.query.\
+                filter(User_Relationship.user_1_id == user_1_id,
+                    User_Relationship.user_2_id == user_2_id, 
+                    User_Relationship.relationship_type_id == 1).first()
+
+    if friends:
+        return True
+    else:
+        return False
+
+
+
+
+
+
 
 
 
