@@ -58,6 +58,9 @@ const Doc = () => {
              <ColorSelector doc_id={room}/>
          </Row>,
         <Row>
+            <TagList />
+        </Row>,
+        <Row>
             <h1>{doc.title}</h1>
         </Row>, 
         <Row>
