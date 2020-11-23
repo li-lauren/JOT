@@ -162,6 +162,11 @@ def create_doc_tag(doc_id, tag_id):
 
     return doc_tag
 
+def get_tags_by_doc_id(doc_id):
+    """GEt all of a documents tags."""
+    
+    return Doc.query.get(doc_id).tags
+
 
 
 def get_docs_owned_by_user_id(user_id):

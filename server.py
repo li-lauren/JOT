@@ -282,6 +282,14 @@ def check_if_friends(user_id):
 
     return jsonify(data)
 
+
+@app.route('/tag/<int:doc_id>')
+def get_tags(doc_id):
+    
+    tags = crud.get_tags_by_doc_id(doc_id)
+
+    return jsonify(tags)
+
     
 
 
