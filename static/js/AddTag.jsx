@@ -5,8 +5,16 @@ const AddTag = () => {
         setTag(e.target.value)
     }
 
+    const addTag = () => {
+        if (socket) {
+            console.log('Adding tag...')
+            socket.emit('add_tag', {'tag': tag})
+            setTag('')
+        }
+    }
+
     return(
-        <Form inline>
+        <Form inline onSubmit={addTag}>
             <Form.Label htmlFor="inlineFormInputName2" srOnly>
                 Add Tag
             </Form.Label>
