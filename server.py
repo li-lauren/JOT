@@ -291,6 +291,13 @@ def get_tags(doc_id):
     return jsonify(tags)
 
 
+@app.route('/tag')
+def get_tag_lib():
+    user_id = session['user_id']
+    tagLib = crud.get_all_tags(user_id)
+
+    return jsonify(tagLib)
+
 @app.route('/docs/tags/<int:tag_id>')
 def filter_docs_by_tag(tag_id):
     user_id = session['user_id']
