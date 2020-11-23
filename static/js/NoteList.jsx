@@ -32,7 +32,7 @@ const NoteList = ({room, socket}) => {
         }    
 
         return () => { isMounted = false };
-    })
+    }, [])
 
     React.useEffect(() => {
 

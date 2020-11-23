@@ -42,7 +42,7 @@ const Note = ({note, room, noteColor, socket}) => {
             }
             
         });
-    })
+    }, [])
 
     const trackPos = (data) => {
         setPos({x: data.x, y: data.y})
