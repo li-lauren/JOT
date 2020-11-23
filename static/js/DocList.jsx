@@ -1,11 +1,13 @@
 const Router = ReactRouterDOM.BrowserRouter;
 const { Redirect, Route } = ReactRouterDOM;
 
-const DocList = ({socket}) => {
-    const [docDets, setDocDets] = React.useState('')
-    const [docList, setDocList] = React.useState([])
-    const [sharedList, setSharedList] = React.useState([])
-    const [docAdded, setDocAdded] = React.useState(false)
+const DocList = () => {
+    const socket = useContext(SocketContext)
+    const [docDets, setDocDets] = useState('')
+    const [docList, setDocList] = useState([])
+    const [sharedList, setSharedList] = useState([])
+    const [docAdded, setDocAdded] = useState(false)
+    const [filter, setFilter] = useState(null)
 
     const history = useHistory()
 
@@ -21,10 +23,24 @@ const DocList = ({socket}) => {
         .then(data => setSharedList(data))
     }
 
+    const getTaggedDocs = () => {
+        fetch(`/docs/tags/${filter}`)
+        .then(res => res.json())
+        .then(data => {
+            setDocList(data.ownedDocsWithTag)
+            setSharedList(data.followedDocsWithTag)  
+        })
+    }
+    console.log(filter)
     useEffect(() => {
-        getDocList()
-        getSharedDocList()
-    }, [docAdded])
+        if (!filter) {
+            getDocList()
+            getSharedDocList()
+        } else {
+            getTaggedDocs()
+        }
+       
+    }, [docAdded, filter])
 
     const getDocDets = (doc_id, e) => {
         console.log(`doc_id: ${doc_id}`)
@@ -62,6 +78,7 @@ const DocList = ({socket}) => {
 
     return (
         <div>
+            <TagLibrary setFilter={setFilter}/>
             <h5>Doc Library</h5>
             <ul>
                 {docList.length !== 0 ? docList.map(doc => {
