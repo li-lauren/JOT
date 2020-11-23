@@ -531,12 +531,14 @@ def calculate_similarity_score(search_term, doc):
         100 * frequency_similarity_score(search_term, body)
     ])
 
-    return (doc_id, score, title)
+    return [doc_id, score, title]
 
 
 def get_doc_matches(search_term, user_id):
     """Search for docs with the highest similarity score to 
        the given search term."""
+
+    search_term = search_term.lower()
 
     docs = Doc.query.filter(Doc.owner == user_id).all()
 
@@ -552,7 +554,7 @@ def get_doc_matches(search_term, user_id):
         score = calculate_similarity_score(search_term, doc)
         if score[1] > 0:
             scores.append(score)
-
+    
     return sorted(scores, key=lambda score: score[1], reverse=True) 
     
 

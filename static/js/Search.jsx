@@ -19,7 +19,7 @@ const Search = () => {
         } 
         
         return () => { isMounted = false };
-    })
+    }, [])
 
     const getProfile = email => {
         

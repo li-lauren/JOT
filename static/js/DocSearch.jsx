@@ -11,13 +11,33 @@ const DocSearch = () => {
 
         if (socket) {
             socket.on('docMatches', data => {
-                console.log('doc autocomplete received')
-                if (isMounted) {setOptions(data.options)}
+               
+                if (isMounted) {
+                    // setOptions(data.options)
+                    let term = data.search_term
+                    let newOptions = [...data.options]
+                   
+                    for (let i=0; i < newOptions.length; i++) {
+                        let txt = newOptions[i][2]
+                        let idx = txt.indexOf(term)
+                        console.log(idx)
+                        if (idx >= 0) {
+                            let newTxt = [
+                                txt.substring(0, idx),
+                                <strong>{term}</strong>,
+                                txt.substring(idx + term.length)
+                            ]
+                            newOptions[i][2] = newTxt
+                        }
+                    }
+
+                    setOptions(newOptions)
+                }
             })    
         }
 
         return () => { isMounted = true }
-    })
+    }, [])
 
     const getDoc = doc_id => {
         
@@ -35,6 +55,7 @@ const DocSearch = () => {
         setSearchTerm(e.target.value)
         socket.emit('doc_search', {'search_term':e.target.value, 'user_id':user_id})
     }
+
 
     return(
         <div>
