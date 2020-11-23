@@ -482,24 +482,28 @@ def add_friend(user_1_id, user_2_id):
 ### SEARCH OPERATIONS ###
 def binary_similarity_score(pattern, string):
     """Return 1 or 0 if pattern is and is not in a string, respectively."""
-    
+    string = string.lower()
+
     l = len(pattern)
     s = len(string)
 
     score = 0
+    idx = None
 
     for i in range(s - l + 1):
         if string[i:i+l] == pattern:
             score = 1
+            idx = i
             break
 
-    return score
+    return score, idx
 
 
 def frequency_similarity_score(pattern, string):
     """Return a similarity score that is the percentage of occurrences of
         a pattern in a string."""
-    
+    string = string.lower()
+
     l = len(pattern)
     s = len(string)
 
@@ -519,19 +523,22 @@ def calculate_similarity_score(search_term, doc):
     body = doc.body
 
     authors = doc.authors
-    print(doc.authors)
+    
     author_list = []
     for author in authors:
         author_list.append(author.name)
-    print(" ".join(author_list))
 
+    (author_score, author_idx) = binary_similarity_score(search_term, " ".join(author_list))
+    (title_score, title_idx) = binary_similarity_score(search_term, title)
     score = sum([
-        0.3 * binary_similarity_score(search_term, " ".join(author_list)), 
-        0.5 * binary_similarity_score(search_term, title), 
-        100 * frequency_similarity_score(search_term, body)
+        0.3 * author_score,
+        0.5 * title_score, 
+        75 * frequency_similarity_score(search_term, body)
     ])
+    print(binary_similarity_score(search_term, title))
+    print(f"Doc: {title} Score: {score} #############################")
 
-    return [doc_id, score, title]
+    return [doc_id, score, title, " ".join(author_list), title_idx, author_idx]
 
 
 def get_doc_matches(search_term, user_id):

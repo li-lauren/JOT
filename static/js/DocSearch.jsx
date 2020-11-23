@@ -1,3 +1,15 @@
+const highlightText = (idx, txt, termLen, optKey) => {
+    let newTxt = [
+        txt.substring(0, idx),
+        <strong key={optKey}>
+            {txt.substring(idx, idx + termLen)}
+        </strong>,
+        txt.substring(idx + termLen)
+    ]
+
+    return newTxt;
+}
+
 const DocSearch = () => {
     const [searchTerm, setSearchTerm] = useState('')
     const [options, setOptions] = useState(null)
@@ -16,19 +28,43 @@ const DocSearch = () => {
                     // setOptions(data.options)
                     let term = data.search_term
                     let newOptions = [...data.options]
-                   
+                    
                     for (let i=0; i < newOptions.length; i++) {
-                        let txt = newOptions[i][2]
-                        let idx = txt.indexOf(term)
-                        console.log(idx)
-                        if (idx >= 0) {
-                            let newTxt = [
-                                txt.substring(0, idx),
-                                <strong>{term}</strong>,
-                                txt.substring(idx + term.length)
-                            ]
-                            newOptions[i][2] = newTxt
+                        let titleIdx = newOptions[i][4]
+                        let authIdx = newOptions[i][5]
+                        let optKey = newOptions[i][0]
+                        if (titleIdx !== null) {
+                            let titleTxt = newOptions[i][2]
+                            let newTitleTxt = highlightText(titleIdx, titleTxt, term.length, optKey)
+                            newOptions[i][2] = newTitleTxt
                         }
+                        if (authIdx !== null) {
+                            let authTxt = newOptions[i][3]
+                            let newAuthTxt = highlightText(authIdx, authTxt, term.length, optKey)
+                            newOptions[i][3] = newAuthTxt
+                        }
+                        // if (titleIdx) {
+                        //     let titleTxt = newOptions[i][2]
+                        //     let newTitleTxt = [
+                        //         titleTxt.substring(0, titleIdx),
+                        //         <strong key={newOptions[i][0]}>
+                        //             {titleTxt.substring(titleIdx, titleIdx + term.length)}
+                        //         </strong>,
+                        //         titleTxt.substring(titleIdx + term.length)
+                        //     ]
+                        //     newOptions[i][2] = newTitleTxt
+                        // }
+                        // let txt = newOptions[i][2]
+                        // let idx = txt.indexOf(term)
+                        // console.log(idx)
+                        // if (idx >= 0) {
+                        //     let newTxt = [
+                        //         txt.substring(0, idx),
+                        //         <strong key={newOptions[i][0]}>{term}</strong>,
+                        //         txt.substring(idx + term.length)
+                        //     ]
+                        //     newOptions[i][2] = newTxt
+                        // }
                     }
 
                     setOptions(newOptions)
@@ -75,6 +111,8 @@ const DocSearch = () => {
             {options ? options.map((option, i) => 
                 <div key={option[0]} onClick={() => getDoc(option[0])}>
                     {option[2]}
+                    <br/>
+                    {option[3]}
                 </div>
                     ): ''}
 

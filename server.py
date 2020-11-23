@@ -497,9 +497,11 @@ def add_friend(data):
 def get_autocomplete_doc_results(data):
     
     search_term = data['search_term']
+    print(f"#####################{search_term}")
     user_id = data['user_id']
 
     options = crud.get_doc_matches(search_term, user_id)
+    print(f"#################{options}")
 
     io.emit("docMatches", {'search_term':search_term,'options':options}, room=request.sid)
 

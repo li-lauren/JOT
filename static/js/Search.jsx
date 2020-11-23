@@ -11,7 +11,7 @@ const Search = () => {
        
         if (socket) {
             socket.on('autocomplete', data => {
-                // console.log('autocomplete res received')
+                console.log('autocomplete res received')
                 if (isMounted && data.user_id == user_id) {
                     setOptions(data.options)
                 }   
