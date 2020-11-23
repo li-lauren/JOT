@@ -131,6 +131,12 @@ def create_img_url(doc_id, url):
 
     return img_url
 
+def check_existing_tag(tag):
+    """Check if a tag already exists."""
+    tag_txt = tag.lower()
+
+    return Tag.query.filter(Tag.tag == tag_txt).first()
+
 
 def create_tag(tag):
     """Create a tag."""
@@ -535,8 +541,8 @@ def calculate_similarity_score(search_term, doc):
         0.5 * title_score, 
         75 * frequency_similarity_score(search_term, body)
     ])
-    print(binary_similarity_score(search_term, title))
-    print(f"Doc: {title} Score: {score} #############################")
+    # print(binary_similarity_score(search_term, title))
+    # print(f"Doc: {title} Score: {score} #############################")
 
     return [doc_id, score, title, " ".join(author_list), title_idx, author_idx]
 
@@ -564,6 +570,7 @@ def get_doc_matches(search_term, user_id):
     
     return sorted(scores, key=lambda score: score[1], reverse=True) 
     
+
 
 
 
