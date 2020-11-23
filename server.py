@@ -517,13 +517,16 @@ def add_tag(data):
     tag_txt = data['tag']
     doc_id = data['doc_id']
     existing_tag = crud.check_existing_tag(tag_txt)
-
+    print(existing_tag)
+    
     if existing_tag:
+        print(existing_tag.tag_id) 
         crud.create_doc_tag(doc_id, existing_tag.tag_id)
 
     else:
         new_tag = crud.create_tag(tag_txt)
         crud.create_doc_tag(doc_id, new_tag.tag_id)
+
 
     io.emit("tag_added", room=doc_id)
 

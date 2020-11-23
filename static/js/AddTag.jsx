@@ -1,14 +1,17 @@
-const AddTag = () => {
+const AddTag = ({doc_id}) => {
+    const socket = useContext(SocketContext)
     const [tag, setTag] = useState('')
 
     const handleInput = e => {
         setTag(e.target.value)
     }
 
-    const addTag = () => {
+    const addTag = e => {
+        e.preventDefault()
+        
         if (socket) {
             console.log('Adding tag...')
-            socket.emit('add_tag', {'tag': tag})
+            socket.emit('add_tag', {'tag': tag, 'doc_id': doc_id})
             setTag('')
         }
     }
