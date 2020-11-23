@@ -36,7 +36,7 @@ const Notifications = () => {
         } 
         
         return () => { isMounted = false };
-    })
+    }, [])
 
     useEffect(() => {
         if (notificationAdded) {

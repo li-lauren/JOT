@@ -47,7 +47,7 @@ const UserProfile = () => {
                 setFriends(true)
             })
         }
-    })
+    }, [])
 
     const getFriendStatus = () => {
         fetch(`/friend/${user.user_id}`)

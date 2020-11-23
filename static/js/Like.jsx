@@ -30,7 +30,7 @@ const Like = ({noteId, socket}) => {
         } 
         
         return () => { isMounted = false };
-    })
+    }, [])
 
     const getLikeInfo = () => {
         const reqOptions = {

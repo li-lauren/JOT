@@ -30,7 +30,7 @@ const FollowerList = ({doc_id, socket}) => {
         } 
         
         return () => { isMounted = false };
-    })
+    }, [])
 
     return (
         <div>

@@ -21,7 +21,7 @@ const DocList = ({socket}) => {
         .then(data => setSharedList(data))
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         getDocList()
         getSharedDocList()
     }, [docAdded])
@@ -53,7 +53,7 @@ const DocList = ({socket}) => {
         } 
         
         return () => { isMounted = false };
-    })
+    }, [])
     
 
     if (docDets) {

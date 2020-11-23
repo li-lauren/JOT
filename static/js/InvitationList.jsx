@@ -20,7 +20,7 @@ const InvitationList = ({socket}) => {
         } 
         
         return () => { isMounted = false };
-    })
+    }, [])
 
     const getInvitations = () => {
         fetch('/invitations')
