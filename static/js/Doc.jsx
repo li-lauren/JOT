@@ -58,7 +58,7 @@ const Doc = () => {
              <ColorSelector doc_id={room}/>
          </Row>,
         <Row>
-            <TagList />
+            <TagList doc_id={room} />
         </Row>,
         <Row>
             <h1>{doc.title}</h1>
