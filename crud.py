@@ -205,17 +205,19 @@ def get_all_tags(user_id):
     return all_tags
 
 
-def get_all_docs_by_tag_id(tag_id, user_id):
+def get_owned_docs_by_tag_id(tag_id, user_id):
     """Get all of a user's doc/followed docs with a given tag."""
-
-    all_docs_with_tag = []
 
     owned_docs_with_tag = db.session.query(Doc).\
         join(Doc_Tag, Doc_Tag.doc_id == Doc.doc_id).\
         filter(Doc.owner == user_id, Doc_Tag.tag_id == tag_id).\
         all()
 
-    print(owned_docs_with_tag)
+    return owned_docs_with_tag
+
+
+def get_followed_docs_by_tag_id(tag_id, user_id):
+    """Get all of a user's doc/followed docs with a given tag."""
 
     followed_docs_with_tag = db.session.query(Doc).\
         join(Doc_Follower, Doc_Follower.doc_id == Doc.doc_id).\
@@ -224,12 +226,7 @@ def get_all_docs_by_tag_id(tag_id, user_id):
                Doc_Follower.accepted == True,
                Doc_Tag.tag_id == tag_id).all()
 
-    print(followed_docs_with_tag)
-    
-    all_docs_with_tag.extend(owned_docs_with_tag)
-    all_docs_with_tag.extend(followed_docs_with_tag)
-
-    return all_docs_with_tag
+    return followed_docs_with_tag
 
 
 def get_docs_owned_by_user_id(user_id):
@@ -638,22 +635,4 @@ def get_doc_matches(search_term, user_id):
     
     return sorted(scores, key=lambda score: score[1], reverse=True) 
     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

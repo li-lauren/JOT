@@ -290,6 +290,22 @@ def get_tags(doc_id):
 
     return jsonify(tags)
 
+
+@app.route('/docs/tags/<int:tag_id>')
+def filter_docs_by_tag(tag_id):
+    user_id = session['user_id']
+    owned_docs_with_tag = crud.get_owned_docs_by_tag_id(tag_id, user_id)
+    followed_docs_with_tag = crud.get_followed_docs_by_tag_id(tag_id, user_id)
+
+    docs = {
+        'ownedDocsWithTag': owned_docs_with_tag,
+        'followedDocsWithTag': followed_docs_with_tag
+    }
+
+    return jsonify(docs)
+
+
+
     
 
 
@@ -529,6 +545,8 @@ def add_tag(data):
 
 
     io.emit("tag_added", room=doc_id)
+
+
 
 
 
