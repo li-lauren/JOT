@@ -196,9 +196,6 @@ def get_all_tags(user_id):
     """Get a list of all of a user's tags."""
     all_tags = []
 
-    # owned_docs = get_docs_owned_by_user_id(user_id)
-    # followed_docs = get_followed_docs_by_user_id(user_id)
-
     owned_tags = get_all_tags_for_owned_docs(user_id)
     followed_tags = get_all_tags_for_followed_docs(user_id)
 
@@ -208,9 +205,31 @@ def get_all_tags(user_id):
     return all_tags
 
 
+def get_all_docs_by_tag_id(tag_id, user_id):
+    """Get all of a user's doc/followed docs with a given tag."""
 
+    all_docs_with_tag = []
 
+    owned_docs_with_tag = db.session.query(Doc).\
+        join(Doc_Tag, Doc_Tag.doc_id == Doc.doc_id).\
+        filter(Doc.owner == user_id, Doc_Tag.tag_id == tag_id).\
+        all()
 
+    print(owned_docs_with_tag)
+
+    followed_docs_with_tag = db.session.query(Doc).\
+        join(Doc_Follower, Doc_Follower.doc_id == Doc.doc_id).\
+        join(Doc_Tag, Doc_Tag.doc_id == Doc.doc_id).\
+        filter(Doc_Follower.user_id == user_id,
+               Doc_Follower.accepted == True,
+               Doc_Tag.tag_id == tag_id).all()
+
+    print(followed_docs_with_tag)
+    
+    all_docs_with_tag.extend(owned_docs_with_tag)
+    all_docs_with_tag.extend(followed_docs_with_tag)
+
+    return all_docs_with_tag
 
 
 def get_docs_owned_by_user_id(user_id):
