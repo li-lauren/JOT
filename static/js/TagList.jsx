@@ -4,7 +4,6 @@ const TagList = ({doc_id}) => {
     const [tagAdded, setTagAdded] = useState(false)
 
     const getTags = () => {
-        console.log('GETTAGS')
         fetch(`/tag/${doc_id}`)
         .then(res => res.json())
         .then(data => {
@@ -22,11 +21,8 @@ const TagList = ({doc_id}) => {
         let isMounted = true;
         if (socket) {
             socket.on("tag_added", () => {
-                console.log("tag added")
-                //console.log(isMounted)
                 
                 if (isMounted) {
-                    console.log("setting tag")
                     setTagAdded(true)
                 }
             })
@@ -34,8 +30,6 @@ const TagList = ({doc_id}) => {
 
         return () => { isMounted = false };
     }, [])
-
-    console.log(tagAdded)
 
     return(
         <div>
