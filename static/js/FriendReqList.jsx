@@ -10,6 +10,7 @@ const FriendReqList = () => {
         fetch('/requests')
         .then(res => res.json())
         .then(data => {
+            console.log(data)
             setReqList(data)
             setReqUpdate(false)
         })
@@ -34,7 +35,7 @@ const FriendReqList = () => {
         <div>
             <h5>Friend Requests</h5>
             {reqList ? reqList.map(req => 
-                <FriendReq />) : <p>None</p>}
+                <FriendReq req={req} />) : <p>None</p>}
             <br/>
         </div>
     )

@@ -311,6 +311,13 @@ def filter_docs_by_tag(tag_id):
 
     return jsonify(docs)
 
+@app.route('/requests')
+def get_friend_reqs():
+    user_id = session['user_id']
+    reqs = crud.get_incoming_reqs(user_id)
+
+    return jsonify(reqs)
+
 
 
     
