@@ -515,19 +515,31 @@ def get_autocomplete_results(data):
     io.emit("autocomplete", {'user_id':user_id, 'options':options}, room=request.sid)
 
 
-@io.on("add_friend")
-def add_friend(data):
-    id_to_friend = data['id_to_friend']
-    user_id = data['user_id']
+@io.on("req_friend")
+def create_friend_req(data):
+    acceptor_id = data['acceptor_id']
+    inviter_id = data['inviter_id']
 
-    user = crud.get_user_by_id(user_id)
+    inviter = crud.get_user_by_id(inviter_id)
 
-    msg = f"New Friend Request from {user.fname} {user.lname}"
+    msg = f"New Friend Request from {inviter.fname} {inviter.lname}"
 
-    crud.add_friend(user_id, id_to_friend)
+    crud.create_friend_req(inviter_id, acceptor_id)
 
-    io.emit("friend_added", {'msg' : msg, 'invitee' : id_to_friend}, include_self=False)
+    io.emit("friend_requested", {'msg' : msg, 'acceptor_id' : acceptor_id})
 
+@io.on("accept_friend")
+def accept_friend(data):
+    acceptor_id = data['acceptor_id']
+    inviter_id = data['inviter_id']
+
+    acceptor = crud.get_user_by_id(acceptor_id)
+
+    msg = f"{acceptor.fname} {acceptor.lname} accepted your friend request"
+
+    crud.add_friend(inviter_id, acceptor_id)
+
+    io.emit("friend_added", {'msg':msg, 'inviter_id': inviter_id})
 
 @io.on("doc_search")
 def get_autocomplete_doc_results(data):

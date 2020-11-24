@@ -1,6 +1,6 @@
 const InvitationList = ({socket}) => {
-    const [invAction, setInvAction] = React.useState(false)
-    const [invitationList, setInvitationList] = React.useState([])
+    const [invAction, setInvAction] = useState(false)
+    const [invitationList, setInvitationList] = useState([])
 
     useEffect(() => {
         getInvitations()

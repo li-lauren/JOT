@@ -117,9 +117,11 @@ for url in article_urls_2:
         doc_author = crud.create_doc_author(doc.doc_id, a.author_id)
 
 # CREATE FRIEND RELATIONSHIP TYPE
-crud.create_friend_relationship_type()
+crud.create_relationship_type('pending_friends')
+crud.create_relationship_type('friends')
 
 # John and Marie are friends
+crud.create_friend_req(1,2)
 crud.add_friend(1, 2)
 
 # Some article following

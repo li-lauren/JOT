@@ -56,9 +56,9 @@ const UserProfile = () => {
 
     }
 
-    const addFriend = () => {
-        console.log('adding friend...')
-        socket.emit('add_friend', {'id_to_friend': user.user_id, 'user_id': userId})
+    const ReqFriend = () => {
+        console.log('requesting friend...')
+        socket.emit('req_friend', {'acceptor_id': user.user_id, 'inviter_id': userId})
     }
 
     return(
@@ -68,7 +68,7 @@ const UserProfile = () => {
             <h5>{user.email}</h5>
             {friends ? 
                 <Button>Unfriend</Button> :
-                <Button onClick={addFriend}>Add Friend</Button> 
+                <Button onClick={ReqFriend}>Send Friend Request</Button> 
             }
             
             <div>
