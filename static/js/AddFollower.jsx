@@ -1,5 +1,6 @@
 const AddFollower = ({followerAdded, setFollowerAdded, socket, doc_id}) => {
-    const [followerEmail, setFollowerEmail] = React.useState('')
+    const [followerEmail, setFollowerEmail] = useState('')
+    const [msg, setMsg] = useState('')
 
     const handleChange = e => {
         setFollowerEmail(e.target.value)
@@ -11,37 +12,47 @@ const AddFollower = ({followerAdded, setFollowerAdded, socket, doc_id}) => {
 
         if (socket) {
             console.log('inviting follower...')
-            socket.emit('invite_to_follow', {'email': followerEmail, 'doc_id': doc_id})
+            socket.emit('invite_to_follow', {'email': followerEmail, 'msg': msg, 'doc_id': doc_id})
             setFollowerEmail('')
+            setMsg('')
         }
-        // const reqOptions = {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type':'application/json'
-        //       },
-        //     body: JSON.stringify({
-        //         'email': followerEmail
-        //     })
-        // }
-        // fetch("/followers", reqOptions)
-        // .then(res => res.text())
-        // .then(data => {
-        //     console.log(data)
-        //     setFollowerAdded(!followerAdded)
-        // })
     }
 
     return (
         <div>
             <h5>Invite Friends</h5>
             <form onSubmit={addFollower}>
-                <input 
+                {/* <input 
                     type="text" name="email" 
                     value={followerEmail} 
                     onChange={handleChange}
-                />
+                /> */}
+                <InputGroup className="mb-3">
+                    <InputGroup.Prepend>
+                    <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                        placeholder="Email"
+                        aria-label="Email"
+                        aria-describedby="basic-addon1"
+                        value={followerEmail} 
+                        onChange={handleChange}
+                    />
+                </InputGroup>
+                <InputGroup>
+                    <InputGroup.Prepend>
+                    <InputGroup.Text>Message</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl 
+                        as="textarea" 
+                        aria-label="Message" 
+                        value={msg}
+                        onChange={e => setMsg(e.target.value)}
+                    />
+                </InputGroup>
+                <input type="submit" style="display: none" />
                 {/* <button type="submit"> + </button> */}
-                <Button variant="outline-dark" type="submit" size="sm"> + </Button>
+                {/* <Button variant="outline-dark" type="submit" size="sm"> + </Button> */}
             </form>   
         </div>  
     )

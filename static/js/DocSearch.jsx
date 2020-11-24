@@ -83,6 +83,7 @@ const DocSearch = () => {
                     placeholder="Article Search"
                     value={searchTerm}
                     onChange={e => getDocMatches(e)}
+                    autocomplete="off"
                 />
             </Form>
 
