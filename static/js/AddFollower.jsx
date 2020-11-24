@@ -50,9 +50,9 @@ const AddFollower = ({followerAdded, setFollowerAdded, socket, doc_id}) => {
                         onChange={e => setMsg(e.target.value)}
                     />
                 </InputGroup>
-                <input type="submit" style="display: none" />
+                {/* <input type="submit" style={{display: 'none'}} /> */}
                 {/* <button type="submit"> + </button> */}
-                {/* <Button variant="outline-dark" type="submit" size="sm"> + </Button> */}
+                <Button variant="outline-dark" type="submit" size="sm"> Invite </Button>
             </form>   
         </div>  
     )

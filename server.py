@@ -425,6 +425,7 @@ def invite_to_follow(data):
     doc_id = data['doc_id']
     print('DOC ID for invite to follow')
     print(doc_id)
+    invite_msg = data['msg']
     inviter_id = session['user_id']
     doc = crud.get_doc_by_doc_id(doc_id)
     title = doc.title
@@ -433,7 +434,7 @@ def invite_to_follow(data):
     user = crud.get_user_by_email(email)
 
     if user:
-        follower = crud.create_doc_follower(user.user_id, doc_id)
+        follower = crud.create_doc_follower(user.user_id, doc_id, invite_msg)
         print(follower)
         msg = f"{inviter.fname} {inviter.lname} shared '{title}' with you"
         pkg = {

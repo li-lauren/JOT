@@ -168,6 +168,7 @@ class Doc_Follower(db.Model):
     doc_id: int
     created_at: datetime
     accepted: bool
+    invite_msg: str
 
     __tablename__ = "doc_followers"
 
@@ -178,6 +179,7 @@ class Doc_Follower(db.Model):
     doc_id = db.Column(db.Integer, db.ForeignKey('docs.doc_id'))
     accepted = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime)
+    invite_msg = db.Column(db.String)
 
     doc = db.relationship("Doc")
 

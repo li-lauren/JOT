@@ -123,10 +123,10 @@ crud.create_friend_relationship_type()
 crud.add_friend(1, 2)
 
 # Some article following
-follow = crud.create_doc_follower(1,4)
+follow = crud.create_doc_follower(1,4, "Thought you'd like this!")
 crud.accept_invite_by_follow_id(follow.doc_follower_id)
 
-follow2 = crud.create_doc_follower(2,1)
+follow2 = crud.create_doc_follower(2,1, "Reminded me of what we were talking about last week...")
 crud.accept_invite_by_follow_id(follow2.doc_follower_id)
 
 

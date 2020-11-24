@@ -31,6 +31,8 @@ const Invitation = ({invitation, invAction, setInvAction, socket}) => {
             <br/>
             {invitation.inviter} {moment(created_at).startOf('minute').fromNow()}
             <br/>
+            {invitation.invite_msg}
+            <br/>
             <Button variant="outline-secondary" size="sm" onClick={accept}>
                 Accept
             </Button> 

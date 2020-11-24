@@ -243,7 +243,7 @@ def get_doc_by_doc_id(doc_id):
 
 ### FOLLOWER CRUD OPERATIONS ###
 
-def create_doc_follower(user_id, doc_id):
+def create_doc_follower(user_id, doc_id, invite_msg):
     """Create a document-follower relationship."""
 
     tz = pytz.timezone('America/Los_Angeles')
@@ -252,7 +252,8 @@ def create_doc_follower(user_id, doc_id):
     doc_follower = Doc_Follower(
         user_id = user_id,
         doc_id = doc_id, 
-        created_at = created_at
+        created_at = created_at,
+        invite_msg = invite_msg
     )
 
     db.session.add(doc_follower)
@@ -310,6 +311,7 @@ def get_invites_by_user_id(user_id):
             'inviter': f"{inviter.fname} {inviter.lname}",
             'title' : title,
             'doc_id': fdoc_id,
+            'invite_msg': fdoc.invite_msg,
             'created_at': fdoc.created_at
         })
 
