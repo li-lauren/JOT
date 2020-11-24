@@ -530,7 +530,12 @@ def get_autocomplete_doc_results(data):
     search_term = data['search_term']
     user_id = data['user_id']
 
-    options = crud.get_doc_matches(search_term, user_id)
+    if search_term:
+        options = crud.get_doc_matches(search_term, user_id)
+    else:
+        options = []
+
+    
     
     io.emit("docMatches", {'search_term':search_term,'options':options}, room=request.sid)
 

@@ -683,7 +683,8 @@ def get_doc_matches(search_term, user_id):
     scores = []
 
     for doc in docs:
-        score = calculate_similarity_score(search_term, doc)
+        # score = calculate_similarity_score(search_term, doc)
+        score = calculate_similarity_score_KMP(search_term, doc)
         if score[1] > 0:
             scores.append(score)
     

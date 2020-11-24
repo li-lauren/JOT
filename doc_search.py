@@ -27,7 +27,7 @@ def partial_match_table(W):
         pos += 1
         cnd += 1
     
-    T[pos] = cnd
+    # T[pos] = cnd
 
     return T
 
