@@ -86,7 +86,7 @@ def register_user():
 @app.route('/docs/<doc_id>')
 def show_doc(doc_id):
     """Show a JOT-formatted document"""
-    #TO DO: Maybe there is a cleaner way to do this
+    #TODO: Check if there is a cleaner way to do this
     print('SHOW_DOC')
     doc = crud.get_doc_by_doc_id(doc_id)
     authors = crud.get_author_by_doc_id(doc_id)

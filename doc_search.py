@@ -32,6 +32,37 @@ def partial_match_table(W):
     return T
 
 
+def kmp_search(S, T, W):
+
+    #I: string, S (text to be searched)
+    #   string, W (word sought)
+    #   partial_match_table, T (constructed from partial_match_table)
+    #O: array of indices (P) where W is found in S; nP (number of positions)
+
+    j = 0 # pos of current char in S
+    k = 0 # pos of current char in W
+
+    nP = 0
+    P = []
+
+    while j < len(S):
+        if W[k] == S[j]:
+            j += 1
+            k += 1
+            if k == len(W):
+                # occurrence found
+                P.append(j - k)
+                nP += 1
+                k = T[k]
+        else:
+            k = T[k]
+            if k < 0:
+                j += 1
+                k += 1
+    
+    return nP, P
+
+
 
 
 
