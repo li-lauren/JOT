@@ -9,6 +9,7 @@ from model import (db, connect_to_db, User, Doc, Author, Doc_Author, Img_Url,
                     User_Relationship)
 
 from trie import Trie
+from doc_search import partial_match_table, kmp_search
 
 if __name__ == '__main__':
     from server import app
@@ -551,6 +552,21 @@ def add_friend(user_1_id, user_2_id):
 
 
 ### SEARCH OPERATIONS ###
+def binary_similarity_score_KMP(pattern, string):
+    """Return if pattern is in a string using the Knuth-Morris-Pratt Algorithm."""
+    string = string.lower()
+
+    kmp_table = partial_match_table(pattern)
+    (num_matches, match_idxs) = kmp_search(string, kmp_table, pattern)
+
+    score = 1 if num_matches else 0
+    
+    first_idx = None
+    if match_idxs:
+        first_idx = match_idxs[0]
+
+    return score, first_idx
+
 def binary_similarity_score(pattern, string):
     """Return 1 or 0 if pattern is and is not in a string, respectively."""
     string = string.lower()
