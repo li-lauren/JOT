@@ -585,6 +585,20 @@ def binary_similarity_score(pattern, string):
 
     return score, idx
 
+def frequency_similarity_score_KMP(pattern, string):
+    """Return a similarity score based on the occurrence percentage of 
+    a pattern in a string using KMP."""
+
+    string = string.lower()
+
+    kmp_table = partial_match_table(pattern)
+    (num_matches, match_idxs) = kmp_search(string, kmp_table, pattern)
+
+    score = num_matches * len(pattern) / len(string)
+    
+    return score
+
+    
 
 def frequency_similarity_score(pattern, string):
     """Return a similarity score that is the percentage of occurrences of
@@ -621,6 +635,30 @@ def calculate_similarity_score(search_term, doc):
         0.3 * author_score,
         0.5 * title_score, 
         75 * frequency_similarity_score(search_term, body)
+    ])
+    # print(binary_similarity_score(search_term, title))
+    # print(f"Doc: {title} Score: {score} #############################")
+
+    return [doc_id, score, title, " ".join(author_list), title_idx, author_idx]
+
+def calculate_similarity_score_KMP(search_term, doc):
+    """Provide a similarity score (0 - 10) for a search term and a string."""
+    doc_id = doc.doc_id
+    title = doc.title
+    body = doc.body
+
+    authors = doc.authors
+    
+    author_list = []
+    for author in authors:
+        author_list.append(author.name)
+
+    (author_score, author_idx) = binary_similarity_score_KMP(search_term, " ".join(author_list))
+    (title_score, title_idx) = binary_similarity_score_KMP(search_term, title)
+    score = sum([
+        0.3 * author_score,
+        0.5 * title_score, 
+        75 * frequency_similarity_score_KMP(search_term, body)
     ])
     # print(binary_similarity_score(search_term, title))
     # print(f"Doc: {title} Score: {score} #############################")
