@@ -29,11 +29,6 @@ const AddFollower = ({followerAdded, setFollowerAdded, socket, doc_id}) => {
             <h5 onClick={toggleShowForm}>Invite Friends</h5>
             {showForm ? 
                 <form onSubmit={addFollower}>
-                    {/* <input 
-                        type="text" name="email" 
-                        value={followerEmail} 
-                        onChange={handleChange}
-                    /> */}
                     <InputGroup className="mb-3">
                         <InputGroup.Prepend>
                         <InputGroup.Text id="basic-addon1">@</InputGroup.Text>

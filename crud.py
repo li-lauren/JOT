@@ -516,9 +516,9 @@ def get_most_followed_doc(user_id):
 
 
 ### FRIEND OPERATIONS ###
-def create_friend_relationship_type():
+def create_relationship_type(relationship):
     friend_relationship = Relationship_Type(
-        relationship_type = 'friends'
+        relationship_type = relationship
     )
 
     db.session.add(friend_relationship)
@@ -527,23 +527,44 @@ def create_friend_relationship_type():
     return friend_relationship
 
 def check_if_friends(user_1_id, user_2_id):
+    """Check if two users are friends (relationship_type_id is 2)"""
     users = [user_1_id, user_2_id]
     friends = User_Relationship.query.\
-                filter(User_Relationship.user_1_id.in_(users),
-                    User_Relationship.user_2_id.in_(users), 
-                    User_Relationship.relationship_type_id == 1).first()
+                filter(User_Relationship.inviter.in_(users),
+                    User_Relationship.acceptor.in_(users), 
+                    User_Relationship.relationship_type_id == 2).first()
 
     return True if (friends and user_1_id != user_2_id) else False
 
+def get_incoming_reqs(acceptor_id):
+    """Get a user's incoming & pending friend requests."""
+
+    incoming_reqs = db.session.query(User.user_id, User.fname, User.lname).\
+                    join(User_Relationship, User_Relationship.inviter == User.user_id).\
+                    filter(User_Relationship.acceptor == acceptor_id,
+                        User_Relationship.relationship_type_id == 1).all()
+
+    return incoming_reqs
+
+def get_sent_reqs(sender_id):
+    """Get a list of a user's sent, pending friend requests."""
+
+    sent_reqs = db.session.query(User.user_id, User.fname, User.lname).\
+                join(User_Relationship, User_Relationship.acceptor == User.user_id).\
+                filter(User_Relationship.inviter == sender_id,
+                    User_Relationship.relationship_type_id == 1).all()
+
+    return sent_reqs
 
 def add_friend(user_1_id, user_2_id):
     tz = pytz.timezone('America/Los_Angeles')
     created_at = datetime.now(tz)
 
+    #update this to just switch relationship_type_id from 1 to 2
     friendship = User_Relationship(
         user_1_id = user_1_id,
         user_2_id = user_2_id,
-        relationship_type_id = 1,
+        relationship_type_id = 2,
         created_at = created_at
     )
 

@@ -273,8 +273,8 @@ class User_Relationship(db.Model):
                                      autoincrement=True, 
                                      primary_key=True)
 
-    user_1_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
-    user_2_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    inviter = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+    acceptor = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
     relationship_type_id = db.Column(db.Integer, 
                                  db.ForeignKey('relationship_types.relationship_type_id'))
@@ -284,8 +284,8 @@ class User_Relationship(db.Model):
     def __repr__(self):
         return (f'<User Relationship '
                    f'user_relationship_id={self.user_relationship_id} ' 
-                   f'user_1_id={self.user_1_id} '
-                   f'user_2_id={self.user_2_id}>')
+                   f'user_1_id={self.inviter} '
+                   f'user_2_id={self.acceptor}>')
 
 
 

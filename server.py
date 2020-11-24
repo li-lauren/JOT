@@ -164,20 +164,20 @@ def get_followed_docs_by_user_id():
     return jsonify(followed_docs)
 
 
-@app.route('/followers', methods=['POST'])
-def create_follower():
-    """Create a follower for a doc."""
+# @app.route('/followers', methods=['POST'])
+# def create_follower():
+#     """Create a follower for a doc."""
 
-    doc_id = session['doc_id']
-    email = request.json.get('email')
+#     doc_id = session['doc_id']
+#     email = request.json.get('email')
 
-    user = crud.get_user_by_email(email)
-    if user:
-        follower = crud.create_doc_follower(user.user_id, doc_id)
-        print(follower)
-        return f"{user.fname} has been added!"
-    else:
-        return f"No user associated with {email}"
+#     user = crud.get_user_by_email(email)
+#     if user:
+#         follower = crud.create_doc_follower(user.user_id, doc_id)
+#         print(follower)
+#         return f"{user.fname} has been added!"
+#     else:
+#         return f"No user associated with {email}"
 
 
 @app.route('/followers')
@@ -520,9 +520,13 @@ def add_friend(data):
     id_to_friend = data['id_to_friend']
     user_id = data['user_id']
 
+    user = crud.get_user_by_id(user_id)
+
+    msg = f"New Friend Request from {user.fname} {user.lname}"
+
     crud.add_friend(user_id, id_to_friend)
 
-    io.emit("friend_added")
+    io.emit("friend_added", {'msg' : msg, 'invitee' : id_to_friend}, include_self=False)
 
 
 @io.on("doc_search")
