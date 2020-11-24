@@ -556,11 +556,28 @@ def get_sent_reqs(sender_id):
 
     return sent_reqs
 
-def add_friend(inviter_id, acceptor_id):
+def create_friend_req(inviter_id, acceptor_id):
+    """Create a friend request."""
     tz = pytz.timezone('America/Los_Angeles')
     created_at = datetime.now(tz)
 
-    #update this to just switch relationship_type_id from 1 to 2
+    friend_req = User_Relationship(
+        inviter = inviter_id,
+        acceptor = acceptor_id,
+        relationship_type_id = 1,
+        created_at = created_at
+    )
+
+    db.session.add(friend_req)
+    db.session.commit()
+
+    return friend_req
+
+def add_friend(inviter_id, acceptor_id):
+    """Accept a friend request."""
+    tz = pytz.timezone('America/Los_Angeles')
+    created_at = datetime.now(tz)
+
     curr_relationship = User_Relationship.query.filter(
             User_Relationship.inviter == inviter_id,
             User_Relationship.acceptor == acceptor_id, 
@@ -569,14 +586,6 @@ def add_friend(inviter_id, acceptor_id):
     curr_relationship.relationship_type_id = 2
     curr_relationship.created_at = created_at
 
-    # friendship = User_Relationship(
-    #     user_1_id = user_1_id,
-    #     user_2_id = user_2_id,
-    #     relationship_type_id = 2,
-    #     created_at = created_at
-    # )
-
-    # db.session.add(friendship)
     db.session.commit()
 
     return curr_relationship
