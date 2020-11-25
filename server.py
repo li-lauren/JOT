@@ -319,6 +319,15 @@ def get_friend_reqs():
     return jsonify(reqs)
 
 
+@app.route('/requests/pending')
+def get_pending_friend_reqs():
+    user_id = session['user_id']
+
+    pending_reqs = crud.get_sent_reqs(user_id)
+
+    return jsonify(pending_reqs)
+    
+
 @app.route('/requests/decline/<int:req_id>')
 def decline_friend_req(req_id):
 

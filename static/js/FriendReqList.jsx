@@ -2,6 +2,7 @@ const FriendReqList = () => {
     const [update, setUpdate] = useState(false)
     const [reqList, setReqList] = useState(null)
     const [friendList, setFriendList] = useState(null)
+    const [pendingList, setPendingList] = useState(null)
     const socket = useContext(SocketContext)
 
     useEffect(() => {
@@ -25,6 +26,15 @@ const FriendReqList = () => {
         .then(data => {
             console.log(data)
             setFriendList(data)
+        })
+    }
+
+    const getPendingFriends = () => {
+        fetch('/requests/pending')
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            setPendingList(data)
         })
     }
 
@@ -59,6 +69,13 @@ const FriendReqList = () => {
                 {`${friend[1]} ${friend[2]}`}
             </div>
             ) : <p>None</p>}
+
+            <h5>Pending</h5>
+            {pendingList ? pendingList.map(pendingFriend => 
+            <div>
+                {`${pendingFriend[1]} ${pendingFriend[2]}`}
+            </div>
+            ) : ''}
             <br/>
         </div>
     )
