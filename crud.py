@@ -544,7 +544,8 @@ def check_if_friends(user_1_id, user_2_id):
 def get_incoming_reqs(acceptor_id):
     """Get a user's incoming & pending friend requests."""
 
-    incoming_reqs = db.session.query(User.user_id, User.fname, User.lname).\
+    incoming_reqs = db.session.query(User_Relationship.user_relationship_id, 
+                    User.fname, User.lname, User.user_id).\
                     join(User_Relationship, User_Relationship.inviter == User.user_id).\
                     filter(User_Relationship.acceptor == acceptor_id,
                         User_Relationship.relationship_type_id == 1).all()
@@ -554,7 +555,8 @@ def get_incoming_reqs(acceptor_id):
 def get_sent_reqs(sender_id):
     """Get a list of a user's sent, pending friend requests."""
 
-    sent_reqs = db.session.query(User.user_id, User.fname, User.lname).\
+    sent_reqs = db.session.query(User_Relationship.user_relationship_id, 
+                User.fname, User.lname, User.user_id).\
                 join(User_Relationship, User_Relationship.acceptor == User.user_id).\
                 filter(User_Relationship.inviter == sender_id,
                     User_Relationship.relationship_type_id == 1).all()
@@ -564,12 +566,14 @@ def get_sent_reqs(sender_id):
 def get_friends_by_user_id(user_id):
     """Get all of a user's friends."""
 
-    accepted_friends = db.session.query(User.user_id, User.fname, User.lname).\
+    accepted_friends = db.session.query(User_Relationship.user_relationship_id, 
+                        User.fname, User.lname, User.user_id).\
                         join(User_Relationship, User_Relationship.inviter == User.user_id).\
                         filter(User_Relationship.acceptor == user_id,
                             User_Relationship.relationship_type_id == 2).all()
 
-    invited_friends = db.session.query(User.user_id, User.fname, User.lname).\
+    invited_friends = db.session.query(User_Relationship.user_relationship_id, 
+                        User.fname, User.lname, User.user_id).\
                         join(User_Relationship, User_Relationship.acceptor == User.user_id).\
                         filter(User_Relationship.inviter == user_id,
                             User_Relationship.relationship_type_id == 2).all()
@@ -614,7 +618,7 @@ def add_friend(req_id):
 def decline_friend_req(req_id):
     """Decline a friend request."""
 
-    relationship = Doc_Follower.query.get(req_id)
+    relationship = User_Relationship.query.get(req_id)
     
     db.session.delete(relationship)
     db.session.commit()

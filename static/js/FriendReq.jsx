@@ -14,16 +14,15 @@ const FriendReq = ({req, setUpdate}) => {
 
     const decline = () => {
         console.log('declining friend req')
-        fetch(`/requests/decline/${req_id}`)
-        .then(res => res.text())
-        .then(
-            setUpdate(true)
-        )
+        socket.emit('decline_friend_request', {
+            'req_id': req_id
+        })
+        setUpdate(true)
     }
     
     return(
         <div>
-            {`${fname} ${lname}     `} 
+            {`${fname} ${lname} ${req_id}    `} 
             
                 <i onClick={accept} className="far fa-check-circle"></i>
            
