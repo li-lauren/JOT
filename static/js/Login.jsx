@@ -50,6 +50,7 @@ const Login = ({loggedIn, setLoggedIn}) => {
                 localStorage.setItem('user_id', info[0])
                 localStorage.setItem('fname', info[1])
                 localStorage.setItem('lname', info[2])
+                localStorage.setItem('email', info[3])
                 setLoggedIn(true)
             }  
         })

@@ -47,7 +47,7 @@ def login():
             print(session)
 
             # return f"Welcome, {user.fname}!"
-            return f"{user.user_id} {user.fname} {user.lname}"
+            return f"{user.user_id} {user.fname} {user.lname} {user.email}"
     
         else:
             return "Incorrect password"
