@@ -319,6 +319,17 @@ def get_friend_reqs():
     return jsonify(reqs)
 
 
+@app.route('/requests/decline/<int:req_id>')
+def decline_friend_req(req_id):
+
+    crud.decline_friend_req(req_id)
+
+    return "Friend req declined"
+
+
+
+
+
 
     
 

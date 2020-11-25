@@ -13,8 +13,14 @@ const FriendReq = ({req, setReqUpdate}) => {
     } 
 
     const decline = () => {
-
+        console.log('declining friend req')
+        fetch(`/requests/decline/${req_id}`)
+        .then(res => res.text())
+        .then(
+            setReqUpdate(true)
+        )
     }
+    
     return(
         <div>
             {`${fname} ${lname}     `} 
