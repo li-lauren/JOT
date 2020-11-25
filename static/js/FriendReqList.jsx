@@ -88,14 +88,14 @@ const FriendReqList = () => {
             <br/>
             <h5>Friends</h5>
             {friendList ? friendList.map(friend => 
-            <div>
+            <div key={friend[3]}>
                 {`${friend[1]} ${friend[2]}`}
             </div>
             ) : <p>None</p>}
 
             <h5>Pending</h5>
             {pendingList ? pendingList.map(pendingFriend => 
-            <div>
+            <div key={pendingFriend[3]}>
                 {`${pendingFriend[1]} ${pendingFriend[2]}`}
             </div>
             ) : ''}

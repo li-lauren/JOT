@@ -8,8 +8,9 @@ const UserProfile = () => {
 
     // const [numFriends, setNumFriends] = useState(null)
     const [friends, setFriends] = useState(null)
+    const [update, setUpdate] = useState(false)
 
-    const userId = localStorage.getItem('user_id')
+    const userId = parseInt(localStorage.getItem('user_id'))
     const socket = useContext(SocketContext)
     const location = useLocation()
     const data = location.state.params
@@ -39,26 +40,42 @@ const UserProfile = () => {
 
     useEffect(() => {
         getFriendStatus()
-    }, [])
+    }, [update])
 
     useEffect(() => {
-        if (socket) {
-            socket.on('friend_added', () => {
-                setFriends(true)
-            })
-        }
+        let isMounted = true;
+
+        socket.on("friend_added", data => {
+            console.log("friend req accepted")
+            console.log(data.userIds)
+            if (isMounted && data.userIds.includes(userId)) {
+                console.log("friend req accepted")
+                setUpdate(true)
+            }
+        })
+        socket.on("req_denied", data => {
+            console.log("friend req denied")
+            console.log(data.userIds)
+            if (isMounted && data.userIds.includes(userId)) {
+                console.log('denied')
+                setUpdate(true)
+            }
+        })
+
+        return () => {isMounted = false}
     }, [])
 
     const getFriendStatus = () => {
         fetch(`/friend/${user.user_id}`)
         .then(res => res.json())
         .then(data => setFriends(data.isFriends))
-
+        setUpdate(false)
     }
 
     const ReqFriend = () => {
         console.log('requesting friend...')
         socket.emit('req_friend', {'acceptor_id': user.user_id, 'inviter_id': userId})
+        setUpdate(!update)
     }
 
     return(

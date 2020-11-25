@@ -532,12 +532,15 @@ def check_if_friends(user_1_id, user_2_id):
     relationship = User_Relationship.query.\
                 filter(User_Relationship.inviter.in_(users),
                     User_Relationship.acceptor.in_(users)).first()
-    relationship_type = relationship.relationship_type_id
+    
+    if relationship:
+        relationship_type = relationship.relationship_type_id
 
-    if relationship_type == 2:
-        return 'Friends'
-    elif relationship_type == 1:
-        return 'Pending'
+        if relationship_type == 2:
+            return 'Friends'
+        if relationship_type == 1:
+            return 'Pending'
+            
     else:
         return None
 

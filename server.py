@@ -314,7 +314,6 @@ def filter_docs_by_tag(tag_id):
 @app.route('/requests')
 def get_friend_reqs():
     user_id = session['user_id']
-    print(f'USERIDDDDDD {user_id}')
     reqs = crud.get_incoming_reqs(user_id)
 
     return jsonify(reqs)
@@ -327,14 +326,6 @@ def get_pending_friend_reqs():
     pending_reqs = crud.get_sent_reqs(user_id)
 
     return jsonify(pending_reqs)
-
-
-# @app.route('/requests/decline/<int:req_id>')
-# def decline_friend_req(req_id):
-
-#     crud.decline_friend_req(req_id)
-
-#     return "Friend req declined"
 
 
 @app.route('/friends')
@@ -590,15 +581,11 @@ def add_tag(data):
 @io.on("accept_friend_req")
 def accept_friend_request(data):
     req_id = data['req_id']
-    print(req_id)
+    
     relationship = crud.add_friend(req_id)
-    # inviter = crud.get_user_by_id(relationship.inviter)
-    # acceptor = crud.get_user_by_id(relationship.acceptor)
+   
     inviter = relationship.inviter
     acceptor = relationship.acceptor
-    print(relationship.relationship_type_id)
-    print(inviter)
-    print(acceptor)
 
     io.emit("friend_added", {'userIds': [inviter, acceptor]})
 
