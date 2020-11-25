@@ -535,18 +535,18 @@ def create_friend_req(data):
 
     io.emit("friend_requested", {'msg' : msg, 'acceptor_id' : acceptor_id})
 
-@io.on("accept_friend")
+@io.on("accept_friend_req")
 def accept_friend(data):
-    acceptor_id = data['acceptor_id']
-    inviter_id = data['inviter_id']
+    req_id = data['req_id']
 
-    acceptor = crud.get_user_by_id(acceptor_id)
+    new_relationship = crud.add_friend(req_id)
+
+    acceptor = crud.get_user_by_id(new_relationship.acceptor)
+    inviter = crud.get_user_by_id(new_relationship.inviter)
 
     msg = f"{acceptor.fname} {acceptor.lname} accepted your friend request"
 
-    crud.add_friend(inviter_id, acceptor_id)
-
-    io.emit("friend_added", {'msg':msg, 'inviter_id': inviter_id})
+    io.emit("friend_added", {'msg':msg, 'inviter_id': inviter.user_id})
 
 @io.on("doc_search")
 def get_autocomplete_doc_results(data):
@@ -581,6 +581,17 @@ def add_tag(data):
 
 
     io.emit("tag_added", room=doc_id)
+
+
+@io.on("accept_friend_request")
+def accept_friend_request(data):
+    req_id = data['req_id']
+
+    relationship = crud.add_friend(req_id)
+    inviter = crud.get_user_by_id(relationship.inviter)
+    # acceptor = crud.get_user_by_id(relationship.acceptor)
+
+    io.emit("friend_added", {'inviter_id':inviter.user_id})
 
 
 

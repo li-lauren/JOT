@@ -40,6 +40,7 @@ const Search = () => {
 
     return(
         <div>
+            <h5>User Search</h5>
             <Form inline 
                 // onSubmit={handleSubmit}
             >
@@ -49,7 +50,7 @@ const Search = () => {
                 <Form.Control
                     className="mb-2 mr-sm-2"
                     id="inlineFormInputName2"
-                    placeholder="Search"
+                    placeholder="User Search"
                     value={searchTerm}
                     onChange={e => getAutocomplete(e)}
                     autocomplete="off"

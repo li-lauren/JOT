@@ -1,6 +1,7 @@
 const FriendReqList = () => {
     const [reqUpdate, setReqUpdate] = useState(false)
     const [reqList, setReqList] = useState(null)
+    const socket = useContext(SocketContext)
 
     useEffect(() => {
         getReqs()
@@ -35,7 +36,11 @@ const FriendReqList = () => {
         <div>
             <h5>Friend Requests</h5>
             {reqList ? reqList.map(req => 
-                <FriendReq req={req} />) : <p>None</p>}
+                <FriendReq 
+                    key={req[0]} 
+                    req={req} 
+                    setReqUpdate={setReqUpdate}
+                />) : <p>None</p>}
             <br/>
         </div>
     )

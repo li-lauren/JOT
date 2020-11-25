@@ -573,22 +573,37 @@ def create_friend_req(inviter_id, acceptor_id):
 
     return friend_req
 
-def add_friend(inviter_id, acceptor_id):
+def add_friend(req_id):
     """Accept a friend request."""
     tz = pytz.timezone('America/Los_Angeles')
     created_at = datetime.now(tz)
 
-    curr_relationship = User_Relationship.query.filter(
-            User_Relationship.inviter == inviter_id,
-            User_Relationship.acceptor == acceptor_id, 
-        ).first()
-
+    curr_relationship = User_Relationship.query.get(req_id)
     curr_relationship.relationship_type_id = 2
     curr_relationship.created_at = created_at
 
     db.session.commit()
 
     return curr_relationship
+
+
+def decline_friend_req(req_id):
+    """Decline a friend request."""
+
+    relationship = Doc_Follower.query.get(req_id)
+    
+    db.session.delete(relationship)
+    db.session.commit()
+
+
+def get_users_in_relationship(relationship_id):
+    """Get a user relationship by ID."""
+    relationship = User_Relationship.query.get(relationship_id)
+    inviter = User.query.get(relationship.inviter)
+    acceptor = User.query.get(relationship.acceptor)
+    
+    return inviter, acceptor
+
 
 
 ### SEARCH OPERATIONS ###
