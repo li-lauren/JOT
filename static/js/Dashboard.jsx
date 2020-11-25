@@ -18,8 +18,7 @@ const Dashboard = ({setLoggedIn}) => {
             <a href="" onClick={logout}>Logout</a>
             <DocList />
             <InvitationList socket={socket}/>
-            <FriendReqList />
-            <Search />
+        
             <br/>
             Doc Search
             <DocSearch />

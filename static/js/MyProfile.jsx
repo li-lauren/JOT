@@ -58,6 +58,8 @@ const MyProfile = () => {
             <h1>{fname} {lname}</h1>
             <h5>{email}</h5>
 
+            <Search />
+            <FriendReqList />
             
             <div>
                 <span>{totalLikes}</span>

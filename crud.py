@@ -556,6 +556,25 @@ def get_sent_reqs(sender_id):
 
     return sent_reqs
 
+def get_friends_by_user_id(user_id):
+    """Get all of a user's friends."""
+
+    accepted_friends = db.session.query(User.user_id, User.fname, User.lname).\
+                        join(User_Relationship, User_Relationship.inviter == User.user_id).\
+                        filter(User_Relationship.acceptor == user_id,
+                            User_Relationship.relationship_type_id == 2).all()
+
+    invited_friends = db.session.query(User.user_id, User.fname, User.lname).\
+                        join(User_Relationship, User_Relationship.acceptor == User.user_id).\
+                        filter(User_Relationship.inviter == user_id,
+                            User_Relationship.relationship_type_id == 2).all()
+    
+    all_friends = accepted_friends + invited_friends
+
+    # sort alphabetically by first name
+    return sorted(all_friends, key=lambda friend: friend[1])
+    
+
 def create_friend_req(inviter_id, acceptor_id):
     """Create a friend request."""
     tz = pytz.timezone('America/Los_Angeles')

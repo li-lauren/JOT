@@ -8,7 +8,7 @@ const Navbar = () => {
             <Link to={'/signup'}>Sign Up</Link>
             <Link to={'/login'}>Login</Link>
             <Link to={'/dashboard'}>Dashboard</Link>
-            {/* <Link to={'/user'}>User Profile</Link> */}
+            <Link to={'/myProfile'}>Profile</Link>
         </nav>
     )   
 }
@@ -102,6 +102,12 @@ const App = () => {
                             exact path={'/profile'}
                             render={(props) => (
                                 <UserProfile {...props} />
+                            )}
+                        />
+                        <Route 
+                            exact path={'/myProfile'}
+                            render={(props) => (
+                                <MyProfile {...props} />
                             )}
                         />
 

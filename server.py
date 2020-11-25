@@ -327,6 +327,15 @@ def decline_friend_req(req_id):
     return "Friend req declined"
 
 
+@app.route('/friends')
+def get_friends():
+    """Get all of a user's friends."""
+    
+    user_id = session['user_id']
+    friends = crud.get_friends_by_user_id(user_id)
+
+    return jsonify(friends)
+
 
 
 

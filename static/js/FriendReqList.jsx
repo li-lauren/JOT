@@ -17,6 +17,10 @@ const FriendReqList = () => {
         })
     }
 
+    const getFriends = () => {
+        
+    }
+
     useEffect(() => {
         let isMounted = true;
         if (socket) {
