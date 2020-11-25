@@ -121,8 +121,8 @@ crud.create_relationship_type('pending_friends')
 crud.create_relationship_type('friends')
 
 # John and Marie are friends
-crud.create_friend_req(1,2)
-crud.add_friend(1, 2)
+req = crud.create_friend_req(1,2)
+crud.add_friend(req.user_relationship_id)
 
 # Some article following
 follow = crud.create_doc_follower(1,4, "Thought you'd like this!")

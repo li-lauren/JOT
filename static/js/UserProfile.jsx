@@ -7,7 +7,7 @@ const UserProfile = () => {
     // const [totalLikes, setTotalLikes] = useState(null)
 
     // const [numFriends, setNumFriends] = useState(null)
-    const [friends, setFriends] = useState(false)
+    const [friends, setFriends] = useState(null)
 
     const userId = localStorage.getItem('user_id')
     const socket = useContext(SocketContext)
@@ -67,7 +67,11 @@ const UserProfile = () => {
             <h1>{user.fname} {user.lname}</h1>
             <h5>{user.email}</h5>
             {friends ? 
-                <Button>Unfriend</Button> :
+                (friends == 'Friends'? 
+                    <Button>
+                        Friends <i className="far fa-check-circle"></i>
+                    </Button> : 
+                    <Button>Pending</Button>) :
                 <Button onClick={ReqFriend}>Send Friend Request</Button> 
             }
             

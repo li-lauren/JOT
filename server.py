@@ -326,14 +326,14 @@ def get_pending_friend_reqs():
     pending_reqs = crud.get_sent_reqs(user_id)
 
     return jsonify(pending_reqs)
-    
 
-@app.route('/requests/decline/<int:req_id>')
-def decline_friend_req(req_id):
 
-    crud.decline_friend_req(req_id)
+# @app.route('/requests/decline/<int:req_id>')
+# def decline_friend_req(req_id):
 
-    return "Friend req declined"
+#     crud.decline_friend_req(req_id)
+
+#     return "Friend req declined"
 
 
 @app.route('/friends')
@@ -551,32 +551,6 @@ def get_autocomplete_results(data):
     io.emit("autocomplete", {'user_id':user_id, 'options':options}, room=request.sid)
 
 
-@io.on("req_friend")
-def create_friend_req(data):
-    acceptor_id = data['acceptor_id']
-    inviter_id = data['inviter_id']
-
-    inviter = crud.get_user_by_id(inviter_id)
-
-    msg = f"New Friend Request from {inviter.fname} {inviter.lname}"
-
-    crud.create_friend_req(inviter_id, acceptor_id)
-
-    io.emit("friend_requested", {'msg' : msg, 'acceptor_id' : acceptor_id})
-
-@io.on("accept_friend_req")
-def accept_friend(data):
-    req_id = data['req_id']
-
-    new_relationship = crud.add_friend(req_id)
-
-    acceptor = crud.get_user_by_id(new_relationship.acceptor)
-    inviter = crud.get_user_by_id(new_relationship.inviter)
-
-    msg = f"{acceptor.fname} {acceptor.lname} accepted your friend request"
-
-    io.emit("friend_added", {'msg':msg, 'inviter_id': inviter.user_id})
-
 @io.on("doc_search")
 def get_autocomplete_doc_results(data):
     
@@ -612,18 +586,55 @@ def add_tag(data):
     io.emit("tag_added", room=doc_id)
 
 
-@io.on("accept_friend_request")
+@io.on("accept_friend_req")
 def accept_friend_request(data):
     req_id = data['req_id']
 
     relationship = crud.add_friend(req_id)
     inviter = crud.get_user_by_id(relationship.inviter)
-    # acceptor = crud.get_user_by_id(relationship.acceptor)
+    acceptor = crud.get_user_by_id(relationship.acceptor)
 
-    io.emit("friend_added", {'inviter_id':inviter.user_id})
+    io.emit("friend_added", {'userIds': [inviter, acceptor]})
 
 
+@io.on("decline_friend_request")
+def decline_friend_request(data):
+    req_id = data['req_id']
 
+    req = crud.get_relationship_by_id(req_id)
+    inviter = req.inviter
+    acceptor = req.acceptor
+
+    crud.decline_friend_req(req_id)
+
+    io.emit("req_denied", {'userIds': [inviter, acceptor]})
+
+
+@io.on("req_friend")
+def create_friend_req(data):
+    acceptor_id = data['acceptor_id']
+    inviter_id = data['inviter_id']
+
+    inviter = crud.get_user_by_id(inviter_id)
+
+    msg = f"New Friend Request from {inviter.fname} {inviter.lname}"
+
+    crud.create_friend_req(inviter_id, acceptor_id)
+
+    io.emit("friend_requested", {'msg' : msg, 'userIds': [acceptor_id, inviter_id]})
+
+# @io.on("accept_friend_req")
+# def accept_friend(data):
+#     req_id = data['req_id']
+
+#     new_relationship = crud.add_friend(req_id)
+
+#     acceptor = crud.get_user_by_id(new_relationship.acceptor)
+#     inviter = crud.get_user_by_id(new_relationship.inviter)
+
+#     msg = f"{acceptor.fname} {acceptor.lname} accepted your friend request"
+
+#     io.emit("friend_added", {'msg':msg, 'inviter_id': inviter.user_id})
 
 
 

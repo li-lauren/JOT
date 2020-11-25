@@ -4,11 +4,11 @@ const FriendReqList = () => {
     const [friendList, setFriendList] = useState(null)
     const [pendingList, setPendingList] = useState(null)
     const socket = useContext(SocketContext)
+    const userId = localStorage.getItem('user_id')
 
     useEffect(() => {
         getReqs()
         getFriends()
-        setUpdate(false)
     }, [update])
 
     const getReqs = () => {
@@ -26,6 +26,7 @@ const FriendReqList = () => {
         .then(data => {
             console.log(data)
             setFriendList(data)
+            setUpdate(false)
         })
     }
 
@@ -43,10 +44,22 @@ const FriendReqList = () => {
         if (socket) {
             socket.on('friend_requested', data => {
                 console.log('req received')
-                if (isMounted && data.acceptor_id 
-                    == localStorage.getItem('user_id')) {
+                if (isMounted && data.userIds.includes(userId)) {
                         setUpdate(true)
                     }
+            })
+
+            socket.on("friend_added", data => {
+                console.log("friend req accepted")
+                if (isMounted && data.userIds.includes(userId)) {
+                    setUpdate(true)
+                }
+            })
+            socket.on("req_denied", data => {
+                console.log("friend req denied")
+                if (isMounted && data.userIds.includes(userId)) {
+                    setUpdate(true)
+                }
             })
         }
 

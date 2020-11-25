@@ -529,12 +529,17 @@ def create_relationship_type(relationship):
 def check_if_friends(user_1_id, user_2_id):
     """Check if two users are friends (relationship_type_id is 2)"""
     users = [user_1_id, user_2_id]
-    friends = User_Relationship.query.\
+    relationship = User_Relationship.query.\
                 filter(User_Relationship.inviter.in_(users),
-                    User_Relationship.acceptor.in_(users), 
-                    User_Relationship.relationship_type_id == 2).first()
+                    User_Relationship.acceptor.in_(users)).first()
+    relationship_type = relationship.relationship_type_id
 
-    return True if (friends and user_1_id != user_2_id) else False
+    if relationship_type == 2:
+        return 'Friends'
+    elif relationship_type == 1:
+        return 'Pending'
+    else:
+        return None
 
 def get_incoming_reqs(acceptor_id):
     """Get a user's incoming & pending friend requests."""
@@ -573,7 +578,7 @@ def get_friends_by_user_id(user_id):
 
     # sort alphabetically by first name
     return sorted(all_friends, key=lambda friend: friend[1])
-    
+
 
 def create_friend_req(inviter_id, acceptor_id):
     """Create a friend request."""
@@ -616,13 +621,19 @@ def decline_friend_req(req_id):
 
 
 def get_users_in_relationship(relationship_id):
-    """Get a user relationship by ID."""
+    """Get users in a user relationship by ID."""
     relationship = User_Relationship.query.get(relationship_id)
     inviter = User.query.get(relationship.inviter)
     acceptor = User.query.get(relationship.acceptor)
     
     return inviter, acceptor
 
+def get_relationship_by_id(relationship_id):
+    """Get a user relationship by ID."""
+
+    relationship = User_Relationship.query.get(relationship_id)
+
+    return relationship
 
 
 ### SEARCH OPERATIONS ###
