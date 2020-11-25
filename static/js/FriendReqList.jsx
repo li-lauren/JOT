@@ -1,11 +1,14 @@
 const FriendReqList = () => {
-    const [reqUpdate, setReqUpdate] = useState(false)
+    const [update, setUpdate] = useState(false)
     const [reqList, setReqList] = useState(null)
+    const [friendList, setFriendList] = useState(null)
     const socket = useContext(SocketContext)
 
     useEffect(() => {
         getReqs()
-    }, [reqUpdate])
+        getFriends()
+        setUpdate(false)
+    }, [update])
 
     const getReqs = () => {
         fetch('/requests')
@@ -13,12 +16,16 @@ const FriendReqList = () => {
         .then(data => {
             console.log(data)
             setReqList(data)
-            setReqUpdate(false)
         })
     }
 
     const getFriends = () => {
-        
+        fetch('/friends')
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            setFriendList(data)
+        })
     }
 
     useEffect(() => {
@@ -28,7 +35,7 @@ const FriendReqList = () => {
                 console.log('req received')
                 if (isMounted && data.acceptor_id 
                     == localStorage.getItem('user_id')) {
-                        setReqUpdate(true)
+                        setUpdate(true)
                     }
             })
         }
@@ -43,8 +50,15 @@ const FriendReqList = () => {
                 <FriendReq 
                     key={req[0]} 
                     req={req} 
-                    setReqUpdate={setReqUpdate}
+                    setUpdate={setUpdate}
                 />) : <p>None</p>}
+            <br/>
+            <h5>Friends</h5>
+            {friendList ? friendList.map(friend => 
+            <div>
+                {`${friend[1]} ${friend[2]}`}
+            </div>
+            ) : <p>None</p>}
             <br/>
         </div>
     )

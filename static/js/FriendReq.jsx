@@ -1,4 +1,4 @@
-const FriendReq = ({req, setReqUpdate}) => {
+const FriendReq = ({req, setUpdate}) => {
     const req_id = req[0]
     const fname = req[1]
     const lname = req[2]
@@ -9,7 +9,7 @@ const FriendReq = ({req, setReqUpdate}) => {
         socket.emit('accept_friend_req', {
             'req_id': req_id
         })
-        setReqUpdate(true)
+        setUpdate(true)
     } 
 
     const decline = () => {
@@ -17,7 +17,7 @@ const FriendReq = ({req, setReqUpdate}) => {
         fetch(`/requests/decline/${req_id}`)
         .then(res => res.text())
         .then(
-            setReqUpdate(true)
+            setUpdate(true)
         )
     }
     
