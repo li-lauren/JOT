@@ -1,5 +1,11 @@
-const Home = () => {
+const Home = ({loggedIn, setLoggedIn}) => {
     return (
-        <h1>HOME</h1>
+        <div>
+             <h1>HOME</h1>
+
+            <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+            <SignUp />
+        </div>
+       
     )
 }

@@ -13,11 +13,11 @@ const Dashboard = ({setLoggedIn}) => {
     }
 
     return(
-        <div>
+        <div id="dashboard">
             <h3>{`${localStorage.getItem('fname')}'s`} Dashboard</h3>
             <a href="" onClick={logout}>Logout</a>
             <DocList />
-            <InvitationList socket={socket}/>
+            <InvitationList />
         
             <br/>
             Doc Search
