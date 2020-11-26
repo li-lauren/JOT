@@ -203,7 +203,7 @@ def get_all_tags(user_id):
     all_tags.extend(owned_tags)
     all_tags.extend(followed_tags)
 
-    return all_tags
+    return set(all_tags)
 
 
 def get_owned_docs_by_tag_id(tag_id, user_id):
@@ -264,18 +264,6 @@ def create_doc_follower(user_id, doc_id, invite_msg):
 def get_followers_by_doc_id(doc_id):
     """Return a document's followers."""
 
-    # used to be all followers
-    # return Doc.query.get(doc_id).followers
-
-    # narrow down to accepted followers
-    # follows = Doc_Follower.query.filter(Doc_Follower.doc_id == doc_id,
-    # Doc_Follower.accepted == True)
-
-    # users = []
-
-    # for follow in follows:
-    #     users.append(follow.user_id)
-
     followers =  db.session.query(User).\
                     join(Doc_Follower, Doc_Follower.user_id == User.user_id).\
                     filter(Doc_Follower.doc_id == doc_id, Doc_Follower.accepted == True).all()
@@ -292,6 +280,7 @@ def get_followed_docs_by_user_id(user_id):
         filter(Doc_Follower.user_id == user_id, Doc_Follower.accepted == True).all()
 
     return followed_docs
+    
 
 ### INVITE CRUD OPERATIONS ###
 def get_invites_by_user_id(user_id):
