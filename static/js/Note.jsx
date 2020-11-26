@@ -7,6 +7,7 @@ const Note = ({note, room, noteColor, socket}) => {
     const [pos, setPos] = useState(
         { x: note.x_pos, y: note.y_pos })
     const [isHovering, setIsHovering] = useState(false)
+    const [showNoteInput, setShowNoteInput] = useState(false)
 
     const note_id = note.note_id
     const fname = note.fname
@@ -86,6 +87,14 @@ const Note = ({note, room, noteColor, socket}) => {
                     {moment(created_at).startOf('minute').fromNow()}
                     {/* {`x: ${(pos.x).toFixed(2)}, y: ${(pos.y).toFixed(2)}`} */}
                     <Like noteId={note_id} socket={socket} />
+                    {'   '}
+                    <i 
+                        className="far fa-comment-dots"
+                        onClick={() => setShowNoteInput(!showNoteInput)}
+                    ></i>
+                    { showNoteInput ? <NoteInput /> : ''}
+                    
+                    
                 </Button>
                 :
                 <Button className="note" style={{backgroundColor: noteColor}}>
