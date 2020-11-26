@@ -53,7 +53,7 @@ const SignUp = () => {
 
     return(
         <div>
-            <h5>Sign Up</h5>
+            {/* <h5>Sign Up</h5>
             <form onSubmit={signUp}>
                 <label>First Name</label>
                 <input type="text" name="fname" value={userInput.fname} onChange={handleChange} />
@@ -68,7 +68,29 @@ const SignUp = () => {
                 <br/>
                 <button type="submit">Join Jot</button>
             </form> 
-            <p>{msg}</p>  
+             */}
+            <br/>
+            <Form onSubmit={signUp}>
+                <Row>
+                    <Col>
+                    <Form.Control placeholder="First" name="fname" value={userInput.fname} onChange={handleChange} />
+                    </Col>
+                    <Col>
+                    <Form.Control placeholder="Last" name="lname" value={userInput.lname} onChange={handleChange}/>
+                    </Col>
+                </Row>
+                <br/>
+                <Row>
+                    <Form.Control placeholder="Email" name="email" value={userInput.email} onChange={handleChange}/>
+                </Row>
+                <br/>
+                <Row>
+                    <Form.Control placeholder="Password" name="pw" value={userInput.pw} onChange={handleChange}/>
+                </Row>
+                <br/>
+                <Button variant="outline-dark" type="submit">Join Jot</Button>
+            </Form>
+            <p>{msg}</p> 
         </div>   
     )
 }

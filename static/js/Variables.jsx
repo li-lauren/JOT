@@ -1,4 +1,4 @@
-const { Container, Row, Button, 
+const { Container, Row, Col, Button, 
         Alert, Form, Badge, InputGroup, FormControl,
         Tabs, Tab} = ReactBootstrap;
 const { useState, useEffect, useRef, useReducer, useContext } = React;
