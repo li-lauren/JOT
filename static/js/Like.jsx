@@ -1,4 +1,5 @@
-const Like = ({noteId, socket}) => {
+const Like = ({noteId}) => {
+    const socket = useContext(SocketContext)
     const [liked, setLiked] = useState(false)
     const [numLikes, setNumLikes] = useState(0)
     const userId = localStorage.getItem('user_id')

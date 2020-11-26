@@ -1,5 +1,7 @@
-const AddNoteReply = ({room, parent_id}) => {
+const AddNoteReply = ({parent_id}) => {
     const [body, setBody] = useState('')
+    const doc_id = localStorage.getItem('doc_id')
+    console.log(doc_id)
 
     const addReply = () => {
         if (socket) {
@@ -7,7 +9,7 @@ const AddNoteReply = ({room, parent_id}) => {
             socket.emit('note_reply',
             {
                 'body': body,
-                'room': room,
+                'room': parseInt(doc_id),
                 'parent_id': parent_id
             })
             setBody('')

@@ -88,7 +88,7 @@ const Note = ({note, room, noteColor, socket}) => {
                     <br/>
                     {moment(created_at).startOf('minute').fromNow()}
                     {/* {`x: ${(pos.x).toFixed(2)}, y: ${(pos.y).toFixed(2)}`} */}
-                    <Like noteId={note_id} socket={socket} />
+                    <Like noteId={note_id} />
                     {'   '}
                     <i 
                         className="far fa-comment-dots"
@@ -96,7 +96,6 @@ const Note = ({note, room, noteColor, socket}) => {
                     ></i>
                     { showNoteInput ? 
                         <AddNoteReply 
-                            room={room} 
                             parent_id={note_id}
                         /> : ''}
                     <ReplyList parent_id={note_id} />
