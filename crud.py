@@ -201,9 +201,11 @@ def get_all_tags(user_id):
     followed_tags = get_all_tags_for_followed_docs(user_id)
 
     all_tags.extend(owned_tags)
-    all_tags.extend(followed_tags)
+    for tag in followed_tags:
+        if tag not in all_tags:
+            all_tags.append(tag)
 
-    return set(all_tags)
+    return all_tags
 
 
 def get_owned_docs_by_tag_id(tag_id, user_id):

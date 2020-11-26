@@ -5,9 +5,13 @@ const TagLibrary = ({setFilter}) => {
     const getTagLib = () => {
         fetch(`/tag`)
         .then(res => res.json())
-        .then(data => 
-            setTagLib(data))
+        .then(data => {
+            setTagLib(data)
+        })
+            
     }
+
+    console.log(tagLib)
 
     useEffect(() => {
         getTagLib()
