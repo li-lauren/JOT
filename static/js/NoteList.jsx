@@ -1,7 +1,7 @@
 const NoteList = ({room, socket}) => {
-    const [noteLog, setNoteLog] = React.useState([]);
-    const [noteAdded, setNoteAdded] = React.useState(null);
-    const [colorChange, setColorChange] = React.useState(null)
+    const [noteLog, setNoteLog] = useState([]);
+    const [noteAdded, setNoteAdded] = useState(null);
+    const [colorChange, setColorChange] = useState(null)
 
     const getAllNotes = () => {
         console.log('GETTING NOTES')

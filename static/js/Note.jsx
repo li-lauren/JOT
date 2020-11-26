@@ -60,6 +60,8 @@ const Note = ({note, room, noteColor, socket}) => {
             'room': room })
     }
 
+    
+
 
     return(
         <ReactDraggable
@@ -92,8 +94,12 @@ const Note = ({note, room, noteColor, socket}) => {
                         className="far fa-comment-dots"
                         onClick={() => setShowNoteInput(!showNoteInput)}
                     ></i>
-                    { showNoteInput ? <AddNoteReply /> : ''}
-                    
+                    { showNoteInput ? 
+                        <AddNoteReply 
+                            room={room} 
+                            parent_id={note_id}
+                        /> : ''}
+                    <ReplyList parent_id={note_id} />
                 </Button>
                 :
                 <Button className="note" style={{backgroundColor: noteColor}}>

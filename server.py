@@ -201,6 +201,15 @@ def get_notes():
     return jsonify(notes)
 
 
+@app.route('/replies/<int:note_id>')
+def get_replies(note_id):
+    """Get all of a note's replies."""
+
+    replies = crud.get_note_replies(note_id)
+
+    return jsonify(replies)
+
+
 @app.route('/invitations')
 def get_invitations():
     """Get all of a user's article invitations."""
@@ -618,19 +627,40 @@ def create_friend_req(data):
 
     io.emit("friend_requested", {'msg' : msg, 'userIds': [acceptor_id, inviter_id]})
 
-# @io.on("accept_friend_req")
-# def accept_friend(data):
-#     req_id = data['req_id']
 
-#     new_relationship = crud.add_friend(req_id)
+@io.on("note_reply")
+def create_note_reply(data):
+    body = data['body']
+    room = data['room'] # same as doc id
+    user_id = session['user_id'] #check this
+    parent_id = data['parent_id']
 
-#     acceptor = crud.get_user_by_id(new_relationship.acceptor)
-#     inviter = crud.get_user_by_id(new_relationship.inviter)
+    user = crud.get_user_by_id(user_id)
+    fname = user.fname
+    lname = user.lname
 
-#     msg = f"{acceptor.fname} {acceptor.lname} accepted your friend request"
+    created_at = datetime.datetime.utcnow()
+    date_as_int = int(time.mktime(created_at.timetuple())) * 1000
 
-#     io.emit("friend_added", {'msg':msg, 'inviter_id': inviter.user_id})
+    note_reply = crud.create_note_reply(user_id, room, created_at, body, 
+        parent_id, fname, lname)
 
+    color = note_reply['color']
+    note = note_reply['note']
+
+    reply_json = {
+        'note_id': note.note_id,
+        'user_id': user_id,
+        'parent_id': parent_id,
+        'doc_id': room,
+        'created_at': date_as_int,
+        'body': body,
+        'fname': fname,
+        'lname': lname,
+        'color': color
+    }
+
+    io.emit("note_reply_created", reply_json, room=room)
 
 
 
