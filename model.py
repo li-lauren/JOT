@@ -210,6 +210,7 @@ class Note(db.Model):
 
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     doc_id = db.Column(db.Integer, db.ForeignKey('docs.doc_id'))
+    parent_id = db.Column(db.Integer, db.ForeignKey('notes.note_id'))
 
     created_at = db.Column(db.DateTime)
     body = db.Column(db.Text)
@@ -221,6 +222,7 @@ class Note(db.Model):
 
     doc = db.relationship("Doc")
     user = db.relationship("User")
+    parent = db.relationship("Note")
 
     likes = db.relationship("Like")
 

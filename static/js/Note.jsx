@@ -94,7 +94,6 @@ const Note = ({note, room, noteColor, socket}) => {
                     ></i>
                     { showNoteInput ? <AddNoteReply /> : ''}
                     
-                    
                 </Button>
                 :
                 <Button className="note" style={{backgroundColor: noteColor}}>
