@@ -92,7 +92,7 @@ const Note = ({note, room, noteColor, socket}) => {
                         className="far fa-comment-dots"
                         onClick={() => setShowNoteInput(!showNoteInput)}
                     ></i>
-                    { showNoteInput ? <NoteInput /> : ''}
+                    { showNoteInput ? <AddNoteReply /> : ''}
                     
                     
                 </Button>
