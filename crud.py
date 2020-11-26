@@ -384,6 +384,7 @@ def create_note(user_id, doc_id, created_at, body, x_pos, y_pos, fname, lname):
     note = Note(
         user_id = user_id,
         doc_id = doc_id, 
+        # parent_id = 0,
         created_at = created_at, 
         body = body,
         x_pos = x_pos,
@@ -426,6 +427,45 @@ def update_note_color(user_id, doc_id, color):
         update({Note.color: color}, synchronize_session=False)
 
     db.session.commit()
+
+
+def create_note_reply(user_id, doc_id, created_at, body, parent_id, fname, lname):
+    """Reply to a note."""
+    # figure out x and y pos
+
+    # tz = pytz.timezone('America/Los_Angeles')
+    # created_at = datetime.now(tz)
+
+    color_check = check_prev_note_color(user_id, doc_id)
+    if color_check:
+        color = color_check
+    else:
+        color = '#C2D6C4'
+
+    note = Note(
+        user_id = user_id,
+        doc_id = doc_id, 
+        parent_id = parent_id,
+        created_at = created_at, 
+        body = body,
+        # x_pos = x_pos,
+        # y_pos = y_pos,
+        fname = fname,
+        lname = lname,
+        color = color
+    )
+
+    db.session.add(note)
+    db.session.commit()
+
+    return {'note': note, 'color': color}
+
+def get_note_replies(parent_id):
+    """Get all replies to a note."""
+
+    return Note.query.filter(Note.parent_id == parent_id).all()
+
+
 
 
     
@@ -540,7 +580,7 @@ def check_if_friends(user_1_id, user_2_id):
             return 'Friends'
         if relationship_type == 1:
             return 'Pending'
-            
+
     else:
         return None
 
