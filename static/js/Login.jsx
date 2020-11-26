@@ -58,18 +58,48 @@ const Login = ({loggedIn, setLoggedIn}) => {
 
     return(
         <div>
-            <h5>Login</h5>
-            <form onSubmit={login} >
-                <label>Email</label>
-                <input type="text" name="email" value={userInput.email} onChange={handleChange} />
-                <label>Password</label>
-                <input type="password" name="pw" value={userInput.pw} onChange={handleChange} />
-                <br/>
-                {/* <button type="submit">Login</button> */}
-                <Button variation="primary" type="submit">Login</Button>
+            <br/>
+            <form onSubmit={login}>
+                <InputGroup className="mb-3">
+                    <InputGroup.Prepend>
+                    <InputGroup.Text id="Email">
+                        <span className="material-icons">
+                            alternate_email
+                        </span>
+                    </InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                        placeholder="Email"
+                        aria-label="Email"
+                        aria-describedby="Email"
+                        name="email"
+                        value={userInput.email} 
+                        onChange={handleChange}
+                    />
+                </InputGroup>
+
+                <InputGroup className="mb-3">
+                    <FormControl
+                    type="password"
+                    placeholder="Password"
+                    aria-label="Password"
+                    aria-describedby="Password"
+                    name="pw"
+                    value={userInput.pw} 
+                    onChange={handleChange}
+                    />
+                    <InputGroup.Append>
+                    <InputGroup.Text id="Password">
+                        <span className="material-icons">
+                            visibility
+                        </span>
+                    </InputGroup.Text>
+                    </InputGroup.Append>
+                </InputGroup>
+                <Button variant="outline-dark" type="submit">Login</Button>
             </form>
+
             <p>{errorMsg}</p>  
-            
         </div>   
     )
 }
