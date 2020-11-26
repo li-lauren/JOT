@@ -1,7 +1,10 @@
 const ReplyList = ({parent_id}) => {
-    const [replyList, setReplyList] = useState(null)
+    const [replyList, setReplyList] = useState([])
     const [replyAdded, setReplyAdded] = useState(null)
     const [colorChange, setColorChange] = useState(null)
+    const socket = useContext(SocketContext)
+
+    console.log(replyList)
 
     const getReplies = () => {
         console.log('Getting Replies')
@@ -20,8 +23,13 @@ const ReplyList = ({parent_id}) => {
     useEffect(() => {
         let isMounted = true;
         if(socket) {
+            
             socket.on('note_reply_created', reply => {
-                setReplyAdded(reply)
+                console.log('note_reply_created')
+                if (isMounted && reply.parent_id == parent_id) {
+                    console.log('note_reply_created!!!!')
+                    setReplyAdded(reply)
+                }
             })
 
             socket.on('note_color_changed', data => {
@@ -40,11 +48,13 @@ const ReplyList = ({parent_id}) => {
     return(
         <div>
             {replyList ? replyList.map(reply => {
-                <Reply 
-                    key={reply.note_id}
-                    reply={reply}
-                    noteColor={note.color}
-                />
+                if (reply) {
+                    return <Reply 
+                                key={reply.note_id}
+                                reply={reply}
+                                noteColor={reply.color}
+                            />
+                }
             }) : ''}
         </div>
     )

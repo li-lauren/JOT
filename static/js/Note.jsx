@@ -70,6 +70,7 @@ const Note = ({note, room, noteColor, socket}) => {
             position={{x: pos.x, y: pos.y}}
             onDrag={(e, data) => trackPos(data)}
             onStop={(e, data) => updatePos(data)}
+            enableUserSelectHack={false}
         >
             <div
                 onMouseEnter={() => setIsHovering(true)}
@@ -78,7 +79,7 @@ const Note = ({note, room, noteColor, socket}) => {
                 { isHovering ? 
                 <Button 
                     className="note" 
-                    onClick={()=>console.log(note_id)}
+                    // onClick={()=>console.log(note_id)}
                     style={{backgroundColor: noteColor}}
                 >
                     {/* <span>{note.note_id}</span> */}

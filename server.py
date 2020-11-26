@@ -630,6 +630,8 @@ def create_friend_req(data):
 
 @io.on("note_reply")
 def create_note_reply(data):
+    print('received note reply')
+    print(data['room'])
     body = data['body']
     room = data['room'] # same as doc id
     user_id = session['user_id'] #check this
@@ -659,6 +661,8 @@ def create_note_reply(data):
         'lname': lname,
         'color': color
     }
+
+    print(reply_json)
 
     io.emit("note_reply_created", reply_json, room=room)
 

@@ -9,6 +9,12 @@
     cursor: pointer;
 }
 
+.reply {
+    padding: 2px 10px;
+    border-radius: 25px;
+    cursor: pointer;
+}
+
 #wrapper {
     margin-left: auto !important;
     margin-right: auto !important;

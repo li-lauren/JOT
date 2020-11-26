@@ -6,7 +6,7 @@ const Reply = ({reply, noteColor}) => {
 
     return(
         <Button
-            className="note"
+            className="reply"
             style={{backgroundColor: noteColor}}
         >
             <span>{reply.fname}</span>
@@ -24,7 +24,7 @@ const Reply = ({reply, noteColor}) => {
                 <AddNoteReply 
                     parent_id={reply_id}
                 /> : ''}
-            {/* <ReplyList parent_id={reply_id} /> */}
+            <ReplyList parent_id={reply_id} />
 
         </Button>
     )
