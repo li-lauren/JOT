@@ -3,6 +3,12 @@ const Dashboard = () => {
     const [showAddDoc, setShowAddDoc] = useState(false)
     const [showInvites, setShowInvites] = useState(false)
 
+    const history = useHistory()
+
+    const handleMyProfile = () => {
+        history.push('/myProfile')
+    }
+    
     const handleSearch = () => {
         setShowSearch(!showSearch)
         setShowAddDoc(false)
@@ -38,7 +44,10 @@ const Dashboard = () => {
                     
                 </Col>
                 <Col md={1}>
-                <i className="material-icons md-36">
+                <i 
+                    className="material-icons md-36"
+                    onClick={handleMyProfile}
+                >
                     person
                 </i>
                 <br/>

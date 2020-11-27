@@ -1,5 +1,5 @@
 const AddDoc = ({docAdded, setDocAdded}) => {
-    const [userInput, setUserInput] = React.useReducer(
+    const [userInput, setUserInput] = useReducer(
         (state, newState) => ({...state, ...newState}), 
         {
             url: '', 
@@ -45,7 +45,18 @@ const AddDoc = ({docAdded, setDocAdded}) => {
     return(
         <div>
             <h5>Add an Article</h5>
-            <form onSubmit={addDoc}>
+            <Form onSubmit={addDoc}>
+                <Form.Control 
+                    size="sm" 
+                    type="text" 
+                    placeholder="Article URL"
+                    name="url" 
+                    value={userInput.url} 
+                    onChange={handleChange} 
+                />
+                <Form.Control type="submit" style={{display: 'none'}} />
+            </Form>
+            {/* <form onSubmit={addDoc}>
                 <label>URL</label>
                 <input 
                     type="text" name="url" 
@@ -55,7 +66,7 @@ const AddDoc = ({docAdded, setDocAdded}) => {
                 <label>Tag</label>
 
                 <button type="submit">Add</button>
-            </form>   
+            </form>    */}
         </div>   
     )
 }

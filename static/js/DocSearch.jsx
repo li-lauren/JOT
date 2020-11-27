@@ -27,6 +27,7 @@ const DocSearch = () => {
                 if (isMounted) {
                     // setOptions(data.options)
                     let term = data.search_term
+                    console.log(data.options)
                     let newOptions = [...data.options]
                     
                     for (let i=0; i < newOptions.length; i++) {
@@ -73,7 +74,8 @@ const DocSearch = () => {
 
     return(
         <div>
-            <Form inline>
+            <h5>Search the Library</h5>
+            <Form>
                 <Form.Label htmlFor="inlineFormInputName2" srOnly>
                     Article Search
                 </Form.Label>
