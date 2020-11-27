@@ -68,9 +68,7 @@ const App = () => {
                         <Route 
                             exact path={'/dashboard'}
                             render={(props) => (
-                            <Dashboard {...props} 
-                                setLoggedIn={setLoggedIn}
-                            /> 
+                            <Dashboard {...props} /> 
                             )} 
                         />
                         <Route 
@@ -91,7 +89,7 @@ const App = () => {
                         <Route 
                             exact path={'/myProfile'}
                             render={(props) => (
-                                <MyProfile {...props} />
+                                <MyProfile {...props} setLoggedIn={setLoggedIn}/>
                             )}
                         />
 

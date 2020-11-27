@@ -1,4 +1,4 @@
-const MyProfile = () => {
+const MyProfile = ({setLoggedIn}) => {
     const [topDoc, setTopDoc] = useState(null)
     const [topDocFollowers, setTopDocFollowers] = useState(null)
     
@@ -14,15 +14,16 @@ const MyProfile = () => {
     const email = localStorage.getItem('email')
     const socket = useContext(SocketContext)
 
+    const logout = () => {
+        console.log('Disconnecting...')
+            if (socket) {
+                socket.disconnect()
+            }
+        localStorage.clear()
+        setLoggedIn(false)
+        
+    }
 
-    // const totalLikes = userInfo.totalLikes
-    // const topNote = userInfo.topNote
-    // const topNoteLikes = userInfo.topNoteLikes
-    // const topDoc = userInfo.topDoc
-    // const topDocFollowers = userInfo.topDocFollowers
-
-    // console.log(topDoc.title)
-    
     useEffect(() => {
         getMyProfile()
     }, [])
@@ -42,21 +43,13 @@ const MyProfile = () => {
         })
     }
 
-    // useEffect(() => {
-    //     if (socket) {
-    //         socket.on('friend_added', () => {
-    //             setFriends(true)
-    //         })
-    //     }
-    // }, [])
-
-
 
     return(
         <div>
             <h4>Profile</h4>
             <h1>{fname} {lname}</h1>
             <h5>{email}</h5>
+            <a href="" onClick={logout}>Logout</a>
 
             <Search />
             <FriendReqList />

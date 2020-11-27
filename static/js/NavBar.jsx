@@ -6,7 +6,14 @@ const Navbar = ({loggedIn}) => {
 
        
         <nav>
-            { loggedIn ? 
+            <span>
+                <Link to={'/dashboard'}>Dashboard</Link>
+                <Link to={'/myProfile'}>
+                    {localStorage.getItem('fname')}
+                </Link>
+            </span> : 
+            <Link to={'/'}>Jot</Link>
+            {/* { loggedIn ? 
                 <span>
                     <Link to={'/dashboard'}>Dashboard</Link>
                     <Link to={'/myProfile'}>
@@ -14,7 +21,7 @@ const Navbar = ({loggedIn}) => {
                     </Link>
                 </span> : 
                 <Link to={'/'}>Jot</Link>
-            }
+            } */}
             
             
         </nav>
