@@ -5,6 +5,7 @@
 
 html, body {
     height: 100%;
+    font-family: 'EB Garamond', serif;
 }
 
 #root {
@@ -14,15 +15,39 @@ html, body {
 #home-container {
     height: 100%;
     display: flex;
-    
 }
 
-.vertical-center {
-    min-height: 100%;
-    display: flex;
-    align-items: center;
+/* DASHBOARD */
+#dashboard-h {
+    /* font-family: 'Libre Franklin', sans-serif; */
+    /* font-family: 'Averia Serif Libre', cursive; */
+    /* font-weight: 800; */
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: right;
+    display: inline-block;
+    font-size: 90px;
+    margin: 0 0 500px 0;
 }
 
+#dashboard-h2 {
+    /* font-family: 'Libre Franklin', sans-serif; */
+    /* font-family: 'Averia Serif Libre', cursive; */
+    writing-mode: vertical-rl;
+    /* transform: rotate(180deg); */
+    text-align: right;
+    display: inline-block;
+    font-size: 120px;
+    margin: 0px -20px 50px -20px;
+}
+
+/* #dashboard {
+    display: inline-block;
+} */
+
+
+
+/* NOTES */
 .note {
     border: #e5e5e5 1px solid;
     padding: 2px 10px;

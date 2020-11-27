@@ -4,8 +4,6 @@ const { Redirect, Switch, Link, Route } = ReactRouterDOM;
 
 const SocketContext = React.createContext();
 
-
-
 const App = () => {
     const [loggedIn, setLoggedIn] = useState(
         localStorage.getItem('user_id') !== null)
