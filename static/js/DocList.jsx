@@ -1,7 +1,7 @@
 const Router = ReactRouterDOM.BrowserRouter;
 const { Redirect, Route } = ReactRouterDOM;
 
-const DocList = () => {
+const DocList = ({showAddDoc}) => {
     const socket = useContext(SocketContext)
     const [docDets, setDocDets] = useState('')
     const [docList, setDocList] = useState([])
@@ -78,6 +78,8 @@ const DocList = () => {
 
     return (
         <div>
+            {showAddDoc ? <AddDoc docAdded={docAdded} setDocAdded={setDocAdded} /> : ''}
+            
             <TagLibrary setFilter={setFilter}/>
             <h5>Doc Library</h5>
             <ul>
@@ -105,7 +107,7 @@ const DocList = () => {
                 })}
             </ul>
             
-            <AddDoc docAdded={docAdded} setDocAdded={setDocAdded} />
+           
             {/* {docDets ? <Doc data={docDets}/> : ''} */}
             
         </div>

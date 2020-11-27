@@ -1,4 +1,25 @@
 const Dashboard = () => {
+    const [showSearch, setShowSearch] = useState(false)
+    const [showAddDoc, setShowAddDoc] = useState(false)
+    const [showInvites, setShowInvites] = useState(false)
+
+    const handleSearch = () => {
+        setShowSearch(!showSearch)
+        setShowAddDoc(false)
+        setShowInvites(false)
+    }
+
+    const handleAddDoc = () => {
+        setShowSearch(false)
+        setShowAddDoc(!showAddDoc)
+        setShowInvites(false)
+    }
+
+    const handleInvites = () => {
+        setShowSearch(false)
+        setShowAddDoc(false)
+        setShowInvites(!showInvites)
+    }
 
     return(
         
@@ -11,24 +32,33 @@ const Dashboard = () => {
                     <h1 id="dashboard-h2">Dashboard</h1>
                 </Col>
                 <Col md={8}>
-                    <DocList />
-                    <InvitationList />
-
-                    <br/>
-                    Doc Search
-                    <DocSearch />
+                    {showSearch ? <DocSearch /> : ''}
+                    {showInvites ? <InvitationList /> : ''}
+                    <DocList showAddDoc={showAddDoc} />
+                    
                 </Col>
                 <Col md={1}>
-                <i class="material-icons md-36">
+                <i className="material-icons md-36">
                     person
                 </i>
                 <br/>
-                <span className="material-icons md-36">
+                <span 
+                    className="material-icons md-36" 
+                    onClick={handleSearch}
+                >
                     search
                 </span>
                 <br/>
-                <span class="material-icons md-36">
+                <span 
+                    className="material-icons md-36"
+                    onClick={handleAddDoc}>
                     post_add
+                </span>
+                <span 
+                    className="material-icons md-36"
+                    onClick={handleInvites}
+                >
+                    how_to_reg
                 </span>
 
 
