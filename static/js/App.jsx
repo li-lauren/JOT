@@ -1,17 +1,6 @@
 const Router = ReactRouterDOM.BrowserRouter;
 const { Redirect, Switch, Link, Route } = ReactRouterDOM;
 
-const Navbar = () => {
-    return(
-        <nav>
-            <Link to={'/'}>Jot</Link>
-            {/* <Link to={'/signup'}>Sign Up</Link>
-            <Link to={'/login'}>Login</Link> */}
-            <Link to={'/dashboard'}>Dashboard</Link>
-            <Link to={'/myProfile'}>Profile</Link>
-        </nav>
-    )   
-}
 
 const SocketContext = React.createContext();
 
@@ -55,7 +44,7 @@ const App = () => {
         
         <SocketContext.Provider value={socket}>
             <Router>
-                <Navbar />
+                <Navbar loggedIn={loggedIn}/>
                 <Switch>
                     <Route 
                         exact path={'/'} 

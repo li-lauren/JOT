@@ -88,7 +88,10 @@ const SignUp = () => {
                     <Form.Control placeholder="Password" name="pw" value={userInput.pw} onChange={handleChange}/>
                 </Row>
                 <br/>
-                <Button variant="outline-dark" type="submit">Join Jot</Button>
+                <Row>
+                    <Button variant="outline-dark" type="submit">Join Jot</Button>
+                </Row>
+                
             </Form>
             <p>{msg}</p> 
         </div>   
