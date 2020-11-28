@@ -85,6 +85,10 @@ div.doc-listing:hover {
     min-width: 720px !important;
 }
 
+.top-image {
+    max-width: 720px;
+}
+
 #add-note {
     position: fixed;
     top: 50%;

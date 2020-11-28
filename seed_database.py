@@ -125,7 +125,7 @@ req = crud.create_friend_req(1,2)
 crud.add_friend(req.user_relationship_id)
 
 # Some article following
-follow = crud.create_doc_follower(1,4, "Thought you'd like this!")
+follow = crud.create_doc_follower(2,4, "Thought you'd like this!")
 crud.accept_invite_by_follow_id(follow.doc_follower_id)
 
 follow2 = crud.create_doc_follower(2,1, "Reminded me of what we were talking about last week...")

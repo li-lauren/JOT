@@ -67,12 +67,14 @@ const Doc = () => {
             <FollowerList doc_id={doc.doc_id} socket={socket} />
         </Row>,
         <Row>
-            <p>{moment(publish_date).format("MMMM Do YYYY")} </p>
+            <p>{doc.publish_date ? moment(publish_date).format("MMMM Do YYYY") : '' }</p>
         </Row>,
         <Row>
             <p>{authors}</p>
         </Row>,
-        <img src={img_url} alt="top_image"/>,
+        <Row> 
+            <img className="top-image" src={img_url} alt="top_image"/>
+        </Row>,
         <Row>
              <div>{HTMLReactParser(doc.body)}</div>
         </Row>
