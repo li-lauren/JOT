@@ -13,11 +13,11 @@ const NoteList = ({room, socket}) => {
         })
     }
 
-    React.useEffect(() => {
+    useEffect(() => {
         getAllNotes()
     }, [room, colorChange])
 
-    React.useEffect(() => {
+    useEffect(() => {
         let isMounted = true;
         if (!socket) {
             console.log('NO SOCKET');
@@ -34,7 +34,7 @@ const NoteList = ({room, socket}) => {
         return () => { isMounted = false };
     }, [])
 
-    React.useEffect(() => {
+    useEffect(() => {
 
         setNoteLog(prevNoteLog => [noteAdded, ...prevNoteLog])
         if (noteAdded) {

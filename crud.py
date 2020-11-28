@@ -396,7 +396,7 @@ def get_notes_by_doc_id(doc_id):
 
     # Doc.query.get(doc_id).notes (Which is more efficient?)
 
-    return Note.query.filter(Note.doc_id == doc_id).all()
+    return Note.query.filter(Note.doc_id == doc_id, Note.parent_id == None).all()
 
 
 def update_note_pos(note_id, new_x, new_y):
