@@ -46,6 +46,10 @@ html, body {
 } */
 
 /* DOC LISTING */
+.doc-list {
+    z-index: 1;
+    position:relative;
+}
 .doc-listing > a{
     
     color: black;
@@ -118,8 +122,13 @@ div.doc-listing:hover {
     clear: both;
 }
 
-/* #noteList {
+/* Search */
+.search-results {
     position: absolute;
-    top: 0px;
-    left: 0px;
-} */
+    width: 100%;
+    background-color: bisque;
+    border-bottom: bisque solid 1px;
+    border-left: bisque solid 1px;
+    border-right: bisque solid 1px;
+    z-index: 10;
+}

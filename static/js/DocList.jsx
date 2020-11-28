@@ -66,7 +66,7 @@ const DocList = ({showAddDoc}) => {
     // }
 
     return (
-        <div>
+        <div className="doc-list">
             {showAddDoc ? <AddDoc docAdded={docAdded} setDocAdded={setDocAdded} /> : ''}
             
             <TagLibrary setFilter={setFilter}/>
