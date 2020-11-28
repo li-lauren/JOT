@@ -3,13 +3,12 @@ const { Redirect, Route } = ReactRouterDOM;
 
 const DocList = ({showAddDoc}) => {
     const socket = useContext(SocketContext)
-    const [docDets, setDocDets] = useState('')
     const [docList, setDocList] = useState([])
     const [sharedList, setSharedList] = useState([])
     const [docAdded, setDocAdded] = useState(false)
     const [filter, setFilter] = useState(null)
 
-    const history = useHistory()
+    
 
     const getDocList = () => {
         fetch("/docs")
@@ -42,17 +41,7 @@ const DocList = ({showAddDoc}) => {
        
     }, [docAdded, filter])
 
-    const getDocDets = (doc_id, e) => {
-        console.log(`doc_id: ${doc_id}`)
-        e.preventDefault()
-        
-        fetch(`/docs/${doc_id}`)
-        .then(res => res.json())
-        .then(data => {
-            setDocDets(data)
-            history.push('/article', {params: data})
-        })
-    }
+    
 
     
     useEffect(() => {
@@ -72,9 +61,9 @@ const DocList = ({showAddDoc}) => {
     }, [])
     
 
-    if (docDets) {
-        <Redirect to='/article' />
-    }
+    // if (docDets) {
+    //     <Redirect to='/article' />
+    // }
 
     return (
         <div>
@@ -83,28 +72,22 @@ const DocList = ({showAddDoc}) => {
             <TagLibrary setFilter={setFilter}/>
             <h5>Doc Library</h5>
             <ul>
-                {docList.length !== 0 ? docList.map(doc => {
-                    return (
-                        <p key={doc.doc_id}>
-                            <a href="" key={doc.doc_id} onClick={(e)=> getDocDets(doc.doc_id, e)}>
-                                {doc.title}
-                            </a>
-                        </p>    
-                    )               
-                }) : <p>Get started by adding an article!</p>}
+                {docList.length !== 0 ? docList.map(doc => 
+                        <DocListing 
+                            key={doc.doc_id} 
+                            doc={doc}
+                        />
+                    ) : <p>Get started by adding an article!</p>}
 
                 <br/>
 
                 {sharedList.length !== 0 && <h6>Followed Docs</h6>}
-                {sharedList.map(doc => {
-                    return (
-                        <p key={doc.doc_id}>
-                            <a href="" key={doc.doc_id} onClick={(e)=> getDocDets(doc.doc_id, e)}>
-                                {doc.title}
-                            </a>
-                        </p>    
-                    )               
-                })}
+                {sharedList ? sharedList.map(doc => 
+                    <DocListing 
+                        key={doc.doc_id} 
+                        doc={doc}
+                    />)
+                : <p>None</p>}
             </ul>
             
            

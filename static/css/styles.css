@@ -45,7 +45,22 @@ html, body {
     display: inline-block;
 } */
 
+/* DOC LISTING */
+.doc-listing > a{
+    
+    color: black;
+    cursor: pointer;
+    padding: 3px; 
+    text-decoration: none;
+}
 
+.doc-listing {
+    margin: 10px 0;
+}
+
+div.doc-listing:hover {
+    border-bottom: 1px black solid;
+}
 
 /* NOTES */
 .note {

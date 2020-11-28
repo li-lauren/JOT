@@ -8,9 +8,9 @@ const Navbar = ({loggedIn}) => {
         <nav>
             <span>
                 <Link to={'/dashboard'}>Dashboard</Link>
-                <Link to={'/myProfile'}>
+                {/* <Link to={'/myProfile'}>
                     {localStorage.getItem('fname')}
-                </Link>
+                </Link> */}
             </span> : 
             <Link to={'/'}>Jot</Link>
             {/* { loggedIn ? 
