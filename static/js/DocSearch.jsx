@@ -89,15 +89,15 @@ const DocSearch = () => {
                 />
             </Form>
 
-            <div className="search-results">
+            <span className="search-results">
                  {options ? options.map((option, i) => 
                     <div key={option[0]} onClick={() => getDoc(option[0])}>
-                        {option[2]}
-                        <br/>
-                        {option[3]}
+                        <div>{option[2]}</div>
+                        <div>{option[3]}</div>
+                        
                     </div>
                         ): ''}
-            </div>
+            </span>
             
 
         </div>

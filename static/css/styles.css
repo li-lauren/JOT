@@ -125,7 +125,7 @@ div.doc-listing:hover {
 /* Search */
 .search-results {
     position: absolute;
-    width: 100%;
+    width: 95%;
     background-color: bisque;
     border-bottom: bisque solid 1px;
     border-left: bisque solid 1px;

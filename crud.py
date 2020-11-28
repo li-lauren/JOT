@@ -811,8 +811,6 @@ def get_doc_matches(search_term, user_id):
         if score[1] > 0:
             scores.append(score)
 
-    print(sorted(scores, key=lambda score: score[1], reverse=True))
-    
     return sorted(scores, key=lambda score: score[1], reverse=True) 
     
 

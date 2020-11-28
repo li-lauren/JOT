@@ -662,8 +662,6 @@ def create_note_reply(data):
         'color': color
     }
 
-    print(reply_json)
-
     io.emit("note_reply_created", reply_json, room=room)
 
 
