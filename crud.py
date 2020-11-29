@@ -232,6 +232,13 @@ def get_followed_docs_by_tag_id(tag_id, user_id):
     return followed_docs_with_tag
 
 
+def get_all_tag_options():
+    """Get all Jot tags."""
+
+    return Tag.query.all()
+
+
+
 def get_docs_owned_by_user_id(user_id):
     """Return all docs belonging to user_id."""
 
