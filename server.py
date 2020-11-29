@@ -600,6 +600,17 @@ def add_tag(data):
     io.emit("tag_added", room=doc_id)
 
 
+@io.on("select_tag")
+def select_tag(data):
+    tag_id = data['tag_id']
+    doc_id = data['doc_id']
+
+    crud.create_doc_tag(doc_id, tag_id)
+
+    io.emit("tags_updated", room=doc_id)
+
+
+
 @io.on("accept_friend_req")
 def accept_friend_request(data):
     req_id = data['req_id']
