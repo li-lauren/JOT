@@ -2,7 +2,7 @@ tag_tree = {
     "name": "All",
     "children": [
         {
-            "name": "STEM", 
+            "name": "Science", 
             "children": [
                 {
                     "name": "Science",
@@ -83,10 +83,33 @@ tag_tree = {
             ]
         },
         {
-            "name": "Arts/Entertainment", 
+            "name": "Health", 
             "children": [
                 {
-                    "name": "Arts", 
+                    "name": "Medicine",
+                    "children": [
+
+                    ]
+                }, 
+                {
+                    "name": "Exercise",
+                    "children": [
+
+                    ] 
+                },
+                {
+                    "name": "Wellness",
+                    "children": [
+
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Arts", 
+            "children": [
+                {
+                    "name": "Visual Arts", 
                     "children": [
                         {
                             "name": "Design", 
@@ -127,28 +150,94 @@ tag_tree = {
                     ]
                 }, 
                 {
-                    "name": "Entertainment",
+                    "name": "Music & Performance Arts", 
                     "children": [
                         {
-                            "name": "Books"
+                            "name": "Music",
+                            "children": [
+
+                            ]
+                        }, 
+                        {
+                            "name": "Dance",
+                            "children": [
+
+                            ]
                         },
                         {
-                            "name": "Movies",
+                            "name": "Theater",
                             "children": [
-                                {
-                                    "name": "Netflix’s Rebecca flattens a classic", 
-                                    "doc_id": 12, 
-                                    "value": 23
-                                }
+
+                            ]
+                        }, 
+                        {
+                            "name": "Comedy",
+                            "children": [
 
                             ]
                         }
                     ]
                 }
             ]
+        },
+        {
+            "name": "Books", 
+            "children": [
+
+            ]
+        },
+        {
+            "name": "Entertainment", 
+            "children": [
+                {
+                    "name": "Film",
+                    "children": [
+
+                    ]
+                }, 
+                {
+                    "name": "TV", 
+                    "children": [
+
+                    ]
+                }, 
+                {
+                    "name": "Events",
+                    "children": [
+
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Food", 
+            "children": [
+
+            ]
         }, 
         {
-            "name": "Other"
+            "name": "Politics", 
+            "children": [
+
+            ]
+        },
+        {
+            "name": "Business", 
+            "children": [
+
+            ]
+        },
+        {
+            "name": "Sports", 
+            "children": [
+
+            ]
+        }, 
+        {
+            "name": "Other", 
+            "children": [
+
+            ]
         }
     ]
 }

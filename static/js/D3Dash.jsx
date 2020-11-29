@@ -416,7 +416,7 @@ const D3Dash = () => {
             "name": "All",
             "children": [
                 {
-                    "name": "STEM", 
+                    "name": "Science", 
                     "children": [
                         {
                             "name": "Science",
@@ -458,7 +458,7 @@ const D3Dash = () => {
                                         {
                                             "name": "Neuroscientist Viviana Gradinaru Receives Young Investigator Award",
                                             "doc_id": 10,
-                                            "value": 800
+                                            "value": 8
                                         },
                                         {
                                             "name": "How Stem Cells Choose their Careers",
@@ -497,10 +497,33 @@ const D3Dash = () => {
                     ]
                 },
                 {
-                    "name": "Arts/Entertainment", 
+                    "name": "Health", 
                     "children": [
                         {
-                            "name": "Arts", 
+                            "name": "Medicine",
+                            "children": [
+        
+                            ]
+                        }, 
+                        {
+                            "name": "Exercise",
+                            "children": [
+        
+                            ] 
+                        },
+                        {
+                            "name": "Wellness",
+                            "children": [
+        
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Arts", 
+                    "children": [
+                        {
+                            "name": "Visual Arts", 
                             "children": [
                                 {
                                     "name": "Design", 
@@ -541,38 +564,97 @@ const D3Dash = () => {
                             ]
                         }, 
                         {
-                            "name": "Entertainment",
+                            "name": "Music & Performance Arts", 
                             "children": [
                                 {
-                                    "name": "Books"
+                                    "name": "Music",
+                                    "children": [
+        
+                                    ]
+                                }, 
+                                {
+                                    "name": "Dance",
+                                    "children": [
+        
+                                    ]
                                 },
                                 {
-                                    "name": "Movies",
+                                    "name": "Theater",
                                     "children": [
-                                        {
-                                            "name": "Netflix’s Rebecca flattens a classic", 
-                                            "doc_id": 12, 
-                                            "value": 23
-                                        }
+        
+                                    ]
+                                }, 
+                                {
+                                    "name": "Comedy",
+                                    "children": [
         
                                     ]
                                 }
                             ]
                         }
                     ]
+                },
+                {
+                    "name": "Books", 
+                    "children": [
+        
+                    ]
+                },
+                {
+                    "name": "Entertainment", 
+                    "children": [
+                        {
+                            "name": "Film",
+                            "children": [
+        
+                            ]
+                        }, 
+                        {
+                            "name": "TV", 
+                            "children": [
+        
+                            ]
+                        }, 
+                        {
+                            "name": "Events",
+                            "children": [
+        
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Food", 
+                    "children": [
+        
+                    ]
+                }, 
+                {
+                    "name": "Politics", 
+                    "children": [
+        
+                    ]
+                },
+                {
+                    "name": "Business", 
+                    "children": [
+        
+                    ]
+                },
+                {
+                    "name": "Sports", 
+                    "children": [
+        
+                    ]
                 }, 
                 {
                     "name": "Other", 
                     "children": [
-                        {
-                            "name": "Caltech Awards 10,000th PhD Degree During October Conferral for Students Impacted by Pandemic",
-                            "doc_id": 8, 
-                            "value": 250
-                        }
+        
                     ]
                 }
             ]
-        };
+        }
         
         // Constructs a root note from specified hiearchical data (data = obj representing the root node)
         // returned node has: data, depth, height, parent, children, value props
@@ -596,6 +678,7 @@ const D3Dash = () => {
             .enter().append("circle") // for each node add a circle
             .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; }) // assign class names to each circle
             .style("fill", function(d) { return d.children ? color(d.depth) : null; }) // give circle a depth-based color
+            .style("fill-opacity", function(d) { return d.value > 0 ? 1 : 0; })
             .on("dblclick", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
             
 
@@ -605,7 +688,7 @@ const D3Dash = () => {
             .enter().append("text") // append a text element for each node
             .attr("class", "label") // assign label as the class name
             .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
-            .style("display", function(d) { return d.parent === root ? "inline" : "none"; }) // only show text if the parent = curr root
+            .style("display", function(d) { return (d.parent === root) ? "inline" : "none"; }) // only show text if the parent = curr root
             .style('pointer-events', 'auto')
             .on("click", function(d) {
                 console.log('CLICKED')
@@ -614,7 +697,7 @@ const D3Dash = () => {
                 d3.event.stopPropagation();
                 clickHandler(d)
                 })
-            .text(function(d) { return d.data.name; }) // retrieve name (from json data) and set as text
+            .text(function(d) { return d.value > 0 ? d.data.name : ''; }) // retrieve name (from json data) and set as text
             
         
         
