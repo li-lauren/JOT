@@ -24,8 +24,7 @@ const TagList = ({doc_id}) => {
     useEffect(() => {
         let isMounted = true;
         if (socket) {
-            socket.on("tag_added", () => {
-                
+            socket.on("tag_added", () => {   
                 if (isMounted) {
                     setTagAdded(true)
                 }
@@ -35,16 +34,37 @@ const TagList = ({doc_id}) => {
         return () => { isMounted = false };
     }, [])
 
+    const selectTag = (tag_id) => {
+        if (socket) {
+            console.log('Selecting Tag')
+            console.log(tag_id)
+            socket.emit('select_tag', {'tag': tag, 'doc_id': doc_id})
+        }
+    }
+
+    const unselectTag = (tag_id) => {
+        if (socket) {
+            console.log('Unselecting Tag')
+            socket.emit('uselect_tag', {'tag_id': tag_id, 'doc_id': doc_id})
+        }
+    }
+
     return(
         <div>
             {selectedTags ? selectedTags.map(tag => 
-            <Badge pill key={tag.tag_id}>
+            <Badge pill 
+                key={tag.tag_id}
+                onClick={() => unselectTag(tag.tag_id)}
+            >
                 {tag.tag}
             </Badge>
             ) : ''}
             {/* <AddTag doc_id={doc_id}/> */}
             {unselectedTags ? unselectedTags.map(tag => 
-            <Badge pill key={tag.tag_id}>
+            <Badge pill 
+                key={tag.tag_id} 
+                onClick={() => selectTag(tag.tag_id)}
+            >
                 {tag.tag}
             </Badge>
             ) : ''}
