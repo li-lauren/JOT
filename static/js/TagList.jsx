@@ -23,8 +23,16 @@ const TagList = ({doc_id}) => {
 
     useEffect(() => {
         let isMounted = true;
+        // if (socket) {
+        //     socket.on("tag_added", () => {   
+        //         if (isMounted) {
+        //             setTagAdded(true)
+        //         }
+        //     })
+        // }
+
         if (socket) {
-            socket.on("tag_added", () => {   
+            socket.on("tags_updated", () => {
                 if (isMounted) {
                     setTagAdded(true)
                 }
