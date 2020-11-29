@@ -5,6 +5,7 @@ const TagList = ({doc_id}) => {
 
     const [selectedTags, setSelectedTags] = useState(null)
     const [unselectedTags, setUnselectedTags] = useState(null)
+    const [showTags, setShowTags] = useState(false)
 
     const getTags = () => {
         fetch(`/tag/${doc_id}`)
@@ -57,25 +58,40 @@ const TagList = ({doc_id}) => {
         }
     }
 
+    console.log(selectedTags)
     return(
         <div>
-            {selectedTags ? selectedTags.map(tag => 
-            <Badge pill 
-                key={tag.tag_id}
-                onClick={() => unselectTag(tag.tag_id)}
-            >
-                {tag.tag}
-            </Badge>
-            ) : ''}
+            {selectedTags ? 
+            <div>
+                {selectedTags.map(tag => 
+                    <Badge pill 
+                        key={tag.tag_id}
+                        onClick={() => unselectTag(tag.tag_id)}
+                    >
+                        {tag.tag}
+                    </Badge>
+                    )
+                }
+
+                <Badge pill 
+                    onClick={() => setShowTags(!showTags)}
+                >
+                    {showTags ? 'Hide Tags' : '+ Tag'}
+                </Badge>
+            </div>
+             : 
+            ''}
+            
+            <br/>
             {/* <AddTag doc_id={doc_id}/> */}
-            {unselectedTags ? unselectedTags.map(tag => 
+            {showTags ? unselectedTags ? unselectedTags.map(tag => 
             <Badge pill 
                 key={tag.tag_id} 
                 onClick={() => selectTag(tag.tag_id)}
             >
                 {tag.tag}
             </Badge>
-            ) : ''}
+            ) : '' : ''}
         </div>
     )
 }
