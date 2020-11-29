@@ -321,6 +321,15 @@ def get_tag_lib():
 
     return jsonify(tagLib)
 
+
+@app.route('/tagtree')
+def get_tag_tree():
+    user_id = session['user_id']
+    tag_tree = tag_trees[user_id][0]
+
+    return jsonify(tag_tree)
+
+
 @app.route('/docs/tags/<int:tag_id>')
 def filter_docs_by_tag(tag_id):
     user_id = session['user_id']
@@ -628,10 +637,10 @@ def select_tag(data):
 
     curr_tag = tag_tree[0]
     while tag_path:
-        curr_tag = curr_tag.children[tag_path[0]]
+        curr_tag = curr_tag['children'][tag_path[0]]
         tag_path = tag_path[1:]
     
-    curr_tag.children.append(doc_info)
+    curr_tag['children'].append(doc_info)
 
     print(tag_tree)
 
@@ -652,12 +661,12 @@ def unselect_tag(data):
 
     curr_tag = tag_tree[0]
     while tag_path:
-        curr_tag = curr_tag.children[tag_path[0]]
+        curr_tag = curr_tag['children'][tag_path[0]]
         tag_path = tag_path[1:]
     
-    for i in range(len(curr_tag.children)):
-        if curr_tag.children[i]['doc_id'] == doc_id:
-            del curr_tag.children[i]
+    for i in range(len(curr_tag['children'])):
+        if curr_tag['children'][i]['doc_id'] == doc_id:
+            del curr_tag['children'][i]
             break
 
     print(tag_tree)
