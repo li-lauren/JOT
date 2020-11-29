@@ -295,9 +295,22 @@ def check_if_friends(user_id):
 @app.route('/tag/<int:doc_id>')
 def get_tags(doc_id):
     
-    tags = crud.get_tags_by_doc_id(doc_id)
+    selected_tags = crud.get_tags_by_doc_id(doc_id)
+    
+    all_tags = crud.get_all_tag_options()
 
-    return jsonify(tags)
+    unselected_tags = []
+
+    for tag in all_tags:
+        if tag not in selected_tags:
+            unselected_tags.append(tag)
+
+    tag_info = {
+        'selected_tags': selected_tags,
+        'unselected_tags': unselected_tags 
+    }
+
+    return jsonify(tag_info)
 
 
 @app.route('/tag')
