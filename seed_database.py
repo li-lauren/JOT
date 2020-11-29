@@ -9,6 +9,7 @@ from newspaper import Article
 import crud
 import model
 import server
+import tag_tree
 
 os.system('dropdb jot')
 os.system('createdb jot')
@@ -130,6 +131,17 @@ crud.accept_invite_by_follow_id(follow.doc_follower_id)
 
 follow2 = crud.create_doc_follower(2,1, "Reminded me of what we were talking about last week...")
 crud.accept_invite_by_follow_id(follow2.doc_follower_id)
+
+# Add tags 
+
+tag_dict = tag_tree.tag_tree
+tags = tag_tree.get_leaves(tag_dict)
+
+print(tags)
+
+for tag in tags:
+    crud.create_tag(tag)
+
 
 
 

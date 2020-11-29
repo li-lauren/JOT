@@ -17,21 +17,23 @@ const AddTag = ({doc_id}) => {
     }
 
     return(
-        <Form inline onSubmit={addTag}>
-            <Form.Label htmlFor="inlineFormInputName2" srOnly>
-                Add Tag
-            </Form.Label>
-            <Form.Control
-                className="mb-2 mr-sm-2"
-                id="inlineFormInputName2"
-                placeholder="Add Tag"
-                value={tag}
-                onChange={handleInput}
-            />
-            
-            <Button type="submit" className="mb-2" size="sm">
-                +
-            </Button>
-        </Form>
+        <div></div>
     )
 }
+
+{/* <Form inline onSubmit={addTag}>
+    <Form.Label htmlFor="inlineFormInputName2" srOnly>
+        Add Tag
+    </Form.Label>
+    <Form.Control
+        className="mb-2 mr-sm-2"
+        id="inlineFormInputName2"
+        placeholder="Add Tag"
+        value={tag}
+        onChange={handleInput}
+    />
+    
+    <Button type="submit" className="mb-2" size="sm">
+        +
+    </Button>
+</Form> */}
