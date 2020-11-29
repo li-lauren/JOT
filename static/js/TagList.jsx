@@ -43,18 +43,19 @@ const TagList = ({doc_id}) => {
         return () => { isMounted = false };
     }, [])
 
-    const selectTag = (tag_id) => {
+    const selectTag = (tag_id, tag) => {
         if (socket) {
             console.log('Selecting Tag')
-            console.log(tag_id)
-            socket.emit('select_tag', {'tag_id': tag_id, 'doc_id': doc_id})
+            socket.emit('select_tag', 
+                {'tag_id': tag_id, 'doc_id': doc_id, 'tag': tag})
         }
     }
 
-    const unselectTag = (tag_id) => {
+    const unselectTag = (tag_id, tag) => {
         if (socket) {
             console.log('Unselecting Tag')
-            socket.emit('uselect_tag', {'tag_id': tag_id, 'doc_id': doc_id})
+            socket.emit('uselect_tag', 
+                {'tag_id': tag_id, 'doc_id': doc_id, 'tag': tag})
         }
     }
 
@@ -66,7 +67,7 @@ const TagList = ({doc_id}) => {
                 {selectedTags.map(tag => 
                     <Badge pill 
                         key={tag.tag_id}
-                        onClick={() => unselectTag(tag.tag_id)}
+                        onClick={() => unselectTag(tag.tag_id, tag.tag)}
                     >
                         {tag.tag}
                     </Badge>
@@ -87,7 +88,7 @@ const TagList = ({doc_id}) => {
             {showTags ? unselectedTags ? unselectedTags.map(tag => 
             <Badge pill 
                 key={tag.tag_id} 
-                onClick={() => selectTag(tag.tag_id)}
+                onClick={() => selectTag(tag.tag_id, tag.tag)}
             >
                 {tag.tag}
             </Badge>

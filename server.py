@@ -8,6 +8,7 @@ import crud
 import json
 import datetime, time
 from trie import Trie
+from tag_tree import initialize_tag_tree, tag_paths
 
 import os
 
@@ -18,7 +19,7 @@ app.secret_key = SECRET_KEY
 
 io = SocketIO(app, cors_allowed_origins="*")
 
-
+tag_trees = {}
 
 
 @app.route('/')
@@ -604,8 +605,35 @@ def add_tag(data):
 def select_tag(data):
     tag_id = data['tag_id']
     doc_id = data['doc_id']
+    tag = data['tag']
+    user_id = session['user_id']
 
     crud.create_doc_tag(doc_id, tag_id)
+
+    doc = crud.get_doc_by_doc_id(doc_id)
+    img = crud.get_image_url_by_doc_id(doc_id)
+    img_url = ''
+    if img:
+        img_url = img[0].url
+
+    doc_info = {
+        "name": doc.title,
+        "doc_id": doc.doc_id,
+        "img": img_url,
+        "value": 5
+    }
+
+    tag_tree = tag_trees[user_id]
+    tag_path = tag_paths[tag]
+
+    curr_tag = tag_tree[0]
+    while tag_path:
+        curr_tag = curr_tag.children[tag_path[0]]
+        tag_path = tag_path[1:]
+    
+    curr_tag.children.append(doc_info)
+
+    print(tag_tree)
 
     io.emit("tags_updated", room=doc_id)
 
@@ -614,8 +642,25 @@ def select_tag(data):
 def unselect_tag(data):
     tag_id = data['tag_id']
     doc_id = data['doc_id']
+    tag = data['tag']
+    user_id = session['user_id']
 
     crud.delete_doc_tag(doc_id, tag_id)
+
+    tag_tree = tag_trees[user_id]
+    tag_path = tag_paths[tag]
+
+    curr_tag = tag_tree[0]
+    while tag_path:
+        curr_tag = curr_tag.children[tag_path[0]]
+        tag_path = tag_path[1:]
+    
+    for i in range(len(curr_tag.children)):
+        if curr_tag.children[i]['doc_id'] == doc_id:
+            del curr_tag.children[i]
+            break
+
+    print(tag_tree)
 
     io.emit("tags_updated", room=doc_id)
 
@@ -715,5 +760,11 @@ if __name__ == '__main__':
     emails = crud.get_all_emails()
     for email in emails:
         email_trie.insert(email[0])
+
+   
+    users = crud.get_users()
+    for user in users:
+        tag_trees[user.user_id] = initialize_tag_tree()
+
         
     io.run(app, debug=True, host='0.0.0.0')
