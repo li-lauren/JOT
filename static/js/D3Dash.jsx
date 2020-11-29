@@ -384,6 +384,18 @@ const D3Dash = () => {
 
     const ref = React.useRef()
 
+    const history = useHistory()
+    const clickHandler = d => {
+        console.log('HANDLING CLICK')
+        console.log(d)
+        console.log(d.data)
+        fetch(`/docs/${d.data.doc_id}`)
+        .then(res => res.json())
+        .then(data => {
+            history.push('/article', {params: data})
+        })
+    }
+
     useEffect(() => {
         const svg = d3.select(ref.current),
             margin = 20,
@@ -584,7 +596,8 @@ const D3Dash = () => {
             .enter().append("circle") // for each node add a circle
             .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; }) // assign class names to each circle
             .style("fill", function(d) { return d.children ? color(d.depth) : null; }) // give circle a depth-based color
-            .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+            .on("dblclick", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
+            
 
         // Append title/label for each node
         var text = g.selectAll("text")
@@ -593,13 +606,24 @@ const D3Dash = () => {
             .attr("class", "label") // assign label as the class name
             .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
             .style("display", function(d) { return d.parent === root ? "inline" : "none"; }) // only show text if the parent = curr root
-            .text(function(d) { return d.data.name; }); // retrieve name (from json data) and set as text
+            .style('pointer-events', 'auto')
+            .on("click", function(d) {
+                console.log('CLICKED')
+                console.log(d.data.name)
+                console.log(d.data)
+                d3.event.stopPropagation();
+                clickHandler(d)
+                })
+            .text(function(d) { return d.data.name; }) // retrieve name (from json data) and set as text
+            
+        
+        
 
         var node = g.selectAll("circle,text");
 
         svg
             .style("background", color(-1))
-            .on("click", function() { zoom(root); });
+            .on("dblclick", function() { zoom(root); });
 
         zoomTo([root.x, root.y, root.r * 2 + margin]);
 
