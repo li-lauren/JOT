@@ -54,7 +54,7 @@ const TagList = ({doc_id}) => {
     const unselectTag = (tag_id, tag) => {
         if (socket) {
             console.log('Unselecting Tag')
-            socket.emit('uselect_tag', 
+            socket.emit('unselect_tag', 
                 {'tag_id': tag_id, 'doc_id': doc_id, 'tag': tag})
         }
     }
