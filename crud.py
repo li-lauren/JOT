@@ -164,6 +164,17 @@ def create_doc_tag(doc_id, tag_id):
     return doc_tag
 
 
+def delete_doc_tag(doc_id, tag_id):
+    """Delete a doc's tag."""
+
+    doc_tag = Doc_Tag.query.\
+        filter(Doc_Tag.doc_id == doc_id, Doc_Tag.tag_id == tag_id).first()
+
+    db.session.delete(doc_tag)
+    db.session.commit()
+
+
+
 def get_tags_by_doc_id(doc_id):
     """Get all of a document's tags."""
 
