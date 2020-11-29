@@ -211,6 +211,4 @@ def get_leaves(tag_tree):
     return leaf_tag 
 
 
-print(get_leaves(tag_tree))
-
     
