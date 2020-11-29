@@ -38,7 +38,7 @@ const TagList = ({doc_id}) => {
         if (socket) {
             console.log('Selecting Tag')
             console.log(tag_id)
-            socket.emit('select_tag', {'tag': tag, 'doc_id': doc_id})
+            socket.emit('select_tag', {'tag_id': tag_id, 'doc_id': doc_id})
         }
     }
 
