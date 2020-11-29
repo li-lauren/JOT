@@ -610,6 +610,15 @@ def select_tag(data):
     io.emit("tags_updated", room=doc_id)
 
 
+@io.on("unselect_tag")
+def unselect_tag(data):
+    tag_id = data['tag_id']
+    doc_id = data['doc_id']
+
+    crud.delete_doc_tag(doc_id, tag_id)
+
+    io.emit("tags_updated", room=doc_id)
+
 
 @io.on("accept_friend_req")
 def accept_friend_request(data):
