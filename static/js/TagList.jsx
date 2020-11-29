@@ -1,13 +1,17 @@
 const TagList = ({doc_id}) => {
     const socket = useContext(SocketContext)
-    const [tagList, setTagList] = useState(null)
+    // const [tagList, setTagList] = useState(null)
     const [tagAdded, setTagAdded] = useState(false)
+
+    const [selectedTags, setSelectedTags] = useState(null)
+    const [unselectedTags, setUnselectedTags] = useState(null)
 
     const getTags = () => {
         fetch(`/tag/${doc_id}`)
         .then(res => res.json())
         .then(data => {
-            setTagList(data)
+            setSelectedTags(data.selected_tags)
+            setUnselectedTags(data.unselected_tags)
             setTagAdded(false)
         })
     }
@@ -33,12 +37,17 @@ const TagList = ({doc_id}) => {
 
     return(
         <div>
-            {tagList ? tagList.map(tag => 
+            {selectedTags ? selectedTags.map(tag => 
             <Badge pill key={tag.tag_id}>
                 {tag.tag}
             </Badge>
             ) : ''}
-            <AddTag doc_id={doc_id}/>
+            {/* <AddTag doc_id={doc_id}/> */}
+            {unselectedTags ? unselectedTags.map(tag => 
+            <Badge pill key={tag.tag_id}>
+                {tag.tag}
+            </Badge>
+            ) : ''}
         </div>
     )
 }
