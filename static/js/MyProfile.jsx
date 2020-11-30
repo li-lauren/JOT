@@ -15,13 +15,15 @@ const MyProfile = ({setLoggedIn}) => {
     const socket = useContext(SocketContext)
 
     const logout = () => {
-        console.log('Disconnecting...')
+        setLoggedIn(false)
+        fetch('/logout')
+        .then(() => {
+            console.log('Disconnecting...')
             if (socket) {
                 socket.disconnect()
             }
-        localStorage.clear()
-        setLoggedIn(false)
-        
+            localStorage.clear()    
+        })    
     }
 
     useEffect(() => {

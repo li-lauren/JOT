@@ -70,8 +70,12 @@ def login():
 
 @app.route('/logout')
 def logout():
-    session.clear()
-    print(f"CLEAR SESSION: {session}")
+    # session.clear()
+    # print(f"CLEAR SESSION: {session}")
+    user_id  = session['user_id']
+    tag_trees[user_id] = initialize_tag_tree()
+
+    print(session)
 
     return redirect('/')
 
