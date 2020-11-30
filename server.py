@@ -45,9 +45,22 @@ def login():
             session['user_id'] = user.user_id
             session['fname'] = user.fname
             session['lname'] = user.lname
-            print(session)
+            
+            # Initiate tag tree
+            tag_tree = tag_trees[user.user_id]
+            tag_doc_dict = crud.get_all_tags_and_docs(user.user_id)
 
-            # return f"Welcome, {user.fname}!"
+            for tag, docs in tag_doc_dict.items(): 
+
+                tag_path = tag_paths[tag]
+
+                curr_tag = tag_tree[0]
+                while tag_path:
+                    curr_tag = curr_tag['children'][tag_path[0]]
+                    tag_path = tag_path[1:]
+                
+                curr_tag['children'].extend(docs)
+
             return f"{user.user_id} {user.fname} {user.lname} {user.email}"
     
         else:
@@ -328,6 +341,7 @@ def get_tag_tree():
     tag_tree = tag_trees[user_id][0]
 
     return jsonify(tag_tree)
+
 
 
 @app.route('/docs/tags/<int:tag_id>')

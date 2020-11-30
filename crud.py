@@ -192,6 +192,33 @@ def get_all_tags_for_owned_docs(user_id):
     return owned_tags
 
 
+def get_all_tags_and_docs(user_id):
+    tags_docs = db.session.query(Tag, Doc).\
+        join(Doc_Tag, Doc_Tag.tag_id == Tag.tag_id).\
+        join(Doc, Doc_Tag.doc_id == Doc.doc_id).\
+        filter(Doc.owner == user_id).all()
+
+    tag_doc_dict = {}
+
+    for (tag, doc) in tags_docs:
+        img = get_image_url_by_doc_id(doc.doc_id)
+        img_url = ''
+        if img:
+            img_url = img[0].url
+        
+        doc_info = {
+            "name": doc.title,
+            "doc_id": doc.doc_id,
+            "img": img_url,
+            "value": 5
+        }
+
+        tag_doc_dict.setdefault(tag.tag, []).append(doc_info)
+
+    return tag_doc_dict
+
+
+
 def get_all_tags_for_followed_docs(user_id):
     """Get all tags for a user's followed docs."""
 
