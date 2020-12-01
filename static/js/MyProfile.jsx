@@ -47,37 +47,45 @@ const MyProfile = ({setLoggedIn}) => {
 
 
     return(
-        <div>
-            <h4>Profile</h4>
-            <h1>{fname} {lname}</h1>
-            <h5>{email}</h5>
-            <a href="" onClick={logout}>Logout</a>
+        <Container>
+            <Row>
+                <Col m={2}>
+                    <h4 id="profile-header">Profile / {fname}</h4>
+                </Col>
+                <Col m={9}>
+                    <h1>{fname} {lname}</h1>
+                    <h5>{email}</h5>
+                    <a href="" onClick={logout}>Logout</a>
 
-            <Search />
-            <FriendReqList />
+                    <Search />
+                    <FriendReqList />
+                    
+                    <div>
+                        <span>{totalLikes}</span>
+                        <br/>
+                        <span>All-time Likes</span>
+                    </div>
+
+                    <div>
+                        <span>{topNote ? topNote.body : 'No jots yet'}</span>
+                        <br/>
+                        <span>{topNote ? `${topNoteLikes} likes` : ''}</span>
+                        <br/>
+                        <span>Top Jot</span>
+                    </div>
+
+                    <div>
+                        <span>{topDoc ? topDoc.title : 'No docs yet'}</span>
+                        <br/>
+                        <span>{topDoc ? `${topDocFollowers} followers` : ''}</span>
+                        <br/>
+                        <span>Top Article</span>
+                    </div>
+                </Col>
+            </Row>
+           
             
-            <div>
-                <span>{totalLikes}</span>
-                <br/>
-                <span>All-time Likes</span>
-            </div>
 
-            <div>
-                <span>{topNote ? topNote.body : 'No jots yet'}</span>
-                <br/>
-                <span>{topNote ? `${topNoteLikes} likes` : ''}</span>
-                <br/>
-                <span>Top Jot</span>
-            </div>
-
-            <div>
-                <span>{topDoc ? topDoc.title : 'No docs yet'}</span>
-                <br/>
-                <span>{topDoc ? `${topDocFollowers} followers` : ''}</span>
-                <br/>
-                <span>Top Article</span>
-            </div>
-
-        </div>
+        </Container>
     )
 }

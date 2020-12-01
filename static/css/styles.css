@@ -55,6 +55,18 @@ html, body {
     display: inline-block;
 } */
 
+/* PROFILE */
+#profile-header {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    text-align: right;
+    display: inline-block;
+    font-size: 90px;
+    font-weight: 700;
+    color: whitesmoke;
+    /* margin: 0 0 500px 0; */
+}
+
 /* DOC LISTING */
 .doc-list {
     z-index: 1;
