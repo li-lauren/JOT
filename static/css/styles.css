@@ -47,6 +47,10 @@ html, body {
     margin: 0px -20px 50px -20px;
 }
 
+#menu {
+    min-height: 750px;
+}
+
 /* #dashboard {
     display: inline-block;
 } */
