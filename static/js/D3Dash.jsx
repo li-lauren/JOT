@@ -111,6 +111,7 @@ const D3Dash = () => {
             .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
             .style("display", function(d) { return (d.parent === root) ? "inline" : "none"; }) // only show text if the parent = curr root
             .style('pointer-events', 'auto')
+            // .style("font-size", function(d) { return Math.min(2 * d.r, (2 * d.r - 8 ) / this.getComputedTextLength() * 24) + "px"; })
             .on("click", function(d) {
                 console.log('CLICKED')
                 console.log(d.data.name)
@@ -118,7 +119,9 @@ const D3Dash = () => {
                 d3.event.stopPropagation();
                 clickHandler(d)
                 })
-            .text(function(d) { return d.value > 0 ? d.data.name : ''; }) // retrieve name (from json data) and set as text
+            .text(function(d) { 
+                return d.value > 0 ? d.data.name : ''; }) 
+                // retrieve name (from json data) and set as text
             
         
         

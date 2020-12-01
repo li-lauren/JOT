@@ -53,7 +53,7 @@ const Search = () => {
                     placeholder="User Search"
                     value={searchTerm}
                     onChange={e => getAutocomplete(e)}
-                    autocomplete="off"
+                    autoComplete="off"
                 />
                
                 {/* <Button type="submit" className="mb-2">

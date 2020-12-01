@@ -25,9 +25,7 @@ const DocSearch = () => {
             socket.on('docMatches', data => {
                
                 if (isMounted) {
-                    // setOptions(data.options)
                     let term = data.search_term
-                    console.log(data.options)
                     let newOptions = [...data.options]
                     
                     for (let i=0; i < newOptions.length; i++) {
@@ -51,13 +49,11 @@ const DocSearch = () => {
             })    
         }
 
-        return () => { isMounted = true }
+        return () => { isMounted = false }
     }, [])
 
     const getDoc = doc_id => {
         
-        console.log(`Get Doc ${doc_id}`)
-
         fetch(`/docs/${doc_id}`)
         .then(res => res.json())
         .then(data => {
