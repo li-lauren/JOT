@@ -19,7 +19,6 @@ const Dashboard = () => {
         setShowAddDoc(false)
         setShowInvites(false)
         setShowDocList(false)
-        setShowD3(false)
     }
 
     const handleAddDoc = () => {
@@ -27,7 +26,6 @@ const Dashboard = () => {
         setShowAddDoc(!showAddDoc)
         setShowInvites(false)
         setShowDocList(false)
-        setShowD3(false)
     }
 
     const handleInvites = () => {
@@ -35,7 +33,6 @@ const Dashboard = () => {
         setShowAddDoc(false)
         setShowInvites(!showInvites)
         setShowDocList(false)
-        setShowD3(false)
     }
 
     const handleDocList = () => {
@@ -43,7 +40,6 @@ const Dashboard = () => {
         setShowAddDoc(false)
         setShowInvites(false)
         setShowDocList(!showDocList)
-        setShowD3(false)
     }
 
 
@@ -70,53 +66,59 @@ const Dashboard = () => {
 
             
             <section id="menu">
-                <Row>
-                    <Col>
-                        <p 
-                            onClick={handleMyProfile}
-                        >
-                            {`${fname}/Profile`}
-                        </p>
-                    </Col>
+                <Container>
+                    <Row>
+                        <Col>
+                            <p 
+                                onClick={handleMyProfile}
+                            >
+                                {`${fname}/Profile`}
+                            </p>
+                        </Col>
+                        
+                        <Col>
+                            <span
+                                onClick={handleSearch}
+                            >
+                                Search
+                            </span>
+                        </Col>
+                        
+                        <Col>
+                            <span 
+                                onClick={handleAddDoc}>
+                                Add an Article
+                            </span>
+                        </Col>
+
+                        <Col>
+                            <span
+                                onClick={handleInvites}
+                            >
+                                Invites
+                            </span>
+                        </Col>
+
+                        <Col>
+                            <div onClick={handleDocList}>
+                                Article List
+                            </div>
+                        </Col>
+
+                    </Row>
+                    <br/>
+                    <br/>
+                    <Row>
+                        {showSearch ? <DocSearch /> : ''}
+                        {showInvites ? <InvitationList /> : ''}
+                        {showDocList ? <DocList /> : ''}
+                        {showAddDoc ? <AddDoc /> : ''}
+                    </Row>
                     
-                    <Col>
-                        <span
-                            onClick={handleSearch}
-                        >
-                            Search
-                        </span>
-                    </Col>
-                    
-                    <Col>
-                        <span 
-                            onClick={handleAddDoc}>
-                            Add an Article
-                        </span>
-                    </Col>
-
-                    <Col>
-                        <span
-                            onClick={handleInvites}
-                        >
-                            Invites
-                        </span>
-                    </Col>
-
-                    <Col>
-                        <div onClick={handleDocList}>
-                            Article List
-                        </div>
-                    </Col>
-
-                </Row>
-    
+                </Container>
+                
             </section> 
-            <br/>
-            <Row>
-                {showSearch ? <DocSearch /> : ''}
-                {showInvites ? <InvitationList /> : ''}
-                {showDocList ? <DocList showAddDoc={showAddDoc} /> : ''}
-            </Row>
+        
                 
                 
             

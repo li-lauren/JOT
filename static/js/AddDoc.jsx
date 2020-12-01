@@ -1,4 +1,5 @@
-const AddDoc = ({docAdded, setDocAdded}) => {
+const AddDoc = () => {
+    const history = useHistory()
     const [userInput, setUserInput] = useReducer(
         (state, newState) => ({...state, ...newState}), 
         {
@@ -34,11 +35,13 @@ const AddDoc = ({docAdded, setDocAdded}) => {
         .then(data => {
             console.log('Doc added')
             console.log(data) 
-            setDocAdded(!docAdded)
+            // setDocAdded(!docAdded)
             setUserInput({
                 url: '', 
                 tag: '',
             })
+            history.push('/article', {params: data})
+
         })
     }
 
