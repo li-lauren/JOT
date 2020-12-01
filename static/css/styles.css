@@ -5,7 +5,8 @@
 
 html, body {
     height: 100%;
-    font-family: 'EB Garamond', serif;
+    font-family: 'Archivo', sans-serif;
+    background-color: #A3F5CF;
 }
 
 #root {
@@ -18,6 +19,9 @@ html, body {
 }
 
 /* DASHBOARD */
+#hamburger {
+    display: inline-block;
+}
 #dashboard-h {
     /* font-family: 'Libre Franklin', sans-serif; */
     /* font-family: 'Averia Serif Libre', cursive; */
@@ -27,6 +31,8 @@ html, body {
     text-align: right;
     display: inline-block;
     font-size: 90px;
+    font-weight: 700;
+    color: whitesmoke;
     margin: 0 0 500px 0;
 }
 

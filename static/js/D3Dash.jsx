@@ -33,7 +33,7 @@ const D3Dash = () => {
         if (tagTree) {
 
         const svg = d3.select(ref.current),
-            margin = 20,
+            margin = 50,
             diameter = +svg.attr("width"),
             g = svg.append("g").attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
         
@@ -72,11 +72,9 @@ const D3Dash = () => {
             .data(nodes)
             .enter().append("pattern")
             .attr("id", function(d) {
-                console.log(d)
                 if (d.children) {
                     return 0
                 } else{
-                    console.log(`image${d.data.doc_id}`)
                     return `image${d.data.doc_id}`
                 }
                 })
@@ -88,6 +86,8 @@ const D3Dash = () => {
             .attr("width", function(d) {return d.r})
             .attr("height", function(d) {return d.r})
             .attr("preserveAspectRatio", "xMidYMid slice")
+
+
             
 
         // Append group (circle)
@@ -98,6 +98,9 @@ const D3Dash = () => {
             .style("fill", function(d) { return d.children ? color(d.depth) : `url(#image${d.data.doc_id})` }) // give circle a depth-based color
             .style("fill-opacity", function(d) { return d.value > 0 ? 1 : 0; })
             .on("dblclick", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
+            // .on("mouseover", function(d) { 
+            //     d3.select(this).style("fill", )
+            // })
             
 
         // Append title/label for each node
@@ -171,6 +174,8 @@ const D3Dash = () => {
             width="960" 
             height="960" 
             ref={ref}
+            viewBox="0 0 960 960"
+            preserveAspectRatio="xMidYMid meet"
         />
     )
 }
