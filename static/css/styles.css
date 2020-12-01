@@ -132,11 +132,16 @@ div.doc-listing:hover {
 .search-results {
     position: absolute;
     width: 95%;
-    background-color: bisque;
-    border-bottom: bisque solid 1px;
-    border-left: bisque solid 1px;
-    border-right: bisque solid 1px;
     z-index: 10;
+}
+
+.search-result {
+    margin: 8px 0px;
+}
+
+.search-author {
+    font-style: italic;
+    font-size: 14px;
 }
     
 

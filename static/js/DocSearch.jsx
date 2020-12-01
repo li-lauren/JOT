@@ -1,7 +1,7 @@
 const highlightText = (idx, txt, termLen, optKey) => {
     let newTxt = [
         txt.substring(0, idx),
-        <strong key={optKey}>
+        <strong key={optKey} style={{color:"blue"}}>
             {txt.substring(idx, idx + termLen)}
         </strong>,
         txt.substring(idx + termLen)
@@ -85,16 +85,19 @@ const DocSearch = () => {
                     placeholder="Article Search"
                     value={searchTerm}
                     onChange={e => getDocMatches(e)}
-                    autocomplete="off"
+                    autoComplete="off"
                 />
             </Form>
 
             <span className="search-results">
                  {options ? options.map((option, i) => 
-                    <div key={option[0]} onClick={() => getDoc(option[0])}>
+                    <div 
+                        key={option[0]} 
+                        onClick={() => getDoc(option[0])}
+                        className="search-result"
+                    >
                         <div>{option[2]}</div>
-                        <div>{option[3]}</div>
-                        
+                        <div className="search-author">{option[3]}</div>    
                     </div>
                         ): ''}
             </span>
