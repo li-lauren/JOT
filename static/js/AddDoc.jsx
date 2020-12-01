@@ -31,7 +31,7 @@ const AddDoc = () => {
             })
         }
         fetch("/docs", reqOptions)
-        .then(res => res.text())
+        .then(res => res.json())
         .then(data => {
             console.log('Doc added')
             console.log(data) 
