@@ -39,8 +39,7 @@ const Search = () => {
     }
 
     return(
-        <div>
-            <h5>User Search</h5>
+        <div id="search-bar"> 
             <Form inline 
                 // onSubmit={handleSubmit}
             >

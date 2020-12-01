@@ -7,6 +7,8 @@ const MyProfile = ({setLoggedIn}) => {
     const [totalLikes, setTotalLikes] = useState(null)
 
     const [numFriends, setNumFriends] = useState(null)
+
+    const [showSearch, setShowSearch] = useState(false)
    
     const user_id = localStorage.getItem('user_id')
     const fname = localStorage.getItem('fname')
@@ -49,15 +51,42 @@ const MyProfile = ({setLoggedIn}) => {
     return(
         <Container>
             <Row>
-                <Col m={2}>
+                <Col >
                     <h4 id="profile-header">Profile / {fname}</h4>
                 </Col>
-                <Col m={9}>
-                    <h1>{fname} {lname}</h1>
-                    <h5>{email}</h5>
-                    <a href="" onClick={logout}>Logout</a>
+                <Col xs={9}>
+                    <Row>
+                        <Col>
+                            <h1>{fname} {lname}</h1>
+                            <h5 className="email-h">{email}</h5>
+                        </Col>
+                        <Col className="d-flex justify-content-end">
+                            {
+                                showSearch ? 
+                                    <div>
+                                        <Search setShowSearch={setShowSearch} />
+                                        <span 
+                                            className="material-icons md-36"
+                                            onClick={() => setShowSearch(false)}
+                                        >
+                                            search_off
+                                        </span>
+                                    </div> : 
+                                    <span  
+                                        className="material-icons md-36"
+                                        onClick={() => setShowSearch(true)}
+                                    >
+                                        search
+                                    </span>
 
-                    <Search />
+                            }
+                            
+                        </Col>
+
+                    </Row>
+                    
+
+                    
                     <FriendReqList />
                     
                     <div>
@@ -74,13 +103,16 @@ const MyProfile = ({setLoggedIn}) => {
                         <span>Top Jot</span>
                     </div>
 
-                    <div>
+                    <div className="top-stat">
                         <span>{topDoc ? topDoc.title : 'No docs yet'}</span>
                         <br/>
                         <span>{topDoc ? `${topDocFollowers} followers` : ''}</span>
                         <br/>
                         <span>Top Article</span>
                     </div>
+                </Col>
+                <Col xs={1}>
+                    <a href="" onClick={logout}>Logout</a>
                 </Col>
             </Row>
            

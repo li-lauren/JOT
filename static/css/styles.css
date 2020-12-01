@@ -20,9 +20,6 @@ html, body {
 }
 
 /* DASHBOARD */
-#hamburger {
-    display: inline-block;
-}
 #dashboard-h {
     /* font-family: 'Libre Franklin', sans-serif; */
     /* font-family: 'Averia Serif Libre', cursive; */
@@ -66,6 +63,16 @@ html, body {
     font-weight: 700;
     color: whitesmoke;
     /* margin: 0 0 500px 0; */
+}
+
+.email-h {
+    font-family: "Poppins", sans-serif;
+    font-weight: 100;
+}
+
+/* SEARCH */
+#search-bar {
+    display: inline-block;
 }
 
 /* DOC LISTING */
