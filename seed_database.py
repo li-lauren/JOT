@@ -126,8 +126,6 @@ req = crud.create_friend_req(1,2)
 crud.add_friend(req.user_relationship_id)
 
 # Some article following
-follow = crud.create_doc_follower(2,4, "Thought you'd like this!")
-crud.accept_invite_by_follow_id(follow.doc_follower_id)
 
 follow2 = crud.create_doc_follower(2,1, "Reminded me of what we were talking about last week...")
 crud.accept_invite_by_follow_id(follow2.doc_follower_id)
@@ -137,10 +135,29 @@ crud.accept_invite_by_follow_id(follow2.doc_follower_id)
 tag_dict = tag_tree.tag_tree
 tags = tag_tree.get_leaves(tag_dict)
 
-print(tags)
-
 for tag in tags:
     crud.create_tag(tag)
+
+# Add tags to articles
+crud.create_doc_tag(1, 12)
+crud.create_doc_tag(2, 25)
+crud.create_doc_tag(3, 6)
+crud.create_doc_tag(3, 16)
+crud.create_doc_tag(4, 10)
+crud.create_doc_tag(4, 12)
+crud.create_doc_tag(5, 11)
+crud.create_doc_tag(6, 4)
+crud.create_doc_tag(6, 7)
+crud.create_doc_tag(7, 4)
+crud.create_doc_tag(8, 2)
+crud.create_doc_tag(9, 2)
+crud.create_doc_tag(10, 4)
+crud.create_doc_tag(11, 4)
+crud.create_doc_tag(12, 19)
+crud.create_doc_tag(13, 18)
+crud.create_doc_tag(14, 18)
+crud.create_doc_tag(14, 20)
+crud.create_doc_tag(15, 5)
 
 
 
