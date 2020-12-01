@@ -73,7 +73,7 @@ const DocSearch = () => {
 
 
     return(
-        <div>
+        <div style={{width:"50%"}}>
             <h5>Search the Library</h5>
             <Form>
                 <Form.Label htmlFor="inlineFormInputName2" srOnly>

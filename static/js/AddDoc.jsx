@@ -46,7 +46,7 @@ const AddDoc = () => {
     }
 
     return(
-        <div>
+        <div style={{width:"50%"}}>
             <h5>Add an Article</h5>
             <Form onSubmit={addDoc}>
                 <Form.Control 
@@ -56,6 +56,7 @@ const AddDoc = () => {
                     name="url" 
                     value={userInput.url} 
                     onChange={handleChange} 
+                    style={{width:"100%"}}
                 />
                 <Form.Control type="submit" style={{display: 'none'}} />
             </Form>
