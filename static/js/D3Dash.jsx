@@ -39,8 +39,10 @@ const D3Dash = () => {
         
         var color = d3.scaleLinear()
             .domain([-1, 5])
-            .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
+            .range(["hsl(0, 0%, 15%)", "hsl(55, 27%, 83%)"])
             .interpolate(d3.interpolateHcl);
+
+            // .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
         
         // Create a new pack layout (which expects json)
         var pack = d3.pack()

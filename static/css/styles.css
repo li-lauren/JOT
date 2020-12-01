@@ -6,7 +6,8 @@
 html, body {
     height: 100%;
     font-family: 'Archivo', sans-serif;
-    background-color: #A3F5CF;
+    background-color: #262626;
+    color: whitesmoke;
 }
 
 #root {
