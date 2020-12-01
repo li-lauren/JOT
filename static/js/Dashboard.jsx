@@ -6,6 +6,8 @@ const Dashboard = () => {
     const [showD3, setShowD3] = useState(true)
     const [showMenu, setShowMenu] = useState(false)
 
+    const fname = localStorage.getItem("fname")
+
     const history = useHistory()
 
     const handleMyProfile = () => {
@@ -49,17 +51,16 @@ const Dashboard = () => {
         
         <div>
             <h1 id="dashboard-h">EXPLORER</h1>
-            {showSearch ? <DocSearch /> : ''}
-            {showInvites ? <InvitationList /> : ''}
-            {showDocList ? <DocList showAddDoc={showAddDoc} /> : ''}
+            
             {showD3 ? <D3Dash /> : ''}
 
             <a href="#menu" id="hamburger">
                 <span 
                     className="material-icons md-48"
+                    style={{color:"whitesmoke"}}
                     // onClick={() => setShowMenu(!showMenu)}
                 >
-                    menu
+                    south
                 </span>
 
             </a>
@@ -68,40 +69,54 @@ const Dashboard = () => {
             <br/>
 
             
-                <section id="menu">
-                    <i 
-                        className="material-icons md-36"
-                        onClick={handleMyProfile}
-                    >
-                        person
-                    </i>
-                    <br/>
-                    <span 
-                        className="material-icons md-36" 
-                        onClick={handleSearch}
-                    >
-                        search
-                    </span>
-                    <br/>
-                    <span 
-                        className="material-icons md-36"
-                        onClick={handleAddDoc}>
-                        post_add
-                    </span>
-                    <span 
-                        className="material-icons md-36"
-                        onClick={handleInvites}
-                    >
-                        how_to_reg
-                    </span>
-                    <div onClick={handleDocList}>
-                        Article List
-                    </div>
-                    <div onClick={() => setShowD3(!showD3)}>
-                        Article Explorer
-                    </div>
+            <section id="menu">
+                <Row>
+                    <Col>
+                        <p 
+                            onClick={handleMyProfile}
+                        >
+                            {`${fname}/Profile`}
+                        </p>
+                    </Col>
+                    
+                    <Col>
+                        <span
+                            onClick={handleSearch}
+                        >
+                            Search
+                        </span>
+                    </Col>
+                    
+                    <Col>
+                        <span 
+                            onClick={handleAddDoc}>
+                            Add an Article
+                        </span>
+                    </Col>
 
-                </section> : ''
+                    <Col>
+                        <span
+                            onClick={handleInvites}
+                        >
+                            Invites
+                        </span>
+                    </Col>
+
+                    <Col>
+                        <div onClick={handleDocList}>
+                            Article List
+                        </div>
+                    </Col>
+
+                </Row>
+    
+            </section> 
+            <br/>
+            <Row>
+                {showSearch ? <DocSearch /> : ''}
+                {showInvites ? <InvitationList /> : ''}
+                {showDocList ? <DocList showAddDoc={showAddDoc} /> : ''}
+            </Row>
                 
                 
             
