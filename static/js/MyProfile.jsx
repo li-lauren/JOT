@@ -1,6 +1,7 @@
 const MyProfile = ({setLoggedIn}) => {
     const [topDoc, setTopDoc] = useState(null)
     const [topDocFollowers, setTopDocFollowers] = useState(null)
+    const [topImg, setTopImg] = useState(null)
     
     const [topNote, setTopNote] = useState(null)
     const [topNoteLikes, setTopNoteLikes] = useState(null)
@@ -44,6 +45,7 @@ const MyProfile = ({setLoggedIn}) => {
             setTopNoteLikes(stats.topNoteLikes)
             setTopDoc(stats.topDoc)
             setTopDocFollowers(stats.topDocFollowers)
+            setTopImg(stats.topImg)
         })
     }
 
@@ -121,6 +123,7 @@ const MyProfile = ({setLoggedIn}) => {
                     
                     
                     <Row className="d-flex top-article-row">
+                        <img src={topImg} alt="top_image"/>
                         <span className="top-article-h">Top Article</span>
                         <div className="top-article">
                             
