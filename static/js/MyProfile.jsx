@@ -88,22 +88,39 @@ const MyProfile = ({setLoggedIn}) => {
 
                     
                     <FriendReqList />
+
+                    <Row style={{"margin-top": "100px"}}>
+                        <Col xs={4}>
+                            <div className="num-likes-cont">
+                                <span className="num-likes">{totalLikes}</span>
+                                <br/>
+                                <span className="num-likes-f">All-time Likes</span>
+                            </div>
+                        </Col>
+                        <Col xs={8}>
+                            <span className="top-note-h">Top Jot</span>
+                            <div className="top-note-body">
+                                <span className="top-note">
+                                    {topNote ? 
+                                        topNote.body : 
+                                        'No jots yet'}
+                                </span>
+                                <br/>
+                               
+                                { topNote ? 
+                                    <span>
+                                        <span className="top-number">{topNoteLikes}</span> 
+                                        { topNoteLikes == 1 ? ` LIKE` : ` LIKES`} 
+                                    </span> : ''
+                                }
+                                
+                                <br/>  
+                            </div>
+                        </Col>
+                    </Row>
                     
-                    <div>
-                        <span>{totalLikes}</span>
-                        <br/>
-                        <span>All-time Likes</span>
-                    </div>
-
-                    <div>
-                        <span>{topNote ? topNote.body : 'No jots yet'}</span>
-                        <br/>
-                        <span>{topNote ? `${topNoteLikes} likes` : ''}</span>
-                        <br/>
-                        <span>Top Jot</span>
-                    </div>
-
-                    <Row className="d-flex">
+                    
+                    <Row className="d-flex top-article-row">
                         <span className="top-article-h">Top Article</span>
                         <div className="top-article">
                             
@@ -116,10 +133,8 @@ const MyProfile = ({setLoggedIn}) => {
                                 </span>
                                 : ''}
                             </div>
-                            <br/>
-                            
+                            <br/>           
                         </div>
-
                     </Row>
                     
                 </Col>
