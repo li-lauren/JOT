@@ -93,6 +93,7 @@ html, body {
     font-family: "PT Mono", monospace;
     color: #EAE7AF;
     font-size: 24px;
+    padding-right: 5px;
     
 }
 
@@ -103,6 +104,7 @@ html, body {
     float: right;
     margin-bottom: 5px;
     color: #EAE7AF;
+    padding-right: 5px;
     
 }
 
@@ -110,7 +112,20 @@ html, body {
     font-style: bold;
     font-size: 36px;
     color: #a72693;
+    padding-right: 5px;
     
+}
+
+/* FRIENDS */
+.count {
+    font-style: bold;
+    font-size: 14px;
+    color: whitesmoke;
+    border: 1px whitesmoke solid;
+    border-radius: 25%;
+    padding: 3px;
+    margin: 5px;
+    text-align: center;
 }
 
 

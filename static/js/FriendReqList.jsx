@@ -3,6 +3,11 @@ const FriendReqList = () => {
     const [reqList, setReqList] = useState(null)
     const [friendList, setFriendList] = useState(null)
     const [pendingList, setPendingList] = useState(null)
+
+    const [showReqList, setShowReqList] = useState(false)
+    const [showFriendList, setShowFriendList] = useState(false)
+    const [showPending, setShowPending] = useState(false)
+
     const socket = useContext(SocketContext)
     const userId = parseInt(localStorage.getItem('user_id'))
 
@@ -77,30 +82,48 @@ const FriendReqList = () => {
     }, [])
 
     return (
-        <div>
-            <h5>Friend Requests</h5>
-            {reqList ? reqList.map(req => 
-                <FriendReq 
-                    key={req[0]} 
-                    req={req} 
-                    setUpdate={setUpdate}
-                />) : <p>None</p>}
-            <br/>
-            <h5>Friends</h5>
-            {friendList ? friendList.map(friend => 
-            <div key={friend[3]}>
-                {`${friend[1]} ${friend[2]}`}
-            </div>
-            ) : <p>None</p>}
+        <Row>
+            <Col>
+                <h5>
+                    Friend Requests
+                    {reqList ? <span className="count">
+                        {`${reqList.length}`}</span> : ''}
+                </h5>
+                {reqList ? reqList.map(req => 
+                    <FriendReq 
+                        key={req[0]} 
+                        req={req} 
+                        setUpdate={setUpdate}
+                    />) : <p>None</p>}
+            </Col>
+            
+            <Col>
+                <h5>
+                    Friends
+                    {friendList ? <span className="count">
+                        {`${friendList.length}`}</span> : ''}
+                </h5>
 
-            <h5>Pending</h5>
-            {pendingList ? pendingList.map(pendingFriend => 
-            <div key={pendingFriend[3]}>
-                {`${pendingFriend[1]} ${pendingFriend[2]}`}
-            </div>
-            ) : ''}
-            <br/>
-        </div>
+                {friendList ? friendList.map(friend => 
+                <div key={friend[3]}>
+                    {`${friend[1]} ${friend[2]}`}
+                </div>
+                ) : <p>None</p>}
+            </Col>
+            
+            <Col>
+                <h5>
+                    Pending
+                    {pendingList ? <span className="count">
+                        {`${pendingList.length}`}</span> : ''}
+                </h5>
+                {pendingList ? pendingList.map(pendingFriend => 
+                <div key={pendingFriend[3]}>
+                    {`${pendingFriend[1]} ${pendingFriend[2]}`}
+                </div>
+                ) : ''}
+            </Col>
+        </Row>
     )
 
 
