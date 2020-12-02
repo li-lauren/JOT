@@ -70,6 +70,50 @@ html, body {
     font-weight: 100;
 }
 
+.top-article {
+    background-color: #241667;
+    /* display: flex; */
+    text-align: right;
+    
+}
+
+.top-article-h {
+    background-color: #EAE7AF;
+    width: 40%;
+    color: #262626;
+    font-weight: 900;
+    font-size: 24px;
+    padding: 5px;
+    padding-left: 20px;
+    margin-left: 25px;
+    margin-bottom: -5px;
+}
+
+.top-title {
+    font-family: "PT Mono", monospace;
+    color: #EAE7AF;
+    font-size: 24px;
+    
+}
+
+.stat {
+    font-size: 16px;
+    border-bottom: #a72693 3px solid;
+    width: 60%;
+    float: right;
+    margin-bottom: 5px;
+    color: #EAE7AF;
+    
+}
+
+.top-number {
+    font-style: bold;
+    font-size: 36px;
+    color: #a72693;
+    
+}
+
+
 /* SEARCH */
 #search-bar {
     display: inline-block;

@@ -103,13 +103,25 @@ const MyProfile = ({setLoggedIn}) => {
                         <span>Top Jot</span>
                     </div>
 
-                    <div className="top-stat">
-                        <span>{topDoc ? topDoc.title : 'No docs yet'}</span>
-                        <br/>
-                        <span>{topDoc ? `${topDocFollowers} followers` : ''}</span>
-                        <br/>
-                        <span>Top Article</span>
-                    </div>
+                    <Row className="d-flex">
+                        <span className="top-article-h">Top Article</span>
+                        <div className="top-article">
+                            
+                            <div className="top-title">{topDoc ? topDoc.title : 'No docs yet'}</div>
+                           
+                            <div className="stat">{topDoc ? 
+                                <span>
+                                    <span className="top-number">{topDocFollowers}</span> 
+                                    { topDocFollowers == 1 ? ` FOLLOWER` : ` FOLLOWERS`} 
+                                </span>
+                                : ''}
+                            </div>
+                            <br/>
+                            
+                        </div>
+
+                    </Row>
+                    
                 </Col>
                 <Col xs={1}>
                     <a href="" onClick={logout}>Logout</a>
