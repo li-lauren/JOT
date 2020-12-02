@@ -108,14 +108,40 @@ html, body {
     background-color: #241667;
 }
 
+.image-cropper {
+    width: 500px;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: -100px;
+}
+
+.top-img {
+    display: inline;
+    margin: 0 auto;
+    margin-left: -25%;
+    height: 100%;
+    width: auto;
+    position: absolute;
+    z-index: 2;
+}
+
 .top-article-row {
     margin-top: 200px;
 }
+
+.article-overlay {
+    position: relative;
+    top: -10px;
+    z-index: 3;
+    margin-top: -300px;
+}
+
 .top-article {
     background-color: #241667;
     /* display: flex; */
-    text-align: right;
-    
+    text-align: right;  
 }
 
 .top-article-h {

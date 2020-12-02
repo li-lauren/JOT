@@ -123,21 +123,28 @@ const MyProfile = ({setLoggedIn}) => {
                     
                     
                     <Row className="d-flex top-article-row">
-                        <img src={topImg} alt="top_image"/>
-                        <span className="top-article-h">Top Article</span>
-                        <div className="top-article">
-                            
-                            <div className="top-title">{topDoc ? topDoc.title : 'No docs yet'}</div>
-                           
-                            <div className="stat">{topDoc ? 
-                                <span>
-                                    <span className="top-number">{topDocFollowers}</span> 
-                                    { topDocFollowers == 1 ? ` FOLLOWER` : ` FOLLOWERS`} 
-                                </span>
-                                : ''}
-                            </div>
-                            <br/>           
+                        <div className="image-cropper">
+                            <img className="top-img" src={topImg} alt="top_image"/>
                         </div>
+                        
+                        <div className="article-overlay">
+                            <span className="top-article-h">Top Article</span>
+                            <div className="top-article">
+                                
+                                <div className="top-title">{topDoc ? topDoc.title : 'No docs yet'}</div>
+                            
+                                <div className="stat">{topDoc ? 
+                                    <span>
+                                        <span className="top-number">{topDocFollowers}</span> 
+                                        { topDocFollowers == 1 ? ` FOLLOWER` : ` FOLLOWERS`} 
+                                    </span>
+                                    : ''}
+                                </div>
+                                <br/>           
+                            </div>
+
+                        </div>
+                        
                     </Row>
                     
                 </Col>
