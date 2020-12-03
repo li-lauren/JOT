@@ -60,156 +60,93 @@ const UserProfile = () => {
     }
 
     return(
-        // <div>
-        //     <h4>User Profile</h4>
-        //     <h1>{user.fname} {user.lname}</h1>
-        //     <h5>{user.email}</h5>
-        //     {friends ? 
-        //         (friends == 'Friends'? 
-        //             <Button>
-        //                 Friends <i className="far fa-check-circle"></i>
-        //             </Button> : 
-        //             <Button>Pending</Button>) :
-        //         <Button onClick={ReqFriend}>Send Friend Request</Button> 
-        //     }
-            
-        //     <div>
-        //         <span>{totalLikes}</span>
-        //         <br/>
-        //         <span>All-time Likes</span>
-        //     </div>
+        <Container>
+            <Row>
+                <Col >
+                    <h4 id="profile-header">Profile / {user.fname}</h4>
+                </Col>
+                <Col xs={9}>
+                    <Row>
+                        <Col>
+                            <h1>{user.fname} {user.lname}</h1>
+                            <h5 className="email-h">{user.email}</h5>
+                        </Col>
+                    </Row>
+                    
+                    <Row>
+                        {friends ? 
+                            (friends == 'Friends'? 
+                                <Button>
+                                    Friends <i className="far fa-check-circle"></i>
+                                </Button> : 
+                                <Button>Pending</Button>) :
+                            <Button onClick={ReqFriend}>Send Friend Request</Button> 
+                        }
+                    </Row>
 
-        //     <div>
-        //         <span>{topNote ? topNote.body : 'No jots yet'}</span>
-        //         <br/>
-        //         <span>{topNote ? `${topNoteLikes} likes` : ''}</span>
-        //         <br/>
-        //         <span>Top Jot</span>
-        //     </div>
+                    <Row style={{"margin-top": "100px"}}>
+                        <Col xs={4}>
+                            <div className="num-likes-cont">
+                                <span className="num-likes">{totalLikes}</span>
+                                <br/>
+                                <span className="num-likes-f">All-time Likes</span>
+                            </div>
+                        </Col>
+                        <Col xs={8} className="top-note-cont">
+                            <div className="top-note-img-cropper">
+                                <img className="top-img" src={topNoteImg} alt="top_note_image"/>
+                            </div>
 
-        //     <div>
-        //         <span>{topDoc ? topDoc.title : 'No docs yet'}</span>
-        //         <br/>
-        //         <span>{topDoc ? `${topDocFollowers} followers` : ''}</span>
-        //         <br/>
-        //         <span>Top Article</span>
-        //     </div>
-
-            <Container>
-                <Row>
-                    <Col >
-                        <h4 id="profile-header">Profile / {user.fname}</h4>
-                    </Col>
-                    <Col xs={9}>
-                        <Row>
-                            <Col>
-                                <h1>{user.fname} {user.lname}</h1>
-                                <h5 className="email-h">{user.email}</h5>
-                            </Col>
-                            {/* <Col className="d-flex justify-content-end">
-                                {
-                                    showSearch ? 
-                                        <div>
-                                            <Search setShowSearch={setShowSearch} />
-                                            <span 
-                                                className="material-icons md-36 search-i"
-                                                onClick={() => setShowSearch(false)}
-                                            >
-                                                search_off
-                                            </span>
-                                        </div> : 
-                                        <span  
-                                            className="material-icons md-36 search-i"
-                                            onClick={() => setShowSearch(true)}
-                                        >
-                                            search
-                                        </span>
-
-                                }
-                                
-                            </Col> */}
-                        </Row>
-                        
-                        <Row>
-                            {friends ? 
-                                (friends == 'Friends'? 
-                                    <Button>
-                                        Friends <i className="far fa-check-circle"></i>
-                                    </Button> : 
-                                    <Button>Pending</Button>) :
-                                <Button onClick={ReqFriend}>Send Friend Request</Button> 
-                            }
-                        </Row>
-
-                        <Row style={{"margin-top": "100px"}}>
-                            <Col xs={4}>
-                                <div className="num-likes-cont">
-                                    <span className="num-likes">{totalLikes}</span>
+                            <div className="top-note-overlay">
+                                <span className="top-note-h">Top Jot</span>
+                                <div className="top-note-body">
+                                    <span className="top-note">
+                                        {topNote ? 
+                                            topNote.body : 
+                                            'No jots yet'}
+                                    </span>
                                     <br/>
-                                    <span className="num-likes-f">All-time Likes</span>
-                                </div>
-                            </Col>
-                            <Col xs={8} className="top-note-cont">
-                                <div className="top-note-img-cropper">
-                                    <img className="top-img" src={topNoteImg} alt="top_note_image"/>
-                                </div>
-
-                                <div className="top-note-overlay">
-                                    <span className="top-note-h">Top Jot</span>
-                                    <div className="top-note-body">
-                                        <span className="top-note">
-                                            {topNote ? 
-                                                topNote.body : 
-                                                'No jots yet'}
-                                        </span>
-                                        <br/>
-                                    
-                                        { topNote ? 
-                                            <span className="stat">
-                                                <span className="top-number">{topNoteLikes}</span> 
-                                                { topNoteLikes == 1 ? ` LIKE` : ` LIKES`} 
-                                            </span> : ''
-                                        }
-                                        
-                                        <br/>  
-                                    </div>
-                                </div>
                                 
-                            </Col>
-                        </Row>
-                        
-                        
-                        <Row className="d-flex top-article-row">
-                            <div className="image-cropper">
-                                <img className="top-img" src={topImg} alt="top_image"/>
-                            </div>
-                            
-                            <div className="article-overlay">
-                                <span className="top-article-h">Top Article</span>
-                                <div className="top-article">
+                                    { topNote ? 
+                                        <span className="stat">
+                                            <span className="top-number">{topNoteLikes}</span> 
+                                            { topNoteLikes == 1 ? ` LIKE` : ` LIKES`} 
+                                        </span> : ''
+                                    }
                                     
-                                    <div className="top-title">{topDoc ? topDoc.title : 'No docs yet'}</div>
-                                
-                                    <div className="stat">{topDoc ? 
-                                        <span>
-                                            <span className="top-number">{topDocFollowers}</span> 
-                                            { topDocFollowers == 1 ? ` FOLLOWER` : ` FOLLOWERS`} 
-                                        </span>
-                                        : ''}
-                                    </div>
-                                    <br/>           
+                                    <br/>  
                                 </div>
-
-                            </div>
+                            </div> 
+                        </Col>
+                    </Row>
+                    
+                    
+                    <Row className="d-flex top-article-row">
+                        <div className="image-cropper">
+                            <img className="top-img" src={topImg} alt="top_image"/>
+                        </div>
+                        
+                        <div className="article-overlay">
+                            <span className="top-article-h">Top Article</span>
+                            <div className="top-article">
+                                
+                                <div className="top-title">{topDoc ? topDoc.title : 'No docs yet'}</div>
                             
-                        </Row>
-                        
-                    </Col>
-                    <Col xs={1}>
-                        
-                    </Col>
-                </Row>
-            </Container>
-        // </div>
+                                <div className="stat">{topDoc ? 
+                                    <span>
+                                        <span className="top-number">{topDocFollowers}</span> 
+                                        { topDocFollowers == 1 ? ` FOLLOWER` : ` FOLLOWERS`} 
+                                    </span>
+                                    : ''}
+                                </div>
+                                <br/>           
+                            </div>
+
+                        </div>  
+                    </Row>  
+                </Col>
+                <Col xs={1}></Col>
+            </Row>
+        </Container>
     )
 }
