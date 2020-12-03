@@ -300,11 +300,12 @@ def get_user_info(email):
     top_note, top_note_likes, top_note_doc, top_note_img = crud.get_most_liked_note(user_id)
     top_doc, top_doc_followers = crud.get_most_followed_doc(user_id)
 
-    img_urls = crud.get_image_url_by_doc_id(top_doc.doc_id)
-
     top_img = ''
-    if img_urls:
-        top_img = img_urls[0].url
+    
+    if top_doc: 
+        img_urls = crud.get_image_url_by_doc_id(top_doc.doc_id)
+        if img_urls:
+            top_img = img_urls[0].url
 
     stats = {
         'user': user,

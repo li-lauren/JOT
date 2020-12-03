@@ -568,16 +568,18 @@ def get_most_liked_note(user_id):
     note = None
     num_likes = None
     doc = None
+    top_img = ''
+
     if most_liked_note_id:
         note = Note.query.get(most_liked_note_id[0])
         doc = Doc.query.get(note.doc_id)
         num_likes = most_liked_note_id[1]
 
-        img_urls = get_image_url_by_doc_id(doc.doc_id)
+        if doc:
+            img_urls = get_image_url_by_doc_id(doc.doc_id)
 
-        top_img = ''
-        if img_urls:
-            top_img = img_urls[0].url
+            if img_urls:
+                top_img = img_urls[0].url
 
     return note, num_likes, doc, top_img
 
