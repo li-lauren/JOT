@@ -40,7 +40,6 @@ const InvitationList = () => {
                     invitation={invitation}
                     invAction={invAction}
                     setInvAction={setInvAction}
-                    socket={socket}
                 />))
                 : <p>None</p>}
             <br/>

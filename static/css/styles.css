@@ -46,7 +46,7 @@ html, body {
 }
 
 #menu {
-    min-height: 750px;
+    min-height: 900px;
 }
 
 /* #dashboard {
@@ -266,6 +266,11 @@ div.doc-listing:hover {
 .add-follower-i {
     margin-left: 10px;
     vertical-align: bottom;
+}
+
+#add-follower-btn {
+    margin-top: 16px;
+    margin-left: auto;
 }
 
 /* NOTES */

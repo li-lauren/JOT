@@ -24,15 +24,56 @@ const AddFollower = ({followerAdded, setFollowerAdded, socket, doc_id}) => {
         setShowForm(!showForm)
     }
 
+    const popover = (
+        <Popover id="popover-basic">
+          <Popover.Content>
+          <form onSubmit={addFollower}>
+                <InputGroup className="mb-3">
+                    <InputGroup.Prepend>
+                    <InputGroup.Text id="basic-addon1">@</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl
+                        placeholder="Email"
+                        aria-label="Email"
+                        aria-describedby="basic-addon1"
+                        value={followerEmail} 
+                        onChange={handleChange}
+                    />
+                </InputGroup>
+                <InputGroup>
+                    <InputGroup.Prepend>
+                    <InputGroup.Text>Message</InputGroup.Text>
+                    </InputGroup.Prepend>
+                    <FormControl 
+                        as="textarea" 
+                        aria-label="Message" 
+                        value={msg}
+                        onChange={e => setMsg(e.target.value)}
+                    />
+                </InputGroup>
+                <Button id="add-follower-btn" variant="outline-dark" type="submit" size="sm"> Invite </Button>
+            </form>
+          </Popover.Content>
+        </Popover>
+      );
+      
+
     return (
         <div id="add-followers">
-            <span 
+            <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+                <span 
+                    class="add-follower-i"
+                >
+                    + Invite
+                </span>
+            </OverlayTrigger>
+            {/* <span 
                 class="add-follower-i"
                 onClick={toggleShowForm}
             >
                 + Invite
-            </span>
-            {showForm ? 
+            </span> */}
+            {/* {showForm ? 
                 <form onSubmit={addFollower}>
                     <InputGroup className="mb-3">
                         <InputGroup.Prepend>
@@ -57,11 +98,9 @@ const AddFollower = ({followerAdded, setFollowerAdded, socket, doc_id}) => {
                             onChange={e => setMsg(e.target.value)}
                         />
                     </InputGroup>
-                    {/* <input type="submit" style={{display: 'none'}} /> */}
-                    {/* <button type="submit"> + </button> */}
                     <Button variant="outline-dark" type="submit" size="sm"> Invite </Button>
                 </form> : ''
-            } 
+            }  */}
         </div>  
     )
 }

@@ -1,5 +1,7 @@
-const Invitation = ({invitation, invAction, setInvAction, socket}) => {
+const Invitation = ({invitation, invAction, setInvAction}) => {
     const created_at = new Date(invitation.created_at)
+    const socket = useContext(SocketContext)
+    const history = useHistory()
 
     const accept = () => {
         console.log('accepting note...')
@@ -8,6 +10,12 @@ const Invitation = ({invitation, invAction, setInvAction, socket}) => {
             'msg': `${localStorage.getItem('fname')} accepted your invite`
         })
         setInvAction(!invAction)
+        
+        fetch(`/docs/${invitation.doc_id}`)
+        .then(res => res.json())
+        .then(data => {
+            history.push('/article', {params: data})
+        })
     }
 
     const decline = () => {
