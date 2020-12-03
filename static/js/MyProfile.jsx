@@ -72,14 +72,14 @@ const MyProfile = ({setLoggedIn}) => {
                                     <div>
                                         <Search setShowSearch={setShowSearch} />
                                         <span 
-                                            className="material-icons md-36"
+                                            className="material-icons md-36 search-i"
                                             onClick={() => setShowSearch(false)}
                                         >
                                             search_off
                                         </span>
                                     </div> : 
                                     <span  
-                                        className="material-icons md-36"
+                                        className="material-icons md-36 search-i"
                                         onClick={() => setShowSearch(true)}
                                     >
                                         search

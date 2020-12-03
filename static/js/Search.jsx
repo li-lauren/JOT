@@ -47,7 +47,7 @@ const Search = () => {
                     Search
                 </Form.Label>
                 <Form.Control
-                    className="mb-2 mr-sm-2"
+                    className="user-search"
                     id="inlineFormInputName2"
                     placeholder="User Search"
                     value={searchTerm}
@@ -59,11 +59,14 @@ const Search = () => {
                     Submit
                 </Button> */}
             </Form>
-            {options ? options.map((option, i) => 
-                <div key={i} onClick={() => getProfile(option)}>
-                    {option}
-                </div>
-                    ): ''}
+            <span className="search-results">
+                {options ? options.map((option, i) => 
+                    <div key={i} onClick={() => getProfile(option)}>
+                        {option}
+                    </div>
+                        ): ''}
+            </span>
+            
         </div>
     )
 }
