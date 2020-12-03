@@ -253,6 +253,21 @@ div.doc-listing:hover {
     border-bottom: 1px black solid;
 }
 
+/* ADD FOLLOWERS */
+.follower {
+    display: inline-block;
+}
+
+#add-followers {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
+.add-follower-i {
+    margin-left: 10px;
+    vertical-align: bottom;
+}
+
 /* NOTES */
 .note {
     border: #e5e5e5 1px solid;

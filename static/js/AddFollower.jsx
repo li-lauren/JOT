@@ -25,8 +25,13 @@ const AddFollower = ({followerAdded, setFollowerAdded, socket, doc_id}) => {
     }
 
     return (
-        <div>
-            <h5 onClick={toggleShowForm}>Invite Friends</h5>
+        <div id="add-followers">
+            <span 
+                class="add-follower-i"
+                onClick={toggleShowForm}
+            >
+                + Invite
+            </span>
             {showForm ? 
                 <form onSubmit={addFollower}>
                     <InputGroup className="mb-3">
