@@ -239,7 +239,7 @@ html, body {
 }
 .doc-listing > a{
     
-    color: black;
+    color: whitesmoke;
     cursor: pointer;
     padding: 3px; 
     text-decoration: none;

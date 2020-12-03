@@ -1,8 +1,8 @@
 const FollowerList = ({doc_id, socket}) => {
-    const [followerAdded, setFollowerAdded] = React.useState(false)
-    const [followerList, setFollowerList] = React.useState([])
+    const [followerAdded, setFollowerAdded] = useState(false)
+    const [followerList, setFollowerList] = useState([])
+    const [isHovering, setIsHovering] = useState(false)
 
-    // console.log(`DOC ID: ${doc_id}`)
     useEffect(() => {
         getFollowers()
     }, [followerAdded, doc_id])
@@ -12,7 +12,6 @@ const FollowerList = ({doc_id, socket}) => {
         .then(res => res.json())
         .then(data => {
             setFollowerList(data)
-            // ("msg" in data) ? setFollowerList([]) : setFollowerList(data);
         })
     }
 
@@ -34,11 +33,22 @@ const FollowerList = ({doc_id, socket}) => {
 
     return (
         <div>
-            <h5>Following</h5>
             {followerList.length > 0 ? (followerList.map(follower => 
-                <li key={follower.user_id}>
-                    {follower.fname} {follower.lname}
-                </li>)) : <p>None</p>}
+                <span 
+                    key={follower.user_id}
+                    onMouseEnter={() => setIsHovering(true)}
+                    onMouseLeave={() => setIsHovering(false)}
+                >
+                    { isHovering ?
+                        <Button>
+                            {`${follower.fname} ${follower.lname}`}
+                        </Button> :
+                        <Button>
+                            {follower.fname[0]}
+                        </Button>
+                    }
+                    
+                </span>)) : <p>None</p>}
             <br/>
             <AddFollower 
                 followerAdded={followerAdded}
