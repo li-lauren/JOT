@@ -62,7 +62,7 @@ const AddFollower = ({followerAdded, setFollowerAdded, socket, doc_id}) => {
         <div id="add-followers">
             <OverlayTrigger trigger="click" placement="right" overlay={popover}>
                 <span 
-                    class="add-follower-i"
+                    className="add-follower-i"
                 >
                     + Invite
                 </span>
