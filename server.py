@@ -263,7 +263,9 @@ def get_user_profile(user_id):
     """Get profile stats for a user."""
 
     total_likes = crud.get_total_num_likes(user_id)
-    top_note, top_note_likes = crud.get_most_liked_note(user_id)
+    top_note, top_note_likes, top_note_doc, top_note_img = crud.get_most_liked_note(user_id)
+    
+    
     top_doc, top_doc_followers = crud.get_most_followed_doc(user_id)
 
     img_urls = crud.get_image_url_by_doc_id(top_doc.doc_id)
@@ -277,6 +279,8 @@ def get_user_profile(user_id):
         'totalLikes': total_likes,
         'topNote': top_note,
         'topNoteLikes': top_note_likes,
+        'topNoteDoc': top_note_doc,
+        'topNoteImg': top_note_img,
         'topDoc' : top_doc,
         'topDocFollowers': top_doc_followers, 
         'topImg' : top_img

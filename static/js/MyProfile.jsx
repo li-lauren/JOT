@@ -6,6 +6,8 @@ const MyProfile = ({setLoggedIn}) => {
     const [topNote, setTopNote] = useState(null)
     const [topNoteLikes, setTopNoteLikes] = useState(null)
     const [totalLikes, setTotalLikes] = useState(null)
+    const [topNoteDoc, setTopNoteDoc] = useState(null)
+    const [topNoteImg, setTopNoteImg] = useState(null)
 
     const [numFriends, setNumFriends] = useState(null)
 
@@ -43,6 +45,8 @@ const MyProfile = ({setLoggedIn}) => {
             setTotalLikes(stats.totalLikes)
             setTopNote(stats.topNote)
             setTopNoteLikes(stats.topNoteLikes)
+            setTopNoteDoc(stats.topNoteDoc)
+            setTopNoteImg(stats.topNoteImg)
             setTopDoc(stats.topDoc)
             setTopDocFollowers(stats.topDocFollowers)
             setTopImg(stats.topImg)
@@ -100,6 +104,9 @@ const MyProfile = ({setLoggedIn}) => {
                             </div>
                         </Col>
                         <Col xs={8}>
+                            <div className="top-note-img-cropper">
+                                <img className="top-img" src={topNoteImg} alt="top_note_image"/>
+                            </div>
                             <span className="top-note-h">Top Jot</span>
                             <div className="top-note-body">
                                 <span className="top-note">
