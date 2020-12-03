@@ -103,28 +103,32 @@ const MyProfile = ({setLoggedIn}) => {
                                 <span className="num-likes-f">All-time Likes</span>
                             </div>
                         </Col>
-                        <Col xs={8}>
+                        <Col xs={8} className="top-note-cont">
                             <div className="top-note-img-cropper">
                                 <img className="top-img" src={topNoteImg} alt="top_note_image"/>
                             </div>
-                            <span className="top-note-h">Top Jot</span>
-                            <div className="top-note-body">
-                                <span className="top-note">
-                                    {topNote ? 
-                                        topNote.body : 
-                                        'No jots yet'}
-                                </span>
-                                <br/>
-                               
-                                { topNote ? 
-                                    <span>
-                                        <span className="top-number">{topNoteLikes}</span> 
-                                        { topNoteLikes == 1 ? ` LIKE` : ` LIKES`} 
-                                    </span> : ''
-                                }
+
+                            <div className="top-note-overlay">
+                                <span className="top-note-h">Top Jot</span>
+                                <div className="top-note-body">
+                                    <span className="top-note">
+                                        {topNote ? 
+                                            topNote.body : 
+                                            'No jots yet'}
+                                    </span>
+                                    <br/>
                                 
-                                <br/>  
+                                    { topNote ? 
+                                        <span className="stat">
+                                            <span className="top-number">{topNoteLikes}</span> 
+                                            { topNoteLikes == 1 ? ` LIKE` : ` LIKES`} 
+                                        </span> : ''
+                                    }
+                                    
+                                    <br/>  
+                                </div>
                             </div>
+                            
                         </Col>
                     </Row>
                     
