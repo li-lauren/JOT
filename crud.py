@@ -728,6 +728,17 @@ def get_relationship_by_id(relationship_id):
 
     return relationship
 
+def unfriend(inviter_id, acceptor_id):
+
+    relationship = User_Relationship.query.filter(
+        User_Relationship.inviter == inviter_id,
+        User_Relationship.acceptor == acceptor_id, 
+        User_Relationship.relationship_type_id == 2
+    ).first()
+
+    db.session.delete(relationship)
+    db.session.commit()
+
 
 ### SEARCH OPERATIONS ###
 def binary_similarity_score_KMP(pattern, string):

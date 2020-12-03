@@ -76,6 +76,13 @@ const FriendReqList = () => {
                     setUpdate(true)
                 }
             })
+
+            socket.on("unfriended", data => {
+                console.log("unfriended")
+                if (isMounted && data.userIds.includes(userId)) {
+                    setUpdate(true)
+                }
+            })
         }
 
         return () => { isMounted = false }

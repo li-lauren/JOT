@@ -59,6 +59,12 @@ const UserProfile = () => {
         setUpdate(!update)
     }
 
+    const unFriend = () => {
+        console.log('unfriending')
+        socket.emit('unfriend', {'acceptor_id': user.user_id, 'inviter_id': userId})
+        setUpdate(!update)
+    }
+
     return(
         <Container>
             <Row>
@@ -76,7 +82,7 @@ const UserProfile = () => {
                     <Row>
                         {friends ? 
                             (friends == 'Friends'? 
-                                <Button>
+                                <Button onClick={unFriend}>
                                     Friends <i className="far fa-check-circle"></i>
                                 </Button> : 
                                 <Button>Pending</Button>) :

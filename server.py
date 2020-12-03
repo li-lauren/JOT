@@ -755,6 +755,16 @@ def create_friend_req(data):
     io.emit("friend_requested", {'msg' : msg, 'userIds': [acceptor_id, inviter_id]})
 
 
+@io.on("unfriend")
+def unfriend(data):
+    acceptor_id = int(data['acceptor_id'])
+    inviter_id = int(data['inviter_id'])
+
+    crud.unfriend(inviter_id, acceptor_id)
+
+    io.emit("unfriended", {'userIds': [acceptor_id, inviter_id]})
+
+
 @io.on("note_reply")
 def create_note_reply(data):
     print('received note reply')

@@ -22,10 +22,10 @@ const FriendReq = ({req, setUpdate}) => {
     
     return(
         <div>
-            {`${fname} ${lname} ${req_id}    `} 
+            {`${fname} ${lname}    `} 
             
                 <i onClick={accept} className="far fa-check-circle"></i>
-           
+                {`   `}
                 <i onClick={decline} className="far fa-times-circle"></i>
            
         </div>
