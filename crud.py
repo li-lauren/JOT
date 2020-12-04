@@ -67,6 +67,9 @@ def get_user_email_matches(search_term, trie):
 
     matches = trie.search(search_term.lower())
 
+    if not search_term:
+        return []
+
     return matches
 
 
