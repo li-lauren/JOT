@@ -3,9 +3,10 @@
 const AddNote = ({room, socket}) => {
     const [note, setNote] = React.useState('');
 
-    const postNote = () => {
+    const postNote = e => {
         // emit note to client
-    
+        e.preventDefault()
+        
         if (socket) {
             console.log('posting note...')
             const addNoteElem = document.getElementById('add-note').getBoundingClientRect()
