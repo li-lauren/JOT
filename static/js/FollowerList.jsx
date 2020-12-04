@@ -38,13 +38,13 @@ const FollowerList = ({doc_id, socket}) => {
                     key={follower.user_id}
                     onMouseEnter={() => setIsHovering(true)}
                     onMouseLeave={() => setIsHovering(false)}
-                    className="follower"
+                    className="followers"
                 >
                     { isHovering ?
-                        <Button size="sm" className="follower">
+                        <Button size="sm" variant="outline-light" className="follower">
                             {`${follower.fname} ${follower.lname}`}
                         </Button> :
-                        <Button size="sm" className="follower">
+                        <Button size="sm" variant="outline-light" className="follower">
                             {follower.fname[0]}
                         </Button>
                     }

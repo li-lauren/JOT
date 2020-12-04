@@ -251,9 +251,6 @@ div.doc-listing:hover {
 }
 
 /* ADD FOLLOWERS */
-.follower {
-    display: inline-block;
-}
 
 #add-followers {
     display: inline-block;
@@ -262,12 +259,22 @@ div.doc-listing:hover {
 
 .add-follower-i {
     margin-left: 10px;
-    vertical-align: bottom;
+    /* vertical-align: bottom; */
+    font-size: 12px;
 }
 
 #add-follower-btn {
     margin-top: 16px;
     margin-left: auto;
+}
+
+.follower {
+    display: inline-block;
+    padding-bottom: 1px;
+    font-size: 12px !important;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid whitesmoke;
 }
 
 /* ARTICLE */
@@ -278,9 +285,6 @@ div.doc-listing:hover {
     margin-bottom: 16px;
 }
 
-.follower {
-
-}
 
 /* TEXT INPUTS */
 
