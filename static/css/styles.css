@@ -49,9 +49,6 @@ html, body {
     min-height: 900px;
 }
 
-/* #dashboard {
-    display: inline-block;
-} */
 
 /* PROFILE */
 #profile-header {
@@ -273,6 +270,14 @@ div.doc-listing:hover {
     margin-left: auto;
 }
 
+/* ARTICLE */
+
+.top-image {
+    max-width: 720px;
+    margin-top: 8px;
+    margin-bottom: 16px;
+}
+
 /* NOTES */
 .note {
     border: #e5e5e5 1px solid;
@@ -294,10 +299,6 @@ div.doc-listing:hover {
     margin-right: auto !important;
     width: 720px !important;
     min-width: 720px !important;
-}
-
-.top-image {
-    max-width: 720px;
 }
 
 #add-note {
@@ -345,6 +346,8 @@ div.doc-listing:hover {
     font-style: italic;
     font-size: 14px;
 }
+
+
     
 
 /* D3 */
