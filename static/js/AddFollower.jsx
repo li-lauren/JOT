@@ -60,7 +60,7 @@ const AddFollower = ({followerAdded, setFollowerAdded, socket, doc_id}) => {
 
     return (
         <div id="add-followers">
-            <OverlayTrigger trigger="click" placement="right" overlay={popover}>
+            <OverlayTrigger trigger="click" placement="right" overlay={popover} rootClose>
                 <span 
                     className="add-follower-i"
                 >

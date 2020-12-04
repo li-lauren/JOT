@@ -1,7 +1,8 @@
-const FollowerList = ({doc_id, socket}) => {
+const FollowerList = ({doc_id}) => {
     const [followerAdded, setFollowerAdded] = useState(false)
     const [followerList, setFollowerList] = useState([])
     const [isHovering, setIsHovering] = useState(false)
+    const socket = useContext(SocketContext)
 
     useEffect(() => {
         getFollowers()

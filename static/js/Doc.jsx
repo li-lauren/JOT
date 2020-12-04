@@ -57,15 +57,15 @@ const Doc = () => {
          <Row>
              <ColorSelector doc_id={room}/>
          </Row>,
+         <Row>
+            <FollowerList doc_id={doc.doc_id} />
+        </Row>,
         <Row>
             <TagList doc_id={room} />
         </Row>,
         <Row>
             <h1>{doc.title}</h1>
         </Row>, 
-        <Row>
-            <FollowerList doc_id={doc.doc_id} socket={socket} />
-        </Row>,
         <Row>
             <p>{doc.publish_date ? moment(publish_date).format("MMMM Do YYYY") : '' }</p>
         </Row>,
