@@ -3,7 +3,7 @@
 const AddNote = ({room, socket}) => {
     const [note, setNote] = React.useState('');
 
-    const postNote = (room, note) => {
+    const postNote = () => {
         // emit note to client
     
         if (socket) {
@@ -26,19 +26,27 @@ const AddNote = ({room, socket}) => {
 
     return (
         <div id="add-note">
-            <input 
-                type="text" name="note" 
-                value={note} 
-                onChange={e => setNote(e.target.value)}
-            />
-            <br/>
+            <form onSubmit={postNote}>
+                <input 
+                    type="text" name="note" 
+                    value={note} 
+                    autoComplete="off"
+                    onChange={e => setNote(e.target.value)}
+                    id="add-note-input"
+                    placeholder="+ Jot"
+                />
+                <input type="submit" style={{display: 'none'}} />
+            </form>
+            
+
+            {/* <br/>
             <Button 
                 onClick={()=> postNote(room, note)}
                 variant="outline-primary"
                 size="sm"
             >
                 Add Note
-            </Button>
+            </Button> */}
         </div>
     )
 }

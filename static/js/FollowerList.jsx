@@ -41,10 +41,10 @@ const FollowerList = ({doc_id, socket}) => {
                     className="follower"
                 >
                     { isHovering ?
-                        <Button size="sm">
+                        <Button size="sm" className="follower">
                             {`${follower.fname} ${follower.lname}`}
                         </Button> :
-                        <Button size="sm">
+                        <Button size="sm" className="follower">
                             {follower.fname[0]}
                         </Button>
                     }

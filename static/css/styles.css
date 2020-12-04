@@ -278,6 +278,38 @@ div.doc-listing:hover {
     margin-bottom: 16px;
 }
 
+.follower {
+
+}
+
+/* TEXT INPUTS */
+
+input[type="text"],
+select.form-control {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid whitesmoke;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  color: whitesmoke;
+  margin-bottom: 5px;
+  outline: none;
+  outline-style: none;
+  padding: 3px 10px;
+}
+
+input[type="text"]:focus,
+select.form-control:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+#add-note-input::-webkit-input-placeholder { 
+    color: whitesmoke;
+}
+
+
 /* NOTES */
 .note {
     border: #e5e5e5 1px solid;
@@ -306,6 +338,7 @@ div.doc-listing:hover {
     top: 50%;
     transform: translate(-110%, -50%);
 }
+
 
 #joinMsg {
     position: fixed;
