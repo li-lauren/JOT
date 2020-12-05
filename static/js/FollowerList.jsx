@@ -1,6 +1,6 @@
 const FollowerList = ({doc_id}) => {
     const [followerAdded, setFollowerAdded] = useState(false)
-    const [followerList, setFollowerList] = useState([])
+    const [followerList, setFollowerList] = useState(null)
     const [isHovering, setIsHovering] = useState(false)
     const socket = useContext(SocketContext)
 
@@ -13,8 +13,11 @@ const FollowerList = ({doc_id}) => {
         .then(res => res.json())
         .then(data => {
             setFollowerList(data)
+            console.log(data)
         })
     }
+
+    console.log(followerList)
 
     useEffect(() => {
         let isMounted = true;
@@ -34,7 +37,7 @@ const FollowerList = ({doc_id}) => {
 
     return (
         <div>
-            {followerList.length > 0 ? (followerList.map(follower => 
+            {followerList ? (followerList.map(follower => 
                 <span 
                     key={follower.user_id}
                     onMouseEnter={() => setIsHovering(true)}
@@ -50,7 +53,7 @@ const FollowerList = ({doc_id}) => {
                         </Button>
                     }
                     
-                </span>)) : <p>None</p>}
+                </span>)) : ''}
             
             <AddFollower 
                 followerAdded={followerAdded}
