@@ -35,6 +35,12 @@ const Home = ({loggedIn, setLoggedIn}) => {
                 }
                 {/* <p id="login-join" onClick={()=> setShowLogin(true)}>LOGIN / JOIN</p> */}
                 <div className="slash">/</div>
+
+                <div id="home-btns">
+                    <p id="login-btn">Login</p>
+                    <p id="signup-btn">Sign Up</p>
+                </div>
+                
             </div>
             
             

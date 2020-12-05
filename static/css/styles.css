@@ -110,13 +110,18 @@ a {
     margin-left: 950px;
     font-size: 300px;
     font-weight: 40;
-    color: whitesmoke;
     z-index: 7;
     position: relative;
     top: -10px;
     transform: scale(0.75, 3);
     font-style: italic;
-    /* font-stretch: ultra-condensed; */
+}
+
+#home-btns {
+    position: relative;
+    z-index: 7;
+    margin-top: -550px;
+    margin-left: 950px;
 }
 
 #home-img-cropper {
