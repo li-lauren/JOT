@@ -5,27 +5,37 @@ const Reply = ({reply, noteColor}) => {
     const reply_id = reply.note_id
 
     return(
-        <Button
+        <div
             className="reply"
             style={{backgroundColor: noteColor}}
         >
-            <span>{reply.fname}</span>
-            <br/>
-            {reply.body}
-            <br/>
-            {moment(created_at).startOf('minute').fromNow()}
+            <span id="note-name">{reply.fname} / </span>
+            <span id="timestamp">{moment(created_at).startOf('minute').fromNow()}</span>
+            {'       '}
             <Like noteId={reply_id} />
-            {'   '}
-            <i 
-                className="far fa-comment-dots"
-                onClick={() => setShowNoteInput(!showNoteInput)}
-            ></i>
-            { showNoteInput ? 
+            <br/>
+            <p id="note-body">{reply.body}</p>
+            
+            { showNoteInput ?
+                <i 
+                    class="material-icons"
+                    id="reply-btn"
+                    onClick={() => setShowNoteInput(false)}
+                >expand_less</i> :
+                <i 
+                    class="material-icons"
+                    id="reply-btn"
+                    onClick={() => setShowNoteInput(true)}
+                >expand_more</i>
+            }
+            { showNoteInput ?
                 <AddNoteReply 
                     parent_id={reply_id}
-                /> : ''}
+                    setShowNoteInput={setShowNoteInput}
+                />
+                : ''}
             <ReplyList parent_id={reply_id} />
 
-        </Button>
+        </div>
     )
 }

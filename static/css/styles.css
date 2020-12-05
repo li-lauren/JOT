@@ -327,18 +327,36 @@ select.form-control:focus {
 
 /* NOTES */
 .note {
-    border: #e5e5e5 1px solid;
+    border: whitesmoke 2px solid;
     padding: 2px 10px;
     border-radius: 25px;
-    /* display: inline-block; */
     position: absolute;
     cursor: pointer;
 }
 
+#note-name {
+    font-size: 14px;
+    font-weight: 900;
+}
+
+#timestamp {
+    font-size: 10px;
+}
+
+#note-body {
+    font-family: 'PT Mono', monospace;
+}
+
+.note:hover {
+    width: 200px;
+    padding: 10px 14px;
+}
+
 .reply {
-    padding: 2px 10px;
+    padding: 10px 10px;
     border-radius: 25px;
     cursor: pointer;
+    border: 1px solid whitesmoke;
 }
 
 #wrapper {
@@ -376,6 +394,18 @@ select.form-control:focus {
     left: 75%;
     width: 20%;
     clear: both;
+}
+
+#reply-btn {
+    display: inline-block;
+    
+}
+
+/* LIKE */
+
+#like {
+    /* display: inline-block; */
+    float: right;
 }
 
 /* Search */

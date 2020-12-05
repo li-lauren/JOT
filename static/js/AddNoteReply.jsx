@@ -1,4 +1,4 @@
-const AddNoteReply = ({parent_id}) => {
+const AddNoteReply = ({parent_id, setShowNoteInput}) => {
     const socket = useContext(SocketContext)
     const [body, setBody] = useState('')
     const doc_id = localStorage.getItem('doc_id')
@@ -14,6 +14,7 @@ const AddNoteReply = ({parent_id}) => {
                 'parent_id': parent_id
             })
             setBody('')
+            setShowNoteInput(false)
         }
     }
 

@@ -61,7 +61,7 @@ const Like = ({noteId}) => {
     }
 
     return(
-        <div>
+        <div id="like">
             { liked ? 
                 <span>
                     <i className="fas fa-heart"
@@ -76,8 +76,7 @@ const Like = ({noteId}) => {
                     </i> 
                     {` ${numLikes}`}
                 </span>
-            }
-            
+            }  
         </div>
         
     )

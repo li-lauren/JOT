@@ -77,34 +77,40 @@ const Note = ({note, room, noteColor, socket}) => {
                 onMouseLeave={() => setIsHovering(false)}
             >
                 { isHovering ? 
-                <Button 
+                <div 
                     className="note" 
-                    // onClick={()=>console.log(note_id)}
                     style={{backgroundColor: noteColor}}
                 >
-                    {/* <span>{note.note_id}</span> */}
-                    <span>{fname}:</span>
-                    <br/>
-                    {note.body}
-                    <br/>
-                    {moment(created_at).startOf('minute').fromNow()}
-                    {/* {`x: ${(pos.x).toFixed(2)}, y: ${(pos.y).toFixed(2)}`} */}
+                    <span id="note-name">{fname} / </span>
+                    <span id="timestamp">{moment(created_at).startOf('minute').fromNow()}</span>
+                    {'       '}
                     <Like noteId={note_id} />
-                    {'   '}
-                    <i 
-                        className="far fa-comment-dots"
-                        onClick={() => setShowNoteInput(!showNoteInput)}
-                    ></i>
-                    { showNoteInput ? 
+                    <br/>
+                    <p id="note-body">{note.body}</p>
+                    
+                    { showNoteInput ?
+                        <i 
+                            class="material-icons"
+                            id="reply-btn"
+                            onClick={() => setShowNoteInput(false)}
+                        >expand_less</i> :
+                        <i 
+                            class="material-icons"
+                            id="reply-btn"
+                            onClick={() => setShowNoteInput(true)}
+                        >expand_more</i>
+                    }
+                    { showNoteInput ?
                         <AddNoteReply 
                             parent_id={note_id}
+                            setShowNoteInput={setShowNoteInput}
                         /> : ''}
                     <ReplyList parent_id={note_id} />
-                </Button>
+                </div>
                 :
-                <Button className="note" style={{backgroundColor: noteColor}}>
+                <div className="note" style={{backgroundColor: noteColor}}>
                     {fname[0]}
-                </Button> }
+                </div> }
 
             </div>
         </ReactDraggable>
