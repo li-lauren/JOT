@@ -22,7 +22,120 @@ a {
 
 #home-container {
     height: 100%;
-    display: flex;
+    
+    /* display: flex; */
+}
+
+#JOT {
+    text-decoration: underline;
+}
+
+
+
+#home-circle {
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #cedce7 0%,#596a72 100%);
+    position: relative;
+    z-index: 3;
+    margin-top: -600px;
+    margin-left: 600px;
+}
+
+#login-circle {
+    width: 700px;
+    height: 700px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #cedce7 0%,#596a72 100%);
+    position: relative;
+    z-index: 10;
+    margin-top: -600px;
+    margin-left: 600px;
+}
+
+#login-tabs {
+    margin-top: 200px !important;
+    width: 400px !important;
+}
+
+#login-join {
+    margin-top: -225px;
+    margin-left: 700px;
+    font-size: 75px;
+    /* color: none;
+    text-shadow:
+		-1px -1px 0 whitesmoke,
+		1px -1px 0 whitesmoke,
+		-1px 1px 0 whitesmoke,
+        1px 1px 0 whitesmoke; */
+    color: lightgray;
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: #262626;
+    position: relative;
+    z-index: 8;
+
+}
+
+#welcome-cont {
+    margin-top: 250px;
+}
+
+.welcome {
+    font-size: 90px;
+    font-weight: 700;
+    color: whitesmoke;
+    margin: auto;
+    text-align: center;
+    z-index: 6;
+    position: relative;
+    top: -10px;
+}
+
+.stroke {
+    color: #262626;
+    /* -webkit-text-stroke: 0.5px whitesmoke; */
+    text-shadow:
+		-1px -1px 0 whitesmoke,
+		1px -1px 0 whitesmoke,
+		-1px 1px 0 whitesmoke,
+        1px 1px 0 whitesmoke;
+    position: relative;
+    z-index: 1 !important;
+    
+}
+
+.slash {
+    margin-top: -550px;
+    margin-left: 950px;
+    font-size: 300px;
+    font-weight: 40;
+    color: whitesmoke;
+    z-index: 7;
+    position: relative;
+    top: -10px;
+    transform: scale(0.75, 3);
+    font-style: italic;
+    /* font-stretch: ultra-condensed; */
+}
+
+#home-img-cropper {
+    width: 500px;
+    height: 500px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-left: -100px;
+}
+
+#home-img {
+    display: inline;
+    margin: 0 auto;
+    margin-left: -25%;
+    height: 100%;
+    width: auto;
+    position: absolute;
+    z-index: 2;
 }
 
 /* DASHBOARD */
