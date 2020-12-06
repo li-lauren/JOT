@@ -34,7 +34,7 @@ const Invitation = ({invitation, invAction, setInvAction}) => {
         .then(data => setInvAction(!invAction))
     }
     return(
-        <div>
+        <div id="invite-cont">
             <span id="invite-title">{invitation.title}</span>
             <br/>
             <span id="inviter">{invitation.inviter}    </span>

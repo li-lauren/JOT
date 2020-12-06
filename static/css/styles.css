@@ -451,6 +451,13 @@ div.doc-listing:hover {
 
 /* ARTICLE INVITES */
 
+#invite-cont {
+    background-color: #202020;
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+}
+
 #invite-title{
     font-family: "PT Mono", monospace;
 }
