@@ -57,7 +57,7 @@ const Login = ({loggedIn, setLoggedIn}) => {
     }
 
     return(
-        <div id="login">
+        <div className="login-signup-cont">
             <br/>
             <form onSubmit={login}>
                 <InputGroup className="mb-3">

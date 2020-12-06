@@ -52,7 +52,7 @@ const SignUp = () => {
     }
 
     return(
-        <div>
+        <div className="login-signup-cont">
             {/* <h5>Sign Up</h5>
             <form onSubmit={signUp}>
                 <label>First Name</label>
@@ -69,7 +69,6 @@ const SignUp = () => {
                 <button type="submit">Join Jot</button>
             </form> 
              */}
-            <br/>
             <Form onSubmit={signUp}>
                 <Row>
                     <Col>

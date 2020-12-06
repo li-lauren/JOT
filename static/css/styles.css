@@ -157,6 +157,14 @@ a {
     z-index: 2;
 }
 
+.login-signup-cont {
+    width: 450px;
+    position: relative;
+    z-index: 11;
+    margin-top: -550px;
+    margin-left: 670px;
+}
+
 /* DASHBOARD */
 #dashboard-h {
     /* font-family: 'Libre Franklin', sans-serif; */
