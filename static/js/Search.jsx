@@ -47,6 +47,7 @@ const Search = () => {
                     Search
                 </Form.Label>
                 <Form.Control
+                    type="text"
                     className="user-search"
                     id="inlineFormInputName2"
                     placeholder="User Search"
