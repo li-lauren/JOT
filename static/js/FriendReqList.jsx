@@ -91,44 +91,55 @@ const FriendReqList = () => {
     return (
         <Row>
             <Col>
-                <h5>
+                <Button 
+                    className="friend-btn"
+                    variant="outline-light"
+                    onClick={() => setShowReqList(!showReqList)}>
                     Friend Requests
                     {reqList ? <span className="count">
                         {`${reqList.length}`}</span> : ''}
-                </h5>
-                {reqList ? reqList.map(req => 
+                </Button>
+                
+                {showReqList ? reqList ? reqList.map(req => 
                     <FriendReq 
                         key={req[0]} 
                         req={req} 
                         setUpdate={setUpdate}
-                    />) : <p>None</p>}
+                    />) : <p>None</p> : ''}
             </Col>
             
             <Col>
-                <h5>
+                <Button 
+                    className="friend-btn"
+                    variant="outline-light"
+                    onClick={() => setShowFriendList(!showFriendList)}>
                     Friends
                     {friendList ? <span className="count">
                         {`${friendList.length}`}</span> : ''}
-                </h5>
-
-                {friendList ? friendList.map(friend => 
+                </Button>
+                
+                {showFriendList ? friendList ? friendList.map(friend => 
                 <div key={friend[3]}>
                     {`${friend[1]} ${friend[2]}`}
                 </div>
-                ) : <p>None</p>}
+                ) : <p>None</p> : ''}
             </Col>
             
             <Col>
-                <h5>
+                <Button 
+                    className="friend-btn"
+                    variant="outline-light"
+                    onClick={() => setShowPending(!showPending)}>
                     Pending
                     {pendingList ? <span className="count">
                         {`${pendingList.length}`}</span> : ''}
-                </h5>
-                {pendingList ? pendingList.map(pendingFriend => 
+                </Button>
+                
+                {showPending ? pendingList ? pendingList.map(pendingFriend => 
                 <div key={pendingFriend[3]}>
                     {`${pendingFriend[1]} ${pendingFriend[2]}`}
                 </div>
-                ) : ''}
+                ) : '' : ''}
             </Col>
         </Row>
     )

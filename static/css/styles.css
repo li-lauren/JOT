@@ -18,6 +18,10 @@ a {
     color: #c6b497;
 }
 
+.btn:focus {
+    box-shadow: none;
+}
+
 /* HOME */
 
 #home-container {
@@ -357,6 +361,19 @@ a {
     margin: 5px; */
     /* text-align: center; */
 }
+
+.friend-btn {
+    display: inline-block;
+    padding-bottom: 1px;
+    font-size: 16px !important;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid whitesmoke;
+    outline: none !important;
+    margin-bottom: 10px;
+}
+
+
 
 
 /* SEARCH */
