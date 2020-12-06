@@ -136,12 +136,23 @@ a {
 #explorer-h {
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  text-align: right;
-  display: inline-block;
   font-size: 90px;
   font-weight: 700;
-  color: whitesmoke;
-  margin-top: -700px;
+  margin-top: -900px;
+}
+
+#expand-cont {
+    float: right;
+    display: inline-block;
+    margin-right: 60px;
+    margin-top: 300px;
+}
+#expand-btn {
+    text-align: right;
+    display: inline-block;
+    font-size: 56px;
+    position: relative;
+    z-index: 12;
 }
 
 
@@ -158,6 +169,8 @@ a {
 
 #menu {
     min-height: 900px;
+    margin-top: 500px;
+    margin-left: 125px;
 }
 
 

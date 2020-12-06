@@ -46,15 +46,13 @@ const Dashboard = () => {
     return(
         
         <div>
-            
-            
             {showD3 ? <D3Dash /> : ''}
             <h1 id="explorer-h">EXPLORER</h1>
 
-            <a href="#menu" id="hamburger">
+            <a href="#menu" id="expand-cont">
                 <span 
-                    className="material-icons md-48"
-                    style={{color:"whitesmoke"}}
+                    className="material-icons"
+                    id="expand-btn"
                     // onClick={() => setShowMenu(!showMenu)}
                 >
                     south
@@ -66,7 +64,7 @@ const Dashboard = () => {
             <br/>
 
             
-            <section id="menu">
+            <section id="menu" name="menu">
                 <Container>
                     <Row>
                         <Col>
