@@ -530,14 +530,17 @@ select.form-control:focus {
   }
   
   .label {
-    font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /* font: 24px "Helvetica Neue", Helvetica, Arial, sans-serif; */
+    font-size: 24px;
+    font-family: "PT Mono", sans-serif;
+    fill: whitesmoke;
     text-anchor: middle;
-    text-shadow: 0 1px 0 #fff, 1px 0 0 #fff, -1px 0 0 #fff, 0 -1px 0 #fff;
+    text-shadow: 0 2px 0 #262626, 2px 0 0 #262626, -2px 0 0 #262626, 0 -2px 0 #262626;
   }
 
-  .label:hover {
+  /* .label:hover {
       opacity: 1 !important;
-  }
+  } */
   
   /* .label,
   .node--root,

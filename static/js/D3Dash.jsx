@@ -96,12 +96,12 @@ const D3Dash = () => {
         var circle = g.selectAll("circle")
             .data(nodes) // join with nodes array
             .enter().append("circle") // for each node add a circle
-            .attr("class", function(d) { return d.parent ? !('img' in d.data) ? "node" : "node node--leaf" : "node node--root"; }) // assign class names to each circle
+            .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; }) // assign class names to each circle
             .style("fill", function(d) { return d.children ? color(d.depth) : `url(#image${d.data.doc_id})` }) // give circle a depth-based color
             .style("fill-opacity", function(d) { return d.value > 0 ? 1 : 0; })
             .on("dblclick", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
-            .on("mouseover", d => mouseover(d))
-            .on("mouseout", d => mouseout(d))
+            // .on("mouseover", d => mouseover(d))
+            // .on("mouseout", d => mouseout(d))
             // .on("click", showLabel)
             
 
@@ -111,35 +111,29 @@ const D3Dash = () => {
             .enter().append("text") // append a text element for each node
             .attr("class", "label") // assign label as the class name
             // .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
-            .style("opacity", 0)
+            .style("opacity", 1)
             .style("display", function(d) { 
-                console.log(root)
-                console.log(focus)
-                console.log(d.children && !('img' in d.children[0].data))
-                // console.log(d.children[0].data)
-                console.log(d.data.name)
                 return (d.parent === root) ? "inline" : "none"; }) // only show text if the parent = curr root
             .style('pointer-events', 'auto')
-            .attr('width', function(d) { return d.r / 3 })
+            // .attr('width', function(d) { return d.r / 3 })
             // .style("font-size", function(d) { return Math.min(2 * d.r, (2 * d.r - 8 ) / this.getComputedTextLength() * 24) + "px"; })
             .on("click", function(d) {
-                console.log('CLICKED')
-                console.log(d.data.name)
-                console.log(d.data)
                 d3.event.stopPropagation();
                 clickHandler(d)
                 })
             // .on("mouseover", d => mouseover(d))
             // .on("mouseout", d => mouseout(d))
             .text(function(d) { 
-                console.log(d.data)
-                return (d.value > 0) ? d.data.name : ''; }) 
+                return (d.value > 0) ? d.data.name : ''; 
+            }) 
             
             
                 // retrieve name (from json data) and set as text
             
-        function mouseout(d) {  if (!('img' in d.data)) {text.style("opacity", 0)} 
-    else {text.style("opacity", 0)}}
+        function mouseout(d) {  
+            if (!('img' in d.data)) {
+                text.style("opacity", 0)
+            } else {text.style("opacity", 0)}}
         function mouseover(d) { 
             console.log(d.children)
             console.log(d.children && !('img' in d.children[0].data))
@@ -149,7 +143,7 @@ const D3Dash = () => {
                 console.log('img' in d.children[0].data)
             }
             
-            if (d.parent === focus && d.children && !('img' in d.children[0].data)) {text.style("opacity", 0.5)}
+            if (d.parent === focus && d.children && !('img' in d.children[0].data)) {text.style("opacity", 1)}
             // if ('img' in d.data) {text.style("opacity", 1)}
         }
         function showLabel(d) {
@@ -180,9 +174,20 @@ const D3Dash = () => {
 
             transition.selectAll("text")
             .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
-                .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
+                // .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
+                .style("fill-opacity", 1)
                 .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
                 .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+            
+            transition.selectAll("text")
+            .filter(function(d) { return !d.children })
+                .style("fill-opacity", function(d) { return d === focus ? 1 : 0})
+                .on("start", function(d) { 
+                    if (d === focus) {this.style.display = "inline"}
+                    else {this.style.display = "none"} })
+                .on("end", function(d) { 
+                    if (d === focus) {this.style.display = "inline"}
+                    else {this.style.display = "none"} })
 
             transition.selectAll("pattern")
                 .style("fill-opacity", 0)
