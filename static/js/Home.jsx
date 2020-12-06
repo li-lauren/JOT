@@ -1,7 +1,5 @@
 const Home = ({loggedIn, setLoggedIn}) => {
-    // const [showSignUp, setShowSignUp] = useState(false)
-    let url = 'https://assets.archpaper.com/wp-content/uploads/2020/09/1969.03-02.03.0019.jpg'
-    // url = 'static/js/circle_packing_gif.gif'
+    
     const [showLoginCircle, setShowLoginCircle] = useState(false)
     const [showLogin, setShowLogin] = useState(false)
     const [showSignup, setShowSignup] = useState(false)
@@ -31,9 +29,6 @@ const Home = ({loggedIn, setLoggedIn}) => {
                     WELCOME TO JOT    
                 </div>
                 
-                {/* <div id="home-img-cropper">
-                    <img id="home-img" src={url} alt=""/>
-                </div> */} 
                 {showLoginCircle ? 
                     <div id="login-circle">
                     </div> :
@@ -51,12 +46,8 @@ const Home = ({loggedIn, setLoggedIn}) => {
                 {showSignup ? <SignUp /> : ''}
                                 
             </div>
-            
-            
-        
+               
             <Container id="home-container">
-                
-
                 {/* <Row className="align-self-center align-items-center w-100">
                     <Col xs={12} md={8}>
                         <h1>HOME</h1>
