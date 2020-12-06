@@ -66,13 +66,13 @@ const Dashboard = () => {
             
             <section id="menu" name="menu">
                 <Container>
-                    <Row>
-                        <Col>
-                            <p 
+                    <Row id="menu-selections">
+                        <Col className="selection">
+                            <span 
                                 onClick={handleMyProfile}
                             >
                                 {`${fname}/Profile`}
-                            </p>
+                            </span>
                         </Col>
                         
                         <Col>
@@ -99,9 +99,9 @@ const Dashboard = () => {
                         </Col>
 
                         <Col>
-                            <div onClick={handleDocList}>
+                            <span onClick={handleDocList}>
                                 Article List
-                            </div>
+                            </span>
                         </Col>
 
                     </Row>

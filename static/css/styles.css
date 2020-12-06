@@ -174,12 +174,23 @@ a {
     margin: 0px -20px 50px -20px;
 }
 
+/* DASHBOARD MENU */
+
 #menu {
     min-height: 900px;
     margin-top: 500px;
     margin-left: 125px;
     position: relative;
     z-index: 14;
+}
+
+#menu-selections {
+    background-color: #1B1A1B;
+    width: 100%;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 
 
