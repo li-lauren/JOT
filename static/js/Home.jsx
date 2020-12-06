@@ -2,7 +2,21 @@ const Home = ({loggedIn, setLoggedIn}) => {
     // const [showSignUp, setShowSignUp] = useState(false)
     let url = 'https://assets.archpaper.com/wp-content/uploads/2020/09/1969.03-02.03.0019.jpg'
     // url = 'static/js/circle_packing_gif.gif'
+    const [showLoginCircle, setShowLoginCircle] = useState(false)
     const [showLogin, setShowLogin] = useState(false)
+    const [showSignup, setShowSignup] = useState(false)
+
+    const handleLogin = () => {
+        setShowLoginCircle(true)
+        setShowLogin(true)
+        setShowSignup(false)
+    }
+
+    const handleSignup = () => {
+        setShowLoginCircle(true)
+        setShowLogin(false)
+        setShowSignup(true)
+    }
 
     return (
 
@@ -20,37 +34,22 @@ const Home = ({loggedIn, setLoggedIn}) => {
                 {/* <div id="home-img-cropper">
                     <img id="home-img" src={url} alt=""/>
                 </div> */} 
-                {showLogin ? 
+                {showLoginCircle ? 
                     <div id="login-circle">
-                        <Tabs defaultActiveKey="login" id="login-tabs">
-                            <Tab eventKey="login" title="Login">
-                                <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-                            </Tab>
-                            <Tab eventKey="signUp" title="Sign Up">
-                                <SignUp />
-                            </Tab>
-                        </Tabs>
                     </div> :
                     <div id="home-circle"></div>
                 }
-                {/* <p id="login-join" onClick={()=> setShowLogin(true)}>LOGIN / JOIN</p> */}
+    
                 <div className="slash">/</div>
-                {/* <div id="home-btns">
-                    <span id="login-btn">Login</span>
-                   {'                    '}
-                    <span id="signup-btn">Sign Up</span>
-                </div> */}
-                {/* <div id="home-btns" >
-                    <span style={{'font-size': '64px'}} class="material-icons">
-                        expand_more
-                    </span>    
-                </div> */}
+        
                 <div id="home-menu">
-                    <span>LOGIN</span> / <span>SIGN UP</span>
+                    <span onClick={handleLogin}>LOGIN</span> / 
+                    {' '}<span onClick={handleSignup}>SIGN UP</span>
                 </div>
 
-                
-                
+                {showLogin ? <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> : ''}
+                {showSignup ? <SignUp /> : ''}
+                                
             </div>
             
             
