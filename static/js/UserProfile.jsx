@@ -82,11 +82,26 @@ const UserProfile = () => {
                     <Row>
                         {friends ? 
                             (friends == 'Friends'? 
-                                <Button onClick={unFriend}>
+                                <Button 
+                                    className="friend-status"
+                                    variant="outline-light"
+                                    onClick={unFriend}
+                                >
                                     Friends <i className="far fa-check-circle"></i>
                                 </Button> : 
-                                <Button>Pending</Button>) :
-                            <Button onClick={ReqFriend}>Send Friend Request</Button> 
+                                <Button 
+                                    className="friend-status"
+                                    variant="outline-light"
+                                >
+                                    Pending
+                                </Button>) :
+                                <Button 
+                                    onClick={ReqFriend}
+                                    className="friend-status"
+                                    variant="outline-light"
+                                >
+                                    Send Friend Request
+                                </Button> 
                         }
                     </Row>
 

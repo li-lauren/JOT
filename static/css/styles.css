@@ -369,8 +369,18 @@ a {
     border: none;
     border-radius: 0;
     border-bottom: 2px solid whitesmoke;
-    outline: none !important;
     margin-bottom: 10px;
+}
+
+.friend-status {
+    display: inline-block;
+    padding-bottom: 1px;
+    font-size: 16px !important;
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid whitesmoke;
+    margin-bottom: 10px;
+    margin-left: 16px;
 }
 
 
