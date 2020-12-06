@@ -33,7 +33,7 @@ const InvitationList = () => {
 
     return (
         <div>
-            <h5>Invitations</h5>
+            <h5 style={{'margin-bottom': '16px'}}>Invitations</h5>
             {invitationList.length > 0 ? (invitationList.map(invitation => 
                 <Invitation 
                     key={invitation.invite_id} 
