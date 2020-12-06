@@ -105,7 +105,7 @@ const UserProfile = () => {
                         }
                     </Row>
 
-                    <Row style={{"margin-top": "100px"}}>
+                    <Row style={{"margin-top": "60px"}}>
                         <Col xs={4}>
                             <div className="num-likes-cont">
                                 <span className="num-likes">{totalLikes}</span>
