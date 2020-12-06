@@ -46,7 +46,7 @@ const Home = ({loggedIn, setLoggedIn}) => {
                     </span>    
                 </div> */}
                 <div id="home-menu">
-                    LOGIN / SIGN UP
+                    <span>LOGIN</span> / <span>SIGN UP</span>
                 </div>
 
                 
