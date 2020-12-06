@@ -10,11 +10,11 @@ const Home = ({loggedIn, setLoggedIn}) => {
             <div id="welcome-cont">
                 <div className="welcome stroke">WELCOME TO JOT</div>
                 <br/>
-                <div className="welcome">WELCOME TO <span id="JOT">JOT</span></div>
+                <div className="welcome">WELCOME TO <span id="JOT">JOT</span>
+                </div>
                 <br/>
                 <div className="welcome stroke">
-                    WELCOME TO JOT
-                    
+                    WELCOME TO JOT    
                 </div>
                 
                 {/* <div id="home-img-cropper">
@@ -35,11 +35,21 @@ const Home = ({loggedIn, setLoggedIn}) => {
                 }
                 {/* <p id="login-join" onClick={()=> setShowLogin(true)}>LOGIN / JOIN</p> */}
                 <div className="slash">/</div>
-
-                <div id="home-btns">
-                    <p id="login-btn">Login</p>
-                    <p id="signup-btn">Sign Up</p>
+                {/* <div id="home-btns">
+                    <span id="login-btn">Login</span>
+                   {'                    '}
+                    <span id="signup-btn">Sign Up</span>
+                </div> */}
+                {/* <div id="home-btns" >
+                    <span style={{'font-size': '64px'}} class="material-icons">
+                        expand_more
+                    </span>    
+                </div> */}
+                <div id="home-menu">
+                    LOGIN / SIGN UP
                 </div>
+
+                
                 
             </div>
             

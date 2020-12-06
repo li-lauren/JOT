@@ -118,10 +118,28 @@ a {
 }
 
 #home-btns {
+    font-size: 64px;
+    margin: auto;
+    margin-top: 100px;
+    text-align: center;
     position: relative;
-    z-index: 7;
-    margin-top: -550px;
-    margin-left: 950px;
+    z-index: 6;
+    top: -10px;
+    
+}
+
+#home-menu {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    /* text-align: right;
+    display: inline-block; */
+    color: lightslategrey;
+    font-family: 'PT Mono', monospace;
+    /* font-style: italic; */
+    margin-top: -300px;
+    font-size: 60px;
+    font-weight: 400;
+    cursor: pointer;
 }
 
 #home-img-cropper {
