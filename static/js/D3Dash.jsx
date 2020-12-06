@@ -210,12 +210,15 @@ const D3Dash = () => {
     }, [tagTree])
 
     return (
-        <svg 
-            width="960" 
-            height="960" 
-            ref={ref}
-            viewBox="0 0 960 960"
-            preserveAspectRatio="xMidYMid meet"
-        />
+        <div id='explorer'>
+            <svg
+                width="960" 
+                height="960" 
+                ref={ref}
+                viewBox="0 0 960 960"
+                preserveAspectRatio="xMidYMid meet"
+            />
+        </div>
+        
     )
 }

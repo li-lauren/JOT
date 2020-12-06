@@ -127,6 +127,24 @@ a {
     margin: 0 0 500px 0;
 }
 
+#explorer {
+    margin: auto;
+    text-align: center;
+    position: relative;
+}
+
+#explorer-h {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  text-align: right;
+  display: inline-block;
+  font-size: 90px;
+  font-weight: 700;
+  color: whitesmoke;
+  margin-top: -700px;
+}
+
+
 #dashboard-h2 {
     /* font-family: 'Libre Franklin', sans-serif; */
     /* font-family: 'Averia Serif Libre', cursive; */
@@ -547,3 +565,5 @@ select.form-control:focus {
   .node--leaf {
     pointer-events: none;
   } */
+
+  

@@ -46,9 +46,10 @@ const Dashboard = () => {
     return(
         
         <div>
-            <h1 id="dashboard-h">EXPLORER</h1>
+            
             
             {showD3 ? <D3Dash /> : ''}
+            <h1 id="explorer-h">EXPLORER</h1>
 
             <a href="#menu" id="hamburger">
                 <span 
