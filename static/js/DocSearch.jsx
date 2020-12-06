@@ -1,7 +1,7 @@
 const highlightText = (idx, txt, termLen, optKey) => {
     let newTxt = [
         txt.substring(0, idx),
-        <strong key={optKey} style={{color:"blue"}}>
+        <strong key={optKey} className="highlight">
             {txt.substring(idx, idx + termLen)}
         </strong>,
         txt.substring(idx + termLen)
@@ -76,6 +76,7 @@ const DocSearch = () => {
                     Article Search
                 </Form.Label>
                 <Form.Control
+                    type="text"
                     className="mb-2 mr-sm-2"
                     id="inlineFormInputName2"
                     placeholder="Article Search"

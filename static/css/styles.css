@@ -543,6 +543,10 @@ select.form-control:focus {
     font-size: 14px;
 }
 
+.highlight {
+    color: #a05344;
+}
+
 
     
 
