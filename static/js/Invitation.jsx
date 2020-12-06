@@ -35,16 +35,17 @@ const Invitation = ({invitation, invAction, setInvAction}) => {
     }
     return(
         <div>
-            {invitation.title}
+            <span id="invite-title">{invitation.title}</span>
             <br/>
-            {invitation.inviter} {moment(created_at).startOf('minute').fromNow()}
+            <span id="inviter">{invitation.inviter}    </span>
+            <span id="invite-timestamp">{moment(created_at).startOf('minute').fromNow()}</span> 
             <br/>
-            {invitation.invite_msg}
+            <span id="invite-msg">{invitation.invite_msg}</span>
             <br/>
-            <Button variant="outline-secondary" size="sm" onClick={accept}>
+            <Button className="invite-btn" variant="outline-light" size="sm" onClick={accept}>
                 Accept
             </Button> 
-            <Button variant="outline-secondary" size="sm" onClick={decline}>
+            <Button className="invite-btn" variant="outline-light" size="sm" onClick={decline}>
                 Decline
             </Button>
         </div>
