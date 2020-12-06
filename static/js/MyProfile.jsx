@@ -159,7 +159,7 @@ const MyProfile = ({setLoggedIn}) => {
                     </Row>
                     
                 </Col>
-                <Col xs={1}>
+                <Col xs={1} className="text-right" style={{"margin-right": "-50px"}}>
                     <a href="" onClick={logout}>Logout</a>
                 </Col>
             </Row>
