@@ -49,9 +49,9 @@ const Dashboard = () => {
             {showD3 ? <D3Dash /> : ''}
             <h1 id="explorer-h">EXPLORER</h1>
 
-            <a href="#menu" id="expand-cont">
+            <a href="#menu">
                 <span 
-                    className="material-icons"
+                    className="material-icons-round"
                     id="expand-btn"
                     // onClick={() => setShowMenu(!showMenu)}
                 >

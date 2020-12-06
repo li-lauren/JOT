@@ -144,14 +144,21 @@ a {
 #expand-cont {
     float: right;
     display: inline-block;
-    margin-right: 60px;
-    margin-top: 300px;
+    margin-right: -230px;
+    margin-top: 100px;
 }
 #expand-btn {
+    margin-right: -180px;
+    margin-top: 100px;
+    padding-left: -100px;
+    transform: scale(1.5,1.5);
+    float: right;
     text-align: right;
     display: inline-block;
-    font-size: 56px;
+    font-weight: 800;
+    font-size: 500px;
     position: relative;
+    color: #363737;
     z-index: 12;
 }
 
@@ -171,6 +178,8 @@ a {
     min-height: 900px;
     margin-top: 500px;
     margin-left: 125px;
+    position: relative;
+    z-index: 14;
 }
 
 
