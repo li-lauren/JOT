@@ -348,13 +348,14 @@ a {
 /* FRIENDS */
 .count {
     font-style: bold;
-    font-size: 14px;
-    color: whitesmoke;
-    border: 1px whitesmoke solid;
+    font-size: 20px;
+    color: #a72693;
+    margin-left: 10px;
+    /* border: 1px whitesmoke solid;
     border-radius: 25%;
     padding: 3px;
-    margin: 5px;
-    text-align: center;
+    margin: 5px; */
+    /* text-align: center; */
 }
 
 
