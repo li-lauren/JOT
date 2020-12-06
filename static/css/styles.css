@@ -401,6 +401,16 @@ a {
     vertical-align: bottom;
 }
 
+/* TAGS */
+
+#tag-lib-base {
+   
+}
+
+.tag {
+    margin-right: 4px;
+}
+
 /* DOC LISTING */
 .doc-list {
     z-index: 1;

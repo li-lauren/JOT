@@ -24,7 +24,7 @@ const TagLibrary = ({setFilter}) => {
 
 
     return(
-        <div>
+        <div id="tag-lib-base" style={{'margin-bottom': '16px'}}>
             {tagLib ? tagLib.map(tag => 
             <Tag pill 
                 key={tag.tag_id} 
@@ -33,10 +33,9 @@ const TagLibrary = ({setFilter}) => {
                 setShowAll={setShowAll}/>
             ) : ''}
             {showAll ? 
-            <Badge pill onClick={toggleShowAll}>
+            <Badge variant="secondary" pill onClick={toggleShowAll}>
                 Show All
-            </Badge> : ''}
-                
+            </Badge> : ''}       
         </div>
     )
 }

@@ -14,7 +14,7 @@ const Tag = ({tag, setFilter, setShowAll}) => {
         setShowAll(true)
     }
     return(
-        <Badge pill onClick={handleTagFilter}>
+        <Badge className="tag" pill variant="secondary" onClick={handleTagFilter}>
             {tag.tag}
         </Badge>
     )
