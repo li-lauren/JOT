@@ -21,7 +21,7 @@ const Doc = () => {
     
     useEffect(() => {
         window.scrollTo(0, 0)
-        
+
         localStorage.setItem('doc_id', room.toString())
         if (socket && room) {
             socket.emit('join', room)
@@ -84,21 +84,26 @@ const Doc = () => {
     ]
     
     return(
-        <Container>
-            <Alert id="joinMsg" show={show} variant="info">
-                {joinMsg}
-            </Alert>
-            
-            <div id="wrapper">
+        <div>
+            <Navbar />
+            <Container style={{'margin-top': '-50px'}}>
+                <Alert id="joinMsg" show={show} variant="info">
+                    {joinMsg}
+                </Alert>
                 
-                {docData}
+                <div id="wrapper">
+                    
+                    {docData}
 
-                <Row>
-                    <NoteList room={room} socket={socket}/>
-                </Row>
+                    <Row>
+                        <NoteList room={room} socket={socket}/>
+                    </Row>
 
-            </div>
-        </Container>
+                </div>
+            </Container>
+
+        </div>
+        
     )
 }
 
