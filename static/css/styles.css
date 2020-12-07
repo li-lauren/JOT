@@ -745,7 +745,15 @@ select.form-control:focus {
 }
 
 .search-result {
-    margin: 8px 0px;
+    /* margin: 8px 0px; */
+    height: 58px;
+    border-top: 1px solid #363737;
+    padding: 4px;
+}
+
+div.search-result:hover {
+    background-color: #363737;
+    cursor: pointer;
 }
 
 .search-author {
