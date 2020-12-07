@@ -65,7 +65,7 @@ const Search = () => {
                     <div key={i} onClick={() => getProfile(option[0])} className="user-listing">
                         <span id="search-name">{option[1]}</span>
                         <br/>
-                        <span>{option[0]}</span>
+                        <span id="search-email">{option[0]}</span>
                     </div>
                         ): ''}
             </span>
