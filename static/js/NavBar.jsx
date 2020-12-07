@@ -7,8 +7,8 @@ const Navbar = () => {
                 <span>
                     <Link id="home-link" to={'/dashboard'}>
                     <span id="home-icon" 
-                        className="material-icons">
-                        house_siding
+                        className="material-icons-round">
+                        west
                     </span>
                     </Link>
                     {/* <Link to={'/myProfile'}>
