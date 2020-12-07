@@ -51,12 +51,13 @@ const Dashboard = () => {
 
             <a href="#menu">
                 <span 
-                    className="material-icons-round"
+                    className="display-none material-icons-round"
                     id="expand-btn"
                     // onClick={() => setShowMenu(!showMenu)}
                 >
                     south
                 </span>
+                {/* <i id="expand-btn" class="fas fa-arrow-down"></i> */}
 
             </a>
                 

@@ -20,6 +20,8 @@ const Doc = () => {
     console.log(socket)
     
     useEffect(() => {
+        window.scrollTo(0, 0)
+        
         localStorage.setItem('doc_id', room.toString())
         if (socket && room) {
             socket.emit('join', room)

@@ -22,6 +22,10 @@ a {
     box-shadow: none;
 }
 
+.display-none {
+    display: none;
+}
+
 /* HOME */
 
 #home-container {
@@ -148,6 +152,7 @@ a {
     margin: auto;
     text-align: center;
     position: relative;
+    z-index: 4;
 }
 
 #explorer-h {
@@ -176,7 +181,7 @@ a {
     font-size: 500px;
     position: relative;
     color: #363737;
-    z-index: 12;
+    z-index: 0;
 }
 
 
@@ -224,7 +229,6 @@ a {
 }
 
 .email-h {
-    font-family: "Poppins", sans-serif;
     font-weight: 100;
 }
 
