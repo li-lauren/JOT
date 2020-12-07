@@ -2,9 +2,9 @@ const { Redirect } = ReactRouterDOM;
 // const { Button } = ReactBootstrap;
 
 const Login = ({loggedIn, setLoggedIn}) => {
-    // if (loggedIn) {
-    //     return <Redirect to={'/dashboard'} />
-    // }
+    if (loggedIn) {
+        return <Redirect to={'/dashboard'} />
+    }
     
     const [userInput, setUserInput] = React.useReducer(
         (state, newState) => ({...state, ...newState}), 
