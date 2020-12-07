@@ -99,7 +99,7 @@ const D3Dash = () => {
             .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; }) // assign class names to each circle
             .style("fill", function(d) { return d.children ? color(d.depth) : `url(#image${d.data.doc_id})` }) // give circle a depth-based color
             .style("fill-opacity", function(d) { return d.value > 0 ? 1 : 0; })
-            .on("dblclick", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
+            .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
             // .on("mouseover", d => mouseover(d))
             // .on("mouseout", d => mouseout(d))
             // .on("click", showLabel)
@@ -157,7 +157,7 @@ const D3Dash = () => {
 
         svg
             .style("background", color(-1))
-            .on("dblclick", function() { zoom(root); }); // apply zoom behavior to root (the selection)
+            .on("click", function() { zoom(root); }); // apply zoom behavior to root (the selection)
             // bind event listeners for zooming to root
 
         zoomTo([root.x, root.y, root.r * 2 + margin]); // initiate position
