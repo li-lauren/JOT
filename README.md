@@ -1,4 +1,4 @@
-### JOT
+# JOT
 
 ## Tech Stack
 React, Flask, Socket.IO, Flask-SocketIO, PostgreSQL, SQLAlchemy, D3.js
