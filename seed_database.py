@@ -42,13 +42,13 @@ user_9 = crud.create_user('Stanley', 'Hutson', 'work-stanley@__mifflin.com', 'te
 user_10 = crud.create_user('Angela', 'Marten', 'work-angela@__mifflin.com', 'test', '', trie)
 user_11 = crud.create_user('Oscar', 'Martinezz', 'work-oscar@__mifflin.com', 'test', '', trie)
 user_12 = crud.create_user('Phyllis', 'Dance', 'work-phyllis@__mifflin.com', 'test', '', trie)
-user_12 = crud.create_user('Kelly', 'Cupour', 'work-kelly@__mifflin.com', 'test', '', trie)
-user_13 = crud.create_user('Roy', 'Vanderson', 'work-roy@__mifflin.com', 'test', '', trie)
-user_13 = crud.create_user('Toby', 'Flinderstone', 'work-toby@__mifflin.com', 'test', '', trie)
-user_13 = crud.create_user('Creed', 'Batton', 'work-creed@__mifflin.com', 'test', '', trie)
-user_2 = crud.create_user('Darryl', 'Phillybin', 'work-darryl@__mifflin.com', 'test', '', trie)
-user_2 = crud.create_user('Kevin', 'Alone', 'work-kevin@__mifflin.com', 'test', '', trie)
-user_2 = crud.create_user('Meredith', 'Calmer', 'work-meredith@__mifflin.com', 'test', '', trie)
+user_13 = crud.create_user('Kelly', 'Cupour', 'work-kelly@__mifflin.com', 'test', '', trie)
+user_14 = crud.create_user('Roy', 'Vanderson', 'work-roy@__mifflin.com', 'test', '', trie)
+user_15 = crud.create_user('Toby', 'Flinderstone', 'work-toby@__mifflin.com', 'test', '', trie)
+user_16 = crud.create_user('Creed', 'Batton', 'work-creed@__mifflin.com', 'test', '', trie)
+user_17 = crud.create_user('Darryl', 'Phillybin', 'work-darryl@__mifflin.com', 'test', '', trie)
+user_18 = crud.create_user('Kevin', 'Alone', 'work-kevin@__mifflin.com', 'test', '', trie)
+user_19 = crud.create_user('Meredith', 'Calmer', 'work-meredith@__mifflin.com', 'test', '', trie)
 
 
 
@@ -70,7 +70,7 @@ article_urls_1 = [
     'https://www.newyorker.com/culture/the-front-row/highlights-from-week-one-of-the-new-york-film-festival',
     'https://news.mit.edu/2020/neural-network-uncertainty-1120',
     'https://www.sciencenews.org/article/color-changing-fibers-mysteries-math-physics-how-knots-work'
-]
+] # articles 1-16
 
 
 docs_in_db = []
@@ -108,7 +108,7 @@ article_urls_2 = [
     'https://www.vox.com/the-goods/21742395/winter-survival-scandinavia-norway-pandemic-seasonal-affective-disorder-darkness',
     'https://www.vox.com/21556548/national-book-award-2020-winners-finalists',
     'https://www.theatlantic.com/culture/archive/2020/10/lakers-nba-2020/616677/'
-]
+] #articles 17 - 25
 
 for url in article_urls_2: 
     article = Article(url, keep_article_html=True)
@@ -140,10 +140,68 @@ crud.create_relationship_type('friends')
 # req = crud.create_friend_req(1,2)
 # crud.add_friend(req.user_relationship_id)
 
+# Pam's Friends
+req = crud.create_friend_req(1,4)
+crud.add_friend(req.user_relationship_id)
+
+req2 = crud.create_friend_req(1, 7)
+crud.add_friend(req2.user_relationship_id)
+
+req3 = crud.create_friend_req(1, 8)
+crud.add_friend(req3.user_relationship_id)
+
+req4 = crud.create_friend_req(1, 18)
+crud.add_friend(req4.user_relationship_id)
+
+req5 = crud.create_friend_req(1, 12)
+crud.add_friend(req5.user_relationship_id)
+
+req6 = crud.create_friend_req(1, 15)
+crud.add_friend(req6.user_relationship_id)
+
+# Jim's Friends
+jim_req1 = crud.create_friend_req(2, 6)
+crud.add_friend(jim_req1.user_relationship_id)
+
+jim_req2 = crud.create_friend_req(2, 3)
+crud.add_friend(jim_req2.user_relationship_id)
+
+jim_req3 = crud.create_friend_req(2, 11)
+crud.add_friend(jim_req3.user_relationship_id)
+
+jim_req4 = crud.create_friend_req(2, 9)
+crud.add_friend(jim_req4.user_relationship_id)
+
+jim_req5 = crud.create_friend_req(2, 18)
+crud.add_friend(jim_req5.user_relationship_id)
+
+
 # Some article following
 
 follow2 = crud.create_doc_follower(2,1, "Reminded me of what we were talking about last week...")
 crud.accept_invite_by_follow_id(follow2.doc_follower_id)
+
+follow3 = crud.create_doc_follower(13,1, "Read this!")
+crud.accept_invite_by_follow_id(follow3.doc_follower_id)
+
+follow4 = crud.create_doc_follower(16,1, "Test")
+crud.accept_invite_by_follow_id(follow4.doc_follower_id)
+
+follow5 = crud.create_doc_follower(7,17, "Test")
+crud.accept_invite_by_follow_id(follow5.doc_follower_id)
+
+follow6 = crud.create_doc_follower(18,17, "Test")
+crud.accept_invite_by_follow_id(follow6.doc_follower_id)
+
+follow7 = crud.create_doc_follower(14,17, "Test")
+crud.accept_invite_by_follow_id(follow7.doc_follower_id)
+
+follow8 = crud.create_doc_follower(12,17, "Test")
+crud.accept_invite_by_follow_id(follow8.doc_follower_id)
+
+follow9 = crud.create_doc_follower(4,17, "Test")
+crud.accept_invite_by_follow_id(follow9.doc_follower_id)
+
 
 # Add tags 
 
@@ -173,6 +231,18 @@ crud.create_doc_tag(13, 18)
 crud.create_doc_tag(14, 18)
 crud.create_doc_tag(14, 20)
 crud.create_doc_tag(15, 5)
+crud.create_doc_tag(16, 5)
+
+# Jim's tags
+crud.create_doc_tag(17, 19)
+crud.create_doc_tag(18, 23)
+crud.create_doc_tag(19, 24)
+crud.create_doc_tag(20, 24)
+crud.create_doc_tag(21, 2)
+crud.create_doc_tag(22, 2)
+crud.create_doc_tag(23, 25)
+crud.create_doc_tag(24, 17)
+crud.create_doc_tag(25, 24)
 
 
 
