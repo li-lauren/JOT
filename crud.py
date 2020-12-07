@@ -70,7 +70,13 @@ def get_user_email_matches(search_term, trie):
     if not search_term:
         return []
 
-    return matches
+    match_names = []
+
+    for match in matches:
+        user = get_user_by_email(match)
+        match_names.append((match, f"{user.fname} {user.lname}"))
+
+    return match_names
 
 
 ### DOC CRUD OPS ###

@@ -63,7 +63,9 @@ const Search = () => {
             <span className="search-results">
                 {options ? options.map((option, i) => 
                     <div key={i} onClick={() => getProfile(option)}>
-                        {option}
+                        {option[1]}
+                        <br/>
+                        {option[0]}
                     </div>
                         ): ''}
             </span>
