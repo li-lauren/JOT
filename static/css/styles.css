@@ -32,6 +32,19 @@ a {
     text-decoration: underline;
 }
 
+#home-link {
+    color: #596a72;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+#home-icon {
+    font-size: 36px;
+    margin-left: -40px;
+    margin-top: 18px;
+    vertical-align: bottom;
+}
+
 
 
 #home-circle {

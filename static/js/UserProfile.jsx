@@ -67,6 +67,7 @@ const UserProfile = () => {
 
     return(
         <Container>
+            <Navbar />
             <Row>
                 <Col >
                     <h4 id="profile-header">Profile / {user.fname}</h4>

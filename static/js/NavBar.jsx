@@ -1,30 +1,33 @@
 const { Redirect, Switch, Link, Route } = ReactRouterDOM;
 
-const Navbar = ({loggedIn}) => {
+const Navbar = () => {
     return(
         <Container>
-
-       
-        <nav>
-            <span>
-                <Link to={'/dashboard'}>Dashboard</Link>
-                {/* <Link to={'/myProfile'}>
-                    {localStorage.getItem('fname')}
-                </Link> */}
-            </span> : 
-            <Link to={'/'}>Jot</Link>
-            {/* { loggedIn ? 
+            <nav>
                 <span>
-                    <Link to={'/dashboard'}>Dashboard</Link>
-                    <Link to={'/myProfile'}>
-                        {localStorage.getItem('fname')}
+                    <Link id="home-link" to={'/dashboard'}>
+                    <span id="home-icon" 
+                        className="material-icons">
+                        house_siding
+                    </span>
                     </Link>
-                </span> : 
-                <Link to={'/'}>Jot</Link>
-            } */}
-            
-            
-        </nav>
+                    {/* <Link to={'/myProfile'}>
+                        {localStorage.getItem('fname')}
+                    </Link> */}
+                </span> 
+                {/* <Link to={'/'}>Jot</Link> */}
+                {/* { loggedIn ? 
+                    <span>
+                        <Link to={'/dashboard'}>Dashboard</Link>
+                        <Link to={'/myProfile'}>
+                            {localStorage.getItem('fname')}
+                        </Link>
+                    </span> : 
+                    <Link to={'/'}>Jot</Link>
+                } */}
+                
+                
+            </nav>
 
             {/* <Navbar bg="light" variant="light">
                 <Navbar.Brand as={Link} to="/">Jot</Navbar.Brand>

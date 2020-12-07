@@ -42,7 +42,7 @@ const App = () => {
         
         <SocketContext.Provider value={socket}>
             <Router>
-                <Navbar loggedIn={loggedIn}/>
+                {/* <Navbar loggedIn={loggedIn}/> */}
                 <Switch>
                     <Route 
                         exact path={'/'} 

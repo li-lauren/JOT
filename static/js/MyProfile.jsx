@@ -56,6 +56,7 @@ const MyProfile = ({setLoggedIn}) => {
 
     return(
         <Container>
+            <Navbar />
             <Row>
                 <Col >
                     <h4 id="profile-header">Profile / {fname}</h4>
