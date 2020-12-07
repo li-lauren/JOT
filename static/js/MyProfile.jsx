@@ -21,13 +21,13 @@ const MyProfile = ({setLoggedIn}) => {
 
     const logout = () => {
         setLoggedIn(false)
+        localStorage.clear()   
         fetch('/logout')
         .then(() => {
             console.log('Disconnecting...')
             if (socket) {
                 socket.disconnect()
-            }
-            localStorage.clear()    
+            } 
         })    
     }
 
