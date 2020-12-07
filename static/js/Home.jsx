@@ -19,7 +19,7 @@ const Home = ({loggedIn, setLoggedIn}) => {
     return (
 
         <div>
-            <Navbar />
+            {/* <Navbar /> */}
             <div id="welcome-cont">
                 <div className="welcome stroke">WELCOME TO JOT</div>
                 <br/>
