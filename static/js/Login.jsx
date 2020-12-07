@@ -75,6 +75,7 @@ const Login = ({loggedIn, setLoggedIn}) => {
                         name="email"
                         value={userInput.email} 
                         onChange={handleChange}
+                        autoComplete="off"
                     />
                 </InputGroup>
 
