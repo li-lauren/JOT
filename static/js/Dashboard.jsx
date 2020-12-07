@@ -47,9 +47,9 @@ const Dashboard = () => {
         
         <div>
             {showD3 ? <D3Dash /> : ''}
-            <h1 id="explorer-h">EXPLORER</h1>
+            <h1 id="explorer-h">explorer</h1>
 
-            <a href="#menu">
+            
                 <span 
                     className="display-none material-icons-round"
                     id="expand-btn"
@@ -58,8 +58,7 @@ const Dashboard = () => {
                     south
                 </span>
                 {/* <i id="expand-btn" class="fas fa-arrow-down"></i> */}
-
-            </a>
+                <a href="#menu" id="hidden-menu-btn">menu menu</a>
                 
             <br/>
             <br/>
