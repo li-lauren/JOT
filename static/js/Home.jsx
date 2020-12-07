@@ -39,8 +39,8 @@ const Home = ({loggedIn, setLoggedIn}) => {
                 <div className="slash">/</div>
         
                 <div id="home-menu">
-                    <span onClick={handleLogin}>LOGIN</span> / 
-                    {' '}<span onClick={handleSignup}>SIGN UP</span>
+                    <span className="login-signup-btns" onClick={handleLogin}>LOGIN</span> / 
+                    {' '}<span onClick={handleSignup} className="login-signup-btns">SIGN UP</span>
                 </div>
 
                 {showLogin ? <Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} /> : ''}
