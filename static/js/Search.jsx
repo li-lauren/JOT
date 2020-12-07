@@ -62,10 +62,10 @@ const Search = () => {
             </Form>
             <span className="search-results">
                 {options ? options.map((option, i) => 
-                    <div key={i} onClick={() => getProfile(option)}>
-                        {option[1]}
+                    <div key={i} onClick={() => getProfile(option[0])} className="user-listing">
+                        <span id="search-name">{option[1]}</span>
                         <br/>
-                        {option[0]}
+                        <span>{option[0]}</span>
                     </div>
                         ): ''}
             </span>

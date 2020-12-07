@@ -749,6 +749,28 @@ select.form-control:focus {
     color: #a05344;
 }
 
+.user-listing {
+    /* margin: 10px 0; */
+    height: 58px;
+    border-top: 1px solid #363737;
+    padding: 4px;
+    /* border-bottom: 1px solid black; */
+}
+
+div.user-listing:hover {
+    background-color: #363737;
+    cursor: pointer;
+}
+
+#search-name {
+    font-family: "PT Mono", monospace;
+    font-size: 16px;
+}
+
+#search-email {
+    font-size: 14px;
+}
+
 
     
 
