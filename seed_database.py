@@ -29,18 +29,26 @@ model.db.create_all()
 #     users_in_db.append(user)
 trie = server.email_trie
 
-user_1 = crud.create_user('John', 'Smith', 'john@example.com', 'test', '', trie)
-user_2 = crud.create_user('Marie', 'Brener', 'marie@example.com', 'test', '', trie)
-user_3 = crud.create_user('Lauren', 'Li', 'lauren@example.com', 'test', '', trie)
-user_4 = crud.create_user('John Paul', 'Roberts', 'johnpaul@example.com', 'test', '', trie)
-user_5 = crud.create_user('Jonas', 'Hill', 'jonas@example.com', 'test', '', trie)
-user_6 = crud.create_user('Jonathan', 'Lee', 'jonathan@example.com', 'test', '', trie)
-user_7 = crud.create_user('Jon', 'Nakayama', 'jon@example.com', 'test', '', trie)
-user_8 = crud.create_user('Jose', 'Gonzales', 'jose@example.com', 'test', '', trie)
-user_9 = crud.create_user('Jacob', 'Smith', 'jacob@example.com', 'test', '', trie)
-user_10 = crud.create_user('Johannes', 'Muller', 'johannes@example.com', 'test', '', trie)
-user_11 = crud.create_user('Jason', 'Jones', 'jason@example.com', 'test', '', trie)
-user_12 = crud.create_user('Janice', 'Joplin', 'janice@example.com', 'test', '', trie)
+
+user_1 = crud.create_user('Pam', 'Deezly', 'work-pam@__mifflin.com', 'test', '', trie)
+user_2 = crud.create_user('Jim', 'Halfort', 'work-jim@__mifflin.com', 'test', '', trie)
+user_3 = crud.create_user('Dwight', 'Root', 'work-dwight@__mifflin.com', 'test', '', trie)
+user_4 = crud.create_user('Michael', 'Scatt', 'work-michael@__mifflin.com', 'test', '', trie)
+user_5 = crud.create_user('Jan', 'Havingson', 'work-jan@__mifflin.com', 'test', '', trie)
+user_6 = crud.create_user('Ryan', 'Hovard', 'work-ryan@__mifflin.com', 'test', '', trie)
+user_7 = crud.create_user('Andy', 'Nard', 'work-andy@__mifflin.com', 'test', '', trie)
+user_8 = crud.create_user('Erin', 'Cannon', 'work-erin@__mifflin.com', 'test', '', trie)
+user_9 = crud.create_user('Stanley', 'Hutson', 'work-stanley@__mifflin.com', 'test', '', trie)
+user_10 = crud.create_user('Angela', 'Marten', 'work-angela@__mifflin.com', 'test', '', trie)
+user_11 = crud.create_user('Oscar', 'Martinezz', 'work-oscar@__mifflin.com', 'test', '', trie)
+user_12 = crud.create_user('Phyllis', 'Dance', 'work-phyllis@__mifflin.com', 'test', '', trie)
+user_12 = crud.create_user('Kelly', 'Cupour', 'work-kelly@__mifflin.com', 'test', '', trie)
+user_13 = crud.create_user('Roy', 'Vanderson', 'work-roy@__mifflin.com', 'test', '', trie)
+user_13 = crud.create_user('Toby', 'Flinderstone', 'work-toby@__mifflin.com', 'test', '', trie)
+user_13 = crud.create_user('Creed', 'Batton', 'work-creed@__mifflin.com', 'test', '', trie)
+user_2 = crud.create_user('Darryl', 'Phillybin', 'work-darryl@__mifflin.com', 'test', '', trie)
+user_2 = crud.create_user('Kevin', 'Alone', 'work-kevin@__mifflin.com', 'test', '', trie)
+user_2 = crud.create_user('Meredith', 'Calmer', 'work-meredith@__mifflin.com', 'test', '', trie)
 
 
 
@@ -49,19 +57,19 @@ article_urls_1 = [
     'https://www.archpaper.com/2020/09/public-opinion-has-softened-on-brutalism-isnt-enough-to-stay-the-wrecking-ball/',
     'https://www.theatlantic.com/politics/archive/2020/05/is-flying-safe-coronavirus/611335/',
     'https://www.popularmechanics.com/technology/infrastructure/a34313925/whale-tail-train-derailment/',
-    'https://abduzeedo.com/editorial-design-new-brutalism-controversial-concrete',
+    'https://www.vox.com/the-highlight/21558074/museums-diversity-kara-walker-subtlety-visitors',
     'https://www.artnews.com/art-news/market/david-ross-hockney-royal-opera-house-1234577007/',
     'https://www.theatlantic.com/magazine/archive/2020/12/the-last-children-of-down-syndrome/616928/',
     'https://www.caltech.edu/campus-life-events/master-calendar/watson-lecture-2020-12',
     'https://www.caltech.edu/about/news/caltech-awards-10000th-phd-degree-during-october-conferral-students-impacted-pandemic',
     'https://www.caltech.edu/about/news/hundreds-copies-newtons-emprincipiaem-found-new-census',
-    'https://www.caltech.edu/about/news/neuroscientist-viviana-gradinaru-receives-young-investigator-award',
+    'https://www.sciencenews.org/article/mice-fidget-those-motions-have-widespread-effects-brain-activity',
     'https://www.caltech.edu/about/news/how-stem-cells-choose-their-careers',
     'https://www.theverge.com/2020/10/24/21531089/netflix-rebecca-review-hitchcock-disney-remake',
     'https://www.newyorker.com/culture/the-front-row/on-the-rocks-reviewed-sofia-coppolas-self-questioning-film-of-a-fathers-destructive-dazzle',
     'https://www.newyorker.com/culture/the-front-row/highlights-from-week-one-of-the-new-york-film-festival',
     'https://news.mit.edu/2020/neural-network-uncertainty-1120',
-    'https://news.mit.edu/2020/erik-demaine-mit-bose-award-excellence-teaching-1120'
+    'https://www.sciencenews.org/article/color-changing-fibers-mysteries-math-physics-how-knots-work'
 ]
 
 
@@ -92,7 +100,14 @@ for url in article_urls_1:
 
 article_urls_2 = [
     'https://www.vox.com/culture/21534638/the-mandalorian-disney-plus-explained-do-i-need-to-watch-star-wars-baby-yoda',
-    'https://www.vox.com/covid-19-coronavirus-economy-recession-stock-market/2020/5/6/21248069/stock-market-economy-federal-reserve-jerome-powell'
+    'https://www.vox.com/covid-19-coronavirus-economy-recession-stock-market/2020/5/6/21248069/stock-market-economy-federal-reserve-jerome-powell', 
+    'https://www.vox.com/culture/2020/8/17/21366621/nba-basketball-disney-mlb-baseball-nhl-hockey-covid-sports-bubble-tv',
+    'https://www.vox.com/2020/5/26/21270539/nba-season-return-disney-world-florida-coronavirus',
+    'https://www.sciencenews.org/article/50-years-ago-scientists-earth-magnetic-field-suspect-extinctions',
+    'https://www.sciencenews.org/article/long-necked-dinosaurs-sauropod-jurassic-herbivores', 
+    'https://www.vox.com/the-goods/21742395/winter-survival-scandinavia-norway-pandemic-seasonal-affective-disorder-darkness',
+    'https://www.vox.com/21556548/national-book-award-2020-winners-finalists',
+    'https://www.theatlantic.com/culture/archive/2020/10/lakers-nba-2020/616677/'
 ]
 
 for url in article_urls_2: 
@@ -122,8 +137,8 @@ crud.create_relationship_type('pending_friends')
 crud.create_relationship_type('friends')
 
 # John and Marie are friends
-req = crud.create_friend_req(1,2)
-crud.add_friend(req.user_relationship_id)
+# req = crud.create_friend_req(1,2)
+# crud.add_friend(req.user_relationship_id)
 
 # Some article following
 
