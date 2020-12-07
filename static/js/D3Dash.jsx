@@ -125,7 +125,8 @@ const D3Dash = () => {
             // .on("mouseout", d => mouseout(d))
             .text(function(d) { 
                 return (d.value > 0) ? d.data.name : ''; 
-            }) 
+            })
+            .call(wrap, 100)
             
             
                 // retrieve name (from json data) and set as text
@@ -180,11 +181,13 @@ const D3Dash = () => {
                 .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
             
             transition.selectAll("text")
+            // .call(wrap, 100)
             .filter(function(d) { return !d.children })
                 .style("fill-opacity", function(d) { return d === focus ? 1 : 0})
                 .on("start", function(d) { 
-                    if (d === focus) {this.style.display = "inline"}
-                    else {this.style.display = "none"} })
+                    if (d === focus) {
+                        this.style.display = "inline"
+                    } else {this.style.display = "none"} })
                 .on("end", function(d) { 
                     if (d === focus) {this.style.display = "inline"}
                     else {this.style.display = "none"} })
@@ -193,6 +196,63 @@ const D3Dash = () => {
                 .style("fill-opacity", 0)
                 
         }
+
+        function wrap(text, width) {
+            text.each(function () {
+                var text = d3.select(this),
+                    words = text.text().split(/\s+/).reverse(),
+                    word,
+                    line = [],
+                    lineNumber = 0,
+                    lineHeight = 1.1, // ems
+                    x = text.attr("x"),
+                    y = text.attr("y"),
+                    dy = 0, //parseFloat(text.attr("dy")),
+                    tspan = text.text(null)
+                                .append("tspan")
+                                .attr("x", x)
+                                .attr("y", y)
+                                .attr("dy", dy + "em");
+                console.log(text.text())
+                while (word = words.pop()) {
+                    line.push(word);
+                    tspan.text(line.join(" "));
+                    if (tspan.node().getComputedTextLength() > width) {
+                        line.pop();
+                        tspan.text(line.join(" "));
+                        line = [word];
+                        tspan = text.append("tspan")
+                                    .attr("x", x)
+                                    .attr("y", y)
+                                    .attr("dy", ++lineNumber * lineHeight + dy + "em")
+                                    .text(word);
+                    }
+                }
+            });
+        }
+
+        // function wrap(d) {
+        //     var text = d3.select(this),
+        //       width = d.r * 2,
+        //       x = d.x,
+        //       y = d.y,
+        //       words = text.text().split(/\s+/).reverse(),
+        //       word,
+        //       line = [],
+        //       lineNumber = 0,
+        //       lineHeight = 1.1,
+        //       tspan = text.text(null).append("tspan").attr("x", x).attr("y", y);
+        //     while (word = words.pop()) {
+        //       line.push(word);
+        //       tspan.text(line.join(" "));
+        //       if (tspan.node().getComputedTextLength() > width) {
+        //         line.pop();
+        //         tspan.text(line.join(" "));
+        //         line = [word];
+        //         tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + "em").text(word);
+        //       }
+        //     }
+        // }
 
         function zoomTo(v) {
             var k = diameter / v[2]; view = v;
