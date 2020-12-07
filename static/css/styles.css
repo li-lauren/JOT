@@ -718,6 +718,7 @@ select.form-control:focus {
 
 .notification {
     position: fixed;
+    z-index: 16;
     top: 10%;
     left: 75%;
     width: 20%;
