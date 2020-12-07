@@ -25,7 +25,7 @@ const DocListing = ({doc}) => {
             </a>
             <br/>
             { isHovering ?
-                <a>
+                <a id="doc-timestamp">
                     {moment(created_at).format('MMMM Do, YYYY')}
                 </a> : ''
             }

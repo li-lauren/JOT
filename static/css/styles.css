@@ -416,6 +416,19 @@ a {
     z-index: 1;
     position:relative;
 }
+
+#doc-lib-h {
+    font-family: "PT Mono", monospace;
+    margin-left: 8px;
+    margin-top: 8px;
+    margin-bottom: 12px;
+}
+
+#follow-lib-h {
+    font-family: "PT Mono", monospace;
+    margin-left: 8px;
+}
+
 .doc-listing > a{
     
     color: whitesmoke;
@@ -425,11 +438,20 @@ a {
 }
 
 .doc-listing {
-    margin: 10px 0;
+    /* margin: 10px 0; */
+    height: 58px;
+    border-top: 1px solid #363737;
+    padding: 4px;
+    /* border-bottom: 1px solid black; */
 }
 
 div.doc-listing:hover {
-    border-bottom: 1px black solid;
+    background-color: #363737;
+}
+
+#doc-timestamp {
+    font-size: 14px;
+    font-style: italic;
 }
 
 /* ADD FOLLOWERS */

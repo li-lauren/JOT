@@ -1,7 +1,7 @@
 const Router = ReactRouterDOM.BrowserRouter;
 const { Redirect, Route } = ReactRouterDOM;
 
-const DocList = ({showAddDoc}) => {
+const DocList = () => {
     const socket = useContext(SocketContext)
     const [docList, setDocList] = useState([])
     const [sharedList, setSharedList] = useState([])
@@ -61,16 +61,11 @@ const DocList = ({showAddDoc}) => {
     }, [])
     
 
-    // if (docDets) {
-    //     <Redirect to='/article' />
-    // }
-
     return (
         <div className="doc-list">
-            {/* {showAddDoc ? <AddDoc docAdded={docAdded} setDocAdded={setDocAdded} /> : ''} */}
             
             <TagLibrary setFilter={setFilter}/>
-            <h5>Doc Library</h5>
+            <h5 id="doc-lib-h">Article Library</h5>
             <ul>
                 {docList.length !== 0 ? docList.map(doc => 
                         <DocListing 
@@ -81,7 +76,7 @@ const DocList = ({showAddDoc}) => {
 
                 <br/>
 
-                {sharedList.length !== 0 && <h6>Followed Docs</h6>}
+                {sharedList.length !== 0 && <h5 id="follow-lib-h">Articles You Follow</h5>}
                 {sharedList ? sharedList.map(doc => 
                     <DocListing 
                         key={doc.doc_id} 
