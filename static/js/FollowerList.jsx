@@ -4,12 +4,14 @@ const FollowerList = ({doc_id}) => {
     const [isHovering, setIsHovering] = useState(false)
     const socket = useContext(SocketContext)
 
+    console.log(doc_id)
     useEffect(() => {
         getFollowers()
     }, [followerAdded, doc_id])
 
     const getFollowers = () => {
-        fetch('/followers')
+        console.log('getting followers')
+        fetch(`/followers/${doc_id}`)
         .then(res => res.json())
         .then(data => {
             setFollowerList(data)
@@ -27,6 +29,7 @@ const FollowerList = ({doc_id}) => {
             socket.on('invite_accepted', data => {
                 console.log('invite accepted in follower list')
                 if (isMounted && data.inviter == localStorage.getItem('user_id')) {
+                    console.log('FOLLOWER ADDED')
                     setFollowerAdded(!followerAdded)
                 }   
             })

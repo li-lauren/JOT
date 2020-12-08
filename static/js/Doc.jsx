@@ -1,6 +1,6 @@
 const Doc = () => {
     const location = useLocation()
-    const data = location.state.params
+    let data = location.state.params
     console.log(`data: ${data.doc}`)
     const authors = data.authors
     const doc = data.doc
@@ -10,7 +10,6 @@ const Doc = () => {
     const [joinMsg, setJoinMsg] = useState('')
     const [show, setShow] = useState(false)
     const socket = useContext(SocketContext)
-
     
     let img_url = ''
 
@@ -34,6 +33,7 @@ const Doc = () => {
             socket.emit('leave', room)
             console.log('leaving room')
         }
+        
     }, [room]);
 
     useEffect(() => {
@@ -56,28 +56,28 @@ const Doc = () => {
     
     
     const docData = [
-         <Row>
+         <Row key={1}>
              <ColorSelector doc_id={room}/>
          </Row>,
-         <Row>
-            <FollowerList doc_id={doc.doc_id} />
+         <Row key={2}>
+            <FollowerList doc_id={room} />
         </Row>,
-        <Row>
+        <Row key={3}>
             <TagList doc_id={room} />
         </Row>,
-        <Row>
+        <Row key={4}>
             <h1>{doc.title}</h1>
         </Row>, 
-        <Row>
+        <Row key={5}>
             <p>{doc.publish_date ? moment(publish_date).format("MMMM Do YYYY") : '' }</p>
         </Row>,
-        <Row>
+        <Row key={6}>
             <p>{authors}</p>
         </Row>,
-        <Row> 
+        <Row key={7}> 
             <img className="top-image" src={img_url} alt="top_image"/>
         </Row>,
-        <Row id="doc-body">
+        <Row id="doc-body" key={8}>
              <div>{HTMLReactParser(doc.body)}</div>
         </Row>
        

@@ -198,11 +198,12 @@ def get_followed_docs_by_user_id():
 #         return f"No user associated with {email}"
 
 
-@app.route('/followers')
-def get_followers():
+@app.route('/followers/<doc_id>')
+def get_followers(doc_id):
     """Get all followers of a doc."""
     
-    doc_id = session['doc_id']
+    # doc_id = session['doc_id']
+    print(doc_id)
     
     followers = crud.get_followers_by_doc_id(doc_id)
 
@@ -435,6 +436,7 @@ def handle_join_room(room):
     user_id = session['user_id']
     print(f"User {session['user_id']} is now in Room {room}, SID: {request.sid}")
     session[request.sid] = user_id
+    session['doc_id'] = room
     print(session)
     join_room(room)
     user = crud.get_user_by_id(user_id)
