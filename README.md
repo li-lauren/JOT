@@ -18,3 +18,10 @@ Users can upload articles which are scraped using Python Newspaper.  Additional 
 adding comments (jots).
 
 ![intro-gif-2](https://github.com/li-lauren/JOT/blob/master/gifs/jot_intro_2.gif)
+
+### Search Feature
+
+A search and autocomplete feature was built from scratch and optimized via
+the Knuth-Morris-Pratt string searching algorithm.
+
+![search-gif](https://github.com/li-lauren/JOT/blob/master/gifs/jot_search.gif)
