@@ -1,11 +1,12 @@
-const NoteList = ({room, socket}) => {
+const NoteList = ({room}) => {
     const [noteLog, setNoteLog] = useState([]);
     const [noteAdded, setNoteAdded] = useState(null);
     const [colorChange, setColorChange] = useState(null)
+    const socket = useContext(SocketContext)
 
     const getAllNotes = () => {
         console.log('GETTING NOTES')
-        fetch('/notes')
+        fetch(`/notes/${room}`)
         .then(res => res.json())
         .then(data => {
             console.log(data)

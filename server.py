@@ -210,11 +210,11 @@ def get_followers(doc_id):
     return jsonify(followers)
 
 
-@app.route('/notes')
-def get_notes():
+@app.route('/notes/<doc_id>')
+def get_notes(doc_id):
     """Get all of a doc's notes."""
     
-    doc_id = session['doc_id']
+    # doc_id = session['doc_id']
     notes = crud.get_notes_by_doc_id(doc_id)
 
     return jsonify(notes)

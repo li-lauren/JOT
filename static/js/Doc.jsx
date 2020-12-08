@@ -96,7 +96,7 @@ const Doc = () => {
                     {docData}
 
                     <Row>
-                        <NoteList room={room} socket={socket}/>
+                        <NoteList room={room} />
                     </Row>
 
                 </div>
