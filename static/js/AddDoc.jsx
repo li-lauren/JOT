@@ -57,6 +57,7 @@ const AddDoc = () => {
                     value={userInput.url} 
                     onChange={handleChange} 
                     style={{width:"100%"}}
+                    autoComplete="off"
                 />
                 <Form.Control type="submit" style={{display: 'none'}} />
             </Form>
