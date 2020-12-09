@@ -1,13 +1,16 @@
-const AddFollower = ({followerAdded, setFollowerAdded, socket, doc_id}) => {
+// Component for adding followers (popup input form)
+
+const AddFollower = ({doc_id}) => {
     const [followerEmail, setFollowerEmail] = useState('')
     const [msg, setMsg] = useState('')
     const [showForm, setShowForm] = useState(false)
+    const socket = useContext(SocketContext)
 
     const handleChange = e => {
         setFollowerEmail(e.target.value)
     }
 
-    const addFollower = (e) => {
+    const addFollower = e => {
         e.preventDefault()
         console.log('Add Follower')
 
@@ -20,9 +23,9 @@ const AddFollower = ({followerAdded, setFollowerAdded, socket, doc_id}) => {
         }
     }
 
-    const toggleShowForm = () => {
-        setShowForm(!showForm)
-    }
+    // const toggleShowForm = () => {
+    //     setShowForm(!showForm)
+    // }
 
     const popover = (
         <Popover id="popover-basic">
