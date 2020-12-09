@@ -1,3 +1,5 @@
+// Component for adding an article
+
 const AddDoc = () => {
     const history = useHistory()
     const [userInput, setUserInput] = useReducer(
@@ -15,10 +17,8 @@ const AddDoc = () => {
         setUserInput({[name]: value});
     }
 
-    const addDoc = (e) => {
+    const addDoc = e => {
         e.preventDefault()
-        console.log('Add Doc')
-        console.log(`UserInput: ${userInput}`)
 
         const reqOptions = {
             method: 'POST',
@@ -33,9 +33,6 @@ const AddDoc = () => {
         fetch("/docs", reqOptions)
         .then(res => res.json())
         .then(data => {
-            console.log('Doc added')
-            console.log(data) 
-            // setDocAdded(!docAdded)
             setUserInput({
                 url: '', 
                 tag: '',
@@ -61,17 +58,6 @@ const AddDoc = () => {
                 />
                 <Form.Control type="submit" style={{display: 'none'}} />
             </Form>
-            {/* <form onSubmit={addDoc}>
-                <label>URL</label>
-                <input 
-                    type="text" name="url" 
-                    value={userInput.url} 
-                    onChange={handleChange}
-                />
-                <label>Tag</label>
-
-                <button type="submit">Add</button>
-            </form>    */}
         </div>   
     )
 }
