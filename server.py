@@ -42,6 +42,7 @@ def login():
    
     if user:
         if user.pw == pw:
+            # add user to flask session
             session['user_id'] = user.user_id
             session['fname'] = user.fname
             session['lname'] = user.lname
@@ -68,14 +69,13 @@ def login():
     else:
         return "No user associated with that email"
 
+
 @app.route('/logout')
 def logout():
     # session.clear()
-    # print(f"CLEAR SESSION: {session}")
+    
     user_id  = session['user_id']
     tag_trees[user_id] = initialize_tag_tree()
-
-    print(session)
 
     return redirect('/')
 
@@ -104,8 +104,7 @@ def register_user():
 @app.route('/docs/<doc_id>')
 def show_doc(doc_id):
     """Show a JOT-formatted document"""
-    #TODO: Check if there is a cleaner way to do this
-    print('SHOW_DOC')
+    
     doc = crud.get_doc_by_doc_id(doc_id)
     authors = crud.get_author_by_doc_id(doc_id)
     img_urls = crud.get_image_url_by_doc_id(doc_id)
@@ -154,7 +153,6 @@ def create_doc():
     img_url_list = []
     img_url_list.append(img_url.url)
     
-    print(f"Doc created: {doc}")
     return jsonify({
         'doc': doc, 
         'authors': " ".join(author_list), 
@@ -182,28 +180,9 @@ def get_followed_docs_by_user_id():
     return jsonify(followed_docs)
 
 
-# @app.route('/followers', methods=['POST'])
-# def create_follower():
-#     """Create a follower for a doc."""
-
-#     doc_id = session['doc_id']
-#     email = request.json.get('email')
-
-#     user = crud.get_user_by_email(email)
-#     if user:
-#         follower = crud.create_doc_follower(user.user_id, doc_id)
-#         print(follower)
-#         return f"{user.fname} has been added!"
-#     else:
-#         return f"No user associated with {email}"
-
-
 @app.route('/followers/<doc_id>')
 def get_followers(doc_id):
     """Get all followers of a doc."""
-    
-    # doc_id = session['doc_id']
-    print(doc_id)
     
     followers = crud.get_followers_by_doc_id(doc_id)
 
@@ -214,7 +193,6 @@ def get_followers(doc_id):
 def get_notes(doc_id):
     """Get all of a doc's notes."""
     
-    # doc_id = session['doc_id']
     notes = crud.get_notes_by_doc_id(doc_id)
 
     return jsonify(notes)
@@ -232,13 +210,16 @@ def get_replies(note_id):
 @app.route('/invitations')
 def get_invitations():
     """Get all of a user's article invitations."""
+
     user_id = session['user_id']
     invites = crud.get_invites_by_user_id(user_id)
     
     return jsonify(invites)
 
+
 @app.route('/decline', methods=['POST'])
 def decline_invitations():
+    """Decline a user's article invitation."""
     
     follow_id = request.json.get('followId')
     crud.decline_invite_by_follow_id(follow_id)
@@ -248,6 +229,7 @@ def decline_invitations():
 
 @app.route('/likes', methods=['POST'])
 def get_like_info():
+    """Get number of likes and whether a user has liked a note."""
 
     note_id = request.json.get('note_id')
     user_id = request.json.get('user_id')
@@ -256,7 +238,6 @@ def get_like_info():
     liked_by_user = crud.get_if_user_likes_a_note(user_id, note_id)
 
     return { 'numLikes': num_likes, 'likedByUser': liked_by_user }
-
 
 
 @app.route('/user/<int:user_id>')
@@ -274,7 +255,6 @@ def get_user_profile(user_id):
     top_img = ''
     if img_urls:
         top_img = img_urls[0].url
-
 
     stats = {
         'totalLikes': total_likes,
@@ -325,6 +305,7 @@ def get_user_info(email):
 
 @app.route('/friend/<int:user_id>')
 def check_if_friends(user_id):
+    """Check if a user is a friend."""
     curr_user_id = session['user_id']
     other_user_id = user_id
 
