@@ -1,7 +1,8 @@
+// Component for adding a note (jot)
 
-
-const AddNote = ({room, socket}) => {
+const AddNote = ({room}) => {
     const [note, setNote] = React.useState('');
+    const socket = useContext(SocketContext);
 
     const postNote = e => {
         // emit note to client
