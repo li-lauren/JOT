@@ -12,7 +12,8 @@ const AddNote = ({room}) => {
             console.log('posting note...')
             const addNoteElem = document.getElementById('add-note').getBoundingClientRect()
             const noteOriginElem = document.getElementById('note-list').getBoundingClientRect()
-        
+            
+            // calculate initial position of note
             const y = addNoteElem.top - noteOriginElem.top - 80
             const x = addNoteElem.left - noteOriginElem.left
             console.log({x, y})
@@ -39,16 +40,6 @@ const AddNote = ({room}) => {
                 />
                 <input type="submit" style={{display: 'none'}} />
             </form>
-            
-
-            {/* <br/>
-            <Button 
-                onClick={()=> postNote(room, note)}
-                variant="outline-primary"
-                size="sm"
-            >
-                Add Note
-            </Button> */}
         </div>
     )
 }
