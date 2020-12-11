@@ -1,3 +1,5 @@
+// component for threaded notes
+
 const AddNoteReply = ({parent_id, setShowNoteInput}) => {
     const socket = useContext(SocketContext)
     const [body, setBody] = useState('')
@@ -5,6 +7,8 @@ const AddNoteReply = ({parent_id, setShowNoteInput}) => {
 
     const addReply = e => {
         e.preventDefault()
+
+        // emit note reply
         if (socket) {
             console.log('Adding reply...')
             socket.emit('note_reply',
