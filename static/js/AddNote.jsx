@@ -10,7 +10,9 @@ const AddNote = ({room}) => {
         
         if (socket) {
             console.log('posting note...')
+            // get position of scrolling new input bar
             const addNoteElem = document.getElementById('add-note').getBoundingClientRect()
+            // get position of original location for note list (below doc)
             const noteOriginElem = document.getElementById('note-list').getBoundingClientRect()
             
             // calculate initial position of note
