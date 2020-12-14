@@ -22,17 +22,13 @@ const AddNoteReply = ({parent_id, setShowNoteInput}) => {
         }
     }
 
-    const handleChange = e => {
-        setBody(e.target.value)
-    }
-
     return(
         <Form onSubmit={addReply}>
             <Form.Group>
                 <Form.Control 
                     size="sm" type="text" 
                     value={body} 
-                    onChange={e => handleChange(e)}
+                    onChange={e => setBody(e.target.value)}
                     placeholder="Reply..." />
                 <Form.Control type="submit" style={{display: 'none'}} />
             </Form.Group>
