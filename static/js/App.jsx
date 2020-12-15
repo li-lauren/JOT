@@ -42,7 +42,6 @@ const App = () => {
         
         <SocketContext.Provider value={socket}>
             <Router>
-                {/* <Navbar loggedIn={loggedIn}/> */}
                 <Switch>
                     <Route 
                         exact path={'/'} 
@@ -52,16 +51,6 @@ const App = () => {
                             setLoggedIn={setLoggedIn} />
                         )} 
                     />
-                    {/* <Route exact path={'/signup'} component={SignUp} />
-                    <Route 
-                        exact path={'/login'} 
-                        render={(props) => (
-                            <Login {...props} 
-                            loggedIn={loggedIn}
-                            setLoggedIn={setLoggedIn} />
-                        )}
-                    />
-                 */}
                     <RequireAuth>
                         <Route 
                             exact path={'/dashboard'}
@@ -71,11 +60,8 @@ const App = () => {
                         />
                         <Route 
                             exact path={'/article'}
-                            // component={Doc}
                             render={(props) => (
-                                <Doc {...props} 
-                                // socket={socket}
-                                />
+                                <Doc {...props} />
                             )}
                         />
                         <Route 
