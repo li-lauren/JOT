@@ -1,4 +1,4 @@
-// component for threaded notes
+// component for adding threaded notes
 
 const AddNoteReply = ({parent_id, setShowNoteInput}) => {
     const socket = useContext(SocketContext)
