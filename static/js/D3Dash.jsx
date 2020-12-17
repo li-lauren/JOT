@@ -42,7 +42,6 @@ const D3Dash = () => {
             .range(["hsl(0, 0%, 15%)", "hsl(55, 27%, 83%)"])
             .interpolate(d3.interpolateHcl);
 
-            // .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
         
         // Create a new pack layout (which expects json)
         var pack = d3.pack()
@@ -69,14 +68,15 @@ const D3Dash = () => {
             view;
         
         var defs = g.append("defs");
-            
+        
+        // Append article images to circles as patterns
         var images = defs.selectAll(null)
             .data(nodes)
             .enter().append("pattern")
             .attr("id", function(d) {
                 if (d.children) {
                     return 0
-                } else{
+                } else {
                     return `image${d.data.doc_id}`
                 }
                 })
@@ -90,8 +90,6 @@ const D3Dash = () => {
             .attr("preserveAspectRatio", "xMidYMid slice")
 
 
-            
-
         // Append group (circle)
         var circle = g.selectAll("circle")
             .data(nodes) // join with nodes array
@@ -100,57 +98,26 @@ const D3Dash = () => {
             .style("fill", function(d) { return d.children ? color(d.depth) : `url(#image${d.data.doc_id})` }) // give circle a depth-based color
             .style("fill-opacity", function(d) { return d.value > 0 ? 1 : 0; })
             .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
-            // .on("mouseover", d => mouseover(d))
-            // .on("mouseout", d => mouseout(d))
-            // .on("click", showLabel)
-            
+
 
         // Append title/label for each node
         var text = g.selectAll("text")
             .data(nodes)
             .enter().append("text") // append a text element for each node
             .attr("class", "label") // assign label as the class name
-            // .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
             .style("opacity", 1)
             .style("display", function(d) { 
                 return (d.parent === root) ? "inline" : "none"; }) // only show text if the parent = curr root
             .style('pointer-events', 'auto')
-            // .attr('width', function(d) { return d.r / 3 })
-            // .style("font-size", function(d) { return Math.min(2 * d.r, (2 * d.r - 8 ) / this.getComputedTextLength() * 24) + "px"; })
             .on("click", function(d) {
                 d3.event.stopPropagation();
                 clickHandler(d)
                 })
-            // .on("mouseover", d => mouseover(d))
-            // .on("mouseout", d => mouseout(d))
             .text(function(d) { 
                 return (d.value > 0) ? d.data.name : ''; 
-            })
+            }) // retrieve name (from json data) and set as text
             .call(wrap, 100)
             
-            
-                // retrieve name (from json data) and set as text
-            
-        function mouseout(d) {  
-            if (!('img' in d.data)) {
-                text.style("opacity", 0)
-            } else {text.style("opacity", 0)}}
-        function mouseover(d) { 
-            console.log(d.children)
-            console.log(d.children && !('img' in d.children[0].data))
-            
-            if (d.children) {
-                console.log(d.children[0].data)
-                console.log('img' in d.children[0].data)
-            }
-            
-            if (d.parent === focus && d.children && !('img' in d.children[0].data)) {text.style("opacity", 1)}
-            // if ('img' in d.data) {text.style("opacity", 1)}
-        }
-        function showLabel(d) {
-            if (d.children.length == 0) {text.style("opacity", 1) }
-        }
-        
 
         var node = g.selectAll("circle,text");
     
@@ -175,13 +142,11 @@ const D3Dash = () => {
 
             transition.selectAll("text")
             .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
-                // .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
                 .style("fill-opacity", 1)
                 .on("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
                 .on("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
             
             transition.selectAll("text")
-            // .call(wrap, 100)
             .filter(function(d) { return !d.children })
                 .style("fill-opacity", function(d) { return d === focus ? 1 : 0})
                 .on("start", function(d) { 
@@ -264,9 +229,6 @@ const D3Dash = () => {
         }
 
     }
-
-
-
     }, [tagTree])
 
     return (
