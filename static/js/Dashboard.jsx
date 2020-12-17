@@ -4,7 +4,6 @@ const Dashboard = () => {
     const [showInvites, setShowInvites] = useState(false)
     const [showDocList, setShowDocList] = useState(false)
     const [showD3, setShowD3] = useState(true)
-    const [showMenu, setShowMenu] = useState(false)
 
     const fname = localStorage.getItem("fname")
 
@@ -48,16 +47,12 @@ const Dashboard = () => {
         <div>
             {showD3 ? <D3Dash /> : ''}
             <h1 id="explorer-h">explorer</h1>
-
-            
                 <span 
                     className="display-none material-icons-round"
                     id="expand-btn"
-                    // onClick={() => setShowMenu(!showMenu)}
                 >
                     south
                 </span>
-                {/* <i id="expand-btn" class="fas fa-arrow-down"></i> */}
                 <a href="#menu" id="hidden-menu-btn">menu menu</a>
                 
             <br/>
@@ -76,24 +71,19 @@ const Dashboard = () => {
                         </Col>
                         
                         <Col>
-                            <span
-                                onClick={handleSearch}
-                            >
+                            <span onClick={handleSearch}>
                                 Search
                             </span>
                         </Col>
                         
                         <Col>
-                            <span 
-                                onClick={handleAddDoc}>
+                            <span onClick={handleAddDoc}>
                                 Add an Article
                             </span>
                         </Col>
 
                         <Col>
-                            <span
-                                onClick={handleInvites}
-                            >
+                            <span onClick={handleInvites}>
                                 Invites
                             </span>
                         </Col>
@@ -103,7 +93,6 @@ const Dashboard = () => {
                                 Article List
                             </span>
                         </Col>
-
                     </Row>
                     <br/>
                     <br/>
@@ -112,92 +101,10 @@ const Dashboard = () => {
                         {showInvites ? <InvitationList /> : ''}
                         {showDocList ? <DocList /> : ''}
                         {showAddDoc ? <AddDoc /> : ''}
-                    </Row>
-                    
+                    </Row>  
                 </Container>
                 
-            </section> 
-        
-                
-                
-            
-            
-            
+            </section>  
         </div>
-        
-
-    
     )
-
 }
-
-{/* <Container>
-    <Row >
-        <Col md={2} className="d-flex align-items-center">
-            <h1 id="dashboard-h">
-                {`${localStorage.getItem('fname')}'s`} Jot</h1>
-            <h1 id="dashboard-h2">Dashboard</h1>
-        </Col>
-        <Col md={9}>
-            {showSearch ? <DocSearch /> : ''}
-            {showInvites ? <InvitationList /> : ''}
-            {showDocList ? <DocList showAddDoc={showAddDoc} /> : ''}
-            {showD3 ? <D3Dash /> : ''}
-            
-        </Col>
-        <Col md={1}>
-            <span 
-                className="material-icons md-48"
-                onClick={() => setShowMenu(!showMenu)}
-            >
-                menu
-            </span>
-            {showMenu ? 
-                <div>
-                    <i 
-                        className="material-icons md-36"
-                        onClick={handleMyProfile}
-                    >
-                        person
-                    </i>
-                    <br/>
-                    <span 
-                        className="material-icons md-36" 
-                        onClick={handleSearch}
-                    >
-                        search
-                    </span>
-                    <br/>
-                    <span 
-                        className="material-icons md-36"
-                        onClick={handleAddDoc}>
-                        post_add
-                    </span>
-                    <span 
-                        className="material-icons md-36"
-                        onClick={handleInvites}
-                    >
-                        how_to_reg
-                    </span>
-                    <div onClick={handleDocList}>
-                        Article List
-                    </div>
-                    <div onClick={() => setShowD3(!showD3)}>
-                        Article Explorer
-                    </div>
-
-                </div> : ''
-                
-                
-            }
-
-
-        </Col>
-
-    </Row>
-    
-    
-    
-
-
-</Container> */}
