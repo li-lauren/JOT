@@ -1,5 +1,3 @@
-const Router = ReactRouterDOM.BrowserRouter;
-const { Redirect, Route } = ReactRouterDOM;
 
 const DocList = () => {
     const socket = useContext(SocketContext)
@@ -30,7 +28,7 @@ const DocList = () => {
             setSharedList(data.followedDocsWithTag)  
         })
     }
-    console.log(filter)
+    
     useEffect(() => {
         if (!filter) {
             getDocList()
@@ -41,11 +39,10 @@ const DocList = () => {
        
     }, [docAdded, filter])
 
-    
 
-    
     useEffect(() => {
         let isMounted = true;
+
         if (!socket) {
             console.log('NO SOCKET');
         } else {
@@ -84,9 +81,6 @@ const DocList = () => {
                     />)
                 : <p>None</p>}
             </ul>
-            
-           
-            {/* {docDets ? <Doc data={docDets}/> : ''} */}
             
         </div>
     )
