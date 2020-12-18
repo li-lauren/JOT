@@ -1,21 +1,20 @@
+// component for the zoomable explorer (circle packing graph sorted by article tags)
+
 const D3Dash = () => {
     const [tagTree, setTagTree] = useState(null)
 
     const ref = React.useRef()
 
     const history = useHistory()
+
+    // redirect to article when the leaf circle labels are clicked
     const clickHandler = d => {
-        console.log('HANDLING CLICK')
-        console.log(d)
-        console.log(d.data)
         fetch(`/docs/${d.data.doc_id}`)
         .then(res => res.json())
         .then(data => {
             history.push('/article', {params: data})
         })
     }
-
-    console.log(tagTree)
 
     const getTagTree = () => {
         fetch('/tagtree')
