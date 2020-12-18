@@ -1,7 +1,10 @@
+// article display with options to add notes, invite followers, and 
+// customize note colors
+
 const Doc = () => {
     const location = useLocation()
     let data = location.state.params
-    console.log(`data: ${data.doc}`)
+   
     const authors = data.authors
     const doc = data.doc
     const room = doc.doc_id
@@ -16,10 +19,9 @@ const Doc = () => {
     if (data.img_urls) {
         img_url = data.img_urls[0]
     }
-    console.log(socket)
     
     useEffect(() => {
-        window.scrollTo(0, 0)
+        window.scrollTo(0, 0) // force view to start at top of page
 
         localStorage.setItem('doc_id', room.toString())
         if (socket && room) {
