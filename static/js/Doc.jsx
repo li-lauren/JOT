@@ -31,7 +31,6 @@ const Doc = () => {
         };
 
         return () => {
-            // disconnectSocket()
             socket.emit('leave', room)
             console.log('leaving room')
         }
@@ -89,6 +88,8 @@ const Doc = () => {
         <div>
             <Navbar />
             <Container style={{'margin-top': '-50px'}}>
+
+                {/* Alert that a user has joined the room  */}
                 <Alert id="joinMsg" show={show} variant="info">
                     {joinMsg}
                 </Alert>
@@ -98,14 +99,13 @@ const Doc = () => {
                     {docData}
 
                     <Row>
+                        {/* Original placeholder for notes  */}
                         <NoteList room={room} />
                     </Row>
 
                 </div>
             </Container>
-
-        </div>
-        
+        </div>   
     )
 }
 

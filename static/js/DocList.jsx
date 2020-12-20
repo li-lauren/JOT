@@ -1,10 +1,11 @@
+// Article/Document Library
 
 const DocList = () => {
     const socket = useContext(SocketContext)
     const [docList, setDocList] = useState([])
     const [sharedList, setSharedList] = useState([])
     const [docAdded, setDocAdded] = useState(false)
-    const [filter, setFilter] = useState(null)
+    const [filter, setFilter] = useState(null) // tag selection for filtering
 
     
 
