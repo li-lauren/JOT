@@ -1,44 +1,44 @@
 // Article/Document Library
 
 const DocList = () => {
-    const socket = useContext(SocketContext)
-    const [docList, setDocList] = useState([])
-    const [sharedList, setSharedList] = useState([])
-    const [docAdded, setDocAdded] = useState(false)
-    const [filter, setFilter] = useState(null) // tag selection for filtering
+    const socket = useContext(SocketContext);
+    const [docList, setDocList] = useState([]);
+    const [sharedList, setSharedList] = useState([]);
+    const [docAdded, setDocAdded] = useState(false);
+    const [filter, setFilter] = useState(null); // tag selection for filtering
 
     
 
     const getDocList = () => {
         fetch("/docs")
         .then(res => res.json())
-        .then(data => setDocList(data))
+        .then(data => setDocList(data));
     }
 
     const getSharedDocList = () => {
         fetch("/followed_docs")
         .then(res => res.json())
-        .then(data => setSharedList(data))
+        .then(data => setSharedList(data));
     }
 
     const getTaggedDocs = () => {
         fetch(`/docs/tags/${filter}`)
         .then(res => res.json())
         .then(data => {
-            setDocList(data.ownedDocsWithTag)
-            setSharedList(data.followedDocsWithTag)  
-        })
+            setDocList(data.ownedDocsWithTag);
+            setSharedList(data.followedDocsWithTag);
+        });
     }
     
     useEffect(() => {
         if (!filter) {
-            getDocList()
-            getSharedDocList()
+            getDocList();
+            getSharedDocList();
         } else {
-            getTaggedDocs()
-        }
+            getTaggedDocs();
+        };
        
-    }, [docAdded, filter])
+    }, [docAdded, filter]);
 
 
     useEffect(() => {
@@ -48,15 +48,15 @@ const DocList = () => {
             console.log('NO SOCKET');
         } else {
             socket.on('invite_accepted', data => {
-                console.log('invite accepted')
+                console.log('invite accepted');
                 if (isMounted && data.follower == localStorage.getItem('user_id')) {
-                    setDocAdded(!docAdded)
-                }   
+                    setDocAdded(!docAdded);
+                }; 
             })
-        } 
+        };
         
         return () => { isMounted = false };
-    }, [])
+    }, []);
     
 
     return (
@@ -84,5 +84,5 @@ const DocList = () => {
             </ul>
             
         </div>
-    )
+    );
 }
