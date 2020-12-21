@@ -1,18 +1,18 @@
 // Listing for an individual article
 
 const DocListing = ({doc}) => {
-    const history = useHistory()
-    const [isHovering, setIsHovering] = useState(false)
-    const created_at = new Date(doc.created_at)
+    const history = useHistory();
+    const [isHovering, setIsHovering] = useState(false);
+    const created_at = new Date(doc.created_at);
 
     const getDocDets = (doc_id, e) => {
-        e.preventDefault()
+        e.preventDefault();
         
         fetch(`/docs/${doc_id}`)
         .then(res => res.json())
         .then(data => {
-            history.push('/article', {params: data})
-        })
+            history.push('/article', {params: data});
+        });
     }
 
     return (
@@ -29,7 +29,7 @@ const DocListing = ({doc}) => {
                 {doc.title}
             </a>
             <br/>
-            
+
             { isHovering ?
                 <a id="doc-timestamp">
                     {moment(created_at).format('MMMM Do, YYYY')}
@@ -37,5 +37,5 @@ const DocListing = ({doc}) => {
             }
             
         </div>    
-    )
+    );
 }
