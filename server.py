@@ -808,5 +808,6 @@ if __name__ == '__main__':
     for user in users:
         tag_trees[user.user_id] = initialize_tag_tree()
 
-        
-    io.run(app, debug=True, host='0.0.0.0')
+    PORT = int(os.environ.get("PORT"), 5000)
+
+    io.run(app, debug=True, host='0.0.0.0', port=PORT)
