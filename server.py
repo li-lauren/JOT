@@ -809,5 +809,6 @@ if __name__ == '__main__':
         tag_trees[user.user_id] = initialize_tag_tree()
 
     PORT = int(os.environ.get("PORT"), 5000)
+    DEBUG = "NO_DEBUG" not in os.environ
 
-    io.run(app, debug=True, host='0.0.0.0', port=PORT)
+    io.run(app, debug=DEBUG, host='0.0.0.0', port=PORT)
