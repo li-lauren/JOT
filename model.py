@@ -293,8 +293,8 @@ class User_Relationship(db.Model):
 
    
 
-def connect_to_db(flask_app, db_uri='postgresql:///jot', echo=False):
-    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+def connect_to_db(flask_app, db_uri=None, echo=False):
+    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri or 'postgresql:///jot'
     flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
