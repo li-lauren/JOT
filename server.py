@@ -812,4 +812,5 @@ if __name__ == '__main__':
         tag_trees[user.user_id] = initialize_tag_tree()
 
 
-    io.run(app, host='0.0.0.0', port=PORT, debug=DEBUG)
+    # io.run(app, host='0.0.0.0', port=PORT, debug=DEBUG)
+    io.run(app, port=PORT, debug=DEBUG)
