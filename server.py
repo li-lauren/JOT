@@ -796,6 +796,9 @@ def create_note_reply(data):
 
 email_trie = Trie()
 
+PORT = int(os.environ.get("PORT"), 5000)
+DEBUG = "NO_DEBUG" not in os.environ
+
 if __name__ == '__main__':
     connect_to_db(app, os.environ.get("DATABASE_URL"))
 
@@ -808,7 +811,5 @@ if __name__ == '__main__':
     for user in users:
         tag_trees[user.user_id] = initialize_tag_tree()
 
-    PORT = int(os.environ.get("PORT"), 5000)
-    DEBUG = "NO_DEBUG" not in os.environ
 
-    io.run(app, debug=DEBUG, host='0.0.0.0', port=PORT)
+    io.run(app, host='0.0.0.0', port=PORT, debug=DEBUG)
