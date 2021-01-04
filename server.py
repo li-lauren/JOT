@@ -796,7 +796,7 @@ def create_note_reply(data):
 
 email_trie = Trie()
 
-PORT = int(os.environ.get("PORT"), 5000)
+PORT = int(os.environ.get("PORT", 5000))
 DEBUG = "NO_DEBUG" not in os.environ
 
 if __name__ == '__main__':
