@@ -141,6 +141,12 @@ a {
     margin-left: 670px;
 }
 
+.login-signup-cont h5 {
+    width: 100%;
+    text-align: center;
+    color: #262626;
+}
+
 /* DASHBOARD */
 #dashboard-h {
     /* font-family: 'Libre Franklin', sans-serif; */

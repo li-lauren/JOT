@@ -53,22 +53,6 @@ const SignUp = () => {
 
     return(
         <div className="login-signup-cont">
-            {/* <h5>Sign Up</h5>
-            <form onSubmit={signUp}>
-                <label>First Name</label>
-                <input type="text" name="fname" value={userInput.fname} onChange={handleChange} />
-                <label>Last Name</label>
-                <input type="text" name="lname" value={userInput.lname} onChange={handleChange} />
-                
-                <br/>
-                <label>Email</label>
-                <input type="text" name="email" value={userInput.email} onChange={handleChange} />
-                <label>Password</label>
-                <input type="password" name="pw" value={userInput.pw} onChange={handleChange} />
-                <br/>
-                <button type="submit">Join Jot</button>
-            </form> 
-             */}
             <Form onSubmit={signUp}>
                 <Row>
                     <Col>
@@ -80,17 +64,22 @@ const SignUp = () => {
                 </Row>
                 <br/>
                 <Row>
-                    <Form.Control placeholder="Email" name="email" value={userInput.email} onChange={handleChange}/>
+                    <Col>
+                        <Form.Control placeholder="Email" name="email" value={userInput.email} onChange={handleChange}/>
+                    </Col>
                 </Row>
                 <br/>
                 <Row>
-                    <Form.Control placeholder="Password" name="pw" value={userInput.pw} onChange={handleChange}/>
+                    <Col>
+                        <Form.Control placeholder="Password" name="pw" value={userInput.pw} onChange={handleChange}/>
+                    </Col>
                 </Row>
                 <br/>
                 <Row>
-                    <Button variant="outline-dark" type="submit">Join Jot</Button>
-                </Row>
-                
+                    <Col>
+                        <Button variant="outline-dark" type="submit">Join Jot</Button>
+                    </Col>
+                </Row>  
             </Form>
             <p>{msg}</p> 
         </div>   
