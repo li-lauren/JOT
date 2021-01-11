@@ -57,9 +57,18 @@ const Dashboard = () => {
 
 
     return(
-        
         <div>
-            {showD3 ? <D3Dash /> : 'Add and tag articles to use the Explorer.'}
+            {showD3 ? <D3Dash /> : 
+                <div id="intro-msg-cont">
+                    <span id="intro-msg-h">Welcome to Jot</span>
+                    <br/>
+                    <span className="intro-msg">
+                        Get started by adding articles below!
+                    </span>
+                    <br/>
+                    <span className="intro-msg">Don't forget to tag them so you can start using the Explorer.</span>
+                </div>
+            }
             <h1 id="explorer-h">explorer</h1>
                 <span 
                     className="display-none material-icons-round"
@@ -72,7 +81,7 @@ const Dashboard = () => {
             <br/>
             <br/>
 
-            
+            {/* Menu / Navbar */}
             <section id="menu" name="menu">
                 <Container>
                     <Row id="menu-selections">
@@ -116,8 +125,7 @@ const Dashboard = () => {
                         {showDocList ? <DocList /> : ''}
                         {showAddDoc ? <AddDoc /> : ''}
                     </Row>  
-                </Container>
-                
+                </Container>  
             </section>  
         </div>
     )
