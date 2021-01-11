@@ -1,5 +1,8 @@
 # JOT
 
+## Short Demo Video
+https://youtu.be/yNFN-Z25rWE
+
 ## Tech Stack
 React, Flask, Socket.IO, Flask-SocketIO, PostgreSQL, SQLAlchemy, D3.js
 
