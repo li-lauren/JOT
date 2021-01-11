@@ -3,11 +3,25 @@ const Dashboard = () => {
     const [showAddDoc, setShowAddDoc] = useState(false)
     const [showInvites, setShowInvites] = useState(false)
     const [showDocList, setShowDocList] = useState(false)
-    const [showD3, setShowD3] = useState(true)
+    const [showD3, setShowD3] = useState(false)
 
     const fname = localStorage.getItem("fname")
+    const userId = localStorage.getItem("user_id")
 
     const history = useHistory()
+
+    useEffect(() => {
+        fetch(`/tags/${userId}`)
+        .then(res => res.text())
+        .then(data => {
+            console.log(data)
+            if (data === 'tags') {
+                setShowD3(true)
+            } else {
+                setShowD3(false)
+            }
+        })
+    })
 
     const handleMyProfile = () => {
         history.push('/myProfile')
@@ -45,7 +59,7 @@ const Dashboard = () => {
     return(
         
         <div>
-            {showD3 ? <D3Dash /> : ''}
+            {showD3 ? <D3Dash /> : 'Add and tag articles to use the Explorer.'}
             <h1 id="explorer-h">explorer</h1>
                 <span 
                     className="display-none material-icons-round"

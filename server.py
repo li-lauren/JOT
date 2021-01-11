@@ -343,6 +343,16 @@ def get_tag_lib():
     return jsonify(tagLib)
 
 
+@app.route('/tags/<user_id>')
+def check_for_tagged_articles(user_id):
+    """Check if a user has tagged articles.  If so, show Explorer."""
+
+    tags = crud.get_all_tags_for_owned_docs(int(user_id))
+    print(tags)
+
+    return "tags" if tags else "noTags"
+
+
 @app.route('/tagtree')
 def get_tag_tree():
     user_id = session['user_id']
