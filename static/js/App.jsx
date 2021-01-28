@@ -11,8 +11,8 @@ const App = () => {
     const [socket, setSocket] = useState(null)
 
     const connectSocket = () => {
-        // setSocket(io.connect('http://0.0.0.0:5000/'))
-        setSocket(io.connect('https://j-o-t.herokuapp.com/'))
+        setSocket(io.connect('http://0.0.0.0:5000/'))
+        // setSocket(io.connect('https://j-o-t.herokuapp.com/'))
         console.log('Connecting')
     }
 

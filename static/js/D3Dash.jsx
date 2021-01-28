@@ -195,29 +195,6 @@ const D3Dash = () => {
             });
         }
 
-        // function wrap(d) {
-        //     var text = d3.select(this),
-        //       width = d.r * 2,
-        //       x = d.x,
-        //       y = d.y,
-        //       words = text.text().split(/\s+/).reverse(),
-        //       word,
-        //       line = [],
-        //       lineNumber = 0,
-        //       lineHeight = 1.1,
-        //       tspan = text.text(null).append("tspan").attr("x", x).attr("y", y);
-        //     while (word = words.pop()) {
-        //       line.push(word);
-        //       tspan.text(line.join(" "));
-        //       if (tspan.node().getComputedTextLength() > width) {
-        //         line.pop();
-        //         tspan.text(line.join(" "));
-        //         line = [word];
-        //         tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + "em").text(word);
-        //       }
-        //     }
-        // }
-
         function zoomTo(v) {
             var k = diameter / v[2]; view = v;
             node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
@@ -231,6 +208,7 @@ const D3Dash = () => {
     }, [tagTree])
 
     return (
+        // use ref to store reference to our rendered SVG
         <div id='explorer'>
             <svg
                 width="960" 

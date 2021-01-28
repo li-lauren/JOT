@@ -669,6 +669,17 @@ select.form-control:focus {
     margin-bottom: 75px;
 }
 
+#doc-body p {
+    display: block;
+}
+
+#doc-body img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: auto;
+}
+
 /* NOTES */
 .note {
     border: whitesmoke 2px solid;
